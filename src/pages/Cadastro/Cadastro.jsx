@@ -1,14 +1,11 @@
-import React from 'react';
-import CadastroForm from '../../components/CadastroForm/CadastroForm';
-import Header from '../../components/header/Header';
+import React from "react";
+import Formulario from "../../components/formulario/Formulario";
 
-const Cadastro = () => {
-  return (
-    <div className="login-container">
-      <Header />
-      <CadastroForm />
-    </div>
-  );
-};
+function Cadastro() {
+    return <>
+        <h1>Tela de Cadastro</h1> 
+        <Formulario />
+    </>
+}
 
 export default Cadastro;
