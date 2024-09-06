@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './LoginForm.css';  // Importando o arquivo CSS
+import './FormularioLogin.css';  // Importando o arquivo CSS
 
-const LoginForm = () => {
+const FormularioLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -49,4 +49,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default FormularioLogin;
