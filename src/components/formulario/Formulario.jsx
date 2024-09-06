@@ -12,16 +12,18 @@ function Formulario() {
     });
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Dados do formulário:', formData);
-        alert('Formulário enviado com sucesso!');
+        if (formData.senha !== formData.confirmaSenha) {
+            alert('As senhas não coincidem');
+        } else {
+            // Processar o cadastro
+            console.log('Cadastro realizado com sucesso!', formData);
+        }
     };
 
     return (
@@ -36,6 +38,7 @@ function Formulario() {
                         placeholder="Nome Completo"
                         value={formData.nome}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
@@ -47,6 +50,7 @@ function Formulario() {
                         placeholder="000.000.000-00"
                         value={formData.cpf}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
@@ -58,6 +62,7 @@ function Formulario() {
                         placeholder="(00)91234-1234"
                         value={formData.telefone}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
@@ -69,6 +74,7 @@ function Formulario() {
                         placeholder="Digite seu email"
                         value={formData.email}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
@@ -80,6 +86,7 @@ function Formulario() {
                         placeholder="A@12345"
                         value={formData.senha}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
@@ -90,6 +97,7 @@ function Formulario() {
                         placeholder="A@12345"
                         value={formData.confirmar}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
