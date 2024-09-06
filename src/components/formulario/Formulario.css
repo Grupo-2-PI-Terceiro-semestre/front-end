@@ -1,0 +1,103 @@
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  /* border: 1px solid #55198a; */
+  border-radius: 5px;
+  background-color: white;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  background-color: #EAF0F7;
+  box-shadow: 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.botao {
+  display: flex;
+  justify-content: center;
+}
+
+.botao .submit-button {
+  width: 55%;
+  padding: 10px;
+  background-color: #0072FF;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 19px;
+  justify-content: center;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 1s;
+}
+
+.botao .submit-button:hover {
+  background-color: #0056b3;
+}
+
+.divisoria {
+  /* border: 1px solid green; */
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 5vh;
+}
+
+.divisoria label {
+  /* border: 1px solid green; */
+  font-weight: bolder;
+}
+
+.divisoria .linha-esquerda {
+  width: 150px;
+  border: 1px solid #000;
+}
+
+.divisoria .linha-direita {
+  width: 150px;
+  border: 1px solid #000;
+}
+
+.botao-google {
+  display: flex;
+  justify-content: center;
+}
+
+.botao-google .submit-button {
+  width: 55%;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  justify-content: center;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 1s;
+}
+
+.botao-google .submit-button:hover {
+  background-color: #6eacee;
+}
