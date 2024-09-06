@@ -1,9 +1,14 @@
-import React from "react";
+import React from 'react';
+import CadastroForm from '../../components/CadastroForm/CadastroForm';
+import Header from '../../components/header/Header';
 
-function Cadastro() {
-    return <>
-        <h1>Tela de Cadastro</h1>
-    </>
-}
+const Cadastro = () => {
+  return (
+    <div className="login-container">
+      <Header />
+      <CadastroForm />
+    </div>
+  );
+};
 
 export default Cadastro;

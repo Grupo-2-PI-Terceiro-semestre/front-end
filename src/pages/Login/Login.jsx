@@ -1,9 +1,13 @@
-import React from "react";
-
-function Login() {
-    return <>
-        <h1>Tela de Login</h1>
-    </>
-}
+import React from 'react';
+import LoginForm from '../../components/LoginForm/LoginForm';
+/* import './Login.css';
+ */
+const Login = () => {
+  return (
+    <div className="login-container">
+      <LoginForm />
+    </div>
+  );
+};
 
 export default Login;
