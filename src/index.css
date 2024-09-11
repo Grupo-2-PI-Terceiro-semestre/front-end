@@ -1,0 +1,8 @@
+.container {
+    margin: 0 auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    max-width: 90vw;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}

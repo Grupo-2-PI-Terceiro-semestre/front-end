@@ -1,10 +1,11 @@
 import React from 'react';
-
+import FormularioLogin from '../../components/formulario-login/FormularioLogin'
+import './Login.css'
 
 const Login = () => {
   return (
     <div className="login-container">
-     <h1>Login</h1>
+      <FormularioLogin />
     </div>
   );
 };

@@ -1,0 +1,12 @@
+.dynamic-button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .dynamic-button:hover {
+    background-color: var(--hover-color);
+  }
+  
