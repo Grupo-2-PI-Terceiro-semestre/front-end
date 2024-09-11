@@ -1,35 +1,39 @@
 .form-container {
-  max-width: 400px;
-  margin: 0 auto;
+  width: 40vw;
+  height: 82vh;
   padding: 20px;
-  /* border: 1px solid #55198a; */
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background-color: white;
 }
 
 h2 {
-  text-align: center;
-  margin-bottom: 20px;
+  font-size: 3.3rem;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
 }
 
-.form-group label {
+
+.form-group .inputLabel{
+  width: 30vw;
+}
+
+.form-group .inputLabel label {
   display: block;
-  margin-bottom: 5px;
   font-weight: bold;
 }
 
-.form-group input,
-.form-group textarea {
+.form-group .inputLabel input {
   width: 100%;
-  padding: 8px;
   border: none;
   border-radius: 10px;
   background-color: #EAF0F7;
   box-shadow: 0 5px rgba(0, 0, 0, 0.3);
+  height: 5vh;
+  padding: 12px;
 }
 
 .botao {
@@ -38,7 +42,7 @@ h2 {
 }
 
 .botao .submit-button {
-  width: 55%;
+  width: 40%;
   padding: 10px;
   background-color: #0072FF;
   color: white;
@@ -47,8 +51,12 @@ h2 {
   cursor: pointer;
   font-size: 19px;
   justify-content: center;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
   transition: background-color 1s;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px rgb(6, 89, 212);
 }
 
 .botao .submit-button:hover {
@@ -85,19 +93,27 @@ h2 {
 }
 
 .botao-google .submit-button {
-  width: 55%;
+  width: 40%;
   padding: 10px;
   background-color: white;
-  color: black;
-  border: 1px solid black;
+  border: 1px solid rgb(183 180 180);  
   border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
   justify-content: center;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
   transition: background-color 1s;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 5px rgb(183 180 180);
 }
 
 .botao-google .submit-button:hover {
   background-color: #6eacee;
+}
+
+.botao-google .submit-button img {
+  height: 4vh;
 }
