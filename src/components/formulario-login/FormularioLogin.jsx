@@ -1,39 +1,41 @@
 import React, { useState } from 'react';
 import './FormularioLogin.css';
 import Button from '../button/Button';
-import { GoogleAuthProvider, signInWithPopup, User as FirebaseUser } from 'firebase/auth';
-import { auth } from '../../services/firebase' // Importando o arquivo CSS
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../services/firebase';
+import iconGoogle from '../../assets/logoGoogle.png';
 
 const FormularioLogin = () => {
-  const [user, setUser] = useState < FirebaseUser | null > (null); // Tipagem correta
-  const [email, Email] = useState('');
+  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!email || !password) {
-
+      setErrorMessage('Email e senha são obrigatórios');
     } else {
       setErrorMessage('');
       console.log('Email:', email);
       console.log('Senha:', password);
     }
   };
+
   const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
-      console.log('Usuário logado:', user);
+      const user = result.user;
+      setUser(user);
     } catch (error) {
-      console.error('Erro ao logar com Google:', error);
+      setErrorMessage('Erro ao fazer login com o Google.');
     }
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
+    <div className="login-form">
+      <form className="" onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div>
           <label>Email:</label>
@@ -74,6 +76,7 @@ const FormularioLogin = () => {
             content="Google"
             type="submit"
             onClick={handleGoogleSignIn}
+            image={iconGoogle}
           />
         </div>
       </form>

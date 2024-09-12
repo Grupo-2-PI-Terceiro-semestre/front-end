@@ -1,0 +1,130 @@
+.login-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 92vh;
+  width: 40rem;
+}
+
+.circle-container {
+  position: relative;
+  width: 38vw; 
+  height: 56vh;
+  /* border: 1px solid; */
+}
+
+.circle-icon {
+  position: absolute;
+  height: 10vh;
+  width: 7vw;
+}
+
+.circle-icon:nth-child(1) {
+  top: 15%;
+  left: 19%;
+  transform: translate(-50%, -50%);
+}
+
+.circle-icon:nth-child(2) {
+  top: 8%;
+  left: 63%;
+  transform: translate(-50%, -50%);
+  height: 14vh;
+}
+
+.circle-icon:nth-child(3) {
+  top: 40%;
+  left: 83%;
+  transform: translate(-50%, -50%);
+}
+
+.circle-icon:nth-child(4) {
+  top: 79%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  width: 5vw;
+}
+
+.circle-icon:nth-child(5) {
+  top: 98%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
+
+.circle-icon:nth-child(6) {
+  top: 92%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+  width: 5vw;
+}
+
+.circle-icon:nth-child(7) {
+  top: 73%;
+  left: 21%;
+  transform: translate(-50%, -50%);
+}
+
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  /* border: 1px solid; */
+  width: 19vw;
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rosa {
+  background: radial-gradient(circle, rgba(255,41,57, 0.4), rgba(255, 255, 255, 1));
+  height: 74vh;
+  width: 21vw;
+  /* border: 1px solid; */
+  position: relative;
+  filter: blur(90px);
+  z-index: -1;
+}
+
+.azul {
+  background: radial-gradient(circle, rgba(0, 114, 255, 0.6), rgba(255, 255, 255, 1));
+  height: 61vh;
+  width: 22vw;
+  /* border: 1px solid; */
+  left: 44%;
+  position: relative;
+  top: -129%;
+  filter: blur(90px);
+  z-index: -1;
+}
+
+.text h1 {
+  font-size: 2.8rem;
+  /* border: 1px solid red; */
+  display: flex;
+  text-align: center;
+  width: 19vw;
+  border: none;
+}
+
+.text .paragrafo {
+  font-size: 1.5rem;
+}
+
+.login-button {
+  font-size: 1.2rem;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 12vw;
+  box-shadow: 0 5px rgb(6, 89, 212);
+  height: 6vh;
+  transition: background-color 1s;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}

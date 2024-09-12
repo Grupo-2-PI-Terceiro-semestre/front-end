@@ -1,29 +1,30 @@
 /* Estilos da header */
 .header {
-    height: 5rem;
-    width: 100vw;
-    background-color: #fff; /* Cor de fundo branca */
-    display: flex;
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
-    align-items: center;     /* Centraliza o conteúdo verticalmente */
-    border-bottom: 1px solid #ddd; /* Borda inferior leve */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  }
-  
-  /* Logo e link */
-  .logo-container {
-    text-align: center;
-  }
-  
-  .logo-link {
-    font-size: 28px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #007bff; /* Cor do link (azul) */
-    font-family: 'Arial', sans-serif; /* Fonte padrão */
-  }
-  
-  .logo-link:hover {
-    color: #0056b3; /* Muda cor do link ao passar o mouse */
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 14vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Logo e link */
+.logo-container {
+  text-align: center;
+}
+
+.logo-link {
+  font-size: 40px;
+  font-weight: 300;
+  /* Peso mais fino da fonte Montserrat */
+  text-decoration: none;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* .logo-link:hover {
+  color: #0056b3;
+} */

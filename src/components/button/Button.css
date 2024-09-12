@@ -1,12 +1,26 @@
 .dynamic-button {
+    padding: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+    background-color: var(--backgroundColor, #0072FF); /* Cor de fundo padrão */
+    color: var(--color, white); /* Cor do texto padrão */
   }
   
   .dynamic-button:hover {
-    background-color: var(--hover-color);
+    background-color: var(--hoverColor, #0056b3); /* Cor de hover padrão */
+  }
+  
+  .button-image {
+    width: 25px; /* Ajuste conforme necessário */
+    height: 25px; /* Ajuste conforme necessário */
+    margin-right: 8px; /* Espaço entre a imagem e o texto */
   }
   
