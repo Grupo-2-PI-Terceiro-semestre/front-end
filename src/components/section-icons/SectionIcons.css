@@ -83,7 +83,7 @@
   width: 21vw;
   /* border: 1px solid; */
   position: relative;
-  filter: blur(90px);
+  filter: blur(120px);
   z-index: -1;
 }
 

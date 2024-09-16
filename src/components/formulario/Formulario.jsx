@@ -8,6 +8,7 @@ function Formulario() {
         cpf: '',
         telefone: '',
         email: '',
+        dataNasc: '',
         senha: '',
         confirmar: ''
     });
@@ -79,6 +80,21 @@ function Formulario() {
                             name="email"
                             placeholder="Digite seu email"
                             value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                </div>
+
+
+                <div className="form-group">
+                    <div className='inputLabel'>
+                        <label>Data de Nascimento:</label>
+                        <input
+                            type="date"
+                            name="dataNasc"
+                            // placeholder="(00)91234-1234"
+                            value={formData.dataNasc}
                             onChange={handleChange}
                             required
                         />
