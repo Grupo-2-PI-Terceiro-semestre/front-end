@@ -3,17 +3,21 @@ import './Formulario.css';
 import iconGoogle from '../../assets/logoGoogle.png'
 import Button from '../button/Button';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { cadastroUser } from '../../router/authRoutes'
 import { auth } from '../../services/firebase';
 
 function Formulario() {
     const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({
-        nome: '',
+        nomePessoa: '',
         cpf: '',
-        telefone: '',
-        email: '',
+        numeroTelefone: '',
+        emailPessoa: '',
+        representante: "true",
         senha: '',
-        confirmar: ''
+        confirmar: '',
+        dataNascimento: '',
+        tiposDeUsuario: 'ADMIN'
     });
 
     const handleChange = (e) => {
@@ -26,19 +30,40 @@ function Formulario() {
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
+            const userData = {
+                emailPessoa: user.email,
+                firebaseUid: user.uid,
+            };
             setUser(user);
             console.log(user);
+            await cadastroUser(userData);
         } catch (error) {
             setErrorMessage('Erro ao fazer login com o Google.');
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.senha !== formData.confirmaSenha) {
-            alert('As senhas não coincidem');
+        if (formData.senha !== formData.confirmar) {
+            setErrorMessage('As senhas não coincidem');
         } else {
-            console.log('Cadastro realizado com sucesso!', formData);
+            try {
+                await cadastroUser(formData);
+                alert('Cadastro realizado com sucesso!');
+                setFormData({
+                    nomePessoa: '',
+                    cpf: '',
+                    numeroTelefone: '',
+                    emailPessoa: '',
+                    representante: "true",
+                    senha: '',
+                    confirmar: '',
+                    dataNascimento: '',
+                    tiposDeUsuario: 'ADMIN'
+                });
+            } catch (error) {
+                setErrorMessage('Erro ao cadastrar o usuário.');
+            }
         }
     };
 
@@ -50,9 +75,9 @@ function Formulario() {
                         <label>Nome Completo:</label>
                         <input
                             type="text"
-                            name="nome"
+                            name="nomePessoa"
                             placeholder="Nome Completo"
-                            value={formData.nome}
+                            value={formData.nomePessoa}
                             onChange={handleChange}
                             required
                         />
@@ -78,9 +103,9 @@ function Formulario() {
                         <label>Telefone:</label>
                         <input
                             type="text"
-                            name="telefone"
+                            name="numeroTelefone"
                             placeholder="(00)91234-1234"
-                            value={formData.telefone}
+                            value={formData.numeroTelefone}
                             onChange={handleChange}
                             required
                         />
@@ -92,9 +117,9 @@ function Formulario() {
                         <label>E-mail:</label>
                         <input
                             type="email"
-                            name="email"
+                            name="emailPessoa"
                             placeholder="Digite seu email"
-                            value={formData.email}
+                            value={formData.emailPessoa}
                             onChange={handleChange}
                             required
                         />

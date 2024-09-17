@@ -1,24 +1,36 @@
 import React, { useState } from 'react';
-import './FormularioLogin.css';
-import Button from '../button/Button';
+import { loginUser } from '../../router/authRoutes'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../services/firebase';
-import iconGoogle from '../../assets/logoGoogle.png';
+import Button from '../button/Button';
+import iconGoogle from '../../assets/logoGoogle.png'
+import './FormularioLogin.css' // Ajuste o caminho conforme necessário
 
 const FormularioLogin = () => {
-  const [user, setUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [user, setUser] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setErrorMessage('Email e senha são obrigatórios');
     } else {
       setErrorMessage('');
-      console.log('Email:', email);
-      console.log('Senha:', password);
+      try {
+        // Cria o objeto user
+        const userData = {
+          emailPessoa: email,
+          senha: password,
+        };
+
+        // Envia o objeto user para o backend
+        const response = await loginUser(userData);
+        setUser(response.user);
+      } catch (error) {
+        setErrorMessage('Erro ao fazer login com e-mail e senha.');
+      }
     }
   };
 
@@ -27,11 +39,19 @@ const FormularioLogin = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      setUser(user);
+      const userData = {
+        emailPessoa: user.email,
+        firebaseUid: user.uid,
+      };
+
+      // Envia o objeto com uid e email para o backend
+      const response = await loginUser(userData);
+      setUser(response.user);
     } catch (error) {
       setErrorMessage('Erro ao fazer login com o Google.');
     }
   };
+
 
   return (
     <div className="login-form">
