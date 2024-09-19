@@ -1,0 +1,67 @@
+*{
+/* .montserrat-<uniquifier> { */
+  font-family: "Montserrat", sans-serif;
+  /* font-optical-sizing: auto;
+  font-weight: ; */
+  font-style: normal;
+/* } */
+}
+
+.main {
+    height: 80vh;
+    width: 100vw;
+    background-image: url('../../assets/section1.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.main .container {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main .container .objetos {
+    height: 39vh;
+    width: 34vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.main .container .objetos .texto {
+    color: white;
+    height: 13vh;
+    width: 34vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.main .container .objetos .texto .titulo {
+    font-size: 2rem;
+}
+
+.main .container .objetos .texto .subtitulo {
+    font-size: 1.4rem;
+}
+
+.main .container .objetos button {
+    color: white;
+    background-color: rgb(0, 114, 255);
+    font-size: 1.3rem;
+    width: 27vw;
+    height: 8vh;
+    border-radius: 10px;
+    box-shadow: 0 5px rgb(5, 84, 181);
+    border: none;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+.main .container .objetos button:hover {
+  background-color: rgb(5, 84, 181);
+}

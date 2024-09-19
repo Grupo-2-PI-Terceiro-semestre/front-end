@@ -80,12 +80,14 @@ h2 {
 
 .divisoria .linha-esquerda {
   width: 150px;
-  border: 1px solid #000;
+  border: 1px solid rgb(0 16 85 / 39%);
+  ;
 }
 
 .divisoria .linha-direita {
   width: 150px;
-  border: 1px solid #000;
+  border: 1px solid rgb(0 16 85 / 39%);
+  ;
 }
 
 .botao-google {
