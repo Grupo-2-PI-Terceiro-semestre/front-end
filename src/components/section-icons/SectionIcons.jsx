@@ -29,6 +29,8 @@ const SectionIcons = ({ titulo, texto, botao, onClick }) => {
           <button onClick={onClick} className="login-button">{botao}</button>
         </div>
       </div>
+
+      {/* <div className='linhaHorizontal'></div> */}
     </div>
   );
 };
