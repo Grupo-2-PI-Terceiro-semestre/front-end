@@ -8,7 +8,7 @@ import Icon5 from '../../assets/aparar_barba.png';
 import Icon6 from '../../assets/tesoura.png';
 import Icon7 from '../../assets/maquiagem.png';
 
-const SectionIcons = ({ titulo, texto, botao }) => {
+const SectionIcons = ({ titulo, texto, botao, onClick }) => {
   return (
     <div className="login-section">
       <div className='circle-container'>
@@ -26,7 +26,7 @@ const SectionIcons = ({ titulo, texto, botao }) => {
         <div className="text">
           <h1>{titulo}</h1>
           <p className='paragrafo'>{texto}</p>
-          <button className="login-button">{botao}</button>
+          <button onClick={onClick} className="login-button">{botao}</button>
         </div>
       </div>
     </div>

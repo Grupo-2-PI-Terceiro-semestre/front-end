@@ -1,10 +1,11 @@
-
 .login-form {
-  background-color: white;
+  width: 28rem;
+  height: auto;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 25vw;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.158);
+  box-sizing: border-box;
 }
 
 .login-form h2 {
@@ -15,44 +16,21 @@
 
 .login-form label {
   display: block;
-  margin-bottom: 8px;
+  font-weight: 500;
   font-size: 14px;
   color: #333;
 }
 
 .login-form input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.login-form button {
-  width: 100%;
-  padding: 10px;
   border: none;
+  margin-bottom: 20px;
   border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.entrar {
-  background-color: #0072FF;
-  color: white;
-}
-
-.entrar:hover {
-  background-color: #006aec;
-}
-
-.google {
-  background-color: #f3f9ff;
-}
-
-.google:hover {
-  background-color: #e8f3fe;
+  background-color: #EAF0F7;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+  height: 4.5vh;
+  padding: 8px;
+  background-color: #837f7f0f;
 }
 
 .botoes {
