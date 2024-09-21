@@ -1,9 +1,12 @@
 .form-container {
-  width: 40vw;
-  height: 91vh;
+  width: 28rem;
+  height: auto;
   padding: 20px;
-  /* border-radius: 5px; */
-  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.158);
+  box-sizing: border-box;
+  margin-top: 5rem;
 }
 
 h2 {
@@ -17,23 +20,33 @@ h2 {
 }
 
 
-.form-group .inputLabel{
-  width: 30vw;
+.form-group .inputLabel {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .form-group .inputLabel label {
   display: block;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
 }
 
 .form-group .inputLabel input {
   width: 100%;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
+
   background-color: #EAF0F7;
-  box-shadow: 0 2px rgba(0, 0, 0, 0.3);
-  height: 5vh;
-  padding: 12px;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+  height: 4.5vh;
+  padding: 8px;
   background-color: #837f7f0f;
 }
 
@@ -44,6 +57,7 @@ h2 {
 
 .botao .submit-button {
   width: 40%;
+  width: 40%;
   padding: 10px;
   background-color: #0072FF;
   color: white;
@@ -53,6 +67,11 @@ h2 {
   font-size: 19px;
   justify-content: center;
   transition: background-color 1s;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px rgb(6, 89, 212);
   height: 6vh;
   display: flex;
   justify-content: center;
@@ -97,14 +116,22 @@ h2 {
 
 .botao-google .submit-button {
   width: 40%;
+  width: 40%;
   padding: 10px;
   background-color: white;
-  border: 1px solid rgb(183 180 180);  
+  border: 1px solid rgb(183 180 180);
+  border: 1px solid rgb(183 180 180);
   border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
   justify-content: center;
   transition: background-color 1s;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 5px rgb(183 180 180);
   height: 6vh;
   display: flex;
   justify-content: center;

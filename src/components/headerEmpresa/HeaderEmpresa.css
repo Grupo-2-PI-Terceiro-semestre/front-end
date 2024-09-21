@@ -4,6 +4,10 @@
     align-items: center;
     display: flex;
     justify-content: space-evenly;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     /* border: 1px solid; */
 }
 
@@ -49,9 +53,10 @@
 
 .headerEmpresa .botaoCliente a {
     text-decoration: none;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
-.headerEmpresa .botaoCliente a .icon{
+.headerEmpresa .botaoCliente a .icon {
     height: 2vh;
+    color: white;
 }
