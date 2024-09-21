@@ -6,7 +6,7 @@ import Carrossel from "../../components/carrossel/Carrossel";
 function HomeEmpresa() {
     return <>
         <HeaderEmpresa />
-        <FirstSectionEmpresa />
+        {/* <FirstSectionEmpresa /> */}
         <Carrossel />
     </>
 }
