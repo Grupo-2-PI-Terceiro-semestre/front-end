@@ -1,5 +1,5 @@
 import React from "react";
-import './FirstSectionEmpresa.css'
+import './FirstSectionEmpresa.css';
 
 function FirstSectionEmpresa() {
     return(
