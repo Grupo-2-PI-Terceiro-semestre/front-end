@@ -15,6 +15,7 @@
     display: flex;
     justify-content: space-between;
     width: 5vw;
+    color: white;
 }
 
 .headerEmpresa .icones .icon {

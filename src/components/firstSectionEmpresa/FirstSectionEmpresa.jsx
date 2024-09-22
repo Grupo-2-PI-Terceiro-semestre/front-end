@@ -3,8 +3,8 @@ import './FirstSectionEmpresa.css';
 
 function FirstSectionEmpresa() {
     return(
-        <div className="main">
-            <div className="container">
+        <div className="main-first-section">
+            <div className="container-first-section">
                 <div className="objetos">
                     <div className="texto">
                         <span className="titulo">Visibilidade e Gestão Eficiente</span>

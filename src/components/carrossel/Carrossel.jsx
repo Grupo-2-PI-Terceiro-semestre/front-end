@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './Carrossel.css';
+import FirstSectionEmpresa from "../../components/firstSectionEmpresa/FirstSectionEmpresa";
 
 function Carrossel() {
     const settings = {
@@ -16,38 +17,52 @@ function Carrossel() {
       };
 
     return(
-        <div className='main' style={{ width: "80%", margin: "0 auto" }}>
-        <h2>Carrossel Simples</h2>
+        <div className='main-carrossel'>
+        {/* <h2>Carrossel Simples</h2> */}
         <Slider {...settings}>
-          <div>
-            <img
-              src="https://via.placeholder.com/400x300"
-              alt="Slide 1"
-              style={{ width: "100%" }}
-            />
+          <div className='bordaImagem'>
+            <div className='imagem1'>
+              <img
+                src='../../assets/section1.png'
+                // alt="Slide 1"
+              />
+            </div>
           </div>
-          <div>
-            <img
-              src="https://via.placeholder.com/400x300"
-              alt="Slide 2"
-              style={{ width: "100%" }}
-            />
+          <div className='bordaImagem'>
+            <div className='imagem2'>
+              <img
+                src='../../assets/section1.png'
+              />
+            </div>
           </div>
-          <div>
-            <img
-              src="https://via.placeholder.com/400x300"
-              alt="Slide 3"
-              style={{ width: "100%" }}
-            />
+          <div className='bordaImagem'>
+            <div className='imagem3'>
+              <img
+                src='../../assets/section1.png'
+              />
+            </div>
           </div>
-          <div>
-            <img
-              src="https://via.placeholder.com/400x300"
-              alt="Slide 4"
-              style={{ width: "100%" }}
-            />
+          <div className='bordaImagem'>
+            <div className='imagem4'>
+              <img
+                src='../../assets/section1.png'
+              />
+            </div>
           </div>
         </Slider>
+
+        <FirstSectionEmpresa />
+
+        {/* <div className="container">
+                <div className="objetos">
+                    <div className="texto">
+                        <span className="titulo">Visibilidade e Gestão Eficiente</span>
+                        <span className="subtitulo">A dupla que impulsiona o sucesso da sua empresa</span>
+                    </div>
+
+                    <button>Comece a testar gratuitamente</button>
+                </div>
+          </div> */}
       </div>
     );
 }

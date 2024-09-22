@@ -1,3 +1,66 @@
-.main {
-    border: 1px solid;
+.main-carrossel {
+    left: 0;
+    position: relative;
+    width: 98vw;
+    /* border: 1px solid; */
+    height: 90vh;
+}
+
+.slick-list {
+    height: 86vh;
+    width: 300vw;
+    /* width: 100vw */
+}
+
+.slick-slide {
+    width: 100vw;
+    height: 86vh;
+}
+
+.main-carrossel .bordaImagem .imagem1 {
+    background-image: url('../../assets/section1.png');
+    background-size: cover;
+    background-position: center;
+    height: 86vh;
+}
+
+.main-carrossel .bordaImagem {
+    height: 90vh;
+    /* border: 1px solid blue; */
+    width: 100%;
+}
+
+.main-carrossel .bordaImagem .imagem2 {
+    background-image: url('../../assets/barbearia.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 86vh;
+}
+
+.main-carrossel .bordaImagem .imagem3 {
+    background-image: url('../../assets/barber-using-computer.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 86vh;
+}
+
+.main-carrossel .bordaImagem .imagem4 {
+    background-image: url('../../assets/aesthetics-professional-working.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 86vh;
+}
+
+.slick-prev {
+    z-index: 2;
+    left: 2vw;
+}
+
+.slick-next {
+    z-index: 2;
+    right: 2vw;
+}
+
+.slick-dots li {
+     color: white !important;
 }

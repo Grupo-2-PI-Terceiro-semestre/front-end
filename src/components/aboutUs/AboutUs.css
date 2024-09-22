@@ -1,0 +1,89 @@
+.main-about-us {
+    width: 100vw;
+    background-color: rgb(245, 247, 244);
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+}
+
+.main-about-us .container-about-us {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.main-about-us .container-about-us .texto-principal {
+    width: 80%;
+    width: 70vw;
+    display: flex;
+    height: 17vh;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.main-about-us .container-about-us .texto-principal b {
+    color: rgb(0, 114, 255);
+}
+
+.main-about-us .container-about-us .exemplos {
+    width: 70vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.main-about-us .container-about-us .exemplos .ex1 {
+    width: 13vw;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    height: 13vh;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.main-about-us .container-about-us .exemplos .ex1 .icon-user {
+    height: 4vh;
+}
+
+.main-about-us .container-about-us .exemplos .ex1 .titulo {
+    width: 7vw;
+}   
+
+.main-about-us .container-about-us .exemplos .ex2 {
+    width: 20vw;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    height: 13vh;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.main-about-us .container-about-us .exemplos .ex2 .icon-chart {
+    height: 4vh;
+}
+
+.main-about-us .container-about-us .exemplos .ex2 .titulo {
+    width: 7vw;
+}  
+
+.main-about-us .container-about-us .exemplos .ex3 {
+    width: 20vw;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    height: 13vh;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.main-about-us .container-about-us .exemplos .ex3 .icon-clock {
+    height: 4vh;
+}
+
+.main-about-us .container-about-us .exemplos .ex3 .titulo {
+    width: 7vw;
+}  
