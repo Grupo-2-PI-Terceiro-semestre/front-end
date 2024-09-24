@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    
+  }
+  
+  .text-container {
+    flex: 1;
+    margin-right: 50px;
+  }
+
+  .text-container h2{
+    font-weight: bold;
+  }
+  
+  .store-buttons {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 9rem;
+  }
+  
+  .store-link {
+    margin-right: 10px;
+  }
+  
+  .store-image {
+    width: 150px;
+  }
+  
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .phone-image {
+    width: 600px; /* ajuste o tamanho conforme necessário */
+  }
+  

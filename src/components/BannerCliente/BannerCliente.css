@@ -1,0 +1,76 @@
+/* Para garantir que o body não tenha scroll lateral */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Previne o scroll lateral */
+}
+
+/* Estilos gerais */
+.container {
+  margin: 0 auto;
+  padding-left: 5%; /* Mantido para o conteúdo que precisa ter margem */
+  padding-right: 5%;
+  max-width: 90vw;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Estilos para o banner */
+.banner {
+  background-image: url('https://www.sp.senac.br/documents/51838645/51838647/salao-de-beleza-de-sucesso-mulher-loira+%281%29.jpg/1ed79d31-1e0e-b4a0-2511-bb1749a59b44?version=1.0&t=1673632072717'); /* Adicione a imagem de fundo */
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw; /* Garante que o banner vá até as bordas laterais */
+  margin: 0; /* Remove margens */
+  padding: 0; /* Remove padding */
+  overflow: hidden; /* Evita o conteúdo ultrapassar os limites */
+}
+
+/* Centraliza o conteúdo do banner */
+.banner-content {
+  text-align: center;
+  color: white;
+  width: 100%; /* Garante que o conteúdo ocupe toda a largura */
+}
+
+/* Estilos para o título do banner */
+.banner h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Estilos da caixa de pesquisa */
+.search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.search-box input {
+  width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.search-box button {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background-color: #0056b3;
+}
