@@ -3,7 +3,7 @@
     position: relative;
     width: 98vw;
     /* border: 1px solid; */
-    height: 90vh;
+    height: 86vh;
 }
 
 .slick-list {
@@ -59,6 +59,15 @@
 .slick-next {
     z-index: 2;
     right: 2vw;
+}
+
+.slick-dots {
+    z-index: 3;
+    bottom: 0;
+    border-radius: 8px;
+    background: #ffffffdb;
+    width: 10vw;
+    left: 44vw;
 }
 
 .slick-dots li {

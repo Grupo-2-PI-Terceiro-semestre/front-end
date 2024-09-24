@@ -4,6 +4,8 @@ import HeaderEmpresa from "../../components/headerEmpresa/HeaderEmpresa";
 import Carrossel from "../../components/carrossel/Carrossel";
 import AboutUs from "../../components/aboutUs/AboutUs";
 import './HomeEmpresa.css';
+import Previa from "../../components/previa/previa";
+import Visibilidade from "../../components/visibilidade/Visibilidade";
 
 function HomeEmpresa() {
     return <>
@@ -12,6 +14,8 @@ function HomeEmpresa() {
         {/* <FirstSectionEmpresa /> */}
         <Carrossel />
         <AboutUs />
+        <Previa />
+        <Visibilidade />
     </div>
     </>
 }
