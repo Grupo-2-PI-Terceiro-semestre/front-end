@@ -1,0 +1,70 @@
+.main-breve {
+    height: 90vh;
+    background-color: rgb(245, 247, 244);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-breve .container-breve {
+    height: 100%;
+    width: 80%;
+}
+
+.main-breve .container-breve .texto .apple {
+    width: 15vw;
+    /* border: 1px solid; */
+    height: 9vh;
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.main-breve .container-breve .texto .apple .icon-apple {
+    height: 8vh;
+}
+
+.main-breve .container-breve .texto .apple .textosApple {
+    /* border: 1px solid; */
+    width: 10vw;
+}
+
+.main-breve .container-breve .texto .apple .textosApple .titulo {
+    font-size: 0.9rem;
+}
+
+.main-breve .container-breve .texto .google {
+    width: 15vw;
+    /* border: 1px solid; */
+    height: 9vh;
+    background-color: rgb(21, 15, 87);
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
+
+
+.main-breve .container-breve .texto .google .textosGoogle {
+    /* border: 1px solid; */
+    width: 10vw;
+}
+
+.main-breve .container-breve .texto .google .textosGoogle .titulo {
+    font-size: 0.9rem;
+}
+
+.main-breve .container-breve .imagem {
+    background-image: url('../../assets/mobile.png');
+    background-size: cover;
+    background-position: center;
+    height: 74vh;
+    width: 26vw;
+}
+
+/* .main-breve .container-breve .imagem img {
+    display: none;
+} */

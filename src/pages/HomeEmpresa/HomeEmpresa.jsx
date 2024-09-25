@@ -6,6 +6,8 @@ import AboutUs from "../../components/aboutUs/AboutUs";
 import './HomeEmpresa.css';
 import Previa from "../../components/previa/previa";
 import Visibilidade from "../../components/visibilidade/Visibilidade";
+import Breve from "../../components/breve/Breve";
+import PerguntasFrequentes from "../../components/perguntasFrequentes/PerguntasFrequentes";
 
 function HomeEmpresa() {
     return <>
@@ -16,6 +18,8 @@ function HomeEmpresa() {
         <AboutUs />
         <Previa />
         <Visibilidade />
+        <PerguntasFrequentes />
+        <Breve />
     </div>
     </>
 }
