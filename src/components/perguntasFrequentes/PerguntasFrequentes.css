@@ -1,0 +1,105 @@
+
+.main-perguntas {
+    height: 80vh;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.main-perguntas .container-perguntas {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.main-perguntas .container-perguntas .perguntas {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.main-perguntas .container-perguntas .perguntas .pergunta1 {
+    width: 18vw;
+    height: 53vh;
+    background-color: rgb(254, 254, 252);
+    border-radius: 14px;
+    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+    padding: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border: 1px solid rgb(194 194 191 / 43%);
+}
+
+/* .main-perguntas .container-perguntas .perguntas .pergunta1 .titulo {
+    border: 1px solid;
+} */
+
+.main-perguntas .container-perguntas .perguntas .pergunta2 {
+    width: 18vw;
+    height: 53vh;
+    background-color: rgb(254, 254, 252);
+    border-radius: 14px;
+    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+    padding: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border: 1px solid rgb(194 194 191 / 43%);
+}
+
+.main-perguntas .container-perguntas .perguntas .pergunta3 {
+    width: 18vw;
+    height: 53vh;
+    background-color: rgb(254, 254, 252);
+    border-radius: 14px;
+    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+    padding: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border: 1px solid rgb(194 194 191 / 43%);
+}
+
+.main-perguntas .container-perguntas .perguntas .botao {
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    height: 7vh;
+    align-items: center;
+    width: 100%;
+}
+
+.main-perguntas .container-perguntas .perguntas .botao button {
+    background-color: rgb(75, 163, 250);
+    border-radius: 10px;
+    color: white;
+    height: 5vh;
+    border: none;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+    
+.main-perguntas .container-perguntas .perguntas .botao button:hover {
+    background-color: rgb(5, 84, 181);
+}
+
+.main-perguntas .container-perguntas .perguntas .icon-check {
+    height: 3vh;
+    color: rgb(75, 163, 250);
+}
+
+.main-perguntas .container-perguntas .perguntas .resposta {
+    display: flex;
+    width: 14vw;
+    justify-content: space-around;
+    height: 23vh;
+}
+
+.main-perguntas .container-perguntas .perguntas .resposta label {
+    width: 12vw;
+}
