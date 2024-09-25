@@ -1,37 +1,37 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import './FooterEmpresa.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faFacebookF, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
-function FooterEmpresa() {
+function FooterEmpresa({ showLinks = true }) { 
     const [email, setEmail] = useState('');
 
     const handleInputChange = (e) => {
-      setEmail(e.target.value);
+        setEmail(e.target.value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Aqui você pode adicionar a lógica para lidar com o envio do e-mail
+        // Lógica para lidar com o envio do e-mail
         alert(`Email enviado: ${email}`);
-      };
+    };
 
     return (
         <div className="main-footer-empresa">
             <div className="container-footer-empresa">
                 <div className="borda">
-                    <div className="titulos">
-                        <label htmlFor="text">Início</label>
-                        <label htmlFor="text">Login</label>
-                        <label htmlFor="text">Cadastrar</label>
-                    </div>
+                    {showLinks && (
+                        <div className="titulos">
+                            <label htmlFor="text">Início</label>
+                            <label htmlFor="text">Login</label>
+                            <label htmlFor="text">Cadastrar</label>
+                        </div>
+                    )}
 
-                    <div className='icones'>
-                        <FontAwesomeIcon icon={faInstagram} className="icon"/>
-                        <FontAwesomeIcon icon={faFacebookF} className="icon"/>
-                        <FontAwesomeIcon icon={faYoutube} className="icon"/>
+                    <div className="icones">
+                        <FontAwesomeIcon icon={faInstagram} className="icon" />
+                        <FontAwesomeIcon icon={faFacebookF} className="icon" />
+                        <FontAwesomeIcon icon={faYoutube} className="icon" />
                     </div>
                 </div>
 
@@ -58,7 +58,7 @@ function FooterEmpresa() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default FooterEmpresa;

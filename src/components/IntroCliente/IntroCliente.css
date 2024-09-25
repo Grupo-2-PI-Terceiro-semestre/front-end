@@ -1,0 +1,28 @@
+
+.main-intro {
+  background-color: rgb(245, 247, 244);
+}
+
+.intro-text {
+    text-align: center;
+    margin: 60px auto;
+    max-width: 80%;
+    padding: 0 20px;
+  }
+  
+  .intro-text h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+  
+  .intro-text p {
+    font-size: 1.2rem;
+    color: #080808;
+    
+  }
+  
+  .intro-text strong {
+    color: #3C70F5;
+    font-weight: bold;
+  }
