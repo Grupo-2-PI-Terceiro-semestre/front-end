@@ -8,7 +8,7 @@ function Breve() {
         <div className="main-breve">
             <div className="container-breve">
                 <div className="texto">
-                    <h1>Em breve, estaremos disponíveis em seu smartphone:</h1>
+                    <h3><b>Em breve, estaremos disponíveis em seu smartphone:</b></h3>
 
                     <div className="apple">
                         <FontAwesomeIcon icon={faApple} className="icon-apple" />
@@ -19,6 +19,9 @@ function Breve() {
                     </div>
 
                     <div className="google">
+                        <div className="imagem">
+                            <img src="../../assets/playStore.png" alt="" />
+                        </div>
                         <div className="textosGoogle">
                             <label className="titulo" htmlFor="text">Download on the</label> 
                             <label htmlFor="text"><b>Play Store</b></label>

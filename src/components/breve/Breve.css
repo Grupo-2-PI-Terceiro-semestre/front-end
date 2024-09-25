@@ -1,5 +1,5 @@
 .main-breve {
-    height: 90vh;
+    height: 85vh;
     background-color: rgb(245, 247, 244);
     width: 100%;
     display: flex;
@@ -9,6 +9,22 @@
 .main-breve .container-breve {
     height: 100%;
     width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.main-breve .container-breve .texto {
+    width: 32vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 36vh;
+    align-items: center;
+}
+
+.main-breve .container-breve .texto h3 {
+    color: rgb(10, 9, 61);
 }
 
 .main-breve .container-breve .texto .apple {
@@ -47,6 +63,13 @@
     color: white;
 }
 
+.main-breve .container-breve .texto .google .imagem {
+    background-image: url('../../assets/playStore.png');
+    background-size: cover;
+    background-position: center;
+    height: 6vh;
+    width: 3vw;
+}
 
 .main-breve .container-breve .texto .google .textosGoogle {
     /* border: 1px solid; */
