@@ -2,21 +2,22 @@
     text-align: center;
     padding: 20px;
     width: 100%;
-    margin: 150px;
+    margin: 15px;
     border: 1px solid #ffffff;
     border-radius: 10px;
   }
   
   .title {
-    font-size: 2em;
-    margin-bottom: 10px;
-    font-weight: bold;
+    font-size: 62px;
+    margin-bottom: 1rem;
+    font-weight: semi-bold;
   }
   
   .subtitle {
-    font-size: 1.2em;
+    font-size: 24px;
     margin-bottom: 80px;
-    color: #555;
+    font-weight: medium;
+    color: #000000;
     max-width: 80%;
     margin: 0 auto;
   }

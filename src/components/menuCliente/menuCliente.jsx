@@ -6,11 +6,10 @@ const categories = [
   'Barbearias',
   'Manicure & Nail Designer',
   'Esteticistas',
-  'Sobrancelhas & Cílios',
-  'Spa & Massagem',
-  'Make Up',
-  'Saúde & Bem-estar',
-  'Mais...'
+  'Sobrancelhas & Cílios'
+  
+  
+
 ];
 
 const menuCliente = () => {
