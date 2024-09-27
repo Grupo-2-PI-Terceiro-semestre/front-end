@@ -1,0 +1,79 @@
+.main-carrosel{
+  background-color: rgb(245, 247, 244);
+  width: 100%;
+  display: flex;
+
+  justify-content: center;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; 
+    max-width: 1200px; 
+    margin: 20px 0 100px;
+    position: relative;
+    
+  }
+  .cards-wrapper {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    justify-content: space-around;
+    transition: transform 0.5s ease-in-out; /
+  }
+  
+  .card {
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 20px; 
+    flex-shrink: 0;
+    transition: transform 0.3s ease; 
+  }
+  
+  .card:hover {
+    transform: scale(1.05); 
+  }
+  
+  .card-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    padding: 10px;
+  }
+  
+  .card-content h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+  }
+  
+  .card-content p {
+    margin-bottom: 5px; 
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .rating {
+    font-size: 1.1em;
+    color: #ffc107;
+    margin-top: 5px;
+  }
+  
+  .carousel-button {
+    background-color: transparent;
+    border: none;
+    font-size: 2em;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .carousel-button:hover {
+    color: #000;
+  }
+  
