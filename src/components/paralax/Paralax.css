@@ -1,0 +1,14 @@
+.paralax-active {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-image: url('https://via.placeholder.com/1920x1080'); */
+    height: 60vh;
+}
+
+.paralax-inactive {
+    background-attachment: scroll;
+    background-color: rgb(245, 247, 244);
+    height: 60vh;
+}

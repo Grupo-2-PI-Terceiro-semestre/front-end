@@ -6,6 +6,7 @@ import './Carrossel.css';
 import FirstSectionEmpresa from "../../components/firstSectionEmpresa/FirstSectionEmpresa";
 
 function Carrossel() {
+
     const settings = {
         dots: true,
         infinite: true,
