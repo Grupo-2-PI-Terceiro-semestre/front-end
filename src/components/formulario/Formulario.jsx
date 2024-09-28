@@ -4,7 +4,7 @@ import iconGoogle from '../../assets/logoGoogle.png'
 
 import Button from '../button/Button';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { cadastroUser } from '../../router/authRoutes'
+import { cadastroUser } from '../../router/usuarioRoutes'
 import { auth } from '../../services/firebase';
 
 
@@ -36,11 +36,10 @@ function Formulario() {
                 tiposDeUsuario: 'ADMIN',
                 representante: "true",
             };
-            setUser(user);
-            console.log(user);
+            setUser(userData);
             await cadastroUser(userData);
         } catch (error) {
-            setErrorMessage('Erro ao fazer login com o Google.');
+            setErrorMessage('Erro ao fazer  com o Google.');
         }
     };
 
@@ -197,6 +196,7 @@ function Formulario() {
                         hoverColor="#006aec"
                         color="white"
                         content="Cadastrar"
+                        onClick={handleSubmit}
                         type="submit"
                     />
                     <span>OU</span>
@@ -206,7 +206,6 @@ function Formulario() {
                         color="black"
                         hoverColor="#e8f3fe"
                         content="Google"
-                        type="submit"
                         onClick={handleGoogleSignIn}
                         image={iconGoogle}
                     />

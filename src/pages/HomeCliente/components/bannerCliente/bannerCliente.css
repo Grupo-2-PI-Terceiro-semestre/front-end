@@ -1,7 +1,7 @@
 .banner {
-  background-image: url('https://www.sp.senac.br/documents/51838645/51838647/salao-de-beleza-de-sucesso-mulher-loira+%281%29.jpg/1ed79d31-1e0e-b4a0-2511-bb1749a59b44?version=1.0&t=1673632072717'); /* Adicione a imagem de fundo */
+  background-image: url('https://www.sp.senac.br/documents/51838645/51838647/salao-de-beleza-de-sucesso-mulher-loira+%281%29.jpg/1ed79d31-1e0e-b4a0-2511-bb1749a59b44?version=1.0&t=1673632072717');
   background-size: cover;
-  background-position: center;
+  background-position: center 0%;
   height: 85vh;
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@
   width: 100vw; 
   margin: 0; 
   padding: 0; 
-  position: relative;
+}
   
 }
 

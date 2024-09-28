@@ -1,12 +1,12 @@
 import React from "react";
 import './HomeCliente.css';
 import HeaderEmpresa from "../../components/headerEmpresa/HeaderEmpresa";
-import BannerCliente from "../../components/bannerCliente/bannerCliente";
+import BannerCliente from "./components/bannerCliente/bannerCliente";
 import Carrossel from "../../components/carrossel/Carrossel";
-import MenuCliente from "../../components/menuCliente/menuCliente";
-import IntroCliente from "../../components/IntroCliente/IntroCliente";
-import CardCliente from "../../components/cardCliente/CardCliente";
-import Localizacao from "../../components/localizacao/Localizacao";
+import MenuCliente from "./components/menuCliente/menuCliente";
+import IntroCliente from "./components/IntroCliente/IntroCliente";
+import CardCliente from "./components/cardCliente/CardCliente";
+import Localizacao from "./components/localizacao/Localizacao";
 import Breve from "../../components/breve/Breve";
 import FooterEmpresa from "../../components/footerEmpresa/FooterEmpresa";
 
