@@ -32,11 +32,13 @@
     justify-content: space-evenly;
     align-items: center;
     
+    
 }
 
 .headerEmpresa .titulos span {
     color: white;
     font-size: 1.6rem;
+    
 }
 
 .headerEmpresa .titulos .opcoes {
@@ -51,14 +53,27 @@
 .headerEmpresa .titulos .opcoes .nav a {
     text-decoration: none;
     color: white;
+    
+    
 }
 
 .headerEmpresa .botaoCliente a {
     text-decoration: none;
     color: rgb(255, 255, 255);
+    font-weight: bold;
+    
 }
 
 .headerEmpresa .botaoCliente a .icon {
     height: 2vh;
     color: white;
 }
+
+
+
+.headerScroll {
+    background-color: #00000051; 
+    transition: background-color 0.3s ease-in-out;
+}
+
+
