@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import './Visibilidade.css';
 
 function Visibilidade() {
-    const imageRef = useRef(null);
+    // const useRef = {};
+    const imageRef = useRef('/src/assets/meninoSeta.png');
 
 
     useEffect(() => {
