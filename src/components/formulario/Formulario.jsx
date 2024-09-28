@@ -4,7 +4,7 @@ import iconGoogle from '../../assets/logoGoogle.png'
 
 import Button from '../button/Button';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { cadastroUser } from '../../router/authRoutes'
+import { cadastroUser } from '../../router/usuarioRoutes'
 import { auth } from '../../services/firebase';
 
 
@@ -39,7 +39,7 @@ function Formulario() {
             setUser(userData);
             await cadastroUser(userData);
         } catch (error) {
-            setErrorMessage('Erro ao fazer cadastro com o Google.');
+            setErrorMessage('Erro ao fazer  com o Google.');
         }
     };
 

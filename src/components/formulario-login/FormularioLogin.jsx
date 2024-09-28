@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginUser } from '../../router/authRoutes'
+import { loginUser } from '../../router/usuarioRoutes'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../services/firebase';
 import Button from '../button/Button';
@@ -36,14 +36,12 @@ const FormularioLogin = () => {
     
     const provider = new GoogleAuthProvider();
     try {
-      debugger
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       const userData = {
         emailPessoa: user.email,
         firebaseUid: user.uid,
       };
-      setUser(userData);
       const response = await loginUser(userData);
       setUser(response.user);
     } catch (error) {
