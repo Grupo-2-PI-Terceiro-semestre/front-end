@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginUser } from '../../router/authRoutes'
+import { loginUser } from '../../router/usuarioRoutes'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../services/firebase';
 import Button from '../button/Button';
@@ -19,22 +19,21 @@ const FormularioLogin = () => {
     } else {
       setErrorMessage('');
       try {
-        // Cria o objeto user
         const userData = {
           emailPessoa: email,
           senha: password,
         };
 
-        // Envia o objeto user para o backend
         const response = await loginUser(userData);
         setUser(response.user);
       } catch (error) {
-        setErrorMessage('Erro ao fazer login com e-mail e senha.');
+        setErrorMessage('Email ou senha invalidos');
       }
     }
   };
 
   const handleGoogleSignIn = async () => {
+    
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
@@ -43,12 +42,10 @@ const FormularioLogin = () => {
         emailPessoa: user.email,
         firebaseUid: user.uid,
       };
-
-      // Envia o objeto com uid e email para o backend
       const response = await loginUser(userData);
       setUser(response.user);
     } catch (error) {
-      setErrorMessage('Erro ao fazer login com o Google.');
+      setErrorMessage("Email ou senha invalidos");
     }
   };
 
@@ -85,7 +82,7 @@ const FormularioLogin = () => {
             hoverColor="#006aec"
             content="Entrar"
             type="submit"
-          // onClick={} // ATRIBUIR FUNÇAO
+            onClick={handleSubmit}
           />
           <span>OU</span>
           <Button
@@ -94,7 +91,6 @@ const FormularioLogin = () => {
             color='black'
             hoverColor="#e8f3fe"
             content="Google"
-            type="submit"
             onClick={handleGoogleSignIn}
             image={iconGoogle}
           />

@@ -1,40 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './HeaderEmpresa.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faFacebookF, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
-function HeaderEmpresa() {
-    return(
-        <header className='headerEmpresa'>
+function HeaderEmpresa({ navLinks, buttonText, width, widthOpcoes }) {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) { 
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    return (
+        <header className={`headerEmpresa ${isScrolled ? 'headerScroll' : ''}`}>
             <div className='icones'>
-                <FontAwesomeIcon icon={faInstagram} className="icon"/>
-                <FontAwesomeIcon icon={faFacebookF} className="icon"/>
-                <FontAwesomeIcon icon={faYoutube} className="icon"/>
+                <FontAwesomeIcon icon={faInstagram} className="icon" />
+                <FontAwesomeIcon icon={faFacebookF} className="icon" />
+                <FontAwesomeIcon icon={faYoutube} className="icon" />
             </div>
 
-            <div className='titulos'>
+            <div className='titulos' style={{ width: width }}>
                 <span>Order Hub</span>
-                <div className='opcoes'>
+                <div className='opcoes' style={{ width: widthOpcoes }}>
                     <nav className='nav'>
-                        <a href="">Inicio</a>
-                        <a href="">Sobre</a>
-                        <a href="">Preview</a>
-                        {/* <a href="">Planos</a> */}
-                        <a href="">Contato</a>
-                        <a href="">Cadastro</a>
-                        <a href="">Login</a>
+                        {navLinks.map((link, index) => (
+                            <a href={link.url} key={index}>{link.name}</a>
+                        ))}
                     </nav>
                 </div>
             </div>
 
             <div className='botaoCliente'>
-                <a href="">Para Clientes <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon" /></a>
+                <a href="">{buttonText} <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon" /></a>
             </div>
         </header>
-    )
+    );
 }
 
 export default HeaderEmpresa;

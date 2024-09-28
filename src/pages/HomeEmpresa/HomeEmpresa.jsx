@@ -12,14 +12,29 @@ import FooterEmpresa from "../../components/footerEmpresa/FooterEmpresa";
 function HomeEmpresa() {
   return (
     <div className="main-home">
-      <HeaderEmpresa />
-      <Carrossel />
-      <AboutUs hasParalax={true} /> {/* Parallax ativo */}
-      <Previa />
-      <Visibilidade />
-      <PerguntasFrequentes />
-      <Breve />
-      <FooterEmpresa />
+    <HeaderEmpresa width="60vw"
+    navLinks={[
+        { name: 'Início', url: '/inicio' },
+        { name: 'Sobre', url: '/sobre' },
+        { name: 'Preview', url: '/preview' },
+        { name: 'Contato', url: '/contato' },
+        { name: 'Cadastro', url: '/cadastro' },
+        { name: 'Login', url: '/login' }
+    ]}
+
+    buttonText="Para Clientes"
+     
+    
+/>
+
+        {/* <FirstSectionEmpresa /> */}
+        {/* <Carrossel />
+        <AboutUs />
+        <Previa />
+        <Visibilidade />
+        <PerguntasFrequentes />
+        <Breve />
+        <FooterEmpresa /> */}
     </div>
   );
 }
