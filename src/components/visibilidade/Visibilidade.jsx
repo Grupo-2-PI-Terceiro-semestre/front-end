@@ -2,7 +2,34 @@ import React from "react";
 import './Visibilidade.css';
 
 function Visibilidade() {
-    return(
+    const imageRef = useRef(null);
+
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.1 // O elemento é considerado visível quando 10% dele aparece
+        });
+
+        if (imageRef.current) {
+            observer.observe(imageRef.current);
+        }
+
+        // Cleanup do observer quando o componente desmontar
+        return () => {
+            if (imageRef.current) {
+                observer.unobserve(imageRef.current);
+            }
+        };
+    }, []);
+
+
+    return (
         <div className="main-visibilidade">
             <div className="container-visibilidade">
                 <div className="textos">
@@ -16,12 +43,12 @@ function Visibilidade() {
                     </div>
 
                     <div className="botao">
-                        <button>Comece a testar gratuitamente</button>                        
+                        <button>Comece a testar gratuitamente</button>
                     </div>
                 </div>
 
-                <div className="imagem">
-                    <img src='../../assets/meninoSeta.png' />
+                <div className="imagem" ref={imageRef}>
+                    <img src='../../assets/meninoSeta.png' alt="menino com seta" />
                 </div>
 
             </div>

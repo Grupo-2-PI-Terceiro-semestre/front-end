@@ -4,6 +4,11 @@
     height: 60vh;
     display: flex;
     justify-content: center;
+    /* position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
 }
 
 .main-about-us .container-about-us {

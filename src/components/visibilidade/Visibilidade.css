@@ -56,6 +56,14 @@
     background-size: cover;
     background-position: center;
     height: 53vh;
+    transform: translateX(100%); /* Fora da tela, à direita */
+    opacity: 0;
+    transition: transform 1s ease-out, opacity 1s ease-out; /* Transição suave */
+}
+
+.main-visibilidade .container-visibilidade .imagem.show {
+    transform: translateX(0); /* Move para o lugar original */
+    opacity: 1;
 }
 
 .main-visibilidade .container-visibilidade .imagem img {
