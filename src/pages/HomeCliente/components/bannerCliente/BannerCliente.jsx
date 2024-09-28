@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; // Importando useState
 import './BannerCliente.css';
-import { findByServicoOuEmpresa } from '../../router/homeClienteRoutes';
+import { findByServicoOuEmpresa } from '../../../../router/homeClienteRoutes';
 
 const BannerCliente = () => {
   const [searchTerm, setSearchTerm] = useState(''); // Inicializando o estado
