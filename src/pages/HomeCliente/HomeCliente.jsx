@@ -1,8 +1,7 @@
 import React from "react";
 import './HomeCliente.css';
 import HeaderEmpresa from "../../components/headerEmpresa/HeaderEmpresa";
-import BannerCliente from "./components/bannerCliente/bannerCliente";
-import Carrossel from "../../components/carrossel/Carrossel";
+import BannerCliente from "../../components/bannerCliente/bannerCliente";
 import MenuCliente from "./components/menuCliente/menuCliente";
 import IntroCliente from "./components/IntroCliente/IntroCliente";
 import CardCliente from "./components/cardCliente/CardCliente";
