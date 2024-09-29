@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './Carrossel.css';
-import FirstSectionEmpresa from "../../components/firstSectionEmpresa/FirstSectionEmpresa";
+import FirstSectionEmpresa from "../firstSectionEmpresa/FirstSectionEmpresa";
 
 function Carrossel() {
 
@@ -24,7 +24,7 @@ function Carrossel() {
           <div className='bordaImagem'>
             <div className='imagem1'>
               <img
-                src='../../assets/section1.png'
+                src='../../../../assets/section1.png'
                 // alt="Slide 1"
               />
             </div>
@@ -32,21 +32,21 @@ function Carrossel() {
           <div className='bordaImagem'>
             <div className='imagem2'>
               <img
-                src='../../assets/section1.png'
+                src='../../../../assets/section1.png'
               />
             </div>
           </div>
           <div className='bordaImagem'>
             <div className='imagem3'>
               <img
-                src='../../assets/section1.png'
+                src='../../../../assets/section1.png'
               />
             </div>
           </div>
           <div className='bordaImagem'>
             <div className='imagem4'>
               <img
-                src='../../assets/section1.png'
+                src='../../../../assets/section1.png'
               />
             </div>
           </div>

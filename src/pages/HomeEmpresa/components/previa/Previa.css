@@ -14,10 +14,16 @@
 }
 
 .main-previa .container-previa .imagem {
-    background-image: url(../../assets/telaNote.png);
-    background-size: cover;
-    background-position: center;
+    /* background-image: url(../../assets/telaNote.png); */
+    /* background-size: cover;
+    background-position: center; */
     width: 27vw;
+    height: 50vh;
+}
+
+.main-previa .container-previa .imagem img {
+    width: 27vw;
+    object-fit: cover;
     height: 50vh;
 }
 
@@ -57,7 +63,31 @@
     justify-content: space-evenly;
 }
 
-.main-previa .container-previa .paragrafo .icones .icone1 .icon-calendar {
+.main-previa .container-previa .paragrafo .icones .icone1 {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.main-previa .container-previa .paragrafo .icones .icone2 {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.main-previa .container-previa .paragrafo .icones .icone3 {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.main-previa .container-previa .paragrafo .icones .icone4 {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+/* .main-previa .container-previa .paragrafo .icones .icone1 .icon-calendar {
     color: rgb(0, 114, 255);
     height: 3vh;
 }
@@ -65,13 +95,21 @@
 .main-previa .container-previa .paragrafo .icones .icone1 label {
     color: rgb(0, 114, 255);
     font-size: 1.1 rem;
-}
-
-/* .main-previa .container-previa .paragrafo .icones .icone2 {
-    height: 6vh;
 } */
 
-.main-previa .container-previa .paragrafo .icones .icone2 .icon-check {
+.ativo .icon-calendar,
+.ativo .icon-hands,
+.ativo .icon-chart-column,
+.ativo .icon-user {
+    color: rgb(0, 114, 255);  /* Cor azul */
+}
+
+.ativo label {
+    color: rgb(0, 114, 255);  /* Cor azul para o texto */
+}
+
+
+.main-previa .container-previa .paragrafo .icones .icone2 .icon-hands {
     height: 3vh;
 }
 
