@@ -17,7 +17,7 @@
 }
 
 .main-carrossel .bordaImagem .imagem1 {
-    background-image: url('../../assets/section1.png');
+    background-image: url('../../../../assets/section1.png');
     background-size: cover;
     background-position: center;
     height: 86vh;
@@ -25,7 +25,7 @@
 }
 
 .main-carrossel .bordaImagem .imagem2 {
-    background-image: url('../../assets/barbearia.jpg');
+    background-image: url('../../../../assets/barbearia.jpg');
     background-size: cover;
     background-position: center;
     height: 86vh;
@@ -33,7 +33,7 @@
 }
 
 .main-carrossel .bordaImagem .imagem3 {
-    background-image: url('../../assets/barber-using-computer.jpg');
+    background-image: url('../../../../assets/barber-using-computer.jpg');
     background-size: cover;
     background-position: center;
     height: 86vh;
@@ -41,7 +41,7 @@
 }
 
 .main-carrossel .bordaImagem .imagem4 {
-    background-image: url('../../assets/aesthetics-professional-working.jpg');
+    background-image: url('../../../../assets/aesthetics-professional-working.jpg');
     background-size: cover;
     background-position: center;
     height: 86vh;
