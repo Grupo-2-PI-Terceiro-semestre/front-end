@@ -1,0 +1,122 @@
+.main-previa {
+    height: 80vh;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.main-previa .container-previa {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.main-previa .container-previa .imagem {
+    /* background-image: url(../../assets/telaNote.png); */
+    /* background-size: cover;
+    background-position: center; */
+    width: 27vw;
+    height: 50vh;
+}
+
+.main-previa .container-previa .imagem img {
+    width: 27vw;
+    object-fit: cover;
+    height: 50vh;
+}
+
+.main-previa .container-previa .paragrafo {
+    height: 50vh;
+}
+
+.main-previa .container-previa .paragrafo .textos {
+    width: 35vw;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+    gap: 1vh;
+    height: 19vh;
+}
+
+.main-previa .container-previa .paragrafo .textos h2 {
+    text-align: justify;
+
+}
+
+.main-previa .container-previa .paragrafo .textos h2 b {
+    color: rgb(0, 114, 255);
+
+}
+
+.main-previa .container-previa .paragrafo .textos label {
+    text-align: justify;
+}
+
+.main-previa .container-previa .paragrafo .icones {
+    /* border: 1px solid; */
+    height: 31vh;
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.main-previa .container-previa .paragrafo .icones .icone1 {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.main-previa .container-previa .paragrafo .icones .icone2 {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.main-previa .container-previa .paragrafo .icones .icone3 {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.main-previa .container-previa .paragrafo .icones .icone4 {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+/* .main-previa .container-previa .paragrafo .icones .icone1 .icon-calendar {
+    color: rgb(0, 114, 255);
+    height: 3vh;
+}
+
+.main-previa .container-previa .paragrafo .icones .icone1 label {
+    color: rgb(0, 114, 255);
+    font-size: 1.1 rem;
+} */
+
+.ativo .icon-calendar,
+.ativo .icon-hands,
+.ativo .icon-chart-column,
+.ativo .icon-user {
+    color: rgb(0, 114, 255);  /* Cor azul */
+}
+
+.ativo label {
+    color: rgb(0, 114, 255);  /* Cor azul para o texto */
+}
+
+
+.main-previa .container-previa .paragrafo .icones .icone2 .icon-hands {
+    height: 3vh;
+}
+
+.main-previa .container-previa .paragrafo .icones .icone3 .icon-chart-column {
+    height: 3vh;
+}
+
+.main-previa .container-previa .paragrafo .icones .icone4 .icon-user {
+    height: 3vh;
+}
