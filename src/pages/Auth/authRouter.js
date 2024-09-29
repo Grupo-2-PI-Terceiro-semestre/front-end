@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-import { postData } from './router';
+import { postData } from '../../router/router';
 
 export const loginUser = async (userData) => {
     try {

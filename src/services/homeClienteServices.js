@@ -1,4 +1,4 @@
-import { getData } from './router';
+import { getData } from '../router/router';
 
 export const findByCategorias = async () => {
     try {

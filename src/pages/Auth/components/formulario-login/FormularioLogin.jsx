@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { loginUser } from '../../router/usuarioRoutes'
+import { loginUser } from '../../authRouter.js'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../../services/firebase';
-import Button from '../button/Button';
-import iconGoogle from '../../assets/logoGoogle.png'
-import './FormularioLogin.css' // Ajuste o caminho conforme necessário
+import { auth } from '../../../../services/firebase';
+import Button from '../../../../components/button/Button';
+import iconGoogle from '../../../../assets/logoGoogle.png'
+import './FormularioLogin.css'
 
 const FormularioLogin = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +23,6 @@ const FormularioLogin = () => {
           emailPessoa: email,
           senha: password,
         };
-
         const response = await loginUser(userData);
         setUser(response.user);
       } catch (error) {
