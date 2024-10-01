@@ -1,8 +1,8 @@
 import React from "react";
-import SectionIcons from "../../components/section-icons/SectionIcons";
-import Formulario from "../../components/formulario/Formulario";
+import SectionIcons from "../components/section-icons/SectionIcons";
+import Formulario from "../components/formulario/Formulario";
 import './Cadastro.css'
-import Header from "../../components/header/Header"
+import Header from "../components/header/Header"
 import { useNavigate } from 'react-router-dom';
 
 function Cadastro() {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import FormularioLogin from '../../components/formulario-login/FormularioLogin';
+import FormularioLogin from '../components/formulario-login/FormularioLogin';
 import './Login.css';
-import SectionIcons from '../../components/section-icons/SectionIcons';
-import Header from '../../components/header/Header';
+import SectionIcons from '../components/section-icons/SectionIcons';
+import Header from '../components/header/Header';
 
 const Login = () => {
   const navigate = useNavigate(); // Use useNavigate dentro do componente

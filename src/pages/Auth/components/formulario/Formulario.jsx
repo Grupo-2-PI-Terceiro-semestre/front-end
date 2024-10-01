@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import './Formulario.css';
-import iconGoogle from '../../assets/logoGoogle.png'
-
-import Button from '../button/Button';
+import iconGoogle from '../../../../assets/logoGoogle.png'
+import Button from '../../../../components/button/Button';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { cadastroUser } from '../../router/usuarioRoutes'
-import { auth } from '../../services/firebase';
+import { cadastroUser } from '../../authRouter'
+import { auth } from '../../../../services/firebase';
 
 
 function Formulario() {

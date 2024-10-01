@@ -1,12 +1,12 @@
 import React from 'react';
 import './SectionIcons.css';
-import Icon1 from '../../assets/pentes.png';
-import Icon2 from '../../assets/pente.png';
-import Icon3 from '../../assets/secador.png';
-import Icon4 from '../../assets/esmalte.png';
-import Icon5 from '../../assets/aparar_barba.png';
-import Icon6 from '../../assets/tesoura.png';
-import Icon7 from '../../assets/maquiagem.png';
+import Icon1 from '../../../../assets/pentes.png';
+import Icon2 from '../../../../assets/pente.png';
+import Icon3 from '../../../../assets/secador.png';
+import Icon4 from '../../../../assets/esmalte.png';
+import Icon5 from '../../../../assets/aparar_barba.png';
+import Icon6 from '../../../../assets/tesoura.png';
+import Icon7 from '../../../../assets/maquiagem.png';
 
 const SectionIcons = ({ titulo, texto, botao, onClick }) => {
   return (

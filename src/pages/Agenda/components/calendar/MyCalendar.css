@@ -1,0 +1,128 @@
+.calendar-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 98.9vw;
+  background-color: #171821;
+}
+
+
+.custom-calendar {
+  background-color: #21222D;
+  /* Fundo do calendário */
+  color: white;
+}
+
+.custom-toolbar {
+  background-color: #21222D;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  width: 85%;
+  margin-left: 15%;
+  border: solid 0.5px #585858;
+  border-radius: 5px;
+}
+
+.custom-toolbar span {
+  margin: 0 15px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 16px;
+  color: white;
+}
+
+.custom-toolbar span:hover {
+  color: #007bff;
+  /* Cor do texto ao passar o mouse */
+}
+
+.custom-span {
+  font-size: 1em;
+  font-weight: normal;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.custom-span.selected {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.rbc-time-slot {
+  background-color: #21222D;
+  /* Fundo dos slots de tempo */
+  line-height: 1.5;
+  /* Aumenta o espaçamento entre os slots de tempo */
+}
+
+.rbc-time-view-resources .rbc-header{
+  background-color: #21222D;
+  color: white;
+  border-bottom: #21222D;
+  font-size: 12px;
+}
+
+ .rbc-time-header-gutter
+ .rbc-label{
+  background-color: #21222D;
+}
+
+.rbc-current-time-indicator{
+  background-color: #1100ff;
+  height: 2.5px;
+}
+
+.rbc-time-slot {
+  background-color: #21222D;
+  /* Fundo dos slots de tempo */
+  color: #ffffff;
+  font-size: 12px;
+  align-items: center;
+  /* Cor do texto das horas */
+}
+
+.rbc-timeslot-group {
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.592) /* Largura e estilo da borda */
+}
+
+.rbc-time-content > * + * > * {
+  border-left: 0.5px solid #dddddd55;
+  border-top: 0px solid #21222D;
+}
+
+.rbc-addons-dnd-row-body{
+  display: none;
+}
+
+.toolbar-container{
+  background-color: #21222D;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  border: solid 0.5px #585858;
+  border-radius: 5px;
+  margin: 3px 0 3px 15%;
+  height: 3rem;
+  padding: 2rem;
+}
+
+.rbc-time-view{
+  margin-left: 15%;
+  width: 85%;
+}
+
+.buscaAgenda{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rbc-day-slot .rbc-event{
+  background-color: #424242;
+  font-size: 12px;
+  border-left: solid 8px #00929B;
+}
