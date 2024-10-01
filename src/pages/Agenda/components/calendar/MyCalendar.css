@@ -9,7 +9,6 @@
 
 .custom-calendar {
   background-color: #21222D;
-  /* Fundo do calendário */
   color: white;
 }
 
@@ -124,5 +123,4 @@
 .rbc-day-slot .rbc-event{
   background-color: #424242;
   font-size: 12px;
-  border-left: solid 8px #00929B;
 }
