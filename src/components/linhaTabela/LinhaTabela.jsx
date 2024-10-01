@@ -4,19 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-function LinhaTabela() {
+function LinhaTabela({nome, valor, tempoExecucao }) {
     return (
         <>
         <div className="container-linha-tabela">
             <div className="tabela">
 
                 <div className="linha">
-                    <label htmlFor="text">Corte Masculino</label>
-                    <label htmlFor="text">R$45,00</label>
-                    <label htmlFor="text">00:45</label>
+                    <label htmlFor="text">{nome}</label>
+                    <label htmlFor="text">{valor}</label>
+                    <label htmlFor="text">{tempoExecucao}</label>
                     <label className="icons" htmlFor="text">
-                        <FontAwesomeIcon icon={faPenToSquare} />
-                        <FontAwesomeIcon icon={faTrashCan} />
+                        <FontAwesomeIcon icon={faPenToSquare} className="icon-pen" />
+                        <FontAwesomeIcon icon={faTrashCan} className="icon-trash" />
                     </label>
                 </div>
             </div>

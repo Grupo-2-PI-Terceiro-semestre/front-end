@@ -1,11 +1,7 @@
 .container-linha-tabela {
-    width: 83vw;
+    width: 75vw; /* Ajuste para ter a mesma largura dos títulos */
     display: flex;
-    /* border: 1px solid; */
     flex-wrap: wrap;
-    /* min-height: 64vh; */
-    /* min-height: 7vh; */
-    /* border: 1px solid white; */
     align-items: baseline;
     height: 7vh;
 }
@@ -17,34 +13,31 @@
     width: 100%;
 }
 
-.container-linha-tabela .tabela .tituloTabela,
 .container-linha-tabela .tabela .linha {
     display: flex;
     align-items: center;
-    width: 87vw;
+    width: 100%; /* Usar 100% aqui para alinhar perfeitamente */
     height: 5vh;
     color: white;
+    background-color: rgb(65, 65, 65);
+    border-radius: 5px;
     padding: 0 1.2vw;
 }
 
-.container-linha-tabela .tabela .tituloTabela {
-    font-weight: bold;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+.container-linha-tabela .tabela .linha .icons .icon-pen {
+    color: rgb(224, 175, 0);
 }
 
-.container-linha-tabela .tabela .linha {
-    background-color: rgb(65, 65, 65);
-    border-radius: 5px;
+.container-linha-tabela .tabela .linha .icons .icon-trash {
+    color: rgb(152, 0, 0);
 }
 
-.container-linha-tabela .tabela .tituloTabela label,
 .container-linha-tabela .tabela .linha label {
     flex: 1; 
     text-align: center;
 }
 
-.container-linha-tabela .tabela .linha label:last-child,
-.container-linha-tabela .tabela .tituloTabela label:last-child {
-    flex: 0.5;
+.container-linha-tabela .tabela .linha label:last-child { 
+    /* flex: 0.5; */
     text-align: center;
 }

@@ -9,7 +9,7 @@ function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4
     const handleKeyUp = (event) => {
         const value = event.target.value;
         setSearchTerm(value);
-        findByServicoOuEmpresa(value); // Chama a função com o valor atual
+        findByServicoOuEmpresa(value);
       };
 
     return (
@@ -37,16 +37,16 @@ function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4
                     </div>
 
                     <div className="conjuntoLinhas">
-                        <LinhaTabela />
-                        <LinhaTabela />
-                        <LinhaTabela />
-                        <LinhaTabela />
-                        <LinhaTabela />
-                        <LinhaTabela />
-                        <LinhaTabela />
-                        <LinhaTabela />
-                        <LinhaTabela />
-                        <LinhaTabela />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
                     </div>
                 </div>
 

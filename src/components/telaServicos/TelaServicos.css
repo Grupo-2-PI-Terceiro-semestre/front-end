@@ -1,5 +1,5 @@
 .main-tela-servicos {
-    width: 88vw;
+    width: 80vw;
     background-color: rgb(33, 34, 45);
     border-radius: 5px;
     display: flex;
@@ -10,9 +10,9 @@
 }
 
 .main-tela-servicos .container-tela-servicos {
-    width: 83vw;
+    width: 75vw;
     display: flex;
-    border: 1px solid;
+    /* border: 1px solid; */
     flex-wrap: wrap;
 }
 
@@ -53,31 +53,23 @@
 .container-tela-servicos .tabelaCompleta .tituloTabela {
     display: flex;
     align-items: center;
-    width: 87vw;
+    width: 75vw;
     height: 5vh;
     color: white;
     padding: 0 1.2vw;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.container-linha-tabela .tabelaCompleta .tituloTabela {
     font-weight: bold;
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .container-tela-servicos .tabelaCompleta .tituloTabela label {
-    flex: 1; 
     text-align: center;
-}
-
-.container-linha-tabela .tabelaCompleta .tituloTabela {
-    display: flex;
-    align-items: center;
-    width: 87vw;
-    height: 5vh;
-    color: white;
-    padding: 0 1.2vw;
-}
-
-.container-linha-tabela .tabelaCompleta .tituloTabela {
-    font-weight: bold;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    width: 22vw;
+    /* border: 1px solid; */
 }
 
 .container-linha-tabela .tabela .linha {
@@ -85,15 +77,24 @@
     border-radius: 5px;
 }
 
-.container-linha-tabela .tabelaCompleta .tituloTabela label {
-    flex: 1; 
+.container-linha-tabela .tabela .linha label:last-child {
+    /* flex: 0.5; */
     text-align: center;
+    gap: 0.5vw;
+    display: flex;
+    justify-content: center;
 }
 
-.container-linha-tabela .tabelaCompleta .tituloTabela label:last-child {
+.container-linha-tabela .tabelaCompleta .tituloTabela label {
+    text-align: center;
+    width: 22vw;
+    border: 1px solid;
+}
+
+/* .container-linha-tabela .tabelaCompleta .tituloTabela label:last-child {
     flex: 0.5;
     text-align: center;
-}
+} */
 
 .container-tela-servicos .tabelaCompleta .conjuntoLinhas {
     min-height: 58vh;

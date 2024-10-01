@@ -2,7 +2,7 @@ import React from "react";
 import './Servico.css';
 import HeaderInterna from "../../components/headerInterna/HeaderInterna";
 import TelaServicos from "../../components/telaServicos/TelaServicos";
-import MenuLateral from "../../components/menuLateral/MenuLateral";
+import MenuPerfil from "../../components/menuPerfil/MenuPerfil";
 
 function Servico() {
 
@@ -11,7 +11,7 @@ function Servico() {
         <div className="main-servico">
             <div className="container-servico">
                 <div className="menu-lateral">
-                    <MenuLateral />
+                    <MenuPerfil />
                 </div>                
                 <div className="principal">
                     <HeaderInterna texto="Novo Serviço"  />
