@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FaCalendarAlt, FaUser, FaChartBar, FaUsers, FaBriefcase, FaSignOutAlt, FaServicestack } from 'react-icons/fa';
-import './MenuPerfil.css'; 
+import './Menu.css'; 
 
-const MenuPerfil = () => {
+const Menu = () => {
   const [activeItem, setActiveItem] = useState('Perfil'); 
 
   const handleItemClick = (item) => {
@@ -49,4 +49,4 @@ const MenuPerfil = () => {
   );
 }
 
-export default MenuPerfil;
+export default Menu;
