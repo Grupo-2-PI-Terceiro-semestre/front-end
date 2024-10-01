@@ -1,0 +1,8 @@
+.mais-perfil{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    overflow: hidden;
+}
