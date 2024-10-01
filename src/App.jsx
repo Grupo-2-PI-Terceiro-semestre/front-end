@@ -4,6 +4,7 @@ import HomeEmpresa from './pages/HomeEmpresa/HomeEmpresa';
 import HomeCliente from './pages/HomeCliente/HomeCliente';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
+import Servico from './pages/Servico/Servico';
  
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/cliente" element={<HomeCliente />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/servico" element={<Servico />} />
       </Routes>
     </Router>
   );

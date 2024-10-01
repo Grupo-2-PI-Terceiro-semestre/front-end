@@ -1,0 +1,100 @@
+.main-tela-servicos {
+    width: 88vw;
+    background-color: rgb(33, 34, 45);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 2vh;
+    padding: 1.9vh;
+    min-height: 85vh;
+}
+
+.main-tela-servicos .container-tela-servicos {
+    width: 83vw;
+    display: flex;
+    border: 1px solid;
+    flex-wrap: wrap;
+}
+
+.main-tela-servicos .container-tela-servicos .titulo {
+    color: white;
+    width: 87vw;
+    display: flex;
+    align-items: center;
+    height: 8vh;
+}
+
+.main-tela-servicos .container-tela-servicos .search-box {
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    width: 87vw;
+    position: relative;
+}
+
+.main-tela-servicos .container-tela-servicos .search-box .search-icon {
+    position: absolute;
+    left: 15px;
+    color: rgb(104, 69, 0);
+    pointer-events: none;
+}
+
+.main-tela-servicos .container-tela-servicos .search-box input {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    font-size: 1rem;
+    border: 1px solid rgb(154, 154, 182);
+    border-radius: 5px;
+    outline: none;
+    background-color: rgb(33, 34, 45);
+    color: white;
+}
+
+.container-tela-servicos .tabelaCompleta .tituloTabela {
+    display: flex;
+    align-items: center;
+    width: 87vw;
+    height: 5vh;
+    color: white;
+    padding: 0 1.2vw;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.container-tela-servicos .tabelaCompleta .tituloTabela label {
+    flex: 1; 
+    text-align: center;
+}
+
+.container-linha-tabela .tabelaCompleta .tituloTabela {
+    display: flex;
+    align-items: center;
+    width: 87vw;
+    height: 5vh;
+    color: white;
+    padding: 0 1.2vw;
+}
+
+.container-linha-tabela .tabelaCompleta .tituloTabela {
+    font-weight: bold;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.container-linha-tabela .tabela .linha {
+    background-color: rgb(65, 65, 65);
+    border-radius: 5px;
+}
+
+.container-linha-tabela .tabelaCompleta .tituloTabela label {
+    flex: 1; 
+    text-align: center;
+}
+
+.container-linha-tabela .tabelaCompleta .tituloTabela label:last-child {
+    flex: 0.5;
+    text-align: center;
+}
+
+.container-tela-servicos .tabelaCompleta .conjuntoLinhas {
+    min-height: 58vh;
+}
