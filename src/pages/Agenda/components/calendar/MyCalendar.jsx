@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { DndProvider } from "react-dnd";
@@ -9,8 +9,10 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./MyCalendar.css";
 import Button from "../../../../components/button/Button";
 import plusIcon from "../../../../assets/plus.png";
-import { events as initialEvents, resources } from './events';
 import IconDemo from '../agenda/Agenda';
+import { findColaborador, findAgendamentos } from '../../services/calendarServices'
+import Cookies from 'js-cookie';
+
 
 moment.locale("pt-br");
 const localizer = momentLocalizer(moment);
@@ -18,8 +20,83 @@ const DragAndDropCalendar = withDragAndDrop(Calendar);
 
 const MyDragAndDropCalendar = () => {
 
-  const [events, setEvents] = useState(initialEvents);
+  const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [colaboradorInfo, setColaboradorInfo] = useState(null);
+  const [resources, setResources] = useState([]);
+
+  const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
+
+  useEffect(() => {
+    buscarColaboradores();
+  }, []);
+
+  const buscarColaboradores = async () => {
+    try {
+      // Buscar informações dos colaboradores pela empresa do usuário
+      const response = await findColaborador(user.idEmpresa);
+
+      const formattedResources = response.data.map(colaborador => ({
+        id: colaborador.idAgenda,
+        title: colaborador.nomeFuncionario,
+      }));
+      setColaboradorInfo(response);
+      setResources(formattedResources);
+      const today = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+      const agendamentosPromises = response.data.map(async (colaborador) => {
+        if (colaborador.idAgenda) {
+          const agendamentos = await buscarEventos(today, colaborador.idAgenda);
+          return agendamentos;
+        }
+      });
+
+      const allAgendamentos = await Promise.all(agendamentosPromises);
+      const formattedEvents = allAgendamentos
+        .flat()
+        .filter(evento => evento !== undefined)
+
+      setEvents(formattedEvents);
+    } catch (error) {
+      console.error('Erro ao buscar colaboradores ou agendamentos:', error);
+    }
+  };
+
+  const eventPropGetter = (event) => {
+  // Aqui você pode acessar o evento e suas propriedades
+  const borderColor = event.corReferenciaHex || '#00929B'; // Define a cor da borda ou um padrão
+
+  return {
+    style: {
+      borderLeft: `solid 8px ${borderColor}`, // Definir a borda dinamicamente
+    },
+  };
+};
+
+  const buscarEventos = async (dataAgendamento, idAgenda) => {
+
+    if (!idAgenda) {
+      debugger
+      console.error('idAgenda está indefinido');
+      return;
+    }
+
+    try {
+      const response = await findAgendamentos(idAgenda, dataAgendamento);
+      const eventsFeature = response.data.map(evento => ({
+        id: evento.idAgendamento,
+        title: evento.servico.nomeServico,
+        start: new Date(evento.horaAgendamento), 
+        end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
+        resourceId: idAgenda,
+        corReferenciaHex: evento.servico.corReferenciaHex,
+      }));
+    
+      return eventsFeature;
+    } catch (error) {
+      console.error('Erro ao buscar agendamentos:', error);
+      return [];
+    }
+  }
 
   const handleDateChange = (day) => {
     setSelectedDate(day);
@@ -73,7 +150,6 @@ const MyDragAndDropCalendar = () => {
   }
 
   const CustomToolbar = () => {
-
     return (
       <div className="toolbar-container">
         <div className="buscaAgenda">
@@ -127,6 +203,7 @@ const MyDragAndDropCalendar = () => {
             resourceTitleAccessor="title"
             startAccessor="start"
             endAccessor="end"
+            eventPropGetter={eventPropGetter}
             defaultView="day"
             date={selectedDate}
             onEventDrop={moveEvent}
