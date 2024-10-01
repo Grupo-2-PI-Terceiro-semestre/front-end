@@ -11,6 +11,7 @@ export const loginUser = async (userData) => {
 
         if (token) {
             Cookies.set('token', token, { expires: 7 });
+            Cookies.set('user', JSON.stringify(response.data), { expires: 7 })
         }
 
         return response.data;
