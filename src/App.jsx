@@ -5,6 +5,7 @@ import HomeCliente from './pages/HomeCliente/HomeCliente';
 import Login from './pages/Auth/Login/Login';
 import Cadastro from './pages/Auth/Cadastro/Cadastro';
 import Agenda from './pages/Agenda/Agenda'
+import Perfil from './pages/Perfil/Perfil';
  
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/agenda" element={<Agenda />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </Router>
   );
