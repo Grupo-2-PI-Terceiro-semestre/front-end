@@ -4,6 +4,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../../../services/firebase';
 import Button from '../../../../components/button/Button';
 import iconGoogle from '../../../../assets/logoGoogle.png'
+import { useNavigate } from 'react-router-dom';
 import './FormularioLogin.css'
 
 const FormularioLogin = () => {
@@ -11,6 +12,8 @@ const FormularioLogin = () => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +28,7 @@ const FormularioLogin = () => {
         };
         const response = await loginUser(userData);
         setUser(response.user);
+        navigate('/agenda')
       } catch (error) {
         setErrorMessage('Email ou senha invalidos');
       }
@@ -32,7 +36,6 @@ const FormularioLogin = () => {
   };
 
   const handleGoogleSignIn = async () => {
-    
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
@@ -43,6 +46,7 @@ const FormularioLogin = () => {
       };
       const response = await loginUser(userData);
       setUser(response.user);
+      navigate('/agenda');
     } catch (error) {
       setErrorMessage("Email ou senha invalidos");
     }
