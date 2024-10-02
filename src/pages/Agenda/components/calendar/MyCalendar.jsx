@@ -62,15 +62,15 @@ const MyDragAndDropCalendar = () => {
   };
 
   const eventPropGetter = (event) => {
-  // Aqui você pode acessar o evento e suas propriedades
-  const borderColor = event.corReferenciaHex || '#00929B'; // Define a cor da borda ou um padrão
+    // Aqui você pode acessar o evento e suas propriedades
+    const borderColor = event.corReferenciaHex || '#00929B'; // Define a cor da borda ou um padrão
 
-  return {
-    style: {
-      borderLeft: `solid 8px ${borderColor}`, // Definir a borda dinamicamente
-    },
+    return {
+      style: {
+        borderLeft: `solid 8px ${borderColor}`, // Definir a borda dinamicamente
+      },
+    };
   };
-};
 
   const buscarEventos = async (dataAgendamento, idAgenda) => {
 
@@ -85,12 +85,12 @@ const MyDragAndDropCalendar = () => {
       const eventsFeature = response.data.map(evento => ({
         id: evento.idAgendamento,
         title: evento.servico.nomeServico,
-        start: new Date(evento.horaAgendamento), 
+        start: new Date(evento.horaAgendamento),
         end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
         resourceId: idAgenda,
         corReferenciaHex: evento.servico.corReferenciaHex,
       }));
-    
+
       return eventsFeature;
     } catch (error) {
       console.error('Erro ao buscar agendamentos:', error);
@@ -152,18 +152,8 @@ const MyDragAndDropCalendar = () => {
   const CustomToolbar = () => {
     return (
       <div className="toolbar-container">
-        <div className="buscaAgenda">
-          <IconDemo content={formatDateToBRWithMonthName(selectedDate)} onDateChange={handleDateChange} />
-        </div>
-        <Button
-          size="auto"
-          content="Adicionar Agendamento"
-          height="2rem"
-          fontSize="14px"
-          widthImage="1.5rem"
-          heightImage="1.5rem"
-          image={plusIcon}
-        />
+
+
       </div>
     );
   };
@@ -172,6 +162,10 @@ const MyDragAndDropCalendar = () => {
     <div className="container">
       <div className="calendar-container">
         <div className="custom-toolbar">
+          <div className="buscaAgenda">
+            <IconDemo content={formatDateToBRWithMonthName(selectedDate)} onDateChange={handleDateChange} />
+          </div>
+          <div className="buttonDay">
           <span
             onClick={() => handleDateChange(new Date(new Date().setDate(new Date().getDate() - 1)))}
             className={isSelected(new Date(new Date().setDate(new Date().getDate() - 1))) ? "custom-span selected" : "custom-span"}
@@ -192,6 +186,16 @@ const MyDragAndDropCalendar = () => {
           >
             Amanhã
           </span>
+          </div>
+          <Button
+            size="auto"
+            content="Adicionar Agendamento"
+            height="2rem"
+            fontSize="14px"
+            widthImage="1.5rem"
+            heightImage="1.5rem"
+            image={plusIcon}
+          />
         </div>
         <DndProvider backend={HTML5Backend}>
           <DragAndDropCalendar
