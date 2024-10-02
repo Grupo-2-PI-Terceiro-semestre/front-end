@@ -6,6 +6,7 @@ import Button from '../../../../components/button/Button';
 import iconGoogle from '../../../../assets/logoGoogle.png'
 import { useNavigate } from 'react-router-dom';
 import './FormularioLogin.css'
+import LinearProgress from '../../../../components/barra-load/LinearProgress';
 
 const FormularioLogin = () => {
   const [email, setEmail] = useState('');
