@@ -20,16 +20,22 @@
     background-image: url('../../../../assets/section1.png');
     background-size: cover;
     background-position: center;
-    height: 86vh;
-    
+    height: 86vh;   
+}
+
+.main-carrossel .bordaImagem .imagem1 img {
+    display: none;   
 }
 
 .main-carrossel .bordaImagem .imagem2 {
     background-image: url('../../../../assets/barbearia.jpg');
     background-size: cover;
     background-position: center;
-    height: 86vh;
-    
+    height: 86vh; 
+}
+
+.main-carrossel .bordaImagem .imagem2 img {
+    display: none;   
 }
 
 .main-carrossel .bordaImagem .imagem3 {
@@ -37,15 +43,21 @@
     background-size: cover;
     background-position: center;
     height: 86vh;
-    
+}
+
+.main-carrossel .bordaImagem .imagem3 img {
+    display: none;   
 }
 
 .main-carrossel .bordaImagem .imagem4 {
     background-image: url('../../../../assets/aesthetics-professional-working.jpg');
     background-size: cover;
     background-position: center;
-    height: 86vh;
-   
+    height: 86vh;  
+}
+
+.main-carrossel .bordaImagem .imagem4 img {
+    display: none;   
 }
 
 .main-carrossel .bordaImagem::before {
