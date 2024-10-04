@@ -4,6 +4,12 @@
   color: white;
 }
 
+.botao{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .buttonDay{
   align-items: center;
   width: 20%;
@@ -70,7 +76,7 @@
 }
 
 .rbc-current-time-indicator{
-  background-color: #1100ff;
+  background-color: #ff0000;
   height: 2.5px;
 }
 

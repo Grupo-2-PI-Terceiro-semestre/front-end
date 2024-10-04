@@ -12,6 +12,7 @@ import plusIcon from "../../../../assets/plus.png";
 import IconDemo from '../agenda/Agenda';
 import { findColaborador, findAgendamentos } from '../../services/calendarServices'
 import Cookies from 'js-cookie';
+import CircularIntegration from '../../../../components/botao-download/CircularIntegration';
 
 
 moment.locale("pt-br");
@@ -28,10 +29,10 @@ const MyDragAndDropCalendar = () => {
   const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 
   useEffect(() => {
-    buscarColaboradores();
+    buscarColaboradores(new Date().toISOString().split('T')[0]);
   }, []);
 
-  const buscarColaboradores = async () => {
+  const buscarColaboradores = async (day) => {
     try {
       // Buscar informações dos colaboradores pela empresa do usuário
       const response = await findColaborador(user.idEmpresa);
@@ -42,10 +43,9 @@ const MyDragAndDropCalendar = () => {
       }));
       setColaboradorInfo(response);
       setResources(formattedResources);
-      const today = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
       const agendamentosPromises = response.data.map(async (colaborador) => {
         if (colaborador.idAgenda) {
-          const agendamentos = await buscarEventos(today, colaborador.idAgenda);
+          const agendamentos = await buscarEventos(day, colaborador.idAgenda);
           return agendamentos;
         }
       });
@@ -99,6 +99,7 @@ const MyDragAndDropCalendar = () => {
   }
 
   const handleDateChange = (day) => {
+    buscarColaboradores(day.toISOString().split('T')[0]);
     setSelectedDate(day);
   };
 
@@ -166,36 +167,39 @@ const MyDragAndDropCalendar = () => {
             <IconDemo content={formatDateToBRWithMonthName(selectedDate)} onDateChange={handleDateChange} />
           </div>
           <div className="buttonDay">
-          <span
-            onClick={() => handleDateChange(new Date(new Date().setDate(new Date().getDate() - 1)))}
-            className={isSelected(new Date(new Date().setDate(new Date().getDate() - 1))) ? "custom-span selected" : "custom-span"}
-          >
-            Ontem
-          </span>
+            <span
+              onClick={() => handleDateChange(new Date(new Date().setDate(new Date().getDate() - 1)))}
+              className={isSelected(new Date(new Date().setDate(new Date().getDate() - 1))) ? "custom-span selected" : "custom-span"}
+            >
+              Ontem
+            </span>
 
-          <span
-            onClick={() => handleDateChange(new Date())}
-            className={isSelected(new Date()) ? "custom-span selected" : "custom-span"}
-          >
-            Hoje
-          </span>
+            <span
+              onClick={() => handleDateChange(new Date())}
+              className={isSelected(new Date()) ? "custom-span selected" : "custom-span"}
+            >
+              Hoje
+            </span>
 
-          <span
-            onClick={() => handleDateChange(new Date(new Date().setDate(new Date().getDate() + 1)))}
-            className={isSelected(new Date(new Date().setDate(new Date().getDate() + 1))) ? "custom-span selected" : "custom-span"}
-          >
-            Amanhã
-          </span>
+            <span
+              onClick={() => handleDateChange(new Date(new Date().setDate(new Date().getDate() + 1)))}
+              className={isSelected(new Date(new Date().setDate(new Date().getDate() + 1))) ? "custom-span selected" : "custom-span"}
+            >
+              Amanhã
+            </span>
           </div>
-          <Button
-            size="auto"
-            content="Adicionar Agendamento"
-            height="2rem"
-            fontSize="14px"
-            widthImage="1.5rem"
-            heightImage="1.5rem"
-            image={plusIcon}
-          />
+          <div className="botao">
+            <Button
+              size="auto"
+              content="Adicionar Agendamento"
+              height="2rem"
+              fontSize="14px"
+              widthImage="1.5rem"
+              heightImage="1.5rem"
+              image={plusIcon}
+            />
+            <CircularIntegration />
+          </div>
         </div>
         <DndProvider backend={HTML5Backend}>
           <DragAndDropCalendar
