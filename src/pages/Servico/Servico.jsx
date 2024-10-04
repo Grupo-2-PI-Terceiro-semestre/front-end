@@ -2,7 +2,7 @@ import React from "react";
 import './Servico.css';
 import HeaderInterna from "../../components/headerInterna/HeaderInterna";
 import TelaServicos from "../../components/telaServicos/TelaServicos";
-import MenuPerfil from "../../components/menuPerfil/MenuPerfil";
+import MenuPerfil from "../../components/menu/Menu";
 
 function Servico() {
 
