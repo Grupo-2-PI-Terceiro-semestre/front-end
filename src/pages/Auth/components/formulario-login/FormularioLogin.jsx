@@ -82,8 +82,6 @@ const FormularioLogin = () => {
         <div className='botoes'>
           <Button
             size="60%"
-            backgroundColor="#0072FF"
-            hoverColor="#006aec"
             content="Entrar"
             type="submit"
             onClick={handleSubmit}
@@ -91,9 +89,8 @@ const FormularioLogin = () => {
           <span>OU</span>
           <Button
             size="60%"
-            backgroundColor="#f3f9ff"
             color='black'
-            hoverColor="#e8f3fe"
+            backgroundColor='#f3f9ff'
             content="Google"
             onClick={handleGoogleSignIn}
             image={iconGoogle}
