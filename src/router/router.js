@@ -17,7 +17,8 @@ export const getData = async (endpoint, pathParams = {}, queryParams = {}) => {
 
         const response = await axios.get(urlWithParams, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'  
             }
         });
 
