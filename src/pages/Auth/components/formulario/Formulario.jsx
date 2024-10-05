@@ -164,9 +164,9 @@ function Formulario() {
                             required
                         />
                     </div>
-                    {/*
                 </div >
 
+                {/*
                 <div className='botao'>
                     <button type="submit" className="submit-button">
                         Cadastrar
@@ -185,8 +185,8 @@ function Formulario() {
                         Google
                     </button>
                 </div>
-======= */}
                 </div>
+                ======= */}
 
                 <div className='botoes'>
                     <Button

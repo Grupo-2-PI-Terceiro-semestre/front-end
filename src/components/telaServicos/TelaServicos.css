@@ -12,7 +12,6 @@
 .main-tela-servicos .container-tela-servicos {
     width: 75vw;
     display: flex;
-    /* border: 1px solid; */
     flex-wrap: wrap;
 }
 
@@ -22,6 +21,7 @@
     display: flex;
     align-items: center;
     height: 8vh;
+    justify-content: space-between;
 }
 
 .main-tela-servicos .container-tela-servicos .search-box {
@@ -69,7 +69,6 @@
 .container-tela-servicos .tabelaCompleta .tituloTabela label {
     text-align: center;
     width: 22vw;
-    /* border: 1px solid; */
 }
 
 .container-linha-tabela .tabela .linha {
@@ -78,7 +77,6 @@
 }
 
 .container-linha-tabela .tabela .linha label:last-child {
-    /* flex: 0.5; */
     text-align: center;
     gap: 0.5vw;
     display: flex;
@@ -90,11 +88,6 @@
     width: 22vw;
     border: 1px solid;
 }
-
-/* .container-linha-tabela .tabelaCompleta .tituloTabela label:last-child {
-    flex: 0.5;
-    text-align: center;
-} */
 
 .container-tela-servicos .tabelaCompleta .conjuntoLinhas {
     min-height: 58vh;

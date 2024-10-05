@@ -1,6 +1,6 @@
 import React from "react";
 import './Servico.css';
-import HeaderInterna from "../../components/headerInterna/HeaderInterna";
+// import HeaderInterna from "../../components/headerInterna/HeaderInterna";
 import TelaServicos from "../../components/telaServicos/TelaServicos";
 import MenuPerfil from "../../components/menuPerfil/MenuPerfil";
 
@@ -14,7 +14,6 @@ function Servico() {
                     <MenuPerfil />
                 </div>                
                 <div className="principal">
-                    <HeaderInterna texto="Novo Serviço"  />
                     <TelaServicos titulo="Serviço" placeholder="Pesquisar Serviço" titulo1="NOME" titulo2="VALOR" titulo3="TEMPO DE EXECUÇÃO" titulo4="AÇÕES" />
                 </div>
             </div>
