@@ -66,23 +66,22 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: vite-app
-
       - name: Unzip artifact for deployment
         run: unzip release.zip
       
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E7CC563F4BC0483381E091C2C37CE9E9 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_953B91CE89A94022ACDF83E6DEF09302 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9411AD1955F74FAEA5F7C0E582A1E716 }}
 
-      - name: Deploy to Azure Web App
+      - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'OrderHub'
+          slot-name: 'Production'
           package: .
-
           
 
