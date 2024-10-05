@@ -1,5 +1,5 @@
 .container-linha-tabela {
-    width: 75vw; /* Ajuste para ter a mesma largura dos títulos */
+    width: 75vw;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -16,7 +16,7 @@
 .container-linha-tabela .tabela .linha {
     display: flex;
     align-items: center;
-    width: 100%; /* Usar 100% aqui para alinhar perfeitamente */
+    width: 100%;
     height: 5vh;
     color: white;
     background-color: rgb(65, 65, 65);
@@ -33,11 +33,10 @@
 }
 
 .container-linha-tabela .tabela .linha label {
-    flex: 1; 
+    flex: 1;
     text-align: center;
 }
 
-.container-linha-tabela .tabela .linha label:last-child { 
-    /* flex: 0.5; */
+.container-linha-tabela .tabela .linha label:last-child {
     text-align: center;
 }
