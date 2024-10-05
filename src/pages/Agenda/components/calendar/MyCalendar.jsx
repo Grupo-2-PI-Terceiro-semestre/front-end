@@ -144,7 +144,6 @@ const MyDragAndDropCalendar = () => {
   };
 
   return (
-
     <div className="container">
       <div className="calendar-container">
         <div className="custom-toolbar">
@@ -165,7 +164,7 @@ const MyDragAndDropCalendar = () => {
 
             <span
               onClick={() => {
-                const today = new Date(); // Data atual
+                const today = new Date();
                 handleDateChange(today);
               }}
               className={isSelected(new Date()) ? "custom-span selected" : "custom-span"}
@@ -176,7 +175,7 @@ const MyDragAndDropCalendar = () => {
             <span
               onClick={() => {
                 const tomorrow = new Date();
-                tomorrow.setDate(tomorrow.getDate() + 1); // Adiciona um dia
+                tomorrow.setDate(tomorrow.getDate() + 1);
                 handleDateChange(tomorrow);
               }}
               className={isSelected(new Date(new Date().setDate(new Date().getDate() + 1))) ? "custom-span selected" : "custom-span"}
