@@ -1,23 +1,31 @@
 import React from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import ErrorIcon from '@mui/icons-material/Error';
 import CircularProgress from '@mui/material/CircularProgress';
 import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
-import { green } from '@mui/material/colors';
+import { green, red } from '@mui/material/colors';
 import Tooltip from '@mui/material/Tooltip';
+import { findCSV } from '../../services/exportarServices';
 
-export default function CircularIntegration() {
+export default function CircularIntegration({ endpoint, path, param }) {
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
-    const timer = React.useRef < setTimeout > undefined > (undefined);
-    const [fileUrl, setFileUrl] = React.useState('');
+    const [error, setError] = React.useState(false); // Estado para o erro
+    const timer = React.useRef(null); // Ajustar o timer corretamente
 
     const buttonSx = {
         ...(success && {
             bgcolor: green[500],
             '&:hover': {
                 bgcolor: green[700],
+            },
+        }),
+        ...(error && {
+            bgcolor: red[500],
+            '&:hover': {
+                bgcolor: red[700],
             },
         }),
     };
@@ -28,35 +36,45 @@ export default function CircularIntegration() {
         };
     }, []);
 
-    const downloadFile = async () => {
-        setLoading(true);
-        try {
-            const url = 'https://gedbatchqa.unimed.coop.br/ged/v1/public/download/autorizacao/e2b2ef8b9a2c420395b3a4c374b129fd';  // Substitua pela URL real do arquivo CSV
-            const response = await fetch(url);
-
-            if (!response.ok) {
-                throw new Error('Erro ao baixar o arquivo');
-            }
-
-            const blob = await response.blob(); // Recebe o arquivo como blob
-            const downloadUrl = URL.createObjectURL(blob); // Cria uma URL para o arquivo
-            setFileUrl(downloadUrl); // Armazena a URL do arquivo para download
-
-            setSuccess(true);
-
-            timer.current = setTimeout(() => {
-                setSuccess(false);
-            }, 5000); 
-        } catch (error) {
-            console.error('Erro no download:', error);
-        } finally {
-            setLoading(false); // Finaliza o estado de carregamento
+    const handleButtonClick = () => {
+        if (!loading) {
+            downloadFile(endpoint, path, param);
         }
     };
 
-    const handleButtonClick = () => {
-        if (!loading) {
-            downloadFile();
+    const downloadFile = async (endpoint, path, dataAgendamento) => {
+        setLoading(true);
+        setError(false);
+        try {
+            const arquivo = await findCSV(endpoint, { path }, { dataAgendamento });
+
+            if (arquivo.data === undefined) {
+                throw new Error('Erro ao baixar o arquivo');
+            }
+
+            const dadosString = arquivo.data;
+
+            const blob = new Blob([dadosString], { type: 'text/csv;charset=utf-8;' });
+            const downloadUrl = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = 'agendamentos.csv';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            setSuccess(true);
+            setTimeout(() => {
+                setSuccess(false);
+            }, 3000);
+        } catch (error) {
+            setError(true); 
+            setTimeout(() => {
+                setError(false); 
+            }, 3000);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -73,13 +91,11 @@ export default function CircularIntegration() {
                             onClick={handleButtonClick}
                         >
                             {success ? (
-                                <a href={fileUrl} download="arquivo.csv" style={{ color: 'white' }}>
-                                    <CheckIcon />
-                                </a>
+                                <CheckIcon style={{ color: 'white' }} />
+                            ) : error ? (
+                                <ErrorIcon style={{ color: 'white' }} />
                             ) : (
-                                <a href={fileUrl} download="arquivo.csv" style={{ color: 'white' }}>
-                                <DownloadForOfflineIcon />
-                                </a>
+                                <DownloadForOfflineIcon style={{ color: 'white' }} />
                             )}
                         </Fab>
                     </span>
