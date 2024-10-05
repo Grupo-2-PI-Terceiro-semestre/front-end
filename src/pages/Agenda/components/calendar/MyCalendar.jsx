@@ -10,9 +10,10 @@ import "./MyCalendar.css";
 import Button from "../../../../components/button/Button";
 import plusIcon from "../../../../assets/plus.png";
 import IconDemo from '../agenda/Agenda';
-import { findColaborador, findAgendamentos } from '../../services/calendarServices'
+import { findColaborador, findAgendamentos } from '../../services/agendaServices'
 import Cookies from 'js-cookie';
 import CircularIntegration from '../../../../components/botao-download/CircularIntegration';
+import CircularSize from '../../../../components/circulo-load/CircularSize';
 
 
 moment.locale("pt-br");
@@ -25,83 +26,71 @@ const MyDragAndDropCalendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [colaboradorInfo, setColaboradorInfo] = useState(null);
   const [resources, setResources] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 
   useEffect(() => {
-    buscarColaboradores(new Date().toISOString().split('T')[0]);
+    const today = new Date();
+    const localDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const formattedDate = localDate.toISOString().split('T')[0];
+    buscarColaboradores(formattedDate);
   }, []);
 
   const buscarColaboradores = async (day) => {
+    setLoading(true);
     try {
-      // Buscar informações dos colaboradores pela empresa do usuário
-      const response = await findColaborador(user.idEmpresa);
+      const response = await findColaborador(user.idEmpresa, day);
 
       const formattedResources = response.data.map(colaborador => ({
         id: colaborador.idAgenda,
         title: colaborador.nomeFuncionario,
       }));
+
       setColaboradorInfo(response);
       setResources(formattedResources);
-      const agendamentosPromises = response.data.map(async (colaborador) => {
-        if (colaborador.idAgenda) {
-          const agendamentos = await buscarEventos(day, colaborador.idAgenda);
-          return agendamentos;
-        }
-      });
 
-      const allAgendamentos = await Promise.all(agendamentosPromises);
-      const formattedEvents = allAgendamentos
-        .flat()
-        .filter(evento => evento !== undefined)
+      const colaboradores = response.data;
 
-      setEvents(formattedEvents);
+      const eventsFeature = colaboradores.flatMap(colaborador =>
+        colaborador.agendamentoDTOS.map(evento => ({
+          id: evento.idAgendamento,
+          title: evento.servico.nomeServico,
+          start: new Date(evento.horaAgendamento),
+          end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
+          resourceId: colaborador.idFuncionario,
+          corReferenciaHex: evento.servico.corReferenciaHex,
+        }))
+      );
+
+      setEvents(eventsFeature);
     } catch (error) {
       console.error('Erro ao buscar colaboradores ou agendamentos:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
+
   const eventPropGetter = (event) => {
-    // Aqui você pode acessar o evento e suas propriedades
-    const borderColor = event.corReferenciaHex || '#00929B'; // Define a cor da borda ou um padrão
+    const borderColor = event.corReferenciaHex || '#00929B';
 
     return {
       style: {
-        borderLeft: `solid 8px ${borderColor}`, // Definir a borda dinamicamente
+        borderLeft: `solid 8px ${borderColor}`,
       },
     };
   };
 
-  const buscarEventos = async (dataAgendamento, idAgenda) => {
-
-    if (!idAgenda) {
-      debugger
-      console.error('idAgenda está indefinido');
-      return;
-    }
-
-    try {
-      const response = await findAgendamentos(idAgenda, dataAgendamento);
-      const eventsFeature = response.data.map(evento => ({
-        id: evento.idAgendamento,
-        title: evento.servico.nomeServico,
-        start: new Date(evento.horaAgendamento),
-        end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
-        resourceId: idAgenda,
-        corReferenciaHex: evento.servico.corReferenciaHex,
-      }));
-
-      return eventsFeature;
-    } catch (error) {
-      console.error('Erro ao buscar agendamentos:', error);
-      return [];
-    }
-  }
-
   const handleDateChange = (day) => {
-    buscarColaboradores(day.toISOString().split('T')[0]);
+    buscarColaboradores(formaterDate(day));
     setSelectedDate(day);
   };
+
+  const formaterDate = (date) => {
+    const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    return localDate.toISOString().split('T')[0];
+  }
 
   const isSelected = (day) => {
     return selectedDate.toDateString() === new Date(day).toDateString();
@@ -129,11 +118,6 @@ const MyDragAndDropCalendar = () => {
     alert(`Você clicou no evento: ${event.title}`);
   };
 
-  const formatCurrentDate = () => {
-    return moment().format('DD / MM / YYYY').replace('MM', (m) => {
-      return moment().locale('pt-br').monthsShort()[moment().month(m).month()];
-    });
-  };
   function formatDateToBRWithMonthName(dateString) {
     const date = new Date(dateString); // Converte a string de data para um objeto Date
 
@@ -160,6 +144,7 @@ const MyDragAndDropCalendar = () => {
   };
 
   return (
+
     <div className="container">
       <div className="calendar-container">
         <div className="custom-toolbar">
@@ -168,26 +153,38 @@ const MyDragAndDropCalendar = () => {
           </div>
           <div className="buttonDay">
             <span
-              onClick={() => handleDateChange(new Date(new Date().setDate(new Date().getDate() - 1)))}
+              onClick={() => {
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1); // Subtrai um dia
+                handleDateChange(yesterday);
+              }}
               className={isSelected(new Date(new Date().setDate(new Date().getDate() - 1))) ? "custom-span selected" : "custom-span"}
             >
               Ontem
             </span>
 
             <span
-              onClick={() => handleDateChange(new Date())}
+              onClick={() => {
+                const today = new Date(); // Data atual
+                handleDateChange(today);
+              }}
               className={isSelected(new Date()) ? "custom-span selected" : "custom-span"}
             >
               Hoje
             </span>
 
             <span
-              onClick={() => handleDateChange(new Date(new Date().setDate(new Date().getDate() + 1)))}
+              onClick={() => {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1); // Adiciona um dia
+                handleDateChange(tomorrow);
+              }}
               className={isSelected(new Date(new Date().setDate(new Date().getDate() + 1))) ? "custom-span selected" : "custom-span"}
             >
               Amanhã
             </span>
           </div>
+
           <div className="botao">
             <Button
               size="auto"
@@ -198,7 +195,10 @@ const MyDragAndDropCalendar = () => {
               heightImage="1.5rem"
               image={plusIcon}
             />
-            <CircularIntegration />
+            <CircularIntegration
+              endpoint='usuarios/agendamentos/exportar/'
+              path={user.idEmpresa}
+              param={formaterDate(selectedDate)} />
           </div>
         </div>
         <DndProvider backend={HTML5Backend}>
@@ -236,6 +236,9 @@ const MyDragAndDropCalendar = () => {
             }}
           />
         </DndProvider>
+        {loading ? (
+          <CircularSize width="100%" height="100%" />
+        ) : null}
       </div>
     </div>
   );
