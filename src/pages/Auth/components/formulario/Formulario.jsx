@@ -123,7 +123,6 @@ function Formulario() {
                         />
                     </div>
                 </div>
-                ======= */}
 
                 <div className='botoes'>
                     <Button
