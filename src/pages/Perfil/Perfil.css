@@ -1,8 +1,22 @@
-.mais-perfil{
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    left: 0;
+.main-servico {
+    width: 98.9vw;
     position: absolute;
-    overflow: hidden;
+    left: 0;
+    background-color: rgb(23, 24, 33);
+}
+
+ .container-perfil {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: rgb(23, 24, 33);
+}
+
+
+.principal {
+    width: 80vw;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly; 
+    gap: 2vh;
 }
