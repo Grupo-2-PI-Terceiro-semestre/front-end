@@ -20,7 +20,7 @@ function Servico() {
                                 { label: 'Serviço', href: '/servico' }
                             ]}
                         />
-                        <HeaderInterna texto="Novo Serviço" />
+                        {/* <HeaderInterna texto="Novo Serviço" /> */}
                         <TelaServicos titulo="Serviço" placeholder="Pesquisar Serviço" titulo1="NOME" titulo2="VALOR" titulo3="TEMPO DE EXECUÇÃO" titulo4="AÇÕES" />
                     </div>
                 </div>
