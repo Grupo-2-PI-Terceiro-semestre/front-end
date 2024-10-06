@@ -8,16 +8,11 @@ import FormularioPrincipal from "../../components/formularioDadosPrincipais/Form
 function Perfil() {
     return (
         <div className="main-servico">
-            <div className="container-perfil">
-                <div className="menu-lateral">
-                    <Menu />
-                </div>                
+            <Menu />  
                 <div className="principal">
                    <BotoesPerfil />
                    <FormularioPrincipal />
                 </div>
-               
-            </div>
         </div>
     );
 }
