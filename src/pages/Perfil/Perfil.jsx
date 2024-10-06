@@ -1,6 +1,6 @@
 import React from "react";
 import "./Perfil.css";
-import MenuPerfil from "../../components/menuPerfil/MenuPerfil";
+import Menu from "../../components/menu/Menu";
 import BotoesPerfil from "../../components/botoesPerfil/BotoesPerfil";
 import FormularioPrincipal from "../../components/formularioDadosPrincipais/FormularioPrincipal";
 
@@ -10,7 +10,7 @@ function Perfil() {
         <div className="main-servico">
             <div className="container-perfil">
                 <div className="menu-lateral">
-                    <MenuPerfil />
+                    <Menu />
                 </div>                
                 <div className="principal">
                    <BotoesPerfil />
