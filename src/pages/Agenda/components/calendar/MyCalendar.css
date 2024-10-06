@@ -1,25 +1,32 @@
-.calendar-container {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 98.9vw;
-  background-color: #171821;
-}
-
 
 .custom-calendar {
   background-color: #21222D;
   color: white;
 }
 
+.botao{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buttonDay{
+  align-items: center;
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+.container{
+  width: 100%;
+}
+
 .custom-toolbar {
   background-color: #21222D;
-  padding: 10px;
+  padding: 0 2rem;
+  height: 11vh;
   display: flex;
-  justify-content: center;
-  width: 85%;
-  margin-left: 15%;
-  border: solid 0.5px #585858;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 5px;
 }
 
@@ -34,7 +41,7 @@
 
 .custom-toolbar span:hover {
   color: #007bff;
-  /* Cor do texto ao passar o mouse */
+  
 }
 
 .custom-span {
@@ -45,7 +52,7 @@
 }
 
 .custom-span.selected {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
@@ -60,7 +67,7 @@
   background-color: #21222D;
   color: white;
   border-bottom: #21222D;
-  font-size: 12px;
+  font-size: 15px;
 }
 
  .rbc-time-header-gutter
@@ -69,7 +76,7 @@
 }
 
 .rbc-current-time-indicator{
-  background-color: #1100ff;
+  background-color: #ff0000;
   height: 2.5px;
 }
 
@@ -87,30 +94,27 @@
 }
 
 .rbc-time-content > * + * > * {
-  border-left: 0.5px solid #dddddd55;
-  border-top: 0px solid #21222D;
+  border-left: 1px solid #595959;
 }
 
 .rbc-addons-dnd-row-body{
   display: none;
 }
 
+.rbc-day-slot .rbc-time-slot {
+   border-top: 0.5px solid #595959; 
+}
+
 .toolbar-container{
-  background-color: #21222D;
-  display: flex;
-  justify-content: space-between;
+  background-color: rgb(23, 24, 33);
   align-items: center;
-  width: 85%;
-  border: solid 0.5px #585858;
   border-radius: 5px;
-  margin: 3px 0 3px 15%;
-  height: 3rem;
-  padding: 2rem;
+  margin: 3px 0 3px;
+  height: 0.5rem;
 }
 
 .rbc-time-view{
-  margin-left: 15%;
-  width: 85%;
+  width: 80.1vw;
 }
 
 .buscaAgenda{
@@ -122,5 +126,9 @@
 
 .rbc-day-slot .rbc-event{
   background-color: #424242;
-  font-size: 12px;
+  font-size: 15px;
+}
+
+.rbc-time-gutter .rbc-time-column{
+  border: none;
 }

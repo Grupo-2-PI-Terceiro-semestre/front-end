@@ -1,0 +1,13 @@
+.container-load {
+    background-color: rgba(0, 0, 0, 0.264); /* fundo semi-transparente */
+    position: fixed; /* posição fixa para sobrepor a tela */
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* garantir que fique acima do conteúdo */
+    pointer-events: none; /* permite interações com o conteúdo subjacente */
+}

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = 'http://localhost:8080/api/v1/';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1/';
+
 
 export const getData = async (endpoint, pathParams = {}, queryParams = {}) => {
     try {
@@ -17,7 +18,8 @@ export const getData = async (endpoint, pathParams = {}, queryParams = {}) => {
 
         const response = await axios.get(urlWithParams, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'  
             }
         });
 

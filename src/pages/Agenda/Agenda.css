@@ -1,0 +1,26 @@
+.main-servico {
+    width: 98.9vw;
+    left: 0;
+    background-color: rgb(23, 24, 33);
+}
+ 
+.main-servico .container-servico {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+ 
+/* .main-servico .container-servico .menu-lateral {
+    width: 9vw;
+    height: 100%;
+} */
+ 
+.main-servico .container-servico .principal {
+    width: 81.7vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 2vh;
+}

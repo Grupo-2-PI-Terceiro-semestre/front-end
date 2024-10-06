@@ -1,8 +1,8 @@
 import { getData, deleteData, postData } from '../../../router/router'
 
-export const findColaborador = async (idEmpresa) => {
+export const findColaborador = async (idEmpresa, dataAgendamento) => {
     try {
-        const response = await getData(`usuarios/empresa/${idEmpresa}`)
+        const response = await getData(`usuarios/empresa/${idEmpresa}`, {}, { dataAgendamento })
         return response;
     }
     catch (e) {
