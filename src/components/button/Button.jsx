@@ -1,6 +1,5 @@
 import React from 'react';
-import './Button.css';
-import { height, width } from '@fortawesome/free-brands-svg-icons/fa42Group';
+import './Button.scss';
 
 const Button = ({
   fontSize = '1rem',
@@ -11,7 +10,6 @@ const Button = ({
   padding = '10px',
   backgroundColor = '#0072FF',
   color = 'white',
-  hoverColor = '#0056b3', // Valor padrão para hoverColor
   content = 'Button',
   type = 'button',
   onClick,
@@ -26,9 +24,8 @@ const Button = ({
         height: height,
         width: size,
         padding: padding,
-        backgroundColor: backgroundColor,
         color: color,
-        '--hoverColor': hoverColor, 
+        backgroundColor: backgroundColor,
       }}
       onClick={onClick}
     >

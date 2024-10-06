@@ -4,6 +4,7 @@ import FormularioLogin from '../components/formulario-login/FormularioLogin';
 import './Login.css';
 import SectionIcons from '../components/section-icons/SectionIcons';
 import Header from '../components/header/Header';
+import LinearProgress from '../../../components/barra-load/LinearProgress';
 
 const Login = () => {
   const navigate = useNavigate(); // Use useNavigate dentro do componente
@@ -13,7 +14,9 @@ const Login = () => {
   };
 
   return (
+    
     <div className="login-container">
+      
       <Header />
       <SectionIcons 
         titulo="Ainda Não Tem Conta?" 

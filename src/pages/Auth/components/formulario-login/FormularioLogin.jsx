@@ -6,6 +6,7 @@ import Button from '../../../../components/button/Button';
 import iconGoogle from '../../../../assets/logoGoogle.png'
 import { useNavigate } from 'react-router-dom';
 import './FormularioLogin.css'
+import LinearProgress from '../../../../components/barra-load/LinearProgress';
 
 const FormularioLogin = () => {
   const [email, setEmail] = useState('');
@@ -81,8 +82,6 @@ const FormularioLogin = () => {
         <div className='botoes'>
           <Button
             size="60%"
-            backgroundColor="#0072FF"
-            hoverColor="#006aec"
             content="Entrar"
             type="submit"
             onClick={handleSubmit}
@@ -90,9 +89,8 @@ const FormularioLogin = () => {
           <span>OU</span>
           <Button
             size="60%"
-            backgroundColor="#f3f9ff"
             color='black'
-            hoverColor="#e8f3fe"
+            backgroundColor='#f3f9ff'
             content="Google"
             onClick={handleGoogleSignIn}
             image={iconGoogle}
