@@ -82,35 +82,6 @@ function Formulario() {
                         />
                     </div>
                 </div>
-                {/* 
-                <div className="form-group">
-                    <div className='inputLabel'>
-                        <label>CPF:</label>
-                        <input
-                            type="text"
-                            name="cpf"
-                            placeholder="000.000.000-00"
-                            value={formData.cpf}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                </div> */}
-
-                {/*                 <div className="form-group">
-                    <div className='inputLabel'>
-                        <label>Telefone:</label>
-                        <input
-                            type="text"
-                            name="numeroTelefone"
-                            placeholder="(00)91234-1234"
-                            value={formData.numeroTelefone}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                </div> */}
-
                 <div className="form-group">
                     <div className='inputLabel'>
                         <label>E-mail:</label>
@@ -124,19 +95,6 @@ function Formulario() {
                         />
                     </div>
                 </div>
-
-
-                {/*                 <div className="form-group">
-                    <div className='inputLabel'>
-                        <label>Data de Nascimento:</label>
-                        <input
-                            type="date"
-                            name="dataNasc"
-                            // placeholder="(00)91234-1234"
-                            value={formData.dataNasc}
-                        />
-                    </div>
-                </div> */}
 
                 <div className="form-group">
                     <div className='inputLabel'>
@@ -164,27 +122,6 @@ function Formulario() {
                             required
                         />
                     </div>
-                </div >
-
-                {/*
-                <div className='botao'>
-                    <button type="submit" className="submit-button">
-                        Cadastrar
-                    </button>
-                </div>
-
-                <div className='divisoria'>
-                    <div className='linha-esquerda'></div>
-                    <label>OU</label>
-                    <div className='linha-direita'></div>
-                </div>
-
-                <div className='botao-google'>
-                    <button type="submit" className="submit-button">
-                        <img src={iconGoogle} alt="iconeGoogle" />
-                        Google
-                    </button>
-                </div>
                 </div>
                 ======= */}
 
@@ -192,7 +129,6 @@ function Formulario() {
                     <Button
                         size="60%"
                         backgroundColor="#0072FF"
-                        hoverColor="#006aec"
                         color="white"
                         content="Cadastrar"
                         onClick={handleSubmit}
@@ -203,7 +139,6 @@ function Formulario() {
                         size="60%"
                         backgroundColor="#f3f9ff"
                         color="black"
-                        hoverColor="#e8f3fe"
                         content="Google"
                         onClick={handleGoogleSignIn}
                         image={iconGoogle}

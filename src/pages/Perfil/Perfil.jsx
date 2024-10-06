@@ -1,11 +1,11 @@
 import React from "react";
 import "./Perfil.css";
-import MenuPerfil from "../../components/menuPerfil/MenuPerfil";
+import Menu from "../../components/menu/Menu";
 
 function Perfil() {
     return (
         <div className="main-perfil"> 
-        <MenuPerfil />
+        <Menu/>
         </div>
 
     );
