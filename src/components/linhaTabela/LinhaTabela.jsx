@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './LinhaTabela.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import ModalExcluir from "../modalExcluir/ModalExcluir";
 import ModalEditar from "../modalAdd/ModalAdd";
 
