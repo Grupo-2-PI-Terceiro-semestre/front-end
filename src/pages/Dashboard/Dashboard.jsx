@@ -1,15 +1,19 @@
 import React from "react";
 import "./Dashboard.css";
-import MenuPerfil from "../../components/menuPerfil/MenuPerfil";
+import Menu from "../../components/menu/Menu";
 import Chart from "../../components/chart/chart";
 import CardDashboard from "../../components/cardDashboard/CardDashboard";
 import Kpi from "../../components/KPI/Kpi";
 
 
+
 function Dashboard() {
+
+    const activeMenuItem = "Dashboard";
+
     return (
         <div className="main-dashboard">
-            <MenuPerfil />
+            <Menu activeMenuItem={activeMenuItem}/>
             <div className="conteudo-dashboard">
                 <div className="superior">
                     <CardDashboard title="" height="130px" width="500px">
