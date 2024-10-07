@@ -6,10 +6,9 @@
 }
 
 .conteudo-dashboard {
-    width: 80%;
+    width: 82%;
     display: flex;
     flex-direction: column;
-    margin-left: 1%;
 }
 
 .superior {
@@ -24,13 +23,13 @@
     width: 100%;
     height: 40%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .inferior {
     width: 100%;
     height: 40%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 

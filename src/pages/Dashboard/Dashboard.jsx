@@ -53,21 +53,21 @@ function Dashboard() {
                     </CardDashboard>
                 </div>
                 <div className="meio">
-                    <CardDashboard title="Total de Clientes por dia da semana" height="280px" width="400px" >
+                    <CardDashboard title="Total de Clientes por dia da semana" height="280px" width="410px" >
                                 <Chart title="" type="column" seriesData={[1, 2, 3, 4, 5, 6, 7]} xAxisData={['Dom', 'Seg', 'Ter', 'Qua', 'Qui',"Sex","Sab"]} lineColor={'white'} heightChart={200} />
                     </CardDashboard>
-                    <CardDashboard title="Total de Receita por Serviço" height="280px" width="400px">
+                    <CardDashboard title="Total de Receita por Serviço" height="280px" width="410px">
                     <Chart title="" type="bar" seriesData={[1, 2, 3, 4, 5, 6, 7]} xAxisData={['Corte','Sobrancelha','Barba','Tintura','Hidratação','Limpeza de Pele','Massagem Facial']} lineColor={'white'} heightChart={200} />
                     </CardDashboard>
-                    <CardDashboard title="Top Performaces" height="280px" width="400px">
+                    <CardDashboard title="Top Performaces" height="280px" width="410px">
                     
                     </CardDashboard>
                 </div>
                 <div className="inferior">
-                    <CardDashboard title="Próximos Atendimentos" height="280px" width="600px">
+                    <CardDashboard title="Próximos Atendimentos" height="280px" width="620px">
                         <p>Conteúdo do card</p>
                     </CardDashboard>
-                    <CardDashboard title="Receita por Mês" height="280px" width="600px">
+                    <CardDashboard title="Receita por Mês" height="280px" width="620px">
                     <Chart title="" type="spline" seriesData={[1, 2, 3, 4, 5, 6, 7,8,9,10,11,20]} xAxisData={['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']} lineColor={'white'} heightChart={200} colorChart={'#3CD856'} />
                     </CardDashboard>
                 </div>
