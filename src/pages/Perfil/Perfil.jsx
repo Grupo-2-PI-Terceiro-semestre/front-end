@@ -1,18 +1,28 @@
 import React from "react";
 import "./Perfil.css";
 import Menu from "../../components/menu/Menu";
-import BotoesPerfil from "../../components/botoesPerfil/BotoesPerfil";
-import FormularioPrincipal from "../../components/formularioDadosPrincipais/FormularioPrincipal";
+import BotoesPerfil from "./components/botoesPerfil/BotoesPerfil";
+import FormularioPrincipal from "./components/formularioDadosPrincipais/FormularioPrincipal";
+import IconBreadcrumbs from "../../components/breadcrumb/Breadcrumb";
 
 
 function Perfil() {
     return (
-        <div className="main-servico">
-            <Menu />  
-                <div className="principal">
-                   <BotoesPerfil />
-                   <FormularioPrincipal />
+
+        <div className="main-perfil">
+            <Menu />
+
+            <div className="principal">
+                <IconBreadcrumbs
+                    paths={[
+                        { label: 'Perfil', href: '/perfil' }
+                    ]}
+                />
+                <div className="conteudo-perfil">
+                    <BotoesPerfil />
+                    <FormularioPrincipal />
                 </div>
+            </div>
         </div>
     );
 }

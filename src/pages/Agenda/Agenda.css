@@ -7,10 +7,10 @@
     margin: 0;
     display: flex;
     overflow-y: hidden;
+    
 }
 
 .principal-agenda {
-    display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     overflow: auto;

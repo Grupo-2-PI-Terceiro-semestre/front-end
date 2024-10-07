@@ -1,15 +1,21 @@
-.main-servico {
+.main-perfil {
     width: 100vw;
-    height: 100vh;
     background-color: rgb(23, 24, 33);
     display: flex;
+    align-items: center;
+    overflow: hidden;
 }
-
 
 .principal {
     width: 80%;
-    height: 100vh;
     display: flex;
-    justify-content: space-evenly; 
-    gap: 2vh;
+    display: flex;
+    flex-direction: column
+}
+
+.conteudo-perfil {
+    display: flex;
+    justify-content: space-around;
+    height: 95vh;
+    align-items: center;
 }
