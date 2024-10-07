@@ -10,7 +10,7 @@ export default function IconBreadcrumbs({ paths }) {
     };
 
     return (
-        <div style={{marginTop: '.8rem', display: 'flex', alignItems: 'center' }} role="presentation">
+        <div style={{ display: 'flex', alignItems: 'center' }} role="presentation">
             <Breadcrumbs
                 aria-label="breadcrumb"
                 separator={<span style={{ color: 'white' }}> / </span>} // Define a cor do separador
