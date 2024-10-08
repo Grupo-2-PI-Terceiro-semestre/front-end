@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - OrderHub
+name: Build and deploy Node.js app to Azure Web App - orderhub
 
 on:
   push:
@@ -57,15 +57,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_84775F36CD6349228052B092CF3321EB }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_02563FD2945544FFBE43BA1B1B4DA782 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_971A99BD5AC8441684F092B9649D4BB2 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EC233F4A744D4614BE5EDD2F33CCEAC4 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_926D228A1521401190F0F6AD5F887016 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A48F6A58CC2A4760A189C92CBA2D0018 }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'OrderHub'
+          app-name: 'orderhub'
           slot-name: 'Production'
           package: .
           
