@@ -144,62 +144,62 @@ const MyDragAndDropCalendar = () => {
   };
 
   return (
-    <div className="container">
-      <div className="calendar-container">
-        <div className="custom-toolbar">
-          <div className="buscaAgenda">
-            <IconDemo content={formatDateToBRWithMonthName(selectedDate)} onDateChange={handleDateChange} />
-          </div>
-          <div className="buttonDay">
-            <span
-              onClick={() => {
-                const yesterday = new Date();
-                yesterday.setDate(yesterday.getDate() - 1); // Subtrai um dia
-                handleDateChange(yesterday);
-              }}
-              className={isSelected(new Date(new Date().setDate(new Date().getDate() - 1))) ? "custom-span selected" : "custom-span"}
-            >
-              Ontem
-            </span>
-
-            <span
-              onClick={() => {
-                const today = new Date();
-                handleDateChange(today);
-              }}
-              className={isSelected(new Date()) ? "custom-span selected" : "custom-span"}
-            >
-              Hoje
-            </span>
-
-            <span
-              onClick={() => {
-                const tomorrow = new Date();
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                handleDateChange(tomorrow);
-              }}
-              className={isSelected(new Date(new Date().setDate(new Date().getDate() + 1))) ? "custom-span selected" : "custom-span"}
-            >
-              Amanhã
-            </span>
-          </div>
-
-          <div className="botao">
-            <Button
-              size="auto"
-              content="Adicionar Agendamento"
-              height="2rem"
-              fontSize="14px"
-              widthImage="1.5rem"
-              heightImage="1.5rem"
-              image={plusIcon}
-            />
-            <CircularIntegration
-              endpoint='usuarios/agendamentos/exportar/'
-              path={user.idEmpresa}
-              param={formaterDate(selectedDate)} />
-          </div>
+    <div className="calendar-container">
+      <div className="custom-toolbar">
+        <div className="buscaAgenda">
+          <IconDemo content={formatDateToBRWithMonthName(selectedDate)} onDateChange={handleDateChange} />
         </div>
+        <div className="buttonDay">
+          <span
+            onClick={() => {
+              const yesterday = new Date();
+              yesterday.setDate(yesterday.getDate() - 1); // Subtrai um dia
+              handleDateChange(yesterday);
+            }}
+            className={isSelected(new Date(new Date().setDate(new Date().getDate() - 1))) ? "custom-span selected" : "custom-span"}
+          >
+            Ontem
+          </span>
+
+          <span
+            onClick={() => {
+              const today = new Date();
+              handleDateChange(today);
+            }}
+            className={isSelected(new Date()) ? "custom-span selected" : "custom-span"}
+          >
+            Hoje
+          </span>
+
+          <span
+            onClick={() => {
+              const tomorrow = new Date();
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              handleDateChange(tomorrow);
+            }}
+            className={isSelected(new Date(new Date().setDate(new Date().getDate() + 1))) ? "custom-span selected" : "custom-span"}
+          >
+            Amanhã
+          </span>
+        </div>
+
+        <div className="botao">
+          <Button
+            size="auto"
+            content="Adicionar Agendamento"
+            height="2rem"
+            fontSize="14px"
+            widthImage="1.5rem"
+            heightImage="1.5rem"
+            image={plusIcon}
+          />
+          <CircularIntegration
+            endpoint='usuarios/agendamentos/exportar/'
+            path={user.idEmpresa}
+            param={formaterDate(selectedDate)} />
+        </div>
+      </div>
+      <div className="agenda-principal">
         <DndProvider backend={HTML5Backend}>
           <DragAndDropCalendar
             selectable
@@ -235,10 +235,11 @@ const MyDragAndDropCalendar = () => {
             }}
           />
         </DndProvider>
-        {loading ? (
-          <CircularSize width="100%" height="100%" />
-        ) : null}
       </div>
+
+      {loading ? (
+        <CircularSize width="100%" height="100%" />
+      ) : null}
     </div>
   );
 };

@@ -7,12 +7,12 @@ const Agenda = () => {
   const activeMenuItem = 'Agenda'; // Define qual item está ativo no menu
 
   return (
-    <div className="main-servico">
-      <div className="container-servico">
+    <div className="main-agenda">
+      <div className="container-agenda">
         <div className="menu-lateral">
           <Menu activeMenuItem={activeMenuItem} />
         </div>
-        <div className="principal">
+        <div className="principal-agenda">
           <IconBreadcrumbs
             paths={[
               { label: 'Agenda', href: '/agenda' }

@@ -1,0 +1,42 @@
+
+.subMenu {
+    width: 20vw;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 1vh;
+    padding: 1vh;
+    flex-direction: column;
+  }
+  
+  .button {
+    background-color: #21222D; 
+    color: #ffffff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: left;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+  }
+  
+  .button .icon {
+    margin-right: 10px; 
+    font-size: 1.2em; 
+  }
+  
+  .button.active {
+    background-color: #2196F3; 
+  }
+  
+  .button:hover {
+    background-color: #397fb8; 
+  }
+  
+  .button.primary:hover {
+    background-color: #2196F3; 
+  }
+
+  
+  

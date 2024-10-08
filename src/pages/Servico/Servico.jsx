@@ -10,18 +10,16 @@ function Servico() {
     return (
         <>
             <div className="main-servico">
+            <Menu activeMenuItem={activeMenuItem} />
                 <div className="container-servico">
-                    <div className="menu-lateral">
-                        <Menu activeMenuItem={activeMenuItem} />
-                    </div>
-                    <div className="principal">
+                    <div className="principal-servico">
                         <IconBreadcrumbs
                             paths={[
                                 { label: 'Serviço', href: '/servico' }
                             ]}
                         />
                         {/* <HeaderInterna texto="Novo Serviço" /> */}
-                        <TelaServicos titulo="Serviço" placeholder="Pesquisar Serviço" titulo1="NOME" titulo2="VALOR" titulo3="TEMPO DE EXECUÇÃO" titulo4="AÇÕES" />
+                        <TelaServicos titulo="Serviços" placeholder="Pesquisar serviço" titulo1="NOME" titulo2="VALOR" titulo3="TEMPO DE EXECUÇÃO" titulo4="AÇÕES" />
                     </div>
                 </div>
             </div>

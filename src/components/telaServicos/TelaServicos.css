@@ -6,7 +6,7 @@
     justify-content: center;
     gap: 2vh;
     padding: 1.9vh;
-    min-height: 85vh;
+    height: 100vh;
 }
 
 .main-tela-servicos .container-tela-servicos {

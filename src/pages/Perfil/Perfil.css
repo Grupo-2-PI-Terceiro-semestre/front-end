@@ -1,8 +1,21 @@
-.mais-perfil{
+.main-perfil {
+    width: 100vw;
+    background-color: rgb(23, 24, 33);
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    left: 0;
-    position: absolute;
+    align-items: center;
     overflow: hidden;
+}
+
+.principal {
+    width: 80%;
+    display: flex;
+    display: flex;
+    flex-direction: column
+}
+
+.conteudo-perfil {
+    display: flex;
+    justify-content: space-around;
+    height: 95vh;
+    align-items: center;
 }
