@@ -14,17 +14,14 @@ function HomeEmpresa() {
     <div className="main-home">
       <HeaderEmpresa width="60vw"
         navLinks={[
-          { name: 'Início', url: '/inicio' },
-          { name: 'Sobre', url: '/sobre' },
-          { name: 'Preview', url: '/preview' },
-          { name: 'Contato', url: '/contato' },
-          { name: 'Cadastro', url: '/cadastro' },
+          { name: 'Início', url: '#inicio' },
+          { name: 'Sobre', url: '#sobre' },
+          { name: 'Preview', url: '#preview' },
+          { name: 'Contato', url: '#contato' },
+          { name: 'Cadastro', url: '/cadastro' },  // Esses são links externos, mantém o comportamento normal de navegação
           { name: 'Login', url: '/login' }
         ]}
-
         buttonText="Para Clientes"
-
-
       />
 
       {/* <FirstSectionEmpresa /> */}
