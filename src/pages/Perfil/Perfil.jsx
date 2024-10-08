@@ -4,8 +4,8 @@ import Menu from "../../components/menu/Menu";
 import BotoesPerfil from "./components/botoesPerfil/BotoesPerfil";
 import FormularioPrincipal from "./components/formularioDadosPrincipais/FormularioPrincipal";
 import IconBreadcrumbs from "../../components/breadcrumb/Breadcrumb";
-import CardLocation from "./components/CardLocation/CardLocation";
-
+/* import CardLocation from "./components/CardLocation/CardLocation";
+ */
 
 function Perfil() {
     return (
@@ -21,7 +21,7 @@ function Perfil() {
                 />
                 <div className="conteudo-perfil">
                     <BotoesPerfil />
-                    <CardLocation />
+                    <FormularioPrincipal />
                 </div>
             </div>
         </div>
