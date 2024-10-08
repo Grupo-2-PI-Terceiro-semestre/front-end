@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = 'http://order.northcentralus.azurecontainer.io:8080/';
+const API_URL = '';
 
 
 export const getData = async (endpoint, pathParams = {}, queryParams = {}) => {
