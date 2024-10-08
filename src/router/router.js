@@ -1,7 +1,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1/';
+const API_URL = import.meta.env.VITE_API_URL;
+console.log('API URL:', import.meta.env.VITE_API_URL);
 
 
 export const getData = async (endpoint, pathParams = {}, queryParams = {}) => {

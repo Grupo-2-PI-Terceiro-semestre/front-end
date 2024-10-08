@@ -8,6 +8,8 @@
 
 .titulo {
     height: 20%;
+    display: flex;
+    justify-content: center;
 }
 
 .titulo h1 {
@@ -15,5 +17,12 @@
     font-size: 14px;
     margin: 4%;
     padding: 0;
+}
+
+.conteudo {
+    height: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    overflow: auto;
 }
 

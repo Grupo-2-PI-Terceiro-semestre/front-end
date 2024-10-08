@@ -20,7 +20,7 @@ function Previa() {
     };
 
     return (
-        <div className="main-previa">
+        <div id="preview" className="main-previa">
             <div className="container-previa">
                 <div className="imagem">
                     {/* A imagem muda conforme o estado */}

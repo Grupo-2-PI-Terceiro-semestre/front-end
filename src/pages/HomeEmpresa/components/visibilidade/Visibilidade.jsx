@@ -31,7 +31,7 @@ function Visibilidade() {
     }, []);
 
     return (
-        <div className="main-visibilidade">
+        <div id="contato" className="main-visibilidade">
             <div className="container-visibilidade">
                 <div className="textos">
                     <div className="titulo">

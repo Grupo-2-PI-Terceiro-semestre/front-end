@@ -47,7 +47,7 @@ function CardLocation() {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={formStyle}>
+        <form onSubmit={handleSubmit} className='formStyle'>
             <div style={fieldContainerStyle}>
                 <label>CEP</label>
                 <input
