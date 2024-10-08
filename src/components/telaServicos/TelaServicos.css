@@ -6,11 +6,11 @@
     justify-content: center;
     gap: 2vh;
     padding: 1.9vh;
-    height: 100vh;
+    height: 91vh;
 }
 
 .main-tela-servicos .container-tela-servicos {
-    width: 75vw;
+    width: 77vw;
     display: flex;
     flex-wrap: wrap;
 }
@@ -50,6 +50,11 @@
     color: white;
 }
 
+.container-tela-servicos .tabelaCompleta {
+    overflow: auto;
+    height: 69vh;
+}
+
 .container-tela-servicos .tabelaCompleta .tituloTabela {
     display: flex;
     align-items: center;
@@ -59,11 +64,9 @@
     padding: 0 1.2vw;
     font-weight: bold;
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.container-linha-tabela .tabelaCompleta .tituloTabela {
-    font-weight: bold;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    position: fixed;
+    z-index: 3;
+    background-color: rgb(33, 34, 45);
 }
 
 .container-tela-servicos .tabelaCompleta .tituloTabela label {
@@ -91,4 +94,7 @@
 
 .container-tela-servicos .tabelaCompleta .conjuntoLinhas {
     min-height: 58vh;
+    overflow: auto;
+    top: 6vh;
+    position: relative;
 }

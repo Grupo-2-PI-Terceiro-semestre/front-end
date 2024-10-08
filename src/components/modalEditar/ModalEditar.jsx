@@ -7,6 +7,8 @@ function ModalEditar({ onClose, titulo }) {
         nomeServico: '',
         valorServico: '',
         tempoExecucao: '',
+        corReferencia: '',
+        descricao: '',
         categoria: '',
         tiposDeUsuario: 'ADMIN'
     });
@@ -26,6 +28,8 @@ function ModalEditar({ onClose, titulo }) {
                 valorServico: '',
                 representante: "true",
                 tempoExecucao: '',
+                corReferencia: '',
+                categoria: '',
                 categoria: '',
             });
         } catch (error) {
@@ -84,6 +88,20 @@ function ModalEditar({ onClose, titulo }) {
 
                         <div className="form-group-editar">
                             <div className='inputLabel-editar'>
+                                <label>Cor Referência:</label>
+                                <input
+                                    type="text"
+                                    name="corReferencia"
+                                    placeholder="Cor Referência"
+                                    defaultValue={formData.corReferencia}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group-editar">
+                            <div className='inputLabel-editar'>
                                 <label htmlFor="categoria">Categoria:</label>
                                 <select
                                     id="categoria"
@@ -99,6 +117,19 @@ function ModalEditar({ onClose, titulo }) {
                                 </select>
                             </div>
                         </div >
+
+                        <div className="form-group-text">
+                            <div className='inputLabel'>
+                                <label>Descrição:</label>
+                                <textarea 
+                                    name="descricao"
+                                    placeholder="Descrição"
+                                    defaultValue={formData.descricao}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
 
                         <button className="botaoCadastrar" onClick={handleSubmit}>Editar</button>
                     </form >

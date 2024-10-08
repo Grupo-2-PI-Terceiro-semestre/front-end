@@ -1,7 +1,7 @@
 .container-linha-tabela .modal-overlay-editar {
     position: fixed;
     top: 0;
-    right: 0; /* Começa fora da tela */
+    right: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
@@ -11,11 +11,6 @@
     z-index: 2;
     transition: right 1s ease;
 }
-
-/* .modal-overlay-editar.active {
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-} */
 
 .modal-header-editar {
     background: rgb(33, 34, 45);
@@ -31,7 +26,7 @@
 }
 
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar {
-    height: 88vh;
+    height: 97vh;
     width: 26vw;
     display: flex;
     flex-wrap: wrap;
@@ -43,7 +38,6 @@
     width: 26vw;
     display: flex;
     justify-content: space-between;
-    /* border: 1px solid; */
     align-items: center;
 }
 
@@ -62,14 +56,14 @@
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 20px;
 }
 
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar {
-    height: 73vh;
+    height: 88vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    width: 27vw;
 }
 
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar {
@@ -78,13 +72,33 @@
     justify-content: center;
 }
 
+.container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-text {
+    height: 19vh;
+    display: flex;
+    justify-content: center;
+    width: 27vw;
+}
+
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar {
     width: 26vw;
-    margin-bottom: 20px;
     height: 10vh;
 }
 
+.form-group-text .inputLabel {
+    width: 26vw;
+    height: 19vh;
+}
+
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar label {
+    display: block;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.form-group-text .inputLabel label {
     display: block;
     color: white;
     display: flex;

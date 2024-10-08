@@ -1,7 +1,7 @@
 .main-header-interna .container-header-interna .modal-overlay {
     position: fixed;
     top: 0;
-    right: 0; /* Começa fora da tela */
+    right: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
@@ -27,7 +27,7 @@
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal {
-    height: 88vh;
+    height: 97vh;
     width: 26vw;
     display: flex;
     flex-wrap: wrap;
@@ -39,7 +39,6 @@
     width: 26vw;
     display: flex;
     justify-content: space-between;
-    /* border: 1px solid; */
     align-items: center;
 }
 
@@ -58,14 +57,14 @@
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 20px;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal {
-    height: 73vh;
+    height: 88vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    width: 27vw;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group {
@@ -77,18 +76,16 @@
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group-text {
     height: 19vh;
     display: flex;
-    justify-content: center;
+    width: 27vw;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel {
     width: 26vw;
-    margin-bottom: 20px;
     height: 9vh;
 }
 
 .form-group-text .inputLabel {
     width: 26vw;
-    margin-bottom: 20px;
     height: 15vh;
 }
 

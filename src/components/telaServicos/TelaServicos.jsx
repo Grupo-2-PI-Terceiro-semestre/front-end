@@ -47,8 +47,12 @@ function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4
                         <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
                         <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
                         <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        {/* <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" /> */}
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
                     </div>
                 </div>
 
