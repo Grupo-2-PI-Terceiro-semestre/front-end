@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './CardLocation.css';
+import '../formularioDadosPrincipais/FormularioPrincipal.css';
 
 function CardLocation() {
     const [cep, setCep] = useState('');
@@ -35,7 +35,7 @@ function CardLocation() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         console.log({
             cep,
             logradouro,
@@ -47,46 +47,63 @@ function CardLocation() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className='formStyle'>
-            <div style={fieldContainerStyle}>
+        <form onSubmit={handleSubmit} className='app-container'>
+            <div className='form-group'>
                 <label>CEP</label>
                 <input
                     type="text"
                     value={cep}
                     onChange={handleCepChange}
                     placeholder="Digite o CEP"
-                    style={inputStyle}
+                    className='form-group'
                 />
             </div>
 
-            <div style={twoFieldsContainerStyle}>
-                <div style={halfFieldStyle}>
+            <div>
+                <div className='form-group'>
                     <label>Logradouro</label>
-                    <input type="text" value={logradouro} onChange={(e) => setLogradouro(e.target.value)} style={inputStyle} />
+                    <input type="text"
+                        value={logradouro}
+                        onChange={(e) => setLogradouro(e.target.value)}
+                        placeholder='Digite seu Logradouro' />
                 </div>
-                <div style={halfFieldStyle}>
+                <div className='form-group'>
                     <label>Número</label>
-                    <input type="text" value={numero} onChange={(e) => setNumero(e.target.value)} style={inputStyle} />
+                    <input type="text"
+                        value={numero}
+                        onChange={(e) => setNumero(e.target.value)}
+                        placeholder='Digite seu número' />
                 </div>
             </div>
 
-            <div style={twoFieldsContainerStyle}>
-                <div style={halfFieldStyle}>
+            <div >
+                <div className='form-group'>
                     <label>UF</label>
-                    <input type="text" value={uf} onChange={(e) => setUf(e.target.value)} style={inputStyle} />
+                    <input type="text"
+                        value={uf}
+                        onChange={(e) => setUf(e.target.value)}
+                        placeholder='Digite sua UF' />
                 </div>
-                <div style={halfFieldStyle}>
+                <div className='form-group'>
                     <label>Cidade</label>
-                    <input type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} style={inputStyle} />
+                    <input type="text"
+                        value={cidade}
+                        onChange={(e) => setCidade(e.target.value)}
+                        placeholder='Digite sua Cidade' />
                 </div>
             </div>
 
-            <div style={fieldContainerStyle}>
+            <div className='form-group'>
                 <label>Complemento</label>
-                <input type="text" value={complemento} onChange={(e) => setComplemento(e.target.value)} style={inputStyle} />
+                <input type="text"
+                    value={complemento}
+                    onChange={(e) => setComplemento(e.target.value)}
+                    placeholder='digite um complemento' />
             </div>
 
-            <button type="submit" style={buttonStyle}>Salvar Alterações</button>
+            <div className='form-group'>
+                <button type="submit">Salvar Alterações</button>
+            </div>
         </form>
     );
 }
