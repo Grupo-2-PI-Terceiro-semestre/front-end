@@ -26,7 +26,7 @@ function HeaderInterna({ texto }) {
                 </div>
 
                 {isModalOpen && (
-                    <ModalAdd onClose={closeModalAdd} />
+                    <ModalAdd onClose={closeModalAdd} titulo="Adicionar Novo Serviço" />
                 )}
             </div>
 
