@@ -12,12 +12,7 @@
     transition: right 1s ease;
 }
 
-/* .modal-overlay.active {
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-} */
-
-.modal-header {
+.main-header-interna .container-header-interna .modal-overlay .modal-header {
     background: rgb(33, 34, 45);
     border-radius: 10px;
     height: 100vh;
@@ -28,6 +23,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal {
@@ -73,7 +69,13 @@
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group {
-    height: 10vh;
+    height: 11vh;
+    display: flex;
+    justify-content: center;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group-text {
+    height: 19vh;
     display: flex;
     justify-content: center;
 }
@@ -81,10 +83,31 @@
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel {
     width: 26vw;
     margin-bottom: 20px;
-    height: 10vh;
+    height: 9vh;
+}
+
+.form-group-text .inputLabel {
+    width: 26vw;
+    margin-bottom: 20px;
+    height: 15vh;
+}
+
+.form-group-text .inputLabel textarea{
+    width: 26vw;
+    height: 15vh;
+    border-radius: 5px;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel label {
+    display: block;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.form-group-text .inputLabel label {
     display: block;
     color: white;
     display: flex;

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import './ModalEditar.css';
 
-function ModalEditar({ onClose }) {
+function ModalEditar({ onClose, titulo }) {
 
     const [formData, setFormData] = useState({
         nomeServico: '',
@@ -37,7 +37,7 @@ function ModalEditar({ onClose }) {
         <div className="modal-overlay-editar">
             <div className="modal-header-editar">
                 <div className="container-modal-editar">
-                    <h4 className="titulo-modal-editar">Adicionar Novo Serviço <button className="botaoFechar" onClick={onClose}>X</button></h4>
+                    <h4 className="titulo-modal-editar">{titulo} <button className="botaoFechar" onClick={onClose}>X</button></h4>
 
                     <form className="form-modal-editar" onSubmit={handleSubmit}>
                         <div className="form-group-editar">
@@ -54,8 +54,8 @@ function ModalEditar({ onClose }) {
                             </div>
                         </div>
 
-                        <div className="form-group">
-                            <div className='inputLabel'>
+                        <div className="form-group-editar">
+                            <div className='inputLabel-editar'>
                                 <label>Valor:</label>
                                 <input
                                     type="number"
@@ -68,8 +68,8 @@ function ModalEditar({ onClose }) {
                             </div>
                         </div>
 
-                        <div className="form-group">
-                            <div className='inputLabel'>
+                        <div className="form-group-editar">
+                            <div className='inputLabel-editar'>
                                 <label>Tempo de Execução:</label>
                                 <input
                                     type="text"
@@ -82,8 +82,8 @@ function ModalEditar({ onClose }) {
                             </div>
                         </div>
 
-                        <div className="form-group">
-                            <div className='inputLabel'>
+                        <div className="form-group-editar">
+                            <div className='inputLabel-editar'>
                                 <label htmlFor="categoria">Categoria:</label>
                                 <select
                                     id="categoria"
@@ -100,7 +100,7 @@ function ModalEditar({ onClose }) {
                             </div>
                         </div >
 
-                        <button className="botaoCadastrar" onClick={handleSubmit}>Cadastrar</button>
+                        <button className="botaoCadastrar" onClick={handleSubmit}>Editar</button>
                     </form >
                 </div>
             </div>

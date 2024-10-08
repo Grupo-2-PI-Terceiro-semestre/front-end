@@ -1,12 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import './ModalAdd.css';
 
-function ModalAdd({ onClose }) {
+function ModalAdd({ onClose, titulo }) {
 
     const [formData, setFormData] = useState({
         nomeServico: '',
         valorServico: '',
         tempoExecucao: '',
+        corReferencia: '',
+        descricao: '',
         categoria: '',
         tiposDeUsuario: 'ADMIN'
     });
@@ -26,6 +28,8 @@ function ModalAdd({ onClose }) {
                 valorServico: '',
                 representante: "true",
                 tempoExecucao: '',
+                corReferencia: '',
+                categoria: '',
                 categoria: '',
             });
         } catch (error) {
@@ -37,7 +41,7 @@ function ModalAdd({ onClose }) {
         <div className="modal-overlay">
             <div className="modal-header">
                 <div className="container-modal">
-                    <h4 className="titulo-modal">Adicionar Novo Serviço <button className="botaoFechar" onClick={onClose}>X</button></h4>
+                    <h4 className="titulo-modal">{titulo} <button className="botaoFechar" onClick={onClose}>X</button></h4>
 
                     <form className="form-modal" onSubmit={handleSubmit}>
                         <div className="form-group">
@@ -84,6 +88,20 @@ function ModalAdd({ onClose }) {
 
                         <div className="form-group">
                             <div className='inputLabel'>
+                                <label>Cor Referência:</label>
+                                <input
+                                    type="text"
+                                    name="corReferencia"
+                                    placeholder="Cor Referência"
+                                    defaultValue={formData.corReferencia}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <div className='inputLabel'>
                                 <label htmlFor="categoria">Categoria:</label>
                                 <select
                                     id="categoria"
@@ -99,6 +117,19 @@ function ModalAdd({ onClose }) {
                                 </select>
                             </div>
                         </div >
+
+                        <div className="form-group-text">
+                            <div className='inputLabel'>
+                                <label>Descrição:</label>
+                                <textarea 
+                                    name="descricao"
+                                    placeholder="Descrição"
+                                    defaultValue={formData.descricao}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
 
                         <button className="botaoCadastrar" onClick={handleSubmit}>Cadastrar</button>
                     </form >

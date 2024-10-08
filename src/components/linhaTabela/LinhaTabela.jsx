@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import ModalExcluir from "../modalExcluir/ModalExcluir";
-import ModalEditar from "../modalAdd/ModalAdd";
+import ModalEditar from "../modalEditar/ModalEditar";
 
 function LinhaTabela({ nome, valor, tempoExecucao }) {
 
@@ -42,13 +42,13 @@ function LinhaTabela({ nome, valor, tempoExecucao }) {
                         </label>
                     </div>
                 </div>
-        
-                {isModalOpenExcluir && (
-                    <ModalExcluir onClose={closeModalExcluir} />
-                )}
 
                 {isModalOpenEditar && (
-                    <ModalEditar onClose={closeModalEditar} />
+                    <ModalEditar onClose={closeModalEditar} titulo="Editar Serviço" />
+                )}
+
+                {isModalOpenExcluir && (
+                    <ModalExcluir onClose={closeModalExcluir} />
                 )}
             </div>
 
