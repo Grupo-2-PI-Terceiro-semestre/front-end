@@ -7,7 +7,6 @@
     border-radius: 10px;
     width: 130px;
     height: 110px;
-    margin-bottom: 5%;
 }
 
 .material-symbols-outlined {
@@ -19,12 +18,7 @@
     flex-direction: column;
 }
 
-.conteudo {
-    height: 80%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
+
 
 .valor {
     font-size: 16px;
