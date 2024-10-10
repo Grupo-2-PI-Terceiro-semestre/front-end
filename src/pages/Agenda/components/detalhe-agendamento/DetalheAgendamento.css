@@ -1,65 +1,165 @@
-.modal {
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background-color: #2a2a2e;
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    color: #fff;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input, textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #444;
-    color: #fff;
-  }
-  
-  textarea {
-    height: 100px;
-  }
-  
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .cancel-button {
-    background-color: #e74c3c;
-    padding: 10px;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .edit-button {
-    background-color: #f39c12;
-    padding: 10px;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+/* Estilos para o modal de detalhamento */
+.detalhe-agendamento {
+  background-color: #1c1b26;
+  padding: 20px;
+  border-radius: 10px;
+  width: 35%;
+  max-height: auto;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  align-items: center;
+}
+
+.detalhe-agendamento h3{
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+
+.detalhe-campo p {
+  margin-top: .2rem;
+  font-size: 13px;
+}
+
+.detalhe-campo {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.detalhe-campo label {
+  font-weight: bold;
+  color: #e0e0e0;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.detalhe-campo input,
+.detalhe-campo textarea {
+  background-color: #2e2c3b;
+  color: #fff;
+  border: 1px solid #393847;
+  padding: 8px;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+}
+
+.detalhe-campo input:disabled,
+.detalhe-campo textarea:disabled {
+  background-color: #3c3a4a;
+}
+
+.detalhe-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detalhe-actions button {
+  background-color: #f0242d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  width: 47%;
+}
+
+.detalhe-actions button:hover {
+  background-color: #d11e28;
+}
+
+.detalhe-actions button.salvar {
+  background-color: #f9a220;
+}
+
+.detalhe-actions button.salvar:hover {
+  background-color: #e2941d;
+}
+
+/* Estilo para o select */
+.detalhe-campo select {
+  background-color: #2e2c3b;
+  color: #fff;
+  border: 1px solid #393847;
+  padding: 8px;
+  border-radius: 4px;
+  outline: none;
+  font-size: 12px;
+  appearance: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.detalhe-campo select::after {
+  content: '\25BC';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #fff;
+}
+
+.detalhe-campo select:hover {
+  background-color: #3c3a4a;
+}
+
+.detalhe-campo select:disabled {
+  background-color: #3c3a4a;
+  cursor: not-allowed;
+}
+
+.detalhe-campo option {
+  background-color: #2e2c3b;
+  color: #fff;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.modal-content {
+  position: relative;
+  z-index: 2000;
+}
+
+#overlay {
+  z-index: 2000;
+}
+
+
+.horarios-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.horario-item {
+  flex: 1;
+  margin-right: 10px;
+  flex-direction: column;
+  display: flex;
+  width: 30%;
+}
+
+.horario-item:last-child {
+  margin-right: 0;
+}
+
+.toggle-button {
+  background-color: #f0242d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  width: 100%;
+}
+
+[part~='toggle-button']::before {
+  content: var(--lumo-icons-clock);
+  color: white;
+}
