@@ -1,7 +1,7 @@
 import React from "react";
 import './ModalExcluir.css';
 
-function ModalExcluir({ onClose }) {
+function ModalExcluir({ onClose, tipo }) {
     return (
         <div className="modal-tela">
             <div className="container-modal">
@@ -14,7 +14,7 @@ function ModalExcluir({ onClose }) {
                     </div>
                     <div className="textos">
                         <label className="titulo-atencao" htmlFor="text"><b>Atenção!</b></label>
-                        <label htmlFor="text">Tem certeza que deseja excluir esse serviço?</label>
+                    <label htmlFor="text">Tem certeza que deseja excluir {tipo}?</label>
                     </div>
 
                     <div className="botoes">

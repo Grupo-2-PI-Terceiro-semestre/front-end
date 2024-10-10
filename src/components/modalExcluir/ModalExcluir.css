@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 3;
     transition: right 1s ease;
 }
 
@@ -18,7 +18,7 @@
     height: 47vh;
     width: 30vw;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 3;
+    z-index: 4;
     text-align: center;
     display: flex;
     justify-content: center;
