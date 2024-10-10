@@ -19,7 +19,7 @@ function Servico() {
                             ]}
                         />
                         {/* <HeaderInterna texto="Novo Serviço" /> */}
-                        <TelaServicos titulo="Serviços" placeholder="Pesquisar serviço" titulo1="NOME" titulo2="VALOR" titulo3="TEMPO DE EXECUÇÃO" titulo4="AÇÕES" />
+                        <TelaServicos titulo="Serviços" placeholder="Pesquisar serviço" titulo1="NOME" titulo2="VALOR" titulo3="TEMPO" titulo4="CATEGORIA" titulo5="AÇÕES" />
                     </div>
                 </div>
             </div>
