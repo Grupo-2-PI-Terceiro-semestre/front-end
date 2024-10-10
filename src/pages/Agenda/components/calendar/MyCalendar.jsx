@@ -14,6 +14,8 @@ import { findColaborador, findAgendamentos } from '../../services/agendaServices
 import Cookies from 'js-cookie';
 import CircularIntegration from '../../../../components/botao-download/CircularIntegration';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
+import DetalheAgendamento from '../detalhe-agendamento/DetalheAgendamento';
+import Modal from '@mui/material/Modal'; // Importação do Modal
 
 
 moment.locale("pt-br");
@@ -25,8 +27,12 @@ const MyDragAndDropCalendar = () => {
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [colaboradorInfo, setColaboradorInfo] = useState(null);
+  const [detalhes , setDetalhes] = useState([]);
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedDetalhes, setSelectedDetalhes] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
   const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 
@@ -51,24 +57,43 @@ const MyDragAndDropCalendar = () => {
       setResources(formattedResources);
 
       const colaboradores = response.data;
-
       const eventsFeature = colaboradores.flatMap(colaborador =>
         colaborador.agendamentoDTOS.map(evento => ({
           id: evento.idAgendamento,
           title: evento.servico.nomeServico,
           start: new Date(evento.horaAgendamento),
           end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
+          nomeFuncionario: colaborador.nomeFuncionario,
+          nomeCliente: evento.cliente.nomePessoa,
+          telefoneCliente: evento.cliente.telefone,
+          descricaoServico: evento.servico.descricao,
           resourceId: colaborador.idFuncionario,
           corReferenciaHex: evento.servico.corReferenciaHex,
         }))
       );
 
+      const detalhes = colaboradores.flatMap(colaborador =>
+        colaborador.agendamentoDTOS.map(detalhes => ({
+          id: detalhes.idAgendamento,
+          nomeCliente: detalhes.cliente.nomePessoa,
+          telefoneCliente: detalhes.cliente.telefone,
+          descricaoServico: detalhes.servico.descricao
+        })));
+
+        console.log('Detalhes:', detalhes);
+
+      setDetalhes(detalhes);
       setEvents(eventsFeature);
     } catch (error) {
       console.error('Erro ao buscar colaboradores ou agendamentos:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedEvent(null);
   };
 
 
@@ -114,8 +139,10 @@ const MyDragAndDropCalendar = () => {
     setEvents(nextEvents);
   };
 
-  const handleEventClick = (event) => {
-    alert(`Você clicou no evento: ${event.title}`);
+  const handleEventClick = (event, detalhe) => {
+    setSelectedEvent(event);
+    setSelectedDetalhes(detalhe);
+    setOpenModal(true); // Abre o modal
   };
 
   function formatDateToBRWithMonthName(dateString) {
@@ -144,6 +171,7 @@ const MyDragAndDropCalendar = () => {
   };
 
   return (
+
     <div className="calendar-container">
       <div className="custom-toolbar">
         <div className="buscaAgenda">
@@ -240,6 +268,20 @@ const MyDragAndDropCalendar = () => {
       {loading ? (
         <CircularSize width="100%" height="100%" />
       ) : null}
+      {/* Modal de Detalhamento */}
+      <Modal open={openModal} onClose={handleCloseModal}>
+        <div className="modal-content">
+          {selectedEvent && (
+            <DetalheAgendamento
+              event={selectedEvent}
+              detalhes={detalhes}
+              idEmpresa={user.idEmpresa}
+              funcionarios = {resources} // Passa os detalhes do evento selecionado
+              onClose={handleCloseModal} // Função para fechar o modal
+            />
+          )}
+        </div>
+      </Modal>
     </div>
   );
 };

@@ -21,3 +21,14 @@ export const findAgendamentos = async (idAgenda, dataAgendamento) => {
         throw e
     }
 }
+
+export const findServicos = async (idEmpresa) => {
+    try {
+        const response = await getData(`servicos/empresa/${idEmpresa}`)
+        return response;
+    }
+    catch (e) {
+        console.error("Erro ao consultar os serviços" + e)
+        throw e
+    }
+}
