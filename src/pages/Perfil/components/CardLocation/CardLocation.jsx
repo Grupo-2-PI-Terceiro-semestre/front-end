@@ -11,12 +11,16 @@ function CardLocation() {
     const [numero, setNumero] = useState('');
 
     const handleCepChange = async (e) => {
-        const cepDigitado = e.target.value;
+        let cepDigitado = e.target.value.replace(/\D/g, '');
+        if (cepDigitado.length > 5) {
+            cepDigitado = cepDigitado.replace(/^(\d{5})(\d)/, '$1-$2'); 
+        }
         setCep(cepDigitado);
 
-        if (cepDigitado.length === 8) {
+        if (cepDigitado.length === 9) { 
+            const cepSemMascara = cepDigitado.replace('-', '');
             try {
-                const response = await axios.get(`https://viacep.com.br/ws/${cepDigitado}/json/`);
+                const response = await axios.get(`https://viacep.com.br/ws/${cepSemMascara}/json/`);
                 const data = response.data;
 
                 if (!data.erro) {
@@ -55,6 +59,7 @@ function CardLocation() {
                     value={cep}
                     onChange={handleCepChange}
                     placeholder="Digite o CEP"
+                    maxLength="9" 
                     className='form-group'
                 />
             </div>
@@ -98,7 +103,7 @@ function CardLocation() {
                 <input type="text"
                     value={complemento}
                     onChange={(e) => setComplemento(e.target.value)}
-                    placeholder='digite um complemento' />
+                    placeholder='Digite um complemento' />
             </div>
 
             <div className='form-group'>
@@ -107,7 +112,5 @@ function CardLocation() {
         </form>
     );
 }
-
-
 
 export default CardLocation;
