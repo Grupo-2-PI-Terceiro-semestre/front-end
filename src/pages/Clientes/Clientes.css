@@ -1,0 +1,27 @@
+.main-clientes {
+    width: 100vw;
+    background-color: rgb(23, 24, 33);
+    display: flex;
+}
+
+.container-clientes {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.titulo {
+    color: white;
+    width: 87vw;
+    display: flex;
+    align-items: center;
+    height: 8vh;
+    justify-content: space-between;
+    background-color: rgb(33, 34, 45);
+    border-radius: 5px;
+}
+
+.main-clientes .container-clientes .principal {
+    width: 80vw;
+    height: 100vh;
+}
