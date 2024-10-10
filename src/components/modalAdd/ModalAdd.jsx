@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import './ModalAdd.css';
 
 function ModalAdd({ onClose, titulo }) {
@@ -7,15 +7,25 @@ function ModalAdd({ onClose, titulo }) {
         nomeServico: '',
         valorServico: '',
         tempoExecucao: '',
-        corReferencia: '',
+        corReferencia: '#000000',
         descricao: '',
         categoria: '',
         tiposDeUsuario: 'ADMIN'
     });
 
+    const [isVisibleAdd, setIsVisibleAdd] = useState(false);
+
+    useEffect(() => {
+        setIsVisibleAdd(true);
+    }, []);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    };
+
+    const handleColorChange = (e) => {
+        setFormData({ ...formData, corReferencia: e.target.value });
     };
 
     const handleSubmit = async (e) => {
@@ -28,8 +38,7 @@ function ModalAdd({ onClose, titulo }) {
                 valorServico: '',
                 representante: "true",
                 tempoExecucao: '',
-                corReferencia: '',
-                categoria: '',
+                corReferencia: '#000000',
                 categoria: '',
             });
         } catch (error) {
@@ -37,8 +46,13 @@ function ModalAdd({ onClose, titulo }) {
         }
     };
 
+    const handleClose = () => {
+        setIsVisibleAdd(false); // Inicia a animação de saída
+        setTimeout(onClose, 300); // Fecha o modal após a animação
+    };
+
     return (
-        <div className="modal-overlay">
+        <div className={`modal-overlay ${isVisibleAdd ? 'visible' : 'hidden'}`}>
             <div className="modal-header">
                 <div className="container-modal">
                     <h4 className="titulo-modal">{titulo} <button className="botaoFechar" onClick={onClose}>X</button></h4>
@@ -48,6 +62,7 @@ function ModalAdd({ onClose, titulo }) {
                             <div className='inputLabel'>
                                 <label>Nome:</label>
                                 <input
+                                    className="input"
                                     type="text"
                                     name="nomeServico"
                                     placeholder="Nome do Serviço"
@@ -62,6 +77,7 @@ function ModalAdd({ onClose, titulo }) {
                             <div className='inputLabel'>
                                 <label>Valor:</label>
                                 <input
+                                    className="input"
                                     type="number"
                                     name="valorServico"
                                     placeholder="Valor do Serviço"
@@ -76,6 +92,7 @@ function ModalAdd({ onClose, titulo }) {
                             <div className='inputLabel'>
                                 <label>Tempo de Execução:</label>
                                 <input
+                                    className="input"
                                     type="text"
                                     name="tempoExecucao"
                                     placeholder="Tempo de Execução"
@@ -86,17 +103,21 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <div className="form-group">
-                            <div className='inputLabel'>
-                                <label>Cor Referência:</label>
-                                <input
-                                    type="text"
-                                    name="corReferencia"
-                                    placeholder="Cor Referência"
-                                    defaultValue={formData.corReferencia}
-                                    onChange={handleChange}
-                                    required
-                                />
+                        <div className="form-group-cor">
+                            <div className='inputLabel-cor'>
+                                <label>Cor de Referência:</label>
+                                <div className="color-picker-container">
+                                    <input
+                                        className="color-picker-input"
+                                        type="color"
+                                        name="corReferencia"
+                                        value={formData.corReferencia}
+                                        onChange={handleColorChange}
+                                    />
+                                    <span className="color-name">
+                                        {formData.corReferencia}
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -131,7 +152,7 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <button className="botaoCadastrar" onClick={handleSubmit}>Cadastrar</button>
+                        <button className="botaoCadastrar" onClick={handleSubmit}>Adicionar</button>
                     </form >
                 </div>
             </div>
