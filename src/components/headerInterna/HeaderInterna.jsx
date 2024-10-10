@@ -6,14 +6,14 @@ import ModalAdd from "../modalAdd/ModalAdd";
 
 function HeaderInterna({ texto }) {
 
-    const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModalAdd = () => {
-        setIsModalOpen(true); // Abrir o modal
+        setIsModalOpen(true);
     };
 
     const closeModalAdd = () => {
-        setIsModalOpen(false); // Fechar o modal
+        setIsModalOpen(false);
     };
 
     return (
