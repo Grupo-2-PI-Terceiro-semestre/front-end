@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import LinhaTabela from "../linhaTabela/LinhaTabela";
 import HeaderInterna from "../headerInterna/HeaderInterna";
 
-function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4
+function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4, titulo5, titulo6
  }) {
     const handleKeyUp = (event) => {
         const value = event.target.value;
@@ -36,23 +36,22 @@ function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4
                         <label htmlFor="text">{titulo2}</label>
                         <label htmlFor="text">{titulo3}</label>
                         <label htmlFor="text">{titulo4}</label>
+                        <label htmlFor="text">{titulo5}</label>
                     </div>
 
                     <div className="conjuntoLinhas">
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" corReferencia="#00000" categoria="Barbearia"/>
                     </div>
                 </div>
 

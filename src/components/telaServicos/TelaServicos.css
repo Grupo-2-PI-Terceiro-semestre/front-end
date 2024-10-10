@@ -1,5 +1,5 @@
 .main-tela-servicos {
-    width: 80vw;
+    width: 82vw;
     background-color: rgb(33, 34, 45);
     border-radius: 5px;
     display: flex;
@@ -53,12 +53,27 @@
 .container-tela-servicos .tabelaCompleta {
     overflow: auto;
     height: 69vh;
+    width: 77vw;
+}
+
+.container-tela-servicos .tabelaCompleta::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px;
+}
+
+.container-tela-servicos .tabelaCompleta::-webkit-scrollbar-thumb {
+    background-color: #2196F3;
+    border-radius: 10px; 
+}
+
+.container-tela-servicos .tabelaCompleta::-webkit-scrollbar-track {
+    background: #171821; 
 }
 
 .container-tela-servicos .tabelaCompleta .tituloTabela {
     display: flex;
     align-items: center;
-    width: 75vw;
+    width: 77vw;
     height: 5vh;
     color: white;
     padding: 0 1.2vw;
