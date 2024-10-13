@@ -15,7 +15,8 @@ import Cookies from 'js-cookie';
 import CircularIntegration from '../../../../components/botao-download/CircularIntegration';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
 import DetalheAgendamento from '../detalhe-agendamento/DetalheAgendamento';
-import Modal from '@mui/material/Modal'; // Importação do Modal
+import Modal from '@mui/material/Modal';
+import Swal from 'sweetalert2'
 
 
 moment.locale("pt-br");
@@ -111,24 +112,52 @@ const MyDragAndDropCalendar = () => {
   const isSelected = (day) => {
     return selectedDate.toDateString() === new Date(day).toDateString();
   };
-  const moveEvent = ({ event, start, end, resourceId }) => {
+  const moveEvent = async ({ event, start, end, resourceId }) => {
     // Cria o evento atualizado com os novos valores
     const updatedEvent = { ...event, start, end, resourceId };
 
     // Encontra o evento antigo para comparar ou manipular se necessário
     const originalEvent = events.find(e => e.id === event.id);
 
-    
-
     const request = {
       idAgendamento: updatedEvent.id,
       horaAgendamento: converterGMTParaBrasilia(updatedEvent.start),
       idAgenda: updatedEvent.resourceId,
+    };
+
+    // Exibe o alerta de confirmação
+    const result = await Swal.fire({
+      title: "Atenção!",
+      text: "Você tem certeza que deseja atualizar esse agendamento?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim",
+    });
+
+    // Se o usuário confirmar, faz a requisição para atualizar o evento
+    if (result.isConfirmed) {
+      setLoading(true); // Inicia o carregamento
+      try {
+        await atualizarEvento(request); // Espera a resposta da função atualizarEvento
+        Swal.fire({
+          title: "Sucesso!",
+          text: "Agendamento atualizado com sucesso!",
+          icon: "success"
+        });
+      } catch (error) {
+        // Exibe o alerta de erro ao usuário
+        Swal.fire({
+          title: "Erro!",
+          text: "Erro ao atualizar o agendamento!",
+          icon: "error"
+        });
+        console.error("Erro ao atualizar evento:", error);
+      } finally {
+        setLoading(false); // Para o carregamento independentemente do resultado
+      }
     }
-
-    console.log(request)
-
-    atualizarEvento(request)
 
     // Atualiza apenas o evento alterado na lista
     const nextEvents = events.map(existingEvent =>
@@ -138,11 +167,22 @@ const MyDragAndDropCalendar = () => {
     setEvents(nextEvents); // Define a nova lista de eventos
   };
 
+  const atualizarEvento = async (novoEvento) => {
+    try {
+      const response = await AtualizarEvento(novoEvento);
+      return response.data;
+    } catch (error) {
+      // Aqui você pode lançar o erro para ser tratado no moveEvent
+      throw new Error("Erro ao atualizar o agendamento");
+    }
+  };
+
+
   const converterGMTParaBrasilia = (horarioGMT) => {
     const data = new Date(horarioGMT);
 
     if (isNaN(data.getTime())) {
-        throw new Error("Horário inválido");
+      throw new Error("Horário inválido");
     }
 
     const ano = data.getFullYear();
@@ -152,15 +192,6 @@ const MyDragAndDropCalendar = () => {
     const minutos = String(data.getMinutes()).padStart(2, '0');
 
     return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
-}
-
-  const atualizarEvento = async (novoEvento) => {
-    try {
-      const response = await AtualizarEvento(novoEvento)
-      return response.data;
-    } catch (error) {
-
-    }
   }
 
 
