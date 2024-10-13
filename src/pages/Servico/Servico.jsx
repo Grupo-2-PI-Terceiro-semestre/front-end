@@ -1,7 +1,7 @@
 import React from "react";
 import './Servico.css';
 // import HeaderInterna from "../../components/headerInterna/HeaderInterna";
-import TelaServicos from "../../components/telaServicos/TelaServicos";
+import TelaServicos from "./components/telaServicos/TelaServicos";
 import Menu from "../../components/menu/Menu";
 import IconBreadcrumbs from "../../components/breadcrumb/Breadcrumb";
 

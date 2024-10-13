@@ -1,9 +1,9 @@
 import React from "react";
 import "./Dashboard.css";
 import Menu from "../../components/menu/Menu";
-import Chart from "../../components/chart/chart";
-import CardDashboard from "../../components/cardDashboard/CardDashboard";
-import Kpi from "../../components/KPI/Kpi";
+import Chart from "./components/chart/Chart";
+import CardDashboard from "./components/cardDashboard/CardDashboard";
+import Kpi from "./components/KPI/Kpi";
 import TabelaDashboard from "./components/Tabela/TabelaDashboard";
 
 function Dashboard() {
