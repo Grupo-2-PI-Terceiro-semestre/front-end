@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './DetalheAgendamento.css'; // Estilizações
 import Button from '../../../../components/button/Button';
-import { findServicos } from '../../services/agendaServices';
-import { TimePicker } from '@hilla/react-components/TimePicker.js';
+import { findServicos, findClientes } from '../../services/agendaServices';
+import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
+import SearchableDropdown from '../autocomplete/SearchableDropdown';
 
 
 const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose }) => {
@@ -11,12 +12,13 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose 
     const [horarioInicio, setHorarioInicio] = useState(event.start);
     const [horarioFim, setHorarioFim] = useState(event.end);
     const [descricaoServico, setDescricaoServico] = useState(detalhes.descricaoServico);
-    const [nomeCliente, setNomeCliente] = useState(detalhes.nomeCliente);
-    const [telefoneCliente, setTelefoneCliente] = useState(detalhes.telefoneCliente);
     const [servicos, setServicos] = useState([]);
+    const [clientes, setClientes] = useState([]);
     const [servicoSelecionado, setServicoSelecionado] = useState('');
+    const [clienteSelecionado, setClienteSelecionado] = useState('');
     const [profissionalSelecionado, setProfissionalSelecionado] = useState('');
 
+    const dropdownRef = useRef(null); // Ref para o dropdown
 
     const toggleEditing = () => {
         setIsEditing(!isEditing);
@@ -24,9 +26,9 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose 
 
     useEffect(() => {
         buscarServicos(idEmpresa);
+        buscarClientes(idEmpresa)
         setServicoSelecionado(event.title);
-        setProfissionalSelecionado(event.nomeFuncionario)
-        console.log('Detalhes:', event.descricaoServico);
+        setProfissionalSelecionado(event.nomeFuncionario);
     }, [idEmpresa, event.title]);
 
     const buscarServicos = async (idEmpresa) => {
@@ -38,86 +40,108 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose 
         }
     };
 
+    const buscarClientes = async (idEmpresa) => {
+        try {
+            const response = await findClientes(idEmpresa);
+            setClientes(response.data)
+        } catch (error) {
+
+        }
+    }
+
     const handleSave = () => {
         console.log('Dados salvos:', { profissional, horarioInicio, horarioFim, descricaoServico, servicoSelecionado });
         setIsEditing(false);
     };
 
+    const handleServicoChange = (servico) => {
+        setServicoSelecionado(servico.nomeServico);
+    };
+
+    const handleFuncionarioChange = (funcionario) => {
+        setServicoSelecionado(funcionario.title);
+    };
+
+    const handleClientesChange = (cliente) => {
+        setClienteSelecionado(cliente.nomePessoa);
+    };
+
     return (
         <div className="detalhe-agendamento">
-            <h3>Detalhes do Agendamento</h3>
+                <span className='botao-fechar' onClick={onClose}>X</span>
+                <h3>Detalhes do Agendamento</h3>
 
-            <div className="detalhe-campo">
-                <label>Nome do Cliente</label>
-                <p>{event.nomeCliente}</p>
-
-            </div>
-            <div className="detalhe-campo">
-                <label>Telefone do Cliente</label>
-                <p>{event.telefoneCliente}</p>
-
-            </div>
-            <div className="detalhe-campo">
-                <label>Serviço:</label>
-                {isEditing ? (
-                    <select
-                        value={servicoSelecionado}
-                        onChange={(e) => setServicoSelecionado(e.target.value)}
-                    >
-                        {servicos.map((servico) => (
-                            <option key={servico.idServico} value={servico.nomeServico}>
-                                {servico.nomeServico}
-                            </option>
-                        ))}
-                    </select>
-                ) : (
-                    <p>{servicos.find(serv => serv.nomeServico === servicoSelecionado)?.nomeServico || event.title}</p>
-                )}
-            </div>
-
-            <div className="detalhe-campo">
-                <label>Profissional:</label>
-                {isEditing ? (
-                    <select
-                        value={profissionalSelecionado} // Use o estado para armazenar o profissional selecionado
-                        onChange={(e) => setProfissionalSelecionado(e.target.value)}
-                    >
-                        {funcionarios.map((profissional) => (
-                            <option key={profissional.id} value={profissional.title}>
-                                {profissional.title}
-                            </option>
-                        ))}
-                    </select>
-                ) : (
-                    <p>{funcionarios.find(prof => prof.title === profissionalSelecionado)?.title || event.nomeFuncionario}</p>
-                )}
-            </div>
-            <div className="detalhe-campo horarios-container">
-                <div className="horario-item">
-                    <label>Horário de Início</label>
+            <div className='inputCliente'>
+                <div className="detalhe-campo">
+                    <label>Cliente:</label>
                     {isEditing ? (
-                        <TimePicker
-                            value={"05:30"} // Usa o estado do horário de início
-                            step={60 * 30} // Intervalo de 30 minutos
-                            autoOpenDisabled
-                        />
+                        <div ref={dropdownRef}>
+                            <SearchableDropdown
+                                options={clientes} // Lista de serviços
+                                onSelectOption={handleClientesChange}
+                                placeholder={event.nomeCliente}
+                                displayField={(option) => option.nomePessoa} // Exibe o campo `nomeServico`
+                                uniqueKey={(option) => option.idCliente} // Usa `idServico` como chave única
+                            />
+                        </div>
                     ) : (
-                        <p>{"05:30"}</p> // Mostra o horário de início quando não está editando
+                        <p>{clienteSelecionado || event.nomeCliente}</p>
                     )}
                 </div>
 
-                <div className="horario-item">
-                    <label>Horário Final</label>
+                <div className="detalhe-campo">
+                    <label>Telefone do Cliente</label>
+                    <p>{event.telefoneCliente}</p>
+                </div>
+            </div>
+
+            <div className='inputServicoFunc'>
+                <div className="detalhe-campo">
+                    <label>Serviço:</label>
                     {isEditing ? (
-                        <TimePicker
-                            value={"05:30"} // Usa o estado do horário de fim
-                            step={60 * 30} // Intervalo de 30 minutos
-                            autoOpenDisabled
-                        />
+                        <div ref={dropdownRef}>
+                            <SearchableDropdown
+                                options={servicos} // Lista de serviços
+                                onSelectOption={handleServicoChange}
+                                placeholder={event.title}
+                                displayField={(option) => option.nomeServico} // Exibe o campo `nomeServico`
+                                uniqueKey={(option) => option.idServico} // Usa `idServico` como chave única
+                            />
+                        </div>
                     ) : (
-                        <p>{"05:30"}</p> // Mostra o horário de fim quando não está editando
+                        <p>{servicoSelecionado || event.title}</p>
                     )}
                 </div>
+
+                <div className="detalhe-campo">
+                    <label>Profissional:</label>
+                    {isEditing ? (
+                        <div ref={dropdownRef}>
+                            <SearchableDropdown
+                                options={funcionarios} // Lista de funcionários
+                                onSelectOption={handleFuncionarioChange}
+                                placeholder={profissionalSelecionado}
+                                displayField={(option) => option.title}
+                                uniqueKey={(option) => option.id}
+                            />
+                        </div>
+                    ) : (
+                        <p>{profissionalSelecionado || funcionarios.title}</p>
+                    )}
+                </div>
+            </div>
+
+            <div className="detalhe-campo">
+                <label>Data e Hora Do Agendamento</label>
+                {isEditing ? (
+                    <DateTimePickerOpenTo
+                        valordefault={horarioInicio}
+                        value={horarioInicio}
+                        onChange={(newValue) => setHorarioInicio(newValue)}
+                    />
+                ) : (
+                    <p>{new Date(horarioInicio).toLocaleString()}</p>
+                )}
             </div>
 
             <div className="detalhe-campo">
@@ -134,6 +158,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose 
                     type="submit"
                     content="Cancelar Agendamento"
                     backgroundColor='#F0242D'
+                    fontWeight='bold'
                     fontSize='15px'
                     size='47%'
                     onClick={onClose}
@@ -142,6 +167,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose 
                     <Button
                         size='47%'
                         fontSize='15px'
+                        fontWeight='bold'
                         content="Salvar"
                         backgroundColor='#28A745'
                         onClick={handleSave}
@@ -150,7 +176,8 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose 
                     <Button
                         size='47%'
                         content="Editar"
-                        fontSize='12px'
+                        fontWeight='bold'
+                        fontSize='15px'
                         backgroundColor='#F9A220'
                         onClick={toggleEditing}
                     />
