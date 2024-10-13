@@ -2,8 +2,8 @@ import React from "react";
 import './TelaServicos.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import LinhaTabela from "../linhaTabela/LinhaTabela";
-import HeaderInterna from "../headerInterna/HeaderInterna";
+import LinhaTabela from "../../../../components/linhaTabela/LinhaTabela";
+import HeaderInterna from "../../../../components/headerInterna/HeaderInterna";
 
 function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4
  }) {
