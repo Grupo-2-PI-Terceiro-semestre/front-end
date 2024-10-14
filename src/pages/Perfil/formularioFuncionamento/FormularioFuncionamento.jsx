@@ -57,7 +57,9 @@ const FormularioFuncionamento = () => {
               Feriados
             </label>
           </div>
-          <button onClick={handleSubmit}>Salvar Alterações</button>
+          <div className="form-group">
+        <button type="submit">Salvar Alterações</button>
+      </div>
         </div>
       );
     };
