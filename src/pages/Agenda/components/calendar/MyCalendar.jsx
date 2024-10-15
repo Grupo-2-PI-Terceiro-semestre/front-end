@@ -10,12 +10,13 @@ import "./MyCalendar.css";
 import Button from "../../../../components/button/Button";
 import plusIcon from "../../../../assets/plus.png";
 import IconDemo from '../agenda/Agenda';
-import { findColaborador, findAgendamentos } from '../../services/agendaServices'
+import { findColaborador, findAgendamentos, AtualizarEvento } from '../../services/agendaServices'
 import Cookies from 'js-cookie';
 import CircularIntegration from '../../../../components/botao-download/CircularIntegration';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
 import DetalheAgendamento from '../detalhe-agendamento/DetalheAgendamento';
-import Modal from '@mui/material/Modal'; // Importação do Modal
+import Modal from '@mui/material/Modal';
+import Swal from 'sweetalert2'
 
 
 moment.locale("pt-br");
@@ -27,12 +28,13 @@ const MyDragAndDropCalendar = () => {
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [colaboradorInfo, setColaboradorInfo] = useState(null);
-  const [detalhes , setDetalhes] = useState([]);
+  const [detalhes, setDetalhes] = useState([]);
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedDetalhes, setSelectedDetalhes] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [openModalAdd, setOpenModalAdd] = useState(false);
 
   const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 
@@ -65,24 +67,14 @@ const MyDragAndDropCalendar = () => {
           end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
           nomeFuncionario: colaborador.nomeFuncionario,
           nomeCliente: evento.cliente.nomePessoa,
+          funcionario: colaborador,
+          cliente: evento.cliente,
           telefoneCliente: evento.cliente.telefone,
           descricaoServico: evento.servico.descricao,
           resourceId: colaborador.idFuncionario,
           corReferenciaHex: evento.servico.corReferenciaHex,
         }))
       );
-
-      const detalhes = colaboradores.flatMap(colaborador =>
-        colaborador.agendamentoDTOS.map(detalhes => ({
-          id: detalhes.idAgendamento,
-          nomeCliente: detalhes.cliente.nomePessoa,
-          telefoneCliente: detalhes.cliente.telefone,
-          descricaoServico: detalhes.servico.descricao
-        })));
-
-        console.log('Detalhes:', detalhes);
-
-      setDetalhes(detalhes);
       setEvents(eventsFeature);
     } catch (error) {
       console.error('Erro ao buscar colaboradores ou agendamentos:', error);
@@ -120,14 +112,88 @@ const MyDragAndDropCalendar = () => {
   const isSelected = (day) => {
     return selectedDate.toDateString() === new Date(day).toDateString();
   };
-
-  const moveEvent = ({ event, start, end, resourceId }) => {
+  const moveEvent = async ({ event, start, end, resourceId }) => {
+    // Cria o evento atualizado com os novos valores
     const updatedEvent = { ...event, start, end, resourceId };
-    const nextEvents = events.map((existingEvent) =>
+
+    // Encontra o evento antigo para comparar ou manipular se necessário
+    const originalEvent = events.find(e => e.id === event.id);
+
+    const request = {
+      idAgendamento: updatedEvent.id,
+      horaAgendamento: converterGMTParaBrasilia(updatedEvent.start),
+      idAgenda: updatedEvent.resourceId,
+    };
+
+    // Exibe o alerta de confirmação
+    const result = await Swal.fire({
+      title: "Atenção!",
+      text: "Você tem certeza que deseja atualizar esse agendamento?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim",
+    });
+
+    // Se o usuário confirmar, faz a requisição para atualizar o evento
+    if (result.isConfirmed) {
+      setLoading(true); // Inicia o carregamento
+      try {
+        await atualizarEvento(request); // Espera a resposta da função atualizarEvento
+        Swal.fire({
+          title: "Sucesso!",
+          text: "Agendamento atualizado com sucesso!",
+          icon: "success"
+        });
+      } catch (error) {
+        // Exibe o alerta de erro ao usuário
+        Swal.fire({
+          title: "Erro!",
+          text: "Erro ao atualizar o agendamento!",
+          icon: "error"
+        });
+        console.error("Erro ao atualizar evento:", error);
+      } finally {
+        setLoading(false); // Para o carregamento independentemente do resultado
+      }
+    }
+
+    // Atualiza apenas o evento alterado na lista
+    const nextEvents = events.map(existingEvent =>
       existingEvent.id === event.id ? updatedEvent : existingEvent
     );
-    setEvents(nextEvents);
+
+    setEvents(nextEvents); // Define a nova lista de eventos
   };
+
+  const atualizarEvento = async (novoEvento) => {
+    try {
+      const response = await AtualizarEvento(novoEvento);
+      return response.data;
+    } catch (error) {
+      // Aqui você pode lançar o erro para ser tratado no moveEvent
+      throw new Error("Erro ao atualizar o agendamento");
+    }
+  };
+
+
+  const converterGMTParaBrasilia = (horarioGMT) => {
+    const data = new Date(horarioGMT);
+
+    if (isNaN(data.getTime())) {
+      throw new Error("Horário inválido");
+    }
+
+    const ano = data.getFullYear();
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
+    const dia = String(data.getDate()).padStart(2, '0');
+    const horas = String(data.getHours()).padStart(2, '0');
+    const minutos = String(data.getMinutes()).padStart(2, '0');
+
+    return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
+  }
+
 
   const resizeEvent = (resizeType, { event, start, end }) => {
     const nextEvents = events.map(existingEvent => {
@@ -276,7 +342,7 @@ const MyDragAndDropCalendar = () => {
               event={selectedEvent}
               detalhes={detalhes}
               idEmpresa={user.idEmpresa}
-              funcionarios = {resources} // Passa os detalhes do evento selecionado
+              funcionarios={resources} // Passa os detalhes do evento selecionado
               onClose={handleCloseModal} // Função para fechar o modal
             />
           )}

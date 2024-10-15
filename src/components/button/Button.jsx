@@ -9,6 +9,7 @@ const Button = ({
   size = '100%',
   padding = '10px',
   backgroundColor = '#0072FF',
+  fontWeight = '',
   color = 'white',
   content = 'Button',
   type = 'button',
@@ -26,6 +27,7 @@ const Button = ({
         padding: padding,
         color: color,
         backgroundColor: backgroundColor,
+        fontWeight: fontWeight
       }}
       onClick={onClick}
     >

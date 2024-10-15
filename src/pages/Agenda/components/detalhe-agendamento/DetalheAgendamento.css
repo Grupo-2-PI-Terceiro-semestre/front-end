@@ -11,11 +11,16 @@
   align-items: center;
 }
 
-.detalhe-agendamento h3{
-  margin: 1.5rem 0;
-  text-align: center;
+.detalhe-agendamento h3 {
+  margin-bottom: 3rem;
 }
 
+.botao-fechar {
+  cursor: pointer;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 2rem;
+}
 
 .detalhe-campo p {
   margin-top: .2rem;
@@ -41,9 +46,10 @@
   background-color: #2e2c3b;
   color: #fff;
   border: 1px solid #393847;
-  padding: 8px;
+  padding: 6px;
   border-radius: 4px;
   outline: none;
+  width: 100%;
   font-size: 14px;
 }
 
@@ -81,49 +87,11 @@
   background-color: #e2941d;
 }
 
-/* Estilo para o select */
-.detalhe-campo select {
-  background-color: #2e2c3b;
-  color: #fff;
-  border: 1px solid #393847;
-  padding: 8px;
-  border-radius: 4px;
-  outline: none;
-  font-size: 12px;
-  appearance: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-.detalhe-campo select::after {
-  content: '\25BC';
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #fff;
-}
-
-.detalhe-campo select:hover {
-  background-color: #3c3a4a;
-}
-
-.detalhe-campo select:disabled {
-  background-color: #3c3a4a;
-  cursor: not-allowed;
-}
-
-.detalhe-campo option {
-  background-color: #2e2c3b;
-  color: #fff;
-  padding: 8px;
-  font-size: 14px;
-}
 
 .modal-content {
   position: relative;
   z-index: 2000;
+  height: 100vh;
 }
 
 #overlay {
@@ -133,15 +101,15 @@
 
 .horarios-container {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  width: 100%;
 }
 
 .horario-item {
-  flex: 1;
-  margin-right: 10px;
   flex-direction: column;
   display: flex;
-  width: 30%;
 }
 
 .horario-item:last-child {
@@ -162,4 +130,27 @@
 [part~='toggle-button']::before {
   content: var(--lumo-icons-clock);
   color: white;
+}
+
+.inputCliente {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.inputServicoFunc {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+
+.inputCliente .detalhe-campo {
+  width: 50%;
+  display: flex;
+}
+
+.inputServicoFunc .detalhe-campo {
+  width: 50%;
+  display: flex;
 }
