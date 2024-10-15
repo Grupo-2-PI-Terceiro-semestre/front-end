@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import LinhaTabela from "../linhaTabela/LinhaTabela";
 // import HeaderInterna from "../headerInterna/HeaderInterna";
 
-function TelaServicos({ placeholder, titulo1, titulo2, titulo3, titulo4, titulo5, titulo6
+function TelaServicos({ placeholder, titulo1, titulo2, titulo3, titulo4, titulo5
  }) {
     const handleKeyUp = (event) => {
         const value = event.target.value;

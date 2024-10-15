@@ -3,7 +3,7 @@ import './Servico.css';
 import HeaderInterna from "../../components/headerInterna/HeaderInterna";
 import TelaServicos from "../../components/telaServicos/TelaServicos";
 import Menu from "../../components/menu/Menu";
-import IconBreadcrumbs from "../../components/breadcrumb/Breadcrumb";
+// import IconBreadcrumbs from "../../components/breadcrumb/Breadcrumb";
 
 function Servico() {
     const activeMenuItem = 'Serviços';
@@ -13,15 +13,17 @@ function Servico() {
                 <Menu activeMenuItem={activeMenuItem} />
                 <div className="container-servico">
                     <div className="principal-servico">
-                        <IconBreadcrumbs
+                        {/* <IconBreadcrumbs
                             paths={[
                                 { label: 'Serviço', href: '/servico' }
                             ]}
-                        />
+                        /> */}
 
                         <div className="titulo">
-                            <h3>Serviços</h3>
-                            <HeaderInterna texto="Novo Serviço" />
+                            <div className="container-titulo">
+                                <h3>Serviços</h3>
+                                <HeaderInterna texto="Novo Serviço" />
+                            </div>
                         </div>
 
                         {/* <HeaderInterna texto="Novo Serviço" /> */}

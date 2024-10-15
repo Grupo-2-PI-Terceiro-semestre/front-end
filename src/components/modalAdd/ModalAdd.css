@@ -77,30 +77,31 @@
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal {
-    height: 94vh;
+    height: 87vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 27vw;
+    width: 26vw;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group {
-    height: 7vh;
+    height: 10vh;
     display: flex;
     justify-content: center;
     /* right: 0.5vw;
     position: relative; */
 }
 
-/* .form-group-cor {
+.form-group-cor {
     height: 11vh;
     display: flex;
-    justify-content: center;
-
-} */
+    /* justify-content: center; */
+    /* border: 1px solid; */
+    width: 27vw;
+}
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group-text {
-    height: 10vh;
+    height: 19vh;
     display: flex;
     width: 27vw;
 }
@@ -110,15 +111,15 @@
     height: 9vh;
 }
 
-/* .inputLabel-cor {
+.inputLabel-cor {
     width: 26vw;
     height: 9vh;
-} */
+}
 
-/* .inputLabel {
+.inputLabel {
     width: 26vw;
     height: 15vh;
-} */
+}
 
 .inputLabel textarea{
     width: 26vw;
@@ -137,23 +138,23 @@
     font-size: 1rem;
 }
 
-/* .inputLabel-cor label {
+.inputLabel-cor label {
     display: block;
     color: white;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-size: 1rem;
-} */
+}
 
-/* .inputLabel label {
+.inputLabel label {
     display: block;
     color: white;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-size: 1rem;
-} */
+}
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel .input {
     width: 100%;
