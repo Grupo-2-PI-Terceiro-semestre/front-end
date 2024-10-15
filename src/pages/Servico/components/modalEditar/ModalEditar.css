@@ -1,21 +1,23 @@
 .container-linha-tabela .modal-overlay-editar {
     position: fixed;
     top: 0;
-    right: 0; /* Começa fora da tela */
+    right: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: end;
-    z-index: 2;
-    transition: right 1s ease;
+    z-index: 4;
+    /* opacity: 0; */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* .modal-overlay-editar.active {
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-} */
+.modal-overlay-editar.visible {
+    opacity: 1;
+    visibility: visible;
+}
 
 .modal-header-editar {
     background: rgb(33, 34, 45);
@@ -23,7 +25,7 @@
     height: 100vh;
     width: 30vw;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 3;
+    z-index: 5;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -31,11 +33,20 @@
 }
 
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar {
-    height: 88vh;
+    height: 97vh;
     width: 26vw;
     display: flex;
     flex-wrap: wrap;
     gap: 3vh;
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay-editar.visible .container-modal-editar {
+    transform: translateX(0);
+}
+
+.modal-overlay-editar.hidden .container-modal-editar {
+    transform: translateX(100%);
 }
 
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .titulo-modal-editar {
@@ -43,7 +54,6 @@
     width: 26vw;
     display: flex;
     justify-content: space-between;
-    /* border: 1px solid; */
     align-items: center;
 }
 
@@ -62,14 +72,14 @@
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 20px;
 }
 
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar {
-    height: 73vh;
+    height: 88vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    width: 27vw;
 }
 
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar {
@@ -78,10 +88,21 @@
     justify-content: center;
 }
 
+.container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-text {
+    height: 19vh;
+    display: flex;
+    justify-content: center;
+    width: 27vw;
+}
+
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar {
     width: 26vw;
-    margin-bottom: 20px;
     height: 10vh;
+}
+
+.form-group-text .inputLabel {
+    width: 26vw;
+    height: 19vh;
 }
 
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar label {
@@ -93,7 +114,16 @@
     font-size: 1rem;
 }
 
-.container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar input {
+.form-group-text .inputLabel label {
+    display: block;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar .input {
     width: 100%;
     border: none;
     border-radius: 5px;
@@ -133,4 +163,30 @@
 
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .botaoCadastrar:hover {
     background-color: var(--hoverColor, #0056b3);
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 5vh;
+    padding-left: 0.5vw;
+    border-radius: 5px;
+    background-color: rgb(65, 65, 65);
+}
+
+.color-picker-input {
+    width: 2vw;
+    height: 4vh;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px; 
+}
+
+.color-name {
+    font-size: 14px; 
+    color: white;
+    font-family: Arial, sans-serif;
+    width: 23vw;
+    display: flex;
 }

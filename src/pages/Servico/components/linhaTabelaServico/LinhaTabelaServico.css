@@ -1,5 +1,5 @@
 .container-linha-tabela {
-    width: 75vw;
+    width: 76vw;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -24,12 +24,28 @@
     padding: 0 1.2vw;
 }
 
+.container-linha-tabela .tabela .linha .cor {
+    height: 5vh;
+    width: 0.6vw;
+    background-color: black;
+    border-radius: 2px;
+}
+
 .container-linha-tabela .tabela .linha .icons .icon-pen {
     color: rgb(224, 175, 0);
+    cursor: pointer;
+    height: 2.5vh;
 }
 
 .container-linha-tabela .tabela .linha .icons .icon-trash {
     color: rgb(202 2 2);
+    cursor: pointer;
+    height: 2.5vh;
+}
+
+.container-linha-tabela .tabela .linha .icons .icon-clip {
+    cursor: pointer;
+    height: 2.5vh;
 }
 
 .container-linha-tabela .tabela .linha label {

@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-import './HeaderInterna.css';
+import './HeaderCliente.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import ModalAdd from "../modalAdd/ModalAdd";
+// import ModalAdd from "../modalAdd/ModalAdd";
 import ModalAddCliente from "../modalAddCliente/ModalAddCliente";
 
-function HeaderInterna({ texto }) {
+function HeaderCliente({ texto }) {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpenCliente, setIsModalOpenCliente] = useState(false);
 
-
-    const openModalAdd = () => {
-        setIsModalOpen(true);
+    const openModalAddCliente = () => {
+        setIsModalOpenCliente(true);
     };
 
-    const closeModalAdd = () => {
-        setIsModalOpen(false);
+    const closeModalAddCliente = () => {
+        setIsModalOpenCliente(false);
     };
 
     // const camposCadastroServico = [
@@ -38,22 +37,22 @@ function HeaderInterna({ texto }) {
         <div className="main-header-interna">
             <div className="container-header-interna">
                 <div className="botao">
-                    <button onClick={openModalAdd}>
+                    <button onClick={openModalAddCliente}>
                         <FontAwesomeIcon icon={faPlus} /> {texto}
                     </button>
                 </div>
 
-                {isModalOpen && (
+
+                {isModalOpenCliente && (
                     // <ModalAdd onClose={closeModalAdd} titulo="Adicionar Novo Serviço" />
 
-                    <ModalAdd
-                        titulo="Cadastrar Serviço"
-                        onClose={() => setIsModalOpen(false)}
+                    <ModalAddCliente
+                        titulo="Cadastrar Cliente"
+                        onCloseCliente={() => setIsModalOpenCliente(false)}
                     // campos={camposCadastroServico}
                     // tituloBotao="Cadastrar"
                     />
                 )}
-
             </div>
 
 
@@ -61,4 +60,4 @@ function HeaderInterna({ texto }) {
     );
 }
 
-export default HeaderInterna;
+export default HeaderCliente;

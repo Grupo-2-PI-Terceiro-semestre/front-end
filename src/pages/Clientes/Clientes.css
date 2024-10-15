@@ -1,24 +1,17 @@
-.main-servico {
+.main-clientes {
     width: 100vw;
     background-color: rgb(23, 24, 33);
     display: flex;
 }
 
-.container-servico {
-    width: 80%;
+.container-clientes {
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 }
 
-.principal-servico { 
-    width: 81vw;
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-    height: 96vh;
-}
-
-.titulo-servico {
+.tituloCliente {
     color: white;
     width: 82vw;
     display: flex;
@@ -29,10 +22,16 @@
     border-radius: 5px;
 }
 
-.titulo-servico .container-titulo-servico {
+.tituloCliente .container-titulo-cliente {
     width: 77vw;
     /* border: 1px solid; */
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.principal {
+    width: 82vw;
+    height: 96vh;
+    gap: 2vh;
 }

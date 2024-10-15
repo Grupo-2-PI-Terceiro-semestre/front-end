@@ -1,15 +1,16 @@
-import React, { useState, useEffect  } from "react";
-import './ModalAdd.css';
+import React, { useState, useEffect } from "react";
+import './ModalEditar.css';
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-function ModalAdd({ onClose, titulo }) {
+function ModalEditar({ onClose, titulo }) {
 
-    // const initialFormData = campos.reduce((acc, campo) => {
-    //     acc[campo.name] = campo.defaultValue || '';  // Inicializa os campos com valores padrão ou string vazia
-    //     return acc;
-    // }, {});
+    const [isVisible, setIsVisible] = useState(false);
 
-    // const [formData, setFormData] = useState(initialFormData);
-    
+    useEffect(() => {
+        setIsVisible(true);
+    }, []);
+
     const [formData, setFormData] = useState({
         nomeServico: '',
         valorServico: '',
@@ -20,11 +21,31 @@ function ModalAdd({ onClose, titulo }) {
         tiposDeUsuario: 'ADMIN'
     });
 
-    const [isVisibleAdd, setIsVisibleAdd] = useState(false);
+    const navigate = useNavigate();
+    const { idServico } = useParams();
+    const [nomeServico, setNomeServico] = useState("");
+    const [valorServico, setValorServico] = useState("");
+    const [tempoExecucao, setTempoExecucao] = useState("");
+    const [corReferencia, setCorReferencia] = useState("");
+    const [descricao, setDescricao] = useState("");
+    const [categoria, setCategoria] = useState("");
 
-    useEffect(() => {
-        setIsVisibleAdd(true);
-    }, []);
+    // useEffect(() => {
+    //     api.get(`/${idServico}`).then((response) => {
+    //         const { data } = response;
+    //         const { nomeServico, tempoExecucao, valorServico, corReferencia, descricao, categoria } = data;
+    //         setNomeServico(nomeServico);
+    //         setTempoExecucao(tempoExecucao);
+    //         setValorServico(valorServico);
+    //         setCorReferencia(corReferencia);
+    //         setDescricao(descricao);
+    //         setCategoria(categoria);
+    //     })
+    //         .catch((error) => {
+    //             console.log("Erro ao buscar os detalhes do serviço:", error);
+    //         })
+    // }, [idServico]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -38,49 +59,39 @@ function ModalAdd({ onClose, titulo }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            // await api.put(`/${idCard}`, {
             await cadastroService(formData);
             alert('Cadastro realizado com sucesso!');
             setFormData({
                 nomeServico: '',
                 valorServico: '',
-                representante: "true",
                 tempoExecucao: '',
                 corReferencia: '#000000',
+                descricao: '',
                 categoria: '',
+                representante: "true",
             });
         } catch (error) {
             setErrorMessage('Erro ao cadastrar o serviço.');
         }
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         await cadastroService(formData);  // Função de cadastro que você já tem
-    //         alert('Cadastro realizado com sucesso!');
-    //         setFormData(initialFormData);  // Reseta o formulário
-    //     } catch (error) {
-    //         alert('Erro ao cadastrar o serviço.');
-    //     }
-    // };
-
     const handleClose = () => {
-        setIsVisibleAdd(false); // Inicia a animação de saída
-        setTimeout(onClose, 300); // Fecha o modal após a animação
+        setIsVisible(false);
+        setTimeout(onClose, 300);
     };
 
     return (
-        
-        <div className={`modal-overlay ${isVisibleAdd ? 'visible' : 'hidden'}`}>
-            <div className="modal-header">
-                <div className="container-modal">
-                    <h4 className="titulo-modal">{titulo} <button className="botaoFechar" onClick={onClose}>X</button></h4>
+        <div className={`modal-overlay-editar ${isVisible ? 'visible' : 'hidden'}`}>
+            <div className="modal-header-editar">
+                <div className="container-modal-editar">
+                    <h4 className="titulo-modal-editar">{titulo} <button className="botaoFechar" onClick={onClose}>X</button></h4>
 
-                    <form className="form-modal" onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <div className='inputLabel'>
+                    <form className="form-modal-editar" onSubmit={handleSubmit}>
+                        <div className="form-group-editar">
+                            <div className='inputLabel-editar'>
                                 <label>Nome:</label>
-                                <input
+                                <input 
                                     className="input"
                                     type="text"
                                     name="nomeServico"
@@ -92,8 +103,8 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <div className="form-group">
-                            <div className='inputLabel'>
+                        <div className="form-group-editar">
+                            <div className='inputLabel-editar'>
                                 <label>Valor:</label>
                                 <input
                                     className="input"
@@ -107,8 +118,8 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <div className="form-group">
-                            <div className='inputLabel'>
+                        <div className="form-group-editar">
+                            <div className='inputLabel-editar'>
                                 <label>Tempo de Execução:</label>
                                 <input
                                     className="input"
@@ -122,8 +133,8 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <div className="form-group-cor">
-                            <div className='inputLabel-cor'>
+                        <div className="form-group-editar">
+                            <div className='inputLabel-editar'>
                                 <label>Cor de Referência:</label>
                                 <div className="color-picker-container">
                                     <input
@@ -140,8 +151,8 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <div className="form-group">
-                            <div className='inputLabel'>
+                        <div className="form-group-editar">
+                            <div className='inputLabel-editar'>
                                 <label htmlFor="categoria">Categoria:</label>
                                 <select
                                     id="categoria"
@@ -161,7 +172,7 @@ function ModalAdd({ onClose, titulo }) {
                         <div className="form-group-text">
                             <div className='inputLabel'>
                                 <label>Descrição:</label>
-                                <textarea 
+                                <textarea
                                     name="descricao"
                                     placeholder="Descrição"
                                     defaultValue={formData.descricao}
@@ -171,7 +182,7 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <button className="botaoCadastrar" onClick={handleSubmit}>Cadastrar</button>
+                        <button className="botaoCadastrar" onClick={handleSubmit}>Editar</button>
                     </form >
                 </div>
             </div>
@@ -180,4 +191,4 @@ function ModalAdd({ onClose, titulo }) {
     )
 }
 
-export default ModalAdd;
+export default ModalEditar;

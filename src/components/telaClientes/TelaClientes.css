@@ -1,4 +1,4 @@
-.main-tela-servicos {
+.main-tela-clientes {
     width: 82vw;
     background-color: rgb(33, 34, 45);
     border-radius: 5px;
@@ -9,13 +9,13 @@
     height: 84vh;
 }
 
-.main-tela-servicos .container-tela-servicos {
+.main-tela-clientes .container-tela-clientes {
     width: 77vw;
     display: flex;
     flex-wrap: wrap;
 }
 
-.main-tela-servicos .container-tela-servicos .titulo {
+.main-tela-clientes .container-tela-clientes .titulo {
     color: white;
     width: 87vw;
     display: flex;
@@ -24,7 +24,7 @@
     justify-content: space-between;
 }
 
-.main-tela-servicos .container-tela-servicos .search-box {
+.main-tela-clientes .container-tela-clientes .search-box {
     display: flex;
     align-items: center;
     height: 10vh;
@@ -32,14 +32,14 @@
     position: relative;
 }
 
-.main-tela-servicos .container-tela-servicos .search-box .search-icon {
+.main-tela-clientes .container-tela-clientes .search-box .search-icon {
     position: absolute;
     left: 15px;
     color: rgb(104, 69, 0);
     pointer-events: none;
 }
 
-.main-tela-servicos .container-tela-servicos .search-box input {
+.main-tela-clientes .container-tela-clientes .search-box input {
     width: 100%;
     padding: 10px 10px 10px 40px;
     font-size: 1rem;
@@ -50,27 +50,27 @@
     color: white;
 }
 
-.container-tela-servicos .tabelaCompleta {
+.container-tela-clientes .tabelaCompleta {
     overflow: auto;
     height: 69vh;
     width: 77vw;
 }
 
-.container-tela-servicos .tabelaCompleta::-webkit-scrollbar {
+.container-tela-clientes .tabelaCompleta::-webkit-scrollbar {
     width: 8px; 
     height: 8px;
 }
 
-.container-tela-servicos .tabelaCompleta::-webkit-scrollbar-thumb {
+.container-tela-clientes .tabelaCompleta::-webkit-scrollbar-thumb {
     background-color: #2196F3;
     border-radius: 10px; 
 }
 
-.container-tela-servicos .tabelaCompleta::-webkit-scrollbar-track {
+.container-tela-clientes .tabelaCompleta::-webkit-scrollbar-track {
     background: #171821; 
 }
 
-.container-tela-servicos .tabelaCompleta .tituloTabela {
+.container-tela-clientes .tabelaCompleta .tituloTabela {
     display: flex;
     align-items: center;
     width: 77vw;
@@ -84,7 +84,7 @@
     background-color: rgb(33, 34, 45);
 }
 
-.container-tela-servicos .tabelaCompleta .tituloTabela label {
+.container-tela-clientes .tabelaCompleta .tituloTabela label {
     text-align: center;
     width: 22vw;
 }
@@ -107,7 +107,7 @@
     border: 1px solid;
 }
 
-.container-tela-servicos .tabelaCompleta .conjuntoLinhas {
+.container-tela-clientes .tabelaCompleta .conjuntoLinhas {
     min-height: 58vh;
     overflow: auto;
     top: 6vh;
