@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './DetalheAgendamento.css'; // Estilizações
 import Button from '../../../../components/button/Button';
-import { findServicos, findClientes } from '../../services/agendaServices';
+import { findServicos, findClientes, CancelarAgendamento } from '../../services/agendaServices';
 import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
+import Swal from 'sweetalert2'
 
 
-const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose }) => {
+const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose, refreshDate }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [profissional, setProfissional] = useState(event.title);
     const [horarioInicio, setHorarioInicio] = useState(event.start);
@@ -49,6 +50,44 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose 
         }
     }
 
+    const cancelarAgendamento = async (idAgendamento) => {
+        try {
+            const result = await Swal.fire({
+                title: "Atenção!",
+                text: "Você tem certeza que deseja cancelar esse agendamento?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim",
+            });
+    
+            if (result.isConfirmed) {
+                try {
+                    await CancelarAgendamento(idAgendamento);
+                    await Swal.fire({
+                        title: "Sucesso!",
+                        text: "Agendamento cancelado com sucesso!",
+                        icon: "success",
+                    });
+    
+                    onClose();
+                    refreshDate(event.start)
+                } catch (error) {
+                    await Swal.fire({
+                        title: "Erro!",
+                        text: "Erro ao cancelar o agendamento!",
+                        icon: "error",
+                    });
+                    console.error("Erro ao cancelar agendamento:", error);
+                }
+            }
+        } catch (error) {
+            throw new Error("Erro ao deletar o agendamento");
+        }
+    };
+    
+
     const handleSave = () => {
         console.log('Dados salvos:', { profissional, horarioInicio, horarioFim, descricaoServico, servicoSelecionado });
         setIsEditing(false);
@@ -68,8 +107,8 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose 
 
     return (
         <div className="detalhe-agendamento">
-                <span className='botao-fechar' onClick={onClose}>X</span>
-                <h3>Detalhes do Agendamento</h3>
+            <span className='botao-fechar' onClick={onClose}>X</span>
+            <h3>Detalhes do Agendamento</h3>
 
             <div className='inputCliente'>
                 <div className="detalhe-campo">
@@ -161,7 +200,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose 
                     fontWeight='bold'
                     fontSize='15px'
                     size='47%'
-                    onClick={onClose}
+                    onClick={() => cancelarAgendamento(event.id)}
                 />
                 {isEditing ? (
                     <Button
