@@ -15,13 +15,13 @@ const SearchableDropdown = ({options, onSelectOption, placeholder, displayField,
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
-        setIsDropdownOpen(true); // Mostrar dropdown ao digitar
+        setIsDropdownOpen(true); 
     };
 
     const handleSelectOption = (option) => {
-        setInputValue(displayField(option)); // Atualiza o input com o valor exibido
-        onSelectOption(option); // Chama a função para selecionar a opção
-        setIsDropdownOpen(false); // Fecha o dropdown após a seleção
+        setInputValue(displayField(option)); 
+        onSelectOption(option); 
+        setIsDropdownOpen(false); 
     };
 
     useEffect(() => {
@@ -48,7 +48,6 @@ const SearchableDropdown = ({options, onSelectOption, placeholder, displayField,
                     onChange={handleInputChange}
                     onFocus={() => {
                         setIsDropdownOpen(true);
-                        setInputValue(''); 
                     }}
                 />
                 {isDropdownOpen && (
