@@ -155,3 +155,8 @@
 .rbc-time-gutter .rbc-time-column {
   border: none;
 }
+
+.rbc-time-view-resources .rbc-time-gutter,
+.rbc-time-view-resources .rbc-time-header-gutter {
+    background-color: #171821 !important;
+}
