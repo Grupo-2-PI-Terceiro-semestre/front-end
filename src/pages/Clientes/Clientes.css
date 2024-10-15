@@ -11,7 +11,7 @@
     align-items: center;
 }
 
-.titulo {
+.tituloCliente {
     color: white;
     width: 82vw;
     display: flex;
@@ -22,7 +22,7 @@
     border-radius: 5px;
 }
 
-.titulo .container-titulo {
+.tituloCliente .container-titulo-cliente {
     width: 77vw;
     /* border: 1px solid; */
     display: flex;
@@ -30,7 +30,7 @@
     justify-content: space-between;
 }
 
-.main-clientes .container-clientes .principal {
+.principal {
     width: 82vw;
     height: 96vh;
     gap: 2vh;

@@ -39,8 +39,8 @@ function Clientes() {
 
                 <div className="principal">
 
-                    <div className="titulo">
-                        <div className="container-titulo">
+                    <div className="tituloCliente">
+                        <div className="container-titulo-cliente">
                             <h3>Clientes</h3>
                             <HeaderCliente texto="Novo Cliente" />
                         </div>

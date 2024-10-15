@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import './LinhaTabela.css';
+import './LinhaTabelaServico.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faClipboard } from '@fortawesome/free-regular-svg-icons';
-import ModalExcluir from "../modalExcluir/ModalExcluir";
+import ModalExcluir from "../../../../components/modalExcluir/ModalExcluir";
 import ModalEditar from "../modalEditar/ModalEditar";
-import ModalDesc from "../modalDesc/ModalDesc";
+import ModalDesc from "../../../../components/modalDesc/ModalDesc";
 
-function LinhaTabela({ nome, valor, tempoExecucao, categoria }) {
+function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria }) {
 
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
     const [isModalOpenExcluir, setIsModalOpenExcluir] = useState(false);
@@ -77,4 +77,4 @@ function LinhaTabela({ nome, valor, tempoExecucao, categoria }) {
     )
 }
 
-export default LinhaTabela;
+export default LinhaTabelaServico;

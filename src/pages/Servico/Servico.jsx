@@ -1,6 +1,6 @@
 import React from "react";
 import './Servico.css';
-// import HeaderInterna from "../../components/headerInterna/HeaderInterna";
+import HeaderInterna from "../../components/headerInterna/HeaderInterna";
 import TelaServicos from "./components/telaServicos/TelaServicos";
 import Menu from "../../components/menu/Menu";
 // import IconBreadcrumbs from "../../components/breadcrumb/Breadcrumb";
@@ -19,8 +19,8 @@ function Servico() {
                             ]}
                         /> */}
 
-                        <div className="titulo">
-                            <div className="container-titulo">
+                        <div className="titulo-servico">
+                            <div className="container-titulo-servico">
                                 <h3>Serviços</h3>
                                 <HeaderInterna texto="Novo Serviço" />
                             </div>
