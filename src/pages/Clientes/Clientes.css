@@ -8,20 +8,30 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .titulo {
     color: white;
-    width: 87vw;
+    width: 82vw;
     display: flex;
     align-items: center;
-    height: 8vh;
-    justify-content: space-between;
+    height: 10vh;
+    justify-content: center;
     background-color: rgb(33, 34, 45);
     border-radius: 5px;
 }
 
+.titulo .container-titulo {
+    width: 77vw;
+    /* border: 1px solid; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .main-clientes .container-clientes .principal {
-    width: 80vw;
-    height: 100vh;
+    width: 82vw;
+    height: 96vh;
+    gap: 2vh;
 }
