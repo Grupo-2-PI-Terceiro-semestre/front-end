@@ -5,8 +5,8 @@ import BotoesPerfil from "./components/botoesPerfil/BotoesPerfil";
 import FormularioPrincipal from "./components/formularioDadosPrincipais/FormularioPrincipal";
 import IconBreadcrumbs from "../../components/breadcrumb/Breadcrumb";
 import FormularioFuncionamento from "./formularioFuncionamento/FormularioFuncionamento";
-/* import CardLocation from "./components/CardLocation/CardLocation";
- */
+import CardLocation from "./components/CardLocation/CardLocation";
+
 
 function Perfil() {
     return (

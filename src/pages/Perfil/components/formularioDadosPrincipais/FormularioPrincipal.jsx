@@ -109,7 +109,7 @@ const FormularioPrincipal = () => {
       </div>
 
       <div className="form-group">
-        <button type="submit">Salvar Alterações</button>
+        <button className='button-perfil' type="submit">Salvar Alterações</button>
       </div>
     </form>
   );
