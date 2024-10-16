@@ -49,22 +49,6 @@
     transform: translateX(100%);
 }
 
-.container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .titulo-modal-editar {
-    color: white;
-    width: 26vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.container-linha-tabela .botaoFechar {
-    display: flex;
-    justify-content: center;
-    background: none;
-    color: white;
-    border: none;
-}
-
 .container-linha-tabela .modal-overlay-editar .modal-header-editar .container-modal-editar .botao {
     background-color: #ff5f5f;
     color: white;

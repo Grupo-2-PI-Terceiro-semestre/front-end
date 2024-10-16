@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import HeadeModal from "../header-modal/HeaderModal";
 // import './ModalEditarCliente.css';
 import './ModalEditarCliente.css';
 // import { useNavigate } from "react-router-dom";
@@ -60,8 +61,7 @@ function ModalEditarCliente({ onClose, titulo }) {
         <div className={`modal-overlay-editar ${isVisible ? 'visible' : 'hidden'}`}>
             <div className="modal-header-editar">
                 <div className="container-modal-editar">
-                    <h4 className="titulo-modal-editar">{titulo} <button className="botaoFechar" onClick={onClose}>X</button></h4>
-
+                <HeadeModal title={titulo} handleClose={onClose} />
                     <form className="form-modal-editar" onSubmit={handleSubmit}>
                         <div className="form-group-editar">
                             <div className='inputLabel-editar'>

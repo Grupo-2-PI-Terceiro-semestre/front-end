@@ -1,0 +1,13 @@
+.botaoFechar {
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.header-modal{
+    color: white;
+    width: 26vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

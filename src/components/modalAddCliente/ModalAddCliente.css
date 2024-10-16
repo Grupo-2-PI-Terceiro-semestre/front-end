@@ -59,13 +59,6 @@
     align-items: center;
 }
 
-.main-header-interna .container-header-interna .botaoFechar {
-    display: flex;
-    justify-content: center;
-    background: none;
-    color: white;
-    border: none;
-}
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .botao {
     background-color: #ff5f5f;

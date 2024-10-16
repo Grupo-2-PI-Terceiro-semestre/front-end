@@ -51,22 +51,6 @@
     transform: translateX(100%);
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .titulo-modal {
-    color: white;
-    width: 26vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.main-header-interna .container-header-interna .botaoFechar {
-    display: flex;
-    justify-content: center;
-    background: none;
-    color: white;
-    border: none;
-}
-
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .botao {
     background-color: #ff5f5f;
     color: white;

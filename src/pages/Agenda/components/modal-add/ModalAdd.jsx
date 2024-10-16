@@ -4,6 +4,7 @@ import { findServicos, findClientes } from '../../services/agendaServices';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import Button from '../../../../components/button/Button';
+import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import dayjs from 'dayjs';
 
 
@@ -96,7 +97,7 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault }) {
     return (
         <div className={`modal-agendamento ${isVisible ? 'modal-aberto' : 'modal-fechado'}`}>
             <div className="container-modal">
-                <h4 className="titulo-modal">Adicionar Novo Serviço<button className="botaoFechar" onClick={handleClose}>X</button></h4>
+                <HeadeModal title="Agendar Serviço" handleClose={handleClose} />
                 <form className="form-modal" onSubmit={handleSubmit}>
                     <div className="form-agendamento">
                         <div className='inputLabel'>
