@@ -9,14 +9,17 @@ const Button = ({
   size = '100%',
   padding = '10px',
   backgroundColor = '#0072FF',
+  fontWeight = '',
   color = 'white',
   content = 'Button',
   type = 'button',
+  disabled = false,
   onClick,
-  image = '',
+  image = ''
 }) => {
   return (
     <button
+      disabled={disabled}
       className="dynamic-button"
       type={type}
       style={{
@@ -25,11 +28,12 @@ const Button = ({
         width: size,
         padding: padding,
         color: color,
-        backgroundColor: backgroundColor,
+        backgroundColor: disabled ? '#909090' : backgroundColor,
+        fontWeight: fontWeight
       }}
       onClick={onClick}
     >
-      {image && <img style={{width: widthImage, height: heightImage}} src={image} alt="button-icon" className="button-image" />}
+      {image && <img style={{ width: widthImage, height: heightImage }} src={image} alt="button-icon" className="button-image" />}
       {content}
     </button>
   );

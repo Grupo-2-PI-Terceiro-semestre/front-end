@@ -18,7 +18,7 @@ function Carrossel() {
       };
 
     return(
-        <div className='main-carrossel'>
+        <div id='inicio' className='main-carrossel'>
         {/* <h2>Carrossel Simples</h2> */}
         <Slider {...settings}>
           <div className='bordaImagem'>
