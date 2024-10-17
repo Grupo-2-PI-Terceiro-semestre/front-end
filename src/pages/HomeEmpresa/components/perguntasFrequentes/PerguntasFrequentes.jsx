@@ -11,7 +11,7 @@ function PerguntasFrequentes() {
 
                 <div className="perguntas">
                     <div className="pergunta1">
-                        <div className="titulo">
+                        <div className="tituloPerguntas">
                             <h1>01</h1>
                             <label htmlFor="text">Como faço para adicionar ou remover serviços?</label>
                         </div>
@@ -27,7 +27,7 @@ function PerguntasFrequentes() {
                     </div>
 
                     <div className="pergunta2">
-                        <div className="titulo">
+                        <div className="tituloPerguntas">
                             <h1>02</h1>
                             <label htmlFor="text">É possível gerenciar a minha agenda?</label>
                         </div>
@@ -43,7 +43,7 @@ function PerguntasFrequentes() {
                     </div>
 
                     <div className="pergunta3">
-                        <div className="titulo">
+                        <div className="tituloPerguntas">
                             <h1>03</h1>
                             <label htmlFor="text">Como posso gerenciar todo o meu estabelecimento?</label>
                         </div>

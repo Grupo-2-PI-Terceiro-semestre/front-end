@@ -1,0 +1,68 @@
+.app-container {
+    background: #21222D;
+    width: 40vw;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 20px;
+    color: #ffffff;
+}
+
+.horario {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0;
+    width: 90%;
+}
+
+input[type="time"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    left: 0;
+    background-color: #d8d8d8;
+    color: #000000;
+}
+
+input[type="time"]::webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.feriados {
+    margin: 20px 0 10px 10;
+}
+
+.form-group button {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: #eee;
+    background-color: #2196F3;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: all 500ms ease;
+}
+
+.form-group button:hover {
+    cursor: pointer;
+    background-color: #1a6db0;
+}
+
+.title-horario {
+    width: 2rem;
+    text-align: start;
+}
+
+.container-horarios{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin: 1rem 0;
+}

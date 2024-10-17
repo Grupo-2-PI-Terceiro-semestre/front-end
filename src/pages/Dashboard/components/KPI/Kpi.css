@@ -1,0 +1,47 @@
+
+.conteiner_kpi {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #171821;
+    border-radius: 10px;
+    width: 130px;
+    height: 110px;
+}
+
+.material-symbols-outlined {
+    font-size: 30px;
+}
+
+.content_kpi {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.valor {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 5%;
+}
+
+
+.description {
+    font-size: 10px;
+    color: #fff;
+    margin-left: 5%;
+    font-weight: 300;
+}
+
+.percent {
+    font-size: 10px;
+    color: #fff;
+    font-weight: 300;
+    margin-left: 5%;
+}
+
+.icon_dashboard {
+    margin-left: 5%;
+}

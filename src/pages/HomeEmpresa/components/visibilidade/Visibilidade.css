@@ -21,11 +21,11 @@
     width: 50vw;
 }
 
-.main-visibilidade .container-visibilidade .textos .titulo h1 b {
+.main-visibilidade .container-visibilidade .textos .tituloVisibilidade h1 b {
     color: rgb(0, 114, 255);
 }
 
-.main-visibilidade .container-visibilidade .textos .titulo label {
+.main-visibilidade .container-visibilidade .textos .tituloVisibilidade label {
     font-size: 1.3rem;
 }
 

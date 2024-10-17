@@ -1,0 +1,28 @@
+.conteiner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #21222D;
+    border-radius: 10px;
+}
+
+.titulo {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.titulo h1 {
+    color: #fff;
+    font-size: 14px;
+    margin: 4%;
+    padding: 0;
+}
+
+.conteudo {
+    height: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    overflow: auto;
+}
+

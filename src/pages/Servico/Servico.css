@@ -1,27 +1,38 @@
 .main-servico {
-    width: 98.9vw;
-    position: absolute;
-    left: 0;
+    width: 100vw;
     background-color: rgb(23, 24, 33);
-}
-
-.main-servico .container-servico {
-    height: 100%;
-    width: 100%;
     display: flex;
-    justify-content: space-between;
 }
 
-.main-servico .container-servico .menu-lateral {
-    width: 9vw; 
-    height: 100%;
+.container-servico {
+    width: 80%;
+    display: flex;
+    align-items: center;
 }
 
-.main-servico .container-servico .principal {
-    width: 81.7vw;
-    height: 100%;
+.principal-servico { 
+    width: 81vw;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     gap: 2vh;
+    height: 96vh;
+}
+
+.titulo-servico {
+    color: white;
+    width: 82vw;
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    justify-content: center;
+    background-color: rgb(33, 34, 45);
+    border-radius: 5px;
+}
+
+.titulo-servico .container-titulo-servico {
+    width: 77vw;
+    /* border: 1px solid; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

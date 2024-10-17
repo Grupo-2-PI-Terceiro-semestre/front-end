@@ -1,30 +1,30 @@
-.main-tela-servicos {
-    width: 80vw;
+.main-tela-clientes {
+    width: 82vw;
     background-color: rgb(33, 34, 45);
     border-radius: 5px;
     display: flex;
     justify-content: center;
     gap: 2vh;
     padding: 1.9vh;
-    min-height: 85vh;
+    height: 84vh;
 }
 
-.main-tela-servicos .container-tela-servicos {
-    width: 75vw;
+.main-tela-clientes .container-tela-clientes {
+    width: 77vw;
     display: flex;
-    /* border: 1px solid; */
     flex-wrap: wrap;
 }
 
-.main-tela-servicos .container-tela-servicos .titulo {
+.main-tela-clientes .container-tela-clientes .titulo {
     color: white;
     width: 87vw;
     display: flex;
     align-items: center;
     height: 8vh;
+    justify-content: space-between;
 }
 
-.main-tela-servicos .container-tela-servicos .search-box {
+.main-tela-clientes .container-tela-clientes .search-box {
     display: flex;
     align-items: center;
     height: 10vh;
@@ -32,14 +32,14 @@
     position: relative;
 }
 
-.main-tela-servicos .container-tela-servicos .search-box .search-icon {
+.main-tela-clientes .container-tela-clientes .search-box .search-icon {
     position: absolute;
     left: 15px;
     color: rgb(104, 69, 0);
     pointer-events: none;
 }
 
-.main-tela-servicos .container-tela-servicos .search-box input {
+.main-tela-clientes .container-tela-clientes .search-box input {
     width: 100%;
     padding: 10px 10px 10px 40px;
     font-size: 1rem;
@@ -50,26 +50,43 @@
     color: white;
 }
 
-.container-tela-servicos .tabelaCompleta .tituloTabela {
+.container-tela-clientes .tabelaCompleta {
+    overflow: auto;
+    height: 69vh;
+    width: 77vw;
+}
+
+.container-tela-clientes .tabelaCompleta::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px;
+}
+
+.container-tela-clientes .tabelaCompleta::-webkit-scrollbar-thumb {
+    background-color: #2196F3;
+    border-radius: 10px; 
+}
+
+.container-tela-clientes .tabelaCompleta::-webkit-scrollbar-track {
+    background: #171821; 
+}
+
+.container-tela-clientes .tabelaCompleta .tituloTabela {
     display: flex;
     align-items: center;
-    width: 75vw;
+    width: 77vw;
     height: 5vh;
     color: white;
     padding: 0 1.2vw;
     font-weight: bold;
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    position: fixed;
+    z-index: 3;
+    background-color: rgb(33, 34, 45);
 }
 
-.container-linha-tabela .tabelaCompleta .tituloTabela {
-    font-weight: bold;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.container-tela-servicos .tabelaCompleta .tituloTabela label {
+.container-tela-clientes .tabelaCompleta .tituloTabela label {
     text-align: center;
     width: 22vw;
-    /* border: 1px solid; */
 }
 
 .container-linha-tabela .tabela .linha {
@@ -78,7 +95,6 @@
 }
 
 .container-linha-tabela .tabela .linha label:last-child {
-    /* flex: 0.5; */
     text-align: center;
     gap: 0.5vw;
     display: flex;
@@ -91,11 +107,9 @@
     border: 1px solid;
 }
 
-/* .container-linha-tabela .tabelaCompleta .tituloTabela label:last-child {
-    flex: 0.5;
-    text-align: center;
-} */
-
-.container-tela-servicos .tabelaCompleta .conjuntoLinhas {
+.container-tela-clientes .tabelaCompleta .conjuntoLinhas {
     min-height: 58vh;
+    overflow: auto;
+    top: 6vh;
+    position: relative;
 }

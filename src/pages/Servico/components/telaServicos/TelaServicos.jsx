@@ -2,7 +2,8 @@ import React from "react";
 import './TelaServicos.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import LinhaTabela from "../linhaTabela/LinhaTabela";
+import LinhaTabela from "../linhaTabelaServico/LinhaTabelaServico";
+import HeaderInterna from "../../../../components/headerInterna/HeaderInterna";
 
 function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4
  }) {
@@ -15,9 +16,10 @@ function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4
     return (
         <div className="main-tela-servicos">
             <div className="container-tela-servicos">
-                <div className="titulo">
+                {/* <div className="titulo">
                     <h3>{titulo}</h3>
-                </div>
+                    <HeaderInterna texto="Novo Serviço"  />
+                </div> */}
 
                 <div className="search-box">
                     <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
@@ -45,8 +47,8 @@ function TelaServicos({ titulo, placeholder, titulo1, titulo2, titulo3, titulo4
                         <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
                         <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
                         <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
-                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        {/* <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" />
+                        <LinhaTabela nome="Corte Masculino" valor="R$45,00" tempoExecucao="00:45" /> */}
                     </div>
                 </div>
 

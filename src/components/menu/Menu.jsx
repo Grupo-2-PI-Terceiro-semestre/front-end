@@ -109,7 +109,7 @@ const Menu = ({ activeMenuItem }) => {
           <FaUsers />
           <span>Equipe</span>
         </li>
-        <li className={activeMenuItem === 'Clientes' ? 'active' : ''} onClick={() => handleItemClick('Clientes', '/cliente')}>
+        <li className={activeMenuItem === 'Clientes' ? 'active' : ''} onClick={() => handleItemClick('Clientes', '/clientes')}>
           <FaBriefcase />
           <span>Clientes</span>
         </li>
