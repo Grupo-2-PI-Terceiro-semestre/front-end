@@ -36,7 +36,9 @@ function Dashboard() {
                 <div className="superior">
                     <CardDashboard title="" height="140px" width="500px">
                         <Kpi
-                            valor="R$ 1.000,00"
+                            endPoint = 'agendamentos/empresa'
+                            idEmpresa = "1"
+                            mes = "10"
                             description="Receita Total"
                             icon={
                                 <span className="material-symbols-outlined">
@@ -47,8 +49,8 @@ function Dashboard() {
                             percent="+10% Mês anterior">
                         </Kpi>
                         <Kpi
-                            valor="R$ 1.000,00"
-                            description="Receita Total"
+                            valor="500"
+                            description="Total de Serviços"
                             icon={
                                 <span className="material-symbols-outlined">
                                     select_check_box
@@ -58,8 +60,8 @@ function Dashboard() {
                             percent="+8% Mês Anterior">
                         </Kpi>
                         <Kpi
-                            valor="R$ 1.000,00"
-                            description="Receita Total"
+                            valor="10"
+                            description="Novos clientes"
                             icon={
                                 <span className="material-symbols-outlined">
                                     account_circle
