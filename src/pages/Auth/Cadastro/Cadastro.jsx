@@ -6,7 +6,6 @@ import Header from "../components/header/Header"
 import { useNavigate } from 'react-router-dom';
 
 function Cadastro() {
-    
     const navigate = useNavigate(); // Use useNavigate dentro do componente
 
     const handleButtonClick = () => {
