@@ -1,12 +1,8 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import { FaUser, FaMapMarkerAlt, FaClock, FaBell } from 'react-icons/fa'; 
 import './BotoesPerfil.css';
 
-function BotoesPerfil() {
-  const [activeButton, setActiveButton] = useState('dados'); 
-
-  
+function BotoesPerfil({ activeButton, setActiveButton }) {
   const handleButtonClick = (button) => {
     setActiveButton(button); 
   };
@@ -14,7 +10,7 @@ function BotoesPerfil() {
   return (
     <div className="subMenu">
       <div 
-        className={`button  ${activeButton === 'dados' ? 'active' : ''}`} 
+        className={`button ${activeButton === 'dados' ? 'active' : ''}`} 
         onClick={() => handleButtonClick('dados')}
       >
         <FaUser className="icon" /> Dados Principais
