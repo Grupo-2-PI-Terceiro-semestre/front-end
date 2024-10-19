@@ -1,0 +1,16 @@
+.app-container .input-mesma-linha {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-mesma-linha input {
+    width: 95%;
+}
+
+.personalize {
+    width: 30%;
+}
+
+.personalize input {
+    width: 100%;
+}
