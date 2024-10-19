@@ -1,6 +1,5 @@
 import React from "react";
 import "./CardDashboard.css";
-import Chart from "../chart/chart";
 
 function CardDashboard(props) {
   const { title, children, height, width } = props;
