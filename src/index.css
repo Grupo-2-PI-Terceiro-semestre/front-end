@@ -4,3 +4,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     display: flex;
 }
+.name-version p {
+    font-size: 0.6rem; 
+    font-weight: 500; 
+    margin: 0;          
+}
