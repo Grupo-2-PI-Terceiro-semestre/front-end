@@ -12,8 +12,6 @@ const FormularioFuncionamento = () => {
     dom: { de: '', ate: '' },
   });
 
-  const [feriados, setFeriados] = useState(false);
-
   const handleChange = (dia, tipo, valor) => {
     setHorarios({
       ...horarios,
@@ -21,14 +19,13 @@ const FormularioFuncionamento = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const onSubmit = () => {
     console.log('Horários:', horarios);
-    console.log('Feriados:', feriados);
   };
 
   return (
     <div className='container-formulario-perfil'>
-      <div className="app-container">
+       <form onSubmit={onSubmit(onSubmit)} className="app-container">
         <h2>Horários</h2>
         <div className='container-horarios'>
           {Object.keys(horarios).map((dia) => (
@@ -38,6 +35,7 @@ const FormularioFuncionamento = () => {
               </div>
               <input
                 type="time"
+                required={true}
                 value={horarios[dia].de}
                 onChange={(e) => handleChange(dia, 'de', e.target.value)}
                 className="time-input"
@@ -47,6 +45,7 @@ const FormularioFuncionamento = () => {
               </div>
               <input
                 type="time"
+                required={true}
                 value={horarios[dia].ate}
                 onChange={(e) => handleChange(dia, 'ate', e.target.value)}
                 className="time-input"
@@ -54,10 +53,11 @@ const FormularioFuncionamento = () => {
             </div>
           ))}
         </div>
-      </div>
-      <div className="button-form">
-        <button type="submit">Salvar Alterações</button>
-      </div>
+        <div className="button-form">
+          <button type="submit">Salvar Alterações</button>
+        </div>
+      </form>
+
     </div>
 
   );
