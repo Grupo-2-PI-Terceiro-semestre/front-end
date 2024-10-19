@@ -23,7 +23,7 @@ RUN npm run build
 RUN npm install -g serve
 
 # Expor a porta 4173, que é a porta padrão do Vite para preview de produção
-EXPOSE 4173
+EXPOSE 5173
 
 # Comando para servir a aplicação usando o serve
-CMD ["serve", "-s", "dist", "-l", "4173"]
+CMD ["serve", "-s", "dist", "-l", "5173"]
