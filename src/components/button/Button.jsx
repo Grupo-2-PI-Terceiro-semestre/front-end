@@ -8,7 +8,7 @@ const Button = ({
   heightImage = '',
   size = '100%',
   padding = '10px',
-  backgroundColor = '#0072FF',
+  backgroundColor = '',
   fontWeight = '',
   color = 'white',
   content = 'Button',
@@ -28,7 +28,7 @@ const Button = ({
         width: size,
         padding: padding,
         color: color,
-        backgroundColor: disabled ? '#909090' : backgroundColor,
+        backgroundColor: backgroundColor,
         fontWeight: fontWeight
       }}
       onClick={onClick}

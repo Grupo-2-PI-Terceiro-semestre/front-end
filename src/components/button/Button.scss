@@ -13,6 +13,10 @@
   transition: 300ms; 
 }
 
+.dynamic-button:hover {
+  background-color: #004692;
+}
+
 .button-image {
   width: 25px; /* Ajuste conforme necessário */
   height: 25px; /* Ajuste conforme necessário */
