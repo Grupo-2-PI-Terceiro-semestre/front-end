@@ -4,6 +4,7 @@ import Button from '../../../../components/button/Button';
 import { findServicos, findClientes, CancelarAgendamento } from '../../services/agendaServices';
 import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
+import CircularSize from '../../../../components/circulo-load/CircularSize';
 import Swal from 'sweetalert2'
 
 
@@ -18,8 +19,9 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
     const [servicoSelecionado, setServicoSelecionado] = useState('');
     const [clienteSelecionado, setClienteSelecionado] = useState('');
     const [profissionalSelecionado, setProfissionalSelecionado] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const dropdownRef = useRef(null); // Ref para o dropdown
+    const dropdownRef = useRef(null); 
 
     const toggleEditing = () => {
         setIsEditing(!isEditing);
@@ -63,6 +65,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
             });
     
             if (result.isConfirmed) {
+                setLoading(true);
                 try {
                     await CancelarAgendamento(idAgendamento);
                     await Swal.fire({
@@ -221,6 +224,9 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                         onClick={toggleEditing}
                     />
                 )}
+                {loading ? (
+                    <CircularSize width="100%" height="100%" />
+                ) : null}
             </div>
         </div>
     );
