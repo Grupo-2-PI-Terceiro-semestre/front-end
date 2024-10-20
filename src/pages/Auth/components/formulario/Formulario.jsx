@@ -5,8 +5,7 @@ import Button from '../../../../components/button/Button';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { cadastroUser } from '../../authRouter'
 import { auth } from '../../../../services/firebase';
-import Barra from '../../../../components/barra-load/LinearProgress';
-import Header from '../header/Header.jsx';
+
 
 
 function Formulario() {
@@ -92,10 +91,10 @@ function Formulario() {
                         <input
                             type="email"
                             name="emailPessoa"
+                            required={true}
                             placeholder="Digite seu email"
                             value={formData.emailPessoa}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                 </div>
@@ -109,7 +108,7 @@ function Formulario() {
                             placeholder="A@12345"
                             defaultValue={formData.senha}
                             onChange={handleChange}
-                            required
+                            required={true}
                         />
                     </div>
                 </div>
@@ -123,7 +122,7 @@ function Formulario() {
                             placeholder="A@12345"
                             defaultValue={formData.confirmar}
                             onChange={handleChange}
-                            required
+                            required={true}
                         />
                     </div>
                 </div>
@@ -131,7 +130,6 @@ function Formulario() {
                 <div className='botoes'>
                     <Button
                         size="60%"
-                        backgroundColor="#0072FF"
                         color="white"
                         content="Cadastrar"
                         onClick={handleSubmit}
