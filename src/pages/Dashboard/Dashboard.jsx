@@ -84,7 +84,7 @@ function Dashboard() {
                     </CardDashboard>
                 </div>
                 <div className="inferior">
-                    <CardDashboard title="Próximos Atendimentos" height="27 0px" width="620px">
+                    <CardDashboard title="Próximos Atendimentos" height="270px" width="620px">
                     <TabelaDashboard headers={headers2} data={data2} />
                     </CardDashboard>
                     <CardDashboard title="Receita por Mês" height="270px" width="620px">
