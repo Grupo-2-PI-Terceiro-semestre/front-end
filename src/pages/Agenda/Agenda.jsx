@@ -1,6 +1,5 @@
 import MyCalendar from './components/calendar/MyCalendar';
 import Menu from '../../components/menu/Menu';
-import IconBreadcrumbs from '../../components/breadcrumb/Breadcrumb';
 import './Agenda.css';
 
 const Agenda = () => {
@@ -13,11 +12,6 @@ const Agenda = () => {
           <Menu activeMenuItem={activeMenuItem} />
         </div>
         <div className="principal-agenda">
-          <IconBreadcrumbs
-            paths={[
-              { label: 'Agenda', href: '/agenda' }
-            ]}
-          />
           <MyCalendar />
         </div>
       </div>
