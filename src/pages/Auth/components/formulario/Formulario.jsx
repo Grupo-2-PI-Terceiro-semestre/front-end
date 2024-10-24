@@ -27,8 +27,8 @@ function Formulario({toggleBarraContainer}) {
     const handleGoogleSignIn = async () => {
         const provider = new GoogleAuthProvider();
         try {
-            const result = await signInWithPopup(auth, provider);
             toggleBarraContainer();
+            const result = await signInWithPopup(auth, provider);
             const user = result.user;
             const userData = {
                 nomePessoa: user.displayName,
@@ -52,9 +52,8 @@ function Formulario({toggleBarraContainer}) {
             setErrorMessage('As senhas não coincidem');
         } else {
             try {
-                await cadastroUser(formData);
                 toggleBarraContainer();
-                alert('Cadastro realizado com sucesso!');
+                await cadastroUser(formData);
                 setFormData({
                     nomePessoa: '',
                     emailPessoa: '',
@@ -63,6 +62,7 @@ function Formulario({toggleBarraContainer}) {
                     confirmar: '',
                     tiposDeUsuario: 'ADMIN'
                 });
+                toggleBarraContainer();
             } catch (error) {
                 toggleBarraContainer();
                 setErrorMessage('Erro ao cadastrar o usuário.');
