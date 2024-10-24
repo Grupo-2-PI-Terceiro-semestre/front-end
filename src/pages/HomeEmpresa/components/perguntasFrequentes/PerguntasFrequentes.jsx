@@ -1,10 +1,10 @@
 import React from "react";
 import './PerguntasFrequentes.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCheck} from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 function PerguntasFrequentes() {
-    return(
+    return (
         <div className="main-perguntas">
             <div className="container-perguntas">
                 <h1>Perguntas Frequentes</h1>
@@ -22,7 +22,9 @@ function PerguntasFrequentes() {
                         </div>
 
                         <div className="botao">
-                            <button>Quero Gerenciar</button>
+                            <button onClick={() => window.location.href = '/cadastro'}>
+                                Quero Gerenciar
+                            </button>
                         </div>
                     </div>
 
@@ -38,7 +40,9 @@ function PerguntasFrequentes() {
                         </div>
 
                         <div className="botao">
-                            <button>Quero Gerenciar</button>
+                            <button onClick={() => window.location.href = '/cadastro'}>
+                                Quero Gerenciar
+                            </button>
                         </div>
                     </div>
 
@@ -54,8 +58,11 @@ function PerguntasFrequentes() {
                         </div>
 
                         <div className="botao">
-                            <button>Quero Gerenciar</button>
+                            <button onClick={() => window.location.href = '/cadastro'}>
+                                Quero Gerenciar
+                            </button>
                         </div>
+
                     </div>
                 </div>
             </div>

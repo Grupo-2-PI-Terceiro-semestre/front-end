@@ -11,7 +11,9 @@ function FirstSectionEmpresa() {
                         <span className="subtitulo">A dupla que impulsiona o sucesso da sua empresa</span>
                     </div>
 
-                    <button>Comece a testar gratuitamente</button>
+                    <button onClick={() => window.location.href = '/cadastro'}>
+                            Comece a testar gratuitamente
+                        </button>
                 </div>
             </div>
         </div>
