@@ -11,7 +11,7 @@ import Agenda from './pages/Agenda/Agenda';
 import Perfil from './pages/Perfil/Perfil';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Clientes from './pages/Clientes/Clientes';
-// import Equipe from './pages/Equipe/Equipe';
+import Equipe from './pages/Equipe/Equipe';
 import ProtectedRoute from './ProtectedRoute'; // Importe o componente ProtectedRoute
 
 const AppRoutes = ({ isAuthenticated }) => {
@@ -26,7 +26,7 @@ const AppRoutes = ({ isAuthenticated }) => {
             <Route path="/perfil" element={<ProtectedRoute element={<Perfil />} isAuthenticated={isAuthenticated} />} />
             <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} isAuthenticated={isAuthenticated} />} />
             <Route path="/clientes" element={<ProtectedRoute element={<Clientes />} isAuthenticated={isAuthenticated} />} />
-            {/* <Route path="/equipe" element={<ProtectedRoute element={<Equipe />} isAuthenticated={isAuthenticated} />} /> */}
+            <Route path="/equipe" element={<ProtectedRoute element={<Equipe />} isAuthenticated={isAuthenticated} />} />
         </Routes>
     );
 };
