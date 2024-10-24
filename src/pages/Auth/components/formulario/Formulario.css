@@ -17,6 +17,7 @@ h2 {
   height: 10vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 
@@ -39,7 +40,7 @@ h2 {
 }
 
 .form-group .inputLabel input {
-  width: 80%;
+  width: 100%;
   border: none;
   border-radius: 5px;
   background-color: #EAF0F7;
@@ -48,6 +49,7 @@ h2 {
   height: 4.5vh;
   padding: 8px;
   background-color: #837f7f0f;
+  justify-content: center;
 }
 
 .botao {
