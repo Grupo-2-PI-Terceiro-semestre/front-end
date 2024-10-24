@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './style.css'; // Estilos específicos do componente
 
-const SearchableDropdown = ({options, onSelectOption, placeholder, displayField, uniqueKey }) => {
+const SearchableDropdown = ({
+    options,
+    onSelectOption,
+    placeholder,
+    displayField,
+    uniqueKey,
+    required
+}) => {
     const [inputValue, setInputValue] = useState('');
+    const [selectedOption, setSelectedOption] = useState(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null); // Ref para o dropdown
+    const dropdownRef = useRef(null);
 
-    // Filtrar opções com base na entrada do usuário
     const filteredOptions = inputValue === ''
         ? options
         : options.filter(option =>
@@ -15,13 +22,14 @@ const SearchableDropdown = ({options, onSelectOption, placeholder, displayField,
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
-        setIsDropdownOpen(true); 
+        setIsDropdownOpen(true);
     };
 
     const handleSelectOption = (option) => {
-        setInputValue(displayField(option)); 
-        onSelectOption(option); 
-        setIsDropdownOpen(false); 
+        setInputValue(displayField(option));
+        setSelectedOption(option);
+        onSelectOption(option);
+        setIsDropdownOpen(false);
     };
 
     useEffect(() => {
@@ -30,12 +38,8 @@ const SearchableDropdown = ({options, onSelectOption, placeholder, displayField,
                 setIsDropdownOpen(false);
             }
         };
-
         document.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
+        return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
     return (
@@ -43,13 +47,15 @@ const SearchableDropdown = ({options, onSelectOption, placeholder, displayField,
             <div className="autocomplete" ref={dropdownRef}>
                 <input
                     type="text"
+                    required={required}
                     placeholder={placeholder || 'Selecione uma opção'}
                     value={inputValue}
                     onChange={handleInputChange}
-                    onFocus={() => {
-                        setIsDropdownOpen(true);
-                    }}
+                    onFocus={() => setIsDropdownOpen(true)}
                 />
+                {selectedOption === null && required && (
+                    <input type="hidden" required /> // Garantir validação.
+                )}
                 {isDropdownOpen && (
                     <ul className="dropdown-list">
                         {filteredOptions.map(option => (
@@ -58,7 +64,7 @@ const SearchableDropdown = ({options, onSelectOption, placeholder, displayField,
                                 onClick={() => handleSelectOption(option)}
                                 className="dropdown-item"
                             >
-                                {displayField(option)} 
+                                {displayField(option)}
                             </li>
                         ))}
                     </ul>

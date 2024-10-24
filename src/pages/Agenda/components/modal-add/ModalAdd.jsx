@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import './ModalAdd.css';
-import { findServicos, findClientes } from '../../services/agendaServices';
+import { findServicos, findClientes, createAgendamento } from '../../services/agendaServices';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import Button from '../../../../components/button/Button';
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import dayjs from 'dayjs';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
+import CircularSize from '../../../../components/circulo-load/CircularSize';
 
 
 
-
-function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault }) {
+function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault, refreshDate }) {
 
     const [servicos, setServicos] = useState([]);
     const [clientes, setClientes] = useState([]);
@@ -19,9 +22,7 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault }) {
     const [profissionalSelecionado, setProfissionalSelecionado] = useState('');
     const [dataHoraAgendamento, setDataHoraAgendamento] = useState('');
     const [isVisible, setIsVisible] = useState(false);
-    const dropdownRef = useRef(null);
-
-
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         buscarServicos(idEmpresa);
@@ -31,15 +32,15 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault }) {
     }, [idEmpresa]);
 
     const handleServicoChange = (servico) => {
-        setServicoSelecionado(servico.nomeServico);
+        setServicoSelecionado(servico.idServico);
     };
 
     const handleFuncionarioChange = (funcionario) => {
-        setProfissionalSelecionado(funcionario.title);
+        setProfissionalSelecionado(funcionario.id);
     };
 
     const handleClientesChange = (cliente) => {
-        setClienteSelecionado(cliente.nomePessoa);
+        setClienteSelecionado(cliente.idCliente);
     };
 
     const buscarServicos = async (idEmpresa) => {
@@ -50,6 +51,26 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault }) {
             console.error('Erro ao buscar os serviços:', error);
         }
     };
+
+    const criarAgendamento = async (agendamento) => {
+        setLoading(true);
+        try {
+            await createAgendamento(agendamento);
+            toast.success('Agendamento criado com sucesso!');
+            refreshDate(new Date(dataHoraAgendamento));
+
+            setLoading(false);
+
+            setTimeout(() => {
+                onClose();
+            }, 3000);
+
+        } catch (error) {
+            console.error('Erro ao criar agendamento:', error);
+            setLoading(false);
+        }
+    };
+
 
     const buscarClientes = async (idEmpresa) => {
         try {
@@ -65,32 +86,35 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault }) {
         setTimeout(onClose, 400);
     };
 
-    const isDisabled = () => {
-        if (
-            servicoSelecionado === '' ||
-            clienteSelecionado === '' ||
-            profissionalSelecionado === '' ||
-            !dataHoraAgendamento
-        ) {
-            return true;
-        }
 
-        const agora = dayjs(); // Data e hora atual
-        const agendamento = dayjs(dataHoraAgendamento); // Data e hora selecionada
-
-        if (agendamento.isBefore(agora)) {
-            return true;
-        }
-
-        return false;
-    };
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        alert(servicoSelecionado + clienteSelecionado + profissionalSelecionado + dataHoraAgendamento);
-        try {
-        } catch (error) {
-            setErrorMessage('Erro ao cadastrar o serviço.');
+        const form = e.target;
+        const agora = dayjs();
+        const agendamento = dayjs(dataHoraAgendamento);
+
+
+        if (dataHoraAgendamento != undefined || dataHoraAgendamento != null) {
+            if (agendamento.isBefore(agora)) {
+                toast.error("Data Inválida, por favor selecione uma data futura!");
+                return;
+            }
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const agendamentoData = {
+                idCliente: clienteSelecionado,
+                idServico: servicoSelecionado,
+                idAgenda: profissionalSelecionado,
+                dataAgendamento: converterGMTParaBrasilia(dataHoraAgendamento)
+            }
+
+            criarAgendamento(agendamentoData);
+        } else {
+            toast.error("Insira uma data e hora válida!");
         }
     };
 
@@ -98,71 +122,72 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault }) {
         <div className={`modal-agendamento ${isVisible ? 'modal-aberto' : 'modal-fechado'}`}>
             <div className="container-modal">
                 <HeadeModal title="Agendar Serviço" handleClose={handleClose} />
-                <form className="form-modal" onSubmit={handleSubmit}>
+                <form className="form-modal" onSubmit={handleSubmit} noValidate>
                     <div className="form-agendamento">
                         <div className='inputLabel'>
                             <label>Cliente:</label>
-                            <div ref={dropdownRef}>
-                                <SearchableDropdown
-                                    options={clientes} // Lista de serviços
-                                    onSelectOption={handleClientesChange}
-                                    displayField={(option) => option.nomePessoa}
-                                    uniqueKey={(option) => option.idCliente}
-                                />
-                            </div>
+                            <SearchableDropdown
+                                options={clientes}
+                                required={true}
+                                onSelectOption={handleClientesChange}
+                                displayField={(option) => option.nomePessoa}
+                                uniqueKey={(option) => option.idCliente}
+                            />
                         </div>
                     </div>
 
                     <div className="form-agendamento">
                         <div className='inputLabel'>
                             <label>Serviço:</label>
-                            <div ref={dropdownRef}>
-                                <SearchableDropdown
-                                    options={servicos}
-                                    placeholder={"Selecione um serviço"}
-                                    onSelectOption={handleServicoChange}
-                                    displayField={(option) => option.nomeServico}
-                                    uniqueKey={(option) => option.idServico}
-                                />
-                            </div>
+                            <SearchableDropdown
+                                options={servicos}
+                                required={true}
+                                placeholder={"Selecione um serviço"}
+                                onSelectOption={handleServicoChange}
+                                displayField={(option) => option.nomeServico}
+                                uniqueKey={(option) => option.idServico}
+                            />
                         </div>
                     </div>
 
                     <div className="form-agendamento">
                         <div className='inputLabel'>
                             <label>Profissional:</label>
-                            <div ref={dropdownRef}>
-                                <SearchableDropdown
-                                    options={funcionarios}
-                                    placeholder={"Selecione um profissional"}
-                                    onSelectOption={handleFuncionarioChange}
-                                    displayField={(option) => option.title}
-                                    uniqueKey={(option) => option.id}
-                                />
-                            </div>
+                            <SearchableDropdown
+                                options={funcionarios}
+                                required={true}
+                                placeholder={"Selecione um profissional"}
+                                onSelectOption={handleFuncionarioChange}
+                                displayField={(option) => option.title}
+                                uniqueKey={(option) => option.id}
+                            />
                         </div>
                     </div>
+
                     <div className="form-agendamento">
                         <div className='inputLabel'>
                             <label htmlFor="categoria">Data e Hora do Agendamento:</label>
                             <DateTimePickerOpenTo
-                                valordefault={new Date()}
-                                onChange={(newValue) => setDataHoraAgendamento(newValue)} // Atualiza o estado no componente pai
+                                required={true}
+                                onChange={(newValue) => setDataHoraAgendamento(newValue)}
                             />
                         </div>
-                    </div >
+                    </div>
+
                     <div className="button-agendar">
                         <Button
                             type="submit"
                             content="Agendar"
                             backgroundColor='#2196f3'
-                            disabled={isDisabled()}
                             fontSize='15px'
-                            onClick={handleSubmit}
                             size='47%'
                         />
                     </div>
-                </form >
+                </form>
+                <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+                {loading ? (
+                    <CircularSize width="100%" height="100%" />
+                ) : null}
             </div>
         </div>
 

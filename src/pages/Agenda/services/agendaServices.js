@@ -65,3 +65,13 @@ export const CancelarAgendamento = async (idAgendamento) => {
         throw e
     }
 }
+
+export const createAgendamento = async (agendamento) => {
+    try {
+        const response = await postData(`agendamentos`, agendamento)
+        return response;
+    } catch (error) {
+        console.log("Erro ao criar o agendamento")
+        throw e
+    }
+}
