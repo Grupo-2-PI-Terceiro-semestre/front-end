@@ -1,0 +1,37 @@
+.main-clientes {
+    width: 100vw;
+    background-color: rgb(23, 24, 33);
+    display: flex;
+}
+
+.container-clientes {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.tituloCliente {
+    color: white;
+    width: 82vw;
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    justify-content: center;
+    background-color: rgb(33, 34, 45);
+    border-radius: 5px;
+}
+
+.tituloCliente .container-titulo-cliente {
+    width: 77vw;
+    /* border: 1px solid; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.principal {
+    width: 82vw;
+    height: 96vh;
+    gap: 2vh;
+}

@@ -1,14 +1,17 @@
 import React from 'react';
 import './Header.css'; // Arquivo CSS para estilização
+import Barra from '../../../../components/barra-load/LinearProgress';
 
-const Header = () => {
+const Header = ({barraVisible}) => {
   return (
+
     <header className="header">
       <div className="logo-container">
         <a href="/" className="logo-link">
           OrderHub
         </a>
       </div>
+      <div className='barra-container'id='barra-container' style={{display: barraVisible?'block':'none'}}><Barra></Barra></div>
     </header>
   );
 };

@@ -17,6 +17,7 @@ h2 {
   height: 10vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 
@@ -42,12 +43,13 @@ h2 {
   width: 100%;
   border: none;
   border-radius: 5px;
-
   background-color: #EAF0F7;
+  color: #333;
   box-shadow: 0 2px rgba(0, 0, 0, 0.1);
   height: 4.5vh;
   padding: 8px;
   background-color: #837f7f0f;
+  justify-content: center;
 }
 
 .botao {

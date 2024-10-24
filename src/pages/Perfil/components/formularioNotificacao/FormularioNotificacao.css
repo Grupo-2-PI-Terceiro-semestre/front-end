@@ -1,0 +1,24 @@
+.form-group textarea {
+    width: 100%;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    outline: none;
+    background-color: #171821;
+    color: #eee;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    max-height: none;
+    min-height: 7rem;
+    max-height: 11rem;
+}
+
+.app-container-notifica .form-group{
+    height: auto;
+}
+
+.app-container-notifica{
+    width: 90%;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+}

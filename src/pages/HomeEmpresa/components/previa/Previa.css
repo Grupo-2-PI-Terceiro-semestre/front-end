@@ -73,6 +73,8 @@
     align-items: center;
     gap: 6px;
     cursor: pointer;
+    gap: 6px;
+    cursor: pointer;
 }
 
 .main-previa .container-previa .paragrafo .icones .icone2 {
@@ -80,11 +82,15 @@
     align-items: center;
     gap: 6px;
     cursor: pointer;
+    gap: 6px;
+    cursor: pointer;
 }
 
 .main-previa .container-previa .paragrafo .icones .icone3 {
     display: flex;
     align-items: center;
+    gap: 6px;
+    cursor: pointer;
     gap: 6px;
     cursor: pointer;
 }

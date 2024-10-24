@@ -6,9 +6,8 @@ import Button from '../../../../components/button/Button';
 import iconGoogle from '../../../../assets/logoGoogle.png'
 import { useNavigate } from 'react-router-dom';
 import './FormularioLogin.css'
-import LinearIndeterminate from '../../../../components/barra-load/LinearProgress';
 
-const FormularioLogin = () => {
+const FormularioLogin = ({toggleBarraContainer}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -21,6 +20,7 @@ const FormularioLogin = () => {
     if (!email || !password) {
       setErrorMessage('Email e senha são obrigatórios');
     } else {
+      toggleBarraContainer();
       setErrorMessage('');
       try {
         const userData = {
@@ -29,8 +29,10 @@ const FormularioLogin = () => {
         };
         const response = await loginUser(userData);
         setUser(response.user);
+        toggleBarraContainer();
         navigate('/agenda')
       } catch (error) {
+        toggleBarraContainer();
         setErrorMessage('Email ou senha invalidos');
       }
     }
@@ -40,6 +42,7 @@ const FormularioLogin = () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
+      toggleBarraContainer(); 
       const user = result.user;
       const userData = {
         emailPessoa: user.email,
@@ -47,8 +50,10 @@ const FormularioLogin = () => {
       };
       const response = await loginUser(userData);
       setUser(response.user);
+      toggleBarraContainer();
       navigate('/agenda');
     } catch (error) {
+      toggleBarraContainer();
       setErrorMessage("Email ou senha invalidos");
     }
   };
@@ -94,9 +99,9 @@ const FormularioLogin = () => {
             content="Google"
             onClick={handleGoogleSignIn}
             image={iconGoogle}
+            //quando apertar o botão display do barra-container como block (ele está none)
           />
         </div>
-        <LinearIndeterminate />
       </form>
     </div>
   );

@@ -1,16 +1,16 @@
 .main-tela-servicos {
-    width: 80vw;
+    width: 82vw;
     background-color: rgb(33, 34, 45);
     border-radius: 5px;
     display: flex;
     justify-content: center;
     gap: 2vh;
     padding: 1.9vh;
-    height: 100vh;
+    height: 84vh;
 }
 
 .main-tela-servicos .container-tela-servicos {
-    width: 75vw;
+    width: 77vw;
     display: flex;
     flex-wrap: wrap;
 }
@@ -50,20 +50,38 @@
     color: white;
 }
 
+.container-tela-servicos .tabelaCompleta {
+    overflow: auto;
+    height: 69vh;
+    width: 77vw;
+}
+
+.container-tela-servicos .tabelaCompleta::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px;
+}
+
+.container-tela-servicos .tabelaCompleta::-webkit-scrollbar-thumb {
+    background-color: #2196F3;
+    border-radius: 10px; 
+}
+
+.container-tela-servicos .tabelaCompleta::-webkit-scrollbar-track {
+    background: #171821; 
+}
+
 .container-tela-servicos .tabelaCompleta .tituloTabela {
     display: flex;
     align-items: center;
-    width: 75vw;
+    width: 77vw;
     height: 5vh;
     color: white;
     padding: 0 1.2vw;
     font-weight: bold;
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.container-linha-tabela .tabelaCompleta .tituloTabela {
-    font-weight: bold;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    position: fixed;
+    z-index: 3;
+    background-color: rgb(33, 34, 45);
 }
 
 .container-tela-servicos .tabelaCompleta .tituloTabela label {
@@ -91,4 +109,7 @@
 
 .container-tela-servicos .tabelaCompleta .conjuntoLinhas {
     min-height: 58vh;
+    overflow: auto;
+    top: 6vh;
+    position: relative;
 }

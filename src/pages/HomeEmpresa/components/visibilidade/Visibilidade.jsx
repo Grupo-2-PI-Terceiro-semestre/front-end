@@ -34,7 +34,7 @@ function Visibilidade() {
         <div  className="main-visibilidade">
             <div className="container-visibilidade">
                 <div className="textos">
-                    <div className="titulo">
+                    <div className="tituloVisibilidade">
                         <h1>Amplie Sua <b>Visibilidade</b></h1>
                         <label>Aproveite nossa plataforma para alcançar mais clientes.</label>
                     </div>

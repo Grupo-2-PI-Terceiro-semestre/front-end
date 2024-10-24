@@ -5,15 +5,20 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import dayjs from 'dayjs';
-import 'dayjs/locale/pt-br'; // Importar a localidade PT-BR
+import 'dayjs/locale/pt-br';
 import './style.css';
 
-// Configurar o Day.js para usar a localidade PT-BR
 dayjs.locale('pt-br');
 
-export default function DateTimePickerOpenTo({ valordefault }) {
-  // Converte o valordefault para um objeto dayjs, se não for null
-  const [selectedDateTime, setSelectedDateTime] = React.useState(valordefault ? dayjs(valordefault) : null);
+export default function DateTimePickerOpenTo({ valordefault, onChange }) {
+  const [selectedDateTime, setSelectedDateTime] = React.useState(
+    valordefault ? dayjs(valordefault) : null
+  );
+
+  const handleDateChange = (newValue) => {
+    setSelectedDateTime(newValue);
+    onChange(newValue); 
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
@@ -22,7 +27,7 @@ export default function DateTimePickerOpenTo({ valordefault }) {
           openTo="day"
           ampm={false}
           value={selectedDateTime}
-          onChange={(newValue) => setSelectedDateTime(newValue)}
+          onChange={handleDateChange}
           renderInput={(params) => <TextField {...params} />}
         />
       </Box>

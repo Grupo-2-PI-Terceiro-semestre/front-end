@@ -3,20 +3,16 @@
     transition: all 0.3s;
     border-radius: 5px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    /* Define a transição */
 }
 
 .custom-calendar:focus {
     border-color: #007bff;
-    /* Cor do contorno ao focar */
     box-shadow: 0 0 1px rgba(0, 123, 255, 0.5);
-    /* Sombra ao focar */
 }
 
 .custom-calendar:hover {
     border-color: #007bff;
     cursor: pointer;
-    /* Cor da borda ao passar o mouse */
 }
 
 .custom-calendar .p-inputtext {
@@ -40,7 +36,7 @@
 
 .p-datepicker table th {
     font-size: 14px;
-    align-items: center;
+    text-align: center;
 }
 
 .p-datepicker .p-datepicker-header {

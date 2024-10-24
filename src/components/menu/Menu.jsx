@@ -5,11 +5,13 @@ import { findByEmpresa, uploadImage } from '../../services/empresaServices';
 import Cookies from 'js-cookie';
 import './Menu.css';
 import Tooltip from '@mui/material/Tooltip';
+import Swal from 'sweetalert2';
 
 const Menu = ({ activeMenuItem }) => {
   const [user, setUser] = useState(null);
   const [empresa, setEmpresa] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,12 +20,11 @@ const Menu = ({ activeMenuItem }) => {
       const parsedUser = JSON.parse(userData);
       setUser(parsedUser);
 
-      // Verifica se já existe uma empresa nos cookies
       const empresaData = Cookies.get('empresa');
       if (empresaData) {
         setEmpresa(JSON.parse(empresaData));
       } else {
-        buscarEmpresa(parsedUser.idEmpresa); // Busca a empresa se não estiver nos cookies
+        buscarEmpresa(parsedUser.idEmpresa);
       }
     }
   }, []);
@@ -40,8 +41,22 @@ const Menu = ({ activeMenuItem }) => {
 
   const handleImageChange = (event) => {
     setImageFile(event.target.files[0]);
-    handleUploadImage(event.target.files[0]); // Chama a função para fazer upload da imagem
+    handleUploadImage(event.target.files[0]);
   };
+
+  const logout = () => {
+    Swal.fire({
+      position: "top-end",
+      icon: "info",
+      title: "Logout",
+      showConfirmButton: false,
+      timer: 1500
+    });
+    Cookies.remove('token');
+    Cookies.remove('user');
+    Cookies.remove('empresa');
+    navigate('/login');
+  }
 
   const handleUploadImage = async (selectedFile) => {
     if (!selectedFile) {
@@ -77,7 +92,7 @@ const Menu = ({ activeMenuItem }) => {
           onChange={handleImageChange}
           style={{ display: 'none' }}
           id="imageUpload"
-          onClick={(event) => { event.stopPropagation(); }} // Impede que o clique no input feche o seletor
+          onClick={(event) => { event.stopPropagation(); }}
         />
 
         <Tooltip title='Fazer Upload'>
@@ -109,7 +124,7 @@ const Menu = ({ activeMenuItem }) => {
           <FaUsers />
           <span>Equipe</span>
         </li>
-        <li className={activeMenuItem === 'Clientes' ? 'active' : ''} onClick={() => handleItemClick('Clientes', '/cliente')}>
+        <li className={activeMenuItem === 'Clientes' ? 'active' : ''} onClick={() => handleItemClick('Clientes', '/clientes')}>
           <FaBriefcase />
           <span>Clientes</span>
         </li>
@@ -118,7 +133,7 @@ const Menu = ({ activeMenuItem }) => {
           <span>Serviços</span>
         </li>
       </ul>
-      <div className="logout">
+      <div onClick={logout} className="logout">
         <FaSignOutAlt />
         <span>Sair</span>
       </div>
