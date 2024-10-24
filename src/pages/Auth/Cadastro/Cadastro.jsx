@@ -10,7 +10,7 @@ function Cadastro() {
     const navigate = useNavigate(); // Use useNavigate dentro do componente
 
     const handleButtonClick = () => {
-        navigate('/login'); // Redireciona para a página de cadastro
+        navigate('/login');
     };
     const toggleBarraContainer = () => {
         setBarraVisible(prev => !prev);
