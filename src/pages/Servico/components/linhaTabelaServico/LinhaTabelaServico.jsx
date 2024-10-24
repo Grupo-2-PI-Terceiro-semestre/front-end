@@ -50,7 +50,7 @@ function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria }) {
                         <label htmlFor="text">{nome}</label>
                         <label htmlFor="text">{valor}</label>
                         <label htmlFor="text">{tempoExecucao}</label>
-                        <label htmlFor="text">{categoria}</label>
+                        {/* <label htmlFor="text">{categoria}</label> */}
                         <label className="icons" htmlFor="text">
 
                             <FontAwesomeIcon onClick={openModalEditar} icon={faPenToSquare} className="icon-pen" />
