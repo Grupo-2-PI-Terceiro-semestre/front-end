@@ -49,22 +49,6 @@
     transform: translateX(100%);
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .titulo-modal-editar {
-    color: white;
-    width: 26vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.botaoFechar {
-    display: flex;
-    justify-content: center;
-    background: none;
-    color: white;
-    border: none;
-}
-
 .modal-overlay-editar .modal-header-editar .container-modal-editar .botao {
     background-color: #ff5f5f;
     color: white;

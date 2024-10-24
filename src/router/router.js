@@ -2,8 +2,11 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const API_URL = import.meta.env.VITE_API_URL;
-console.log('API URL:', import.meta.env.VITE_API_URL);
 
+if (!import.meta.env.PROD) {
+    console.log('API URL:', import.meta.env.VITE_API_URL);
+    console.log('NODE_ENV:', JSON.stringify(import.meta.env));
+}
 
 export const getData = async (endpoint, pathParams = {}, queryParams = {}) => {
     try {
@@ -20,7 +23,7 @@ export const getData = async (endpoint, pathParams = {}, queryParams = {}) => {
         const response = await axios.get(urlWithParams, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'  
+                'Content-Type': 'application/json'
             }
         });
 

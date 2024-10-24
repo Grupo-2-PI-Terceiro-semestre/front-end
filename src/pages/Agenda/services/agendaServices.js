@@ -46,12 +46,32 @@ export const findClientes = async (idEmpresa) => {
 }
 
 export const AtualizarEvento = async (eventoAtualizado) => {
-    
+
     try {
         const response = await putData(`agendamentos`, eventoAtualizado)
         return response;
     } catch (error) {
         console.log("Erro ao autalizar o agendamento")
+        throw e
+    }
+}
+
+export const CancelarAgendamento = async (idAgendamento) => {
+    try {
+        const response = await putData(`agendamentos/${idAgendamento}`)
+        return response;
+    } catch (error) {
+        console.log("Serviço: Erro ao Deletar o Agendamento")
+        throw e
+    }
+}
+
+export const createAgendamento = async (agendamento) => {
+    try {
+        const response = await postData(`agendamentos`, agendamento)
+        return response;
+    } catch (error) {
+        console.log("Erro ao criar o agendamento")
         throw e
     }
 }

@@ -10,13 +10,15 @@ import "./MyCalendar.css";
 import Button from "../../../../components/button/Button";
 import plusIcon from "../../../../assets/plus.png";
 import IconDemo from '../agenda/Agenda';
-import { findColaborador, findAgendamentos, AtualizarEvento } from '../../services/agendaServices'
+import { findColaborador, AtualizarEvento } from '../../services/agendaServices'
 import Cookies from 'js-cookie';
 import CircularIntegration from '../../../../components/botao-download/CircularIntegration';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
 import DetalheAgendamento from '../detalhe-agendamento/DetalheAgendamento';
+import ModalAdd from '../modal-add/ModalAdd';
 import Modal from '@mui/material/Modal';
 import Swal from 'sweetalert2'
+import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
 
 
 moment.locale("pt-br");
@@ -46,48 +48,53 @@ const MyDragAndDropCalendar = () => {
   }, []);
 
   const buscarColaboradores = async (day) => {
-    setLoading(true);
-    try {
-      const response = await findColaborador(user.idEmpresa, day);
+    if (user.idEmpresa) {
+      setLoading(true);
+      try {
+        const response = await findColaborador(user.idEmpresa, day);
 
-      const formattedResources = response.data.map(colaborador => ({
-        id: colaborador.idAgenda,
-        title: colaborador.nomeFuncionario,
-      }));
+        const formattedResources = response.data.map(colaborador => ({
+          id: colaborador.idAgenda,
+          title: colaborador.nomeFuncionario,
+        }));
 
-      setColaboradorInfo(response);
-      setResources(formattedResources);
+        setColaboradorInfo(response);
+        setResources(formattedResources);
 
-      const colaboradores = response.data;
-      const eventsFeature = colaboradores.flatMap(colaborador =>
-        colaborador.agendamentoDTOS.map(evento => ({
-          id: evento.idAgendamento,
-          title: evento.servico.nomeServico,
-          start: new Date(evento.horaAgendamento),
-          end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
-          nomeFuncionario: colaborador.nomeFuncionario,
-          nomeCliente: evento.cliente.nomePessoa,
-          funcionario: colaborador,
-          cliente: evento.cliente,
-          telefoneCliente: evento.cliente.telefone,
-          descricaoServico: evento.servico.descricao,
-          resourceId: colaborador.idFuncionario,
-          corReferenciaHex: evento.servico.corReferenciaHex,
-        }))
-      );
-      setEvents(eventsFeature);
-    } catch (error) {
-      console.error('Erro ao buscar colaboradores ou agendamentos:', error);
-    } finally {
-      setLoading(false);
+        const colaboradores = response.data;
+        const eventsFeature = colaboradores.flatMap(colaborador =>
+          colaborador.agendamentoDTOS.map(evento => ({
+            id: evento.idAgendamento,
+            title: evento.servico.nomeServico,
+            start: new Date(evento.horaAgendamento),
+            end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
+            nomeFuncionario: colaborador.nomeFuncionario,
+            nomeCliente: evento.cliente.nomePessoa,
+            funcionario: colaborador,
+            cliente: evento.cliente,
+            telefoneCliente: evento.cliente.telefone,
+            descricaoServico: evento.servico.descricao,
+            resourceId: colaborador.idFuncionario,
+            corReferenciaHex: evento.servico.corReferenciaHex,
+          }))
+        );
+        setEvents(eventsFeature);
+      } catch (error) {
+        console.error('Erro ao buscar colaboradores ou agendamentos:', error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModalDetalhes = () => {
     setOpenModal(false);
     setSelectedEvent(null);
   };
 
+  const handleCloseModalAdd = () => {
+    setOpenModalAdd(false);
+  };
 
   const eventPropGetter = (event) => {
     const borderColor = event.corReferenciaHex || '#00929B';
@@ -100,6 +107,7 @@ const MyDragAndDropCalendar = () => {
   };
 
   const handleDateChange = (day) => {
+    debugger
     buscarColaboradores(formaterDate(day));
     setSelectedDate(day);
   };
@@ -113,11 +121,8 @@ const MyDragAndDropCalendar = () => {
     return selectedDate.toDateString() === new Date(day).toDateString();
   };
   const moveEvent = async ({ event, start, end, resourceId }) => {
-    // Cria o evento atualizado com os novos valores
-    const updatedEvent = { ...event, start, end, resourceId };
 
-    // Encontra o evento antigo para comparar ou manipular se necessário
-    const originalEvent = events.find(e => e.id === event.id);
+    const updatedEvent = { ...event, start, end, resourceId };
 
     const request = {
       idAgendamento: updatedEvent.id,
@@ -125,7 +130,6 @@ const MyDragAndDropCalendar = () => {
       idAgenda: updatedEvent.resourceId,
     };
 
-    // Exibe o alerta de confirmação
     const result = await Swal.fire({
       title: "Atenção!",
       text: "Você tem certeza que deseja atualizar esse agendamento?",
@@ -136,18 +140,23 @@ const MyDragAndDropCalendar = () => {
       confirmButtonText: "Sim",
     });
 
-    // Se o usuário confirmar, faz a requisição para atualizar o evento
     if (result.isConfirmed) {
-      setLoading(true); // Inicia o carregamento
+      setLoading(true);
       try {
-        await atualizarEvento(request); // Espera a resposta da função atualizarEvento
+        await atualizarEvento(request);
+
+        const nextEvents = events.map(existingEvent =>
+          existingEvent.id === event.id ? updatedEvent : existingEvent
+        );
+
+        setEvents(nextEvents);
+
         Swal.fire({
           title: "Sucesso!",
           text: "Agendamento atualizado com sucesso!",
           icon: "success"
         });
       } catch (error) {
-        // Exibe o alerta de erro ao usuário
         Swal.fire({
           title: "Erro!",
           text: "Erro ao atualizar o agendamento!",
@@ -155,16 +164,10 @@ const MyDragAndDropCalendar = () => {
         });
         console.error("Erro ao atualizar evento:", error);
       } finally {
-        setLoading(false); // Para o carregamento independentemente do resultado
+        setLoading(false);
       }
     }
 
-    // Atualiza apenas o evento alterado na lista
-    const nextEvents = events.map(existingEvent =>
-      existingEvent.id === event.id ? updatedEvent : existingEvent
-    );
-
-    setEvents(nextEvents); // Define a nova lista de eventos
   };
 
   const atualizarEvento = async (novoEvento) => {
@@ -172,28 +175,9 @@ const MyDragAndDropCalendar = () => {
       const response = await AtualizarEvento(novoEvento);
       return response.data;
     } catch (error) {
-      // Aqui você pode lançar o erro para ser tratado no moveEvent
       throw new Error("Erro ao atualizar o agendamento");
     }
   };
-
-
-  const converterGMTParaBrasilia = (horarioGMT) => {
-    const data = new Date(horarioGMT);
-
-    if (isNaN(data.getTime())) {
-      throw new Error("Horário inválido");
-    }
-
-    const ano = data.getFullYear();
-    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
-    const dia = String(data.getDate()).padStart(2, '0');
-    const horas = String(data.getHours()).padStart(2, '0');
-    const minutos = String(data.getMinutes()).padStart(2, '0');
-
-    return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
-  }
-
 
   const resizeEvent = (resizeType, { event, start, end }) => {
     const nextEvents = events.map(existingEvent => {
@@ -208,23 +192,27 @@ const MyDragAndDropCalendar = () => {
   const handleEventClick = (event, detalhe) => {
     setSelectedEvent(event);
     setSelectedDetalhes(detalhe);
-    setOpenModal(true); // Abre o modal
+    setOpenModal(true);
+  };
+
+  const handleAddClick = () => {
+    setOpenModalAdd(true);
   };
 
   function formatDateToBRWithMonthName(dateString) {
-    const date = new Date(dateString); // Converte a string de data para um objeto Date
+    const date = new Date(dateString);
 
-    const day = String(date.getDate()).padStart(2, '0'); // Pega o dia e adiciona zero à esquerda se necessário
+    const day = String(date.getDate()).padStart(2, '0');
     const monthNames = ['Jan', 'Fev',
       'Mar', 'Abr',
       'Mai', 'Jun',
       'Jul', 'Ago',
       'Set', 'Out',
       'Nov', 'Dez'
-    ]; // Array com os nomes dos meses
-    const month = monthNames[date.getMonth()]; // Pega o nome do mês
-    const year = date.getFullYear(); // Pega o ano
-    return `${day} - ${month} - ${year}`; // Retorna no formato "dd de mês de yyyy"
+    ];
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} - ${month} - ${year}`;
   }
 
   const CustomToolbar = () => {
@@ -285,6 +273,7 @@ const MyDragAndDropCalendar = () => {
             fontSize="14px"
             widthImage="1.5rem"
             heightImage="1.5rem"
+            onClick={handleAddClick}
             image={plusIcon}
           />
           <CircularIntegration
@@ -335,17 +324,30 @@ const MyDragAndDropCalendar = () => {
         <CircularSize width="100%" height="100%" />
       ) : null}
       {/* Modal de Detalhamento */}
-      <Modal open={openModal} onClose={handleCloseModal}>
+      <Modal open={openModal} onClose={handleCloseModalDetalhes}>
         <div className="modal-content">
           {selectedEvent && (
             <DetalheAgendamento
               event={selectedEvent}
               detalhes={detalhes}
               idEmpresa={user.idEmpresa}
-              funcionarios={resources} // Passa os detalhes do evento selecionado
-              onClose={handleCloseModal} // Função para fechar o modal
+              funcionarios={resources}
+              refreshDate={handleDateChange}
+              onClose={handleCloseModalDetalhes}
             />
           )}
+        </div>
+      </Modal>
+      {/* Modal de Adicionar Agendamento */}
+      <Modal open={openModalAdd} onClose={handleCloseModalAdd}>
+        <div className="modal-content">
+          <ModalAdd
+            onClose={handleCloseModalAdd}
+            idEmpresa={user.idEmpresa}
+            funcionarios={resources}
+            dateDefault={converterGMTParaBrasilia(selectedDate)}
+            refreshDate={handleDateChange} // Certifique-se de passar corretamente
+          />
         </div>
       </Modal>
     </div>

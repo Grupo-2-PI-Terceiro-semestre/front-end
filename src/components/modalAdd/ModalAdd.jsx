@@ -1,5 +1,6 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import './ModalAdd.css';
+import HeadeModal from '../header-modal/HeaderModal';
 
 function ModalAdd({ onClose, titulo }) {
 
@@ -9,7 +10,7 @@ function ModalAdd({ onClose, titulo }) {
     // }, {});
 
     // const [formData, setFormData] = useState(initialFormData);
-    
+
     const [formData, setFormData] = useState({
         nomeServico: '',
         valorServico: '',
@@ -70,12 +71,11 @@ function ModalAdd({ onClose, titulo }) {
     };
 
     return (
-        
+
         <div className={`modal-overlay ${isVisibleAdd ? 'visible' : 'hidden'}`}>
             <div className="modal-header">
                 <div className="container-modal">
-                    <h4 className="titulo-modal">{titulo} <button className="botaoFechar" onClick={onClose}>X</button></h4>
-
+                    <HeadeModal title={titulo} handleClose={onClose} />
                     <form className="form-modal" onSubmit={handleSubmit}>
                         <div className="form-group">
                             <div className='inputLabel'>
@@ -161,7 +161,7 @@ function ModalAdd({ onClose, titulo }) {
                         <div className="form-group-text">
                             <div className='inputLabel'>
                                 <label>Descrição:</label>
-                                <textarea 
+                                <textarea
                                     name="descricao"
                                     placeholder="Descrição"
                                     defaultValue={formData.descricao}

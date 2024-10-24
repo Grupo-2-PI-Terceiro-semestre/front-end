@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './ModalAddCliente.css';
 import Swal from 'sweetalert2';
+import HeadeModal from '../header-modal/HeaderModal';
 
 function ModalAddCliente({ onCloseCliente, titulo }) {
 
@@ -104,8 +105,7 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
         <div className={`modal-overlay ${isVisibleAddCliente ? 'visible' : 'hidden'}`}>
             <div className="modal-header">
                 <div className="container-modal">
-                    <h4 className="titulo-modal">{titulo} <button className="botaoFechar" onClick={onCloseCliente}>X</button></h4>
-
+                    <HeadeModal title={titulo} handleClose={onCloseCliente} />
                     <form className="form-modal" onSubmit={handleSubmit}>
                         <div className="form-group">
                             <div className='inputLabel'>

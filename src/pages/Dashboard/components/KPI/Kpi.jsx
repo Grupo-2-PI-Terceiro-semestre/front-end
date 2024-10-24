@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { findDashboardData } from "../../services/dashboardServices";
 import "./Kpi.css";
 
 function Kpi(props) {
-    const { valor, description, icon, percent, iconColor } = props;
+    const { description, icon, iconColor, endPoint, mes, idEmpresa } = props;
+
+    useEffect(() => {
+        buscarReceitaMensal(endPoint, mes, idEmpresa);
+    }, []);
+
+    const [totalReceita, setTotalReceita] = useState(0);
+    const [comparativoReceita, setComparativoReceita] = useState(0);
+
+    const buscarReceitaMensal = async (endPoint, mes, idEmpresa) => {
+        findDashboardData(idEmpresa, mes, endPoint)
+            .then((response) => {
+                setTotalReceita(response.totalReceita);
+                setComparativoReceita(response.comparativoReceita);
+            })
+            .catch((error) => {
+                console.error("Erro ao buscar a receita mensal", error);
+            });
+    };
 
     return (
         <div className="conteiner_kpi">
@@ -11,13 +30,13 @@ function Kpi(props) {
             </div>
             <div className="content_kpi">
                 <div className="valor">
-                    {valor}
+                    {totalReceita}
                 </div>
                 <div className="description">
                     {description}
                 </div>
                 <div className="percent">
-                    {percent}
+                    {comparativoReceita}
                 </div>
             </div>
         </div>

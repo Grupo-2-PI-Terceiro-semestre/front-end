@@ -31,3 +31,6 @@
 .dropdown-item:hover {
     background-color: rgb(51, 0, 255) !important;
 }
+.inputContainer{
+    width: 100%;
+}

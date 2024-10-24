@@ -5,6 +5,7 @@
   border-radius: 10px;
   width: 35%;
   max-height: auto;
+  z-index: 1050;
   margin: auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   color: #ffffff;
@@ -90,14 +91,8 @@
 
 .modal-content {
   position: relative;
-  z-index: 2000;
   height: 100vh;
 }
-
-#overlay {
-  z-index: 2000;
-}
-
 
 .horarios-container {
   display: flex;
@@ -153,4 +148,8 @@
 .inputServicoFunc .detalhe-campo {
   width: 50%;
   display: flex;
+}
+
+.swal2-container {
+  z-index: 2000 !important; /* Valor maior que o modal */
 }

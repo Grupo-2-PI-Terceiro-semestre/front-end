@@ -7,6 +7,7 @@ import { cadastroUser } from '../../authRouter'
 import { auth } from '../../../../services/firebase';
 
 
+
 function Formulario() {
     const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({
@@ -37,7 +38,9 @@ function Formulario() {
             };
             setUser(userData);
             await cadastroUser(userData);
+            toggleBarraContainer();
         } catch (error) {
+            toggleBarraContainer();
             setErrorMessage('Erro ao fazer  com o Google.');
         }
     };
@@ -88,10 +91,10 @@ function Formulario() {
                         <input
                             type="email"
                             name="emailPessoa"
+                            required={true}
                             placeholder="Digite seu email"
                             value={formData.emailPessoa}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                 </div>
@@ -105,7 +108,7 @@ function Formulario() {
                             placeholder="A@12345"
                             defaultValue={formData.senha}
                             onChange={handleChange}
-                            required
+                            required={true}
                         />
                     </div>
                 </div>
@@ -119,7 +122,7 @@ function Formulario() {
                             placeholder="A@12345"
                             defaultValue={formData.confirmar}
                             onChange={handleChange}
-                            required
+                            required={true}
                         />
                     </div>
                 </div>
@@ -127,7 +130,6 @@ function Formulario() {
                 <div className='botoes'>
                     <Button
                         size="60%"
-                        backgroundColor="#0072FF"
                         color="white"
                         content="Cadastrar"
                         onClick={handleSubmit}

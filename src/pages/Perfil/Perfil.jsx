@@ -1,32 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Perfil.css";
 import Menu from "../../components/menu/Menu";
 import BotoesPerfil from "./components/botoesPerfil/BotoesPerfil";
 import FormularioPrincipal from "./components/formularioDadosPrincipais/FormularioPrincipal";
-import IconBreadcrumbs from "../../components/breadcrumb/Breadcrumb";
-import FormularioFuncionamento from "./formularioFuncionamento/FormularioFuncionamento";
-/* import CardLocation from "./components/CardLocation/CardLocation";
- */
+import FormularioFuncionamento from "./components/formularioFuncionamento/FormularioFuncionamento";
+import FormularioLocalizacao from "./components/formularioLocalizacao/FormularioLocalizacao";
+import FormularioNotificacao from "./components/formularioNotificacao/FormularioNotificacao";
 
 function Perfil() {
-    return (
+  const [activeButton, setActiveButton] = useState('dados');
 
-        <div className="main-perfil">
-            <Menu />
+  return (
+    <div className="main-perfil">
+      <Menu />
+      <div className="principal">
+        <div className="conteudo-perfil">
 
-            <div className="principal">
-                <IconBreadcrumbs
-                    paths={[
-                        { label: 'Perfil', href: '/perfil' }
-                    ]}
-                />
-                <div className="conteudo-perfil">
-                    <BotoesPerfil />
-                    <FormularioFuncionamento />
-                </div>
-            </div>
+          <BotoesPerfil activeButton={activeButton} setActiveButton={setActiveButton} />
+            {activeButton === 'dados' && <FormularioPrincipal />}
+            {activeButton === 'localizacao' && <FormularioLocalizacao />}
+            {activeButton === 'horario' && <FormularioFuncionamento />}
+            {activeButton === 'notificacoes' && <FormularioNotificacao />}
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default Perfil;

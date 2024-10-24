@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
-import './style.css'; // Certifique-se de que este arquivo tenha as classes CSS
+import './style.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 
-// Configuração da localidade para o Brasil
 addLocale('br', {
     firstDayOfWeek: 1,
     dayNames: ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'],
@@ -18,11 +17,11 @@ addLocale('br', {
 });
 
 export default function IconDemo({content, onDateChange }) {
-    const [date, setDate] = useState(null); // Estado local para armazenar a data
+    const [date, setDate] = useState(null); 
 
     const handleDateChange = (e) => {
-        setDate(e.value); // Atualiza o estado local com a data selecionada
-        onDateChange(e.value); // Passa a data para o componente pai
+        setDate(e.value); 
+        onDateChange(e.value); 
     };
 
     return (
@@ -31,14 +30,14 @@ export default function IconDemo({content, onDateChange }) {
                 Agenda
             </label>
             <Calendar
-                value={date} // O valor do calendário está diretamente ligado ao estado
-                onChange={handleDateChange} // Atualiza a data
+                value={date}
+                onChange={handleDateChange} 
                 locale="br"
                 id="buttondisplay"
-                className="custom-calendar" // A classe que aplica a transição
+                className="custom-calendar" 
                 placeholder={content}
                 dateFormat="dd/mm/yy"
-                inputStyle={{ width: '100%' }} // Faz o input ocupar toda a largura
+                inputStyle={{ width: '100%' }}
             />
         </div>
     );

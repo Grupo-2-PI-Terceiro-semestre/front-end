@@ -36,7 +36,9 @@ function Dashboard() {
                 <div className="superior">
                     <CardDashboard title="" height="140px" width="500px">
                         <Kpi
-                            valor="R$ 1.000,00"
+                            endPoint = 'agendamentos/empresa'
+                            idEmpresa = "1"
+                            mes = "10"
                             description="Receita Total"
                             icon={
                                 <span className="material-symbols-outlined">
@@ -47,8 +49,8 @@ function Dashboard() {
                             percent="+10% Mês anterior">
                         </Kpi>
                         <Kpi
-                            valor="R$ 1.000,00"
-                            description="Receita Total"
+                            valor="500"
+                            description="Total de Serviços"
                             icon={
                                 <span className="material-symbols-outlined">
                                     select_check_box
@@ -58,8 +60,8 @@ function Dashboard() {
                             percent="+8% Mês Anterior">
                         </Kpi>
                         <Kpi
-                            valor="R$ 1.000,00"
-                            description="Receita Total"
+                            valor="10"
+                            description="Novos clientes"
                             icon={
                                 <span className="material-symbols-outlined">
                                     account_circle
@@ -82,10 +84,10 @@ function Dashboard() {
                     </CardDashboard>
                 </div>
                 <div className="inferior">
-                    <CardDashboard title="Próximos Atendimentos" height="250px" width="620px">
+                    <CardDashboard title="Próximos Atendimentos" height="270px" width="620px">
                     <TabelaDashboard headers={headers2} data={data2} />
                     </CardDashboard>
-                    <CardDashboard title="Receita por Mês" height="250px" width="620px">
+                    <CardDashboard title="Receita por Mês" height="270px" width="620px">
                         <Chart title="" type="spline" seriesData={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20]} xAxisData={['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']} lineColor={'white'} heightChart={200} colorChart={'#3CD856'} />
                     </CardDashboard>
                 </div>
