@@ -8,7 +8,7 @@ import { auth } from '../../../../services/firebase';
 
 
 
-function Formulario() {
+function Formulario({toggleBarraContainer}) {
     const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({
         nomePessoa: '',
@@ -28,6 +28,7 @@ function Formulario() {
         const provider = new GoogleAuthProvider();
         try {
             const result = await signInWithPopup(auth, provider);
+            toggleBarraContainer();
             const user = result.user;
             const userData = {
                 nomePessoa: user.displayName,
@@ -52,6 +53,7 @@ function Formulario() {
         } else {
             try {
                 await cadastroUser(formData);
+                toggleBarraContainer();
                 alert('Cadastro realizado com sucesso!');
                 setFormData({
                     nomePessoa: '',
@@ -62,6 +64,7 @@ function Formulario() {
                     tiposDeUsuario: 'ADMIN'
                 });
             } catch (error) {
+                toggleBarraContainer();
                 setErrorMessage('Erro ao cadastrar o usuário.');
             }
         }

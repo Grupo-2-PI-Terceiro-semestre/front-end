@@ -6,8 +6,6 @@ import Button from '../../../../components/button/Button';
 import iconGoogle from '../../../../assets/logoGoogle.png'
 import { useNavigate } from 'react-router-dom';
 import './FormularioLogin.css'
-import Barra from '../../../../components/barra-load/LinearProgress';
-import Header from '../header/Header.jsx';
 
 const FormularioLogin = ({toggleBarraContainer}) => {
   const [email, setEmail] = useState('');
