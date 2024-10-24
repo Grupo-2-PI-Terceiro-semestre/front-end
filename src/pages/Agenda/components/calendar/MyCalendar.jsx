@@ -18,6 +18,7 @@ import DetalheAgendamento from '../detalhe-agendamento/DetalheAgendamento';
 import ModalAdd from '../modal-add/ModalAdd';
 import Modal from '@mui/material/Modal';
 import Swal from 'sweetalert2'
+import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
 
 
 moment.locale("pt-br");
@@ -106,6 +107,7 @@ const MyDragAndDropCalendar = () => {
   };
 
   const handleDateChange = (day) => {
+    debugger
     buscarColaboradores(formaterDate(day));
     setSelectedDate(day);
   };
@@ -176,23 +178,6 @@ const MyDragAndDropCalendar = () => {
       throw new Error("Erro ao atualizar o agendamento");
     }
   };
-
-  const converterGMTParaBrasilia = (horarioGMT) => {
-    const data = new Date(horarioGMT);
-
-    if (isNaN(data.getTime())) {
-      throw new Error("Horário inválido");
-    }
-
-    const ano = data.getFullYear();
-    const mes = String(data.getMonth() + 1).padStart(2, '0');
-    const dia = String(data.getDate()).padStart(2, '0');
-    const horas = String(data.getHours()).padStart(2, '0');
-    const minutos = String(data.getMinutes()).padStart(2, '0');
-
-    return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
-  }
-
 
   const resizeEvent = (resizeType, { event, start, end }) => {
     const nextEvents = events.map(existingEvent => {
@@ -360,7 +345,8 @@ const MyDragAndDropCalendar = () => {
             onClose={handleCloseModalAdd}
             idEmpresa={user.idEmpresa}
             funcionarios={resources}
-            dateDefoult={converterGMTParaBrasilia(selectedDate)}
+            dateDefault={converterGMTParaBrasilia(selectedDate)}
+            refreshDate={handleDateChange} // Certifique-se de passar corretamente
           />
         </div>
       </Modal>
