@@ -16,10 +16,11 @@ function HomeCliente() {
             <HeaderEmpresa
                 navLinks={[
                     { name: 'Início', url: '/inicio' },
-                    { name: 'Sobre', url: '/sobre' },
-                    { name: 'Contato', url: '/contato' }
+                    { name: 'Sobre', url: '#sobre' },
+                    { name: 'Contato', url: '#contato' }
                 ]}
                 buttonText="Para Empresa"
+                url="/"
                 width="40vw" 
                 widthOpcoes="40%"  
             />
