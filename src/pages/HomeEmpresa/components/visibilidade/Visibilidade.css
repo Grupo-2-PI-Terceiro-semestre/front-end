@@ -21,6 +21,13 @@
     width: 50vw;
 }
 
+
+/* .main-visibilidade .container-visibilidade .textos .titulo h1 {
+    color: black;
+    font-size: 20px;
+    
+} */
+
 .main-visibilidade .container-visibilidade .textos .titulo h1 b {
     color: rgb(0, 114, 255);
 }
