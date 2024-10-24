@@ -2,7 +2,7 @@ import React from "react";
 import './Clientes.css';
 // import ModalAdd from "../../components/modalAdd/ModalAdd";
 import Menu from "../../components/menu/Menu";
-import TelaClientes from "../../components/telaClientes/TelaClientes";
+import TelaClientes from "./components/telaClientes/TelaClientes";
 import HeaderCliente from "../../components/headerCliente/HeaderCliente";
 // import HeaderInterna from "../../components/headerInterna/HeaderInterna";
 
