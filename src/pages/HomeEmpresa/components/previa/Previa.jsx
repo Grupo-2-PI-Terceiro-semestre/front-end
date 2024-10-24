@@ -35,7 +35,7 @@ function Previa() {
 
                     <div className="icones">
                         {/* Ícone 1: Recursos básicos */}
-                        <div
+                        <div 
                             className={`icone1 ${iconeSelecionado === 'icone1' ? 'ativo' : ''}`}
                             onClick={() => handleIconClick(telaNote, 'icone1')}
                         >

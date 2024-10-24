@@ -4,6 +4,7 @@ import HeadeModal from "../header-modal/HeaderModal";
 import './ModalEditarCliente.css';
 // import { useNavigate } from "react-router-dom";
 // import { useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function ModalEditarCliente({ onClose, titulo }) {
 
@@ -35,21 +36,57 @@ function ModalEditarCliente({ onClose, titulo }) {
         setFormData({ ...formData, corReferencia: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            // await api.put(`/${idCard}`, {
-            await cadastroService(formData);
-            alert('Cadastro realizado com sucesso!');
-            setFormData({
-                nomeCliente: '',
-                telefoneCliente: '',
-                emailCliente: '',
-                representante: "true",
-            });
-        } catch (error) {
-            setErrorMessage('Erro ao cadastrar o serviço.');
-        }
+    const handleSubmit = () => {
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Tem certeza?",
+            text: "O cliente será editado!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, editar!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire({
+                    title: "Editado!",
+                    text: "O cliente foi editado.",
+                    icon: "success"
+                });
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelado",
+                    text: "O cliente não foi editado",
+                    icon: "error"
+                });
+            }
+        });
+
+
+        // e.preventDefault();
+        // try {
+        //     // await api.put(`/${idCard}`, {
+        //     await cadastroService(formData);
+        //     alert('Cadastro realizado com sucesso!');
+        //     setFormData({
+        //         nomeCliente: '',
+        //         telefoneCliente: '',
+        //         emailCliente: '',
+        //         representante: "true",
+        //     });
+        // } catch (error) {
+        //     setErrorMessage('Erro ao cadastrar o serviço.');
+        // }
     };
 
     const handleClose = () => {
@@ -69,9 +106,9 @@ function ModalEditarCliente({ onClose, titulo }) {
                                 <input
                                     className="input"
                                     type="text"
-                                    name="nomeServico"
-                                    placeholder="Nome do Serviço"
-                                    value={formData.nomeServico}
+                                    name="nomeCliente"
+                                    placeholder="Nome do Cliente"
+                                    value={formData.nomeCliente}
                                     onChange={handleChange}
                                     required
                                 />
@@ -84,9 +121,9 @@ function ModalEditarCliente({ onClose, titulo }) {
                                 <input
                                     className="input"
                                     type="text"
-                                    name="tempoExecucao"
+                                    name="telefoneCliente"
                                     placeholder="(XX) XXXXX-XXXX"
-                                    defaultValue={formData.tempoExecucao}
+                                    defaultValue={formData.telefoneCliente}
                                     onChange={handleChange}
                                     required
                                 />
@@ -99,9 +136,9 @@ function ModalEditarCliente({ onClose, titulo }) {
                                 <input
                                     className="input"
                                     type="email"
-                                    name="emailPessoa"
-                                    placeholder="Digite seu email"
-                                    value={formData.emailPessoa}
+                                    name="emailCliente"
+                                    placeholder="Digite o email"
+                                    value={formData.emailCliente}
                                     onChange={handleChange}
                                     required
                                 />
