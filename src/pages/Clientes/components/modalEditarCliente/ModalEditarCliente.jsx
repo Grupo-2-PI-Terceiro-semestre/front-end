@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import HeadeModal from "../header-modal/HeaderModal";
-// import './ModalEditarCliente.css';
+import HeadeModal from '../../../../components/header-modal/HeaderModal';
 import './ModalEditarCliente.css';
 // import { useNavigate } from "react-router-dom";
 // import { useParams } from "react-router-dom";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './ModalAddCliente.css';
 import Swal from 'sweetalert2';
-import HeadeModal from '../header-modal/HeaderModal';
+import HeadeModal from '../../../../components/header-modal/HeaderModal';
 
 function ModalAddCliente({ onCloseCliente, titulo }) {
 
