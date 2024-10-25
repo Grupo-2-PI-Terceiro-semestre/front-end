@@ -5,10 +5,13 @@ import Button from '../../../../components/button/Button';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { cadastroUser } from '../../authRouter'
 import { auth } from '../../../../services/firebase';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Formulario({toggleBarraContainer}) {
+    const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('');
     const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({
         nomePessoa: '',
@@ -40,6 +43,7 @@ function Formulario({toggleBarraContainer}) {
             setUser(userData);
             await cadastroUser(userData);
             toggleBarraContainer();
+            navigate('/login')
         } catch (error) {
             toggleBarraContainer();
             setErrorMessage('Erro ao fazer  com o Google.');
@@ -63,6 +67,7 @@ function Formulario({toggleBarraContainer}) {
                     tiposDeUsuario: 'ADMIN'
                 });
                 toggleBarraContainer();
+                navigate('/login')
             } catch (error) {
                 toggleBarraContainer();
                 setErrorMessage('Erro ao cadastrar o usuário.');
@@ -129,7 +134,7 @@ function Formulario({toggleBarraContainer}) {
                         />
                     </div>
                 </div>
-
+                {errorMessage && <p className='error-message'>{errorMessage}</p>}
                 <div className='botoes'>
                     <Button
                         size="60%"
