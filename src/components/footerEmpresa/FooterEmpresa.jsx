@@ -22,10 +22,10 @@ function FooterEmpresa({ showLinks = true }) {
                 <div className="borda">
                     {showLinks && (
                         <div className="titulos">
-                            <label htmlFor="text">Início</label>
-                            <label htmlFor="text">Login</label>
-                            <label htmlFor="text">Cadastrar</label>
-                        </div>
+                        <a href="/">Início</a>
+                        <a href="/login">Login</a>
+                        <a href="/cadastro">Cadastrar</a>
+                    </div>
                     )}
 
                     <div className="icones">
