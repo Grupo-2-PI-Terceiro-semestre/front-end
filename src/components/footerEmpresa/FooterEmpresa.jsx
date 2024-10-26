@@ -17,22 +17,34 @@ function FooterEmpresa({ showLinks = true }) {
     };
 
     return (
-        <div className="main-footer-empresa">
+        <div id='contato' className="main-footer-empresa">
             <div className="container-footer-empresa">
                 <div className="borda">
                     {showLinks && (
                         <div className="titulos">
-                            <label htmlFor="text">Início</label>
-                            <label htmlFor="text">Login</label>
-                            <label htmlFor="text">Cadastrar</label>
-                        </div>
+                        <a href="/">Início</a>
+                        <a href="/login">Login</a>
+                        <a href="/cadastro">Cadastrar</a>
+                    </div>
                     )}
 
                     <div className="icones">
+
+                        <a href="https://www.instagram.com/">
                         <FontAwesomeIcon icon={faInstagram} className="icon" />
+                        </a>
+                        <a href="https://www.facebook.com/?locale=pt_BR">
                         <FontAwesomeIcon icon={faFacebookF} className="icon" />
+                        </a>
+                        <a href="https://www.youtube.com/">
                         <FontAwesomeIcon icon={faYoutube} className="icon" />
+                        </a>
+                        
                     </div>
+
+
+
+                    
                 </div>
 
                 <div className="info">

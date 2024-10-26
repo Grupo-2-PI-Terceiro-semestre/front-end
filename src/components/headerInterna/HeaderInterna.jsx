@@ -3,7 +3,7 @@ import './HeaderInterna.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import ModalAdd from "../modalAdd/ModalAdd";
-import ModalAddCliente from "../modalAddCliente/ModalAddCliente";
+import ModalAddCliente from "../../pages/Clientes/components/modalAddCliente/ModalAddCliente";
 
 function HeaderInterna({ texto }) {
 

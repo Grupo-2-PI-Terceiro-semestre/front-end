@@ -63,39 +63,44 @@
     justify-content: space-evenly;
 }
 
+
+.main-previa .container-previa .paragrafo .icones label{
+    cursor: pointer;
+}
+
 .main-previa .container-previa .paragrafo .icones .icone1 {
     display: flex;
     align-items: center;
-    gap: 6px
+    gap: 6px;
+    cursor: pointer;
+    gap: 6px;
+    cursor: pointer;
 }
 
 .main-previa .container-previa .paragrafo .icones .icone2 {
     display: flex;
     align-items: center;
-    gap: 6px
+    gap: 6px;
+    cursor: pointer;
+    gap: 6px;
+    cursor: pointer;
 }
 
 .main-previa .container-previa .paragrafo .icones .icone3 {
     display: flex;
     align-items: center;
-    gap: 6px
+    gap: 6px;
+    cursor: pointer;
+    gap: 6px;
+    cursor: pointer;
 }
 
 .main-previa .container-previa .paragrafo .icones .icone4 {
     display: flex;
     align-items: center;
-    gap: 6px
+    gap: 6px;
+    cursor: pointer;
 }
-
-/* .main-previa .container-previa .paragrafo .icones .icone1 .icon-calendar {
-    color: rgb(0, 114, 255);
-    height: 3vh;
-}
-
-.main-previa .container-previa .paragrafo .icones .icone1 label {
-    color: rgb(0, 114, 255);
-    font-size: 1.1 rem;
-} */
 
 .ativo .icon-calendar,
 .ativo .icon-hands,

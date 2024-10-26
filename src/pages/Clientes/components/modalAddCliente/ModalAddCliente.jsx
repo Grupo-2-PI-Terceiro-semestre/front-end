@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './ModalAddCliente.css';
-import HeadeModal from '../header-modal/HeaderModal';
+import Swal from 'sweetalert2';
+import HeadeModal from '../../../../components/header-modal/HeaderModal';
 
 function ModalAddCliente({ onCloseCliente, titulo }) {
 
@@ -33,19 +34,54 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
         setFormData({ ...formData, corReferencia: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await cadastroService(formData);
-            alert('Cadastro realizado com sucesso!');
-            setFormData({
-                nomeCliente: '',
-                telefoneCliente: '',
-                emailCliente: '',
-            });
-        } catch (error) {
-            setErrorMessage('Erro ao cadastrar o cliente.');
-        }
+    const handleSubmit = () => {
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Tem certeza?",
+            text: "Um novo cliente será criado!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, cadastrar!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cadastrado!",
+                    text: "O cliente foi cadastrado.",
+                    icon: "success"
+                });
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelado",
+                    text: "O cliente não foi cadastrado",
+                    icon: "error"
+                });
+            }
+        });
+
+        // e.preventDefault();
+        // try {
+        //     await cadastroService(formData);
+        //     alert('Cadastro realizado com sucesso!');
+        //     setFormData({
+        //         nomeCliente: '',
+        //         telefoneCliente: '',
+        //         emailCliente: '',
+        //     });
+        // } catch (error) {
+        //     setErrorMessage('Erro ao cadastrar o cliente.');
+        // }
     };
 
     // const handleSubmit = async (e) => {
@@ -77,9 +113,9 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
                                 <input
                                     className="input"
                                     type="text"
-                                    name="nomeServico"
-                                    placeholder="Nome do Serviço"
-                                    value={formData.nomeServico}
+                                    name="nomeCliente"
+                                    placeholder="Nome do Cliente"
+                                    value={formData.nomeCliente}
                                     onChange={handleChange}
                                     required
                                 />
@@ -92,9 +128,9 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
                                 <input
                                     className="input"
                                     type="text"
-                                    name="tempoExecucao"
+                                    name="telefoneCliente"
                                     placeholder="(XX) XXXXX-XXXX"
-                                    defaultValue={formData.tempoExecucao}
+                                    defaultValue={formData.telefoneCliente}
                                     onChange={handleChange}
                                     required
                                 />
@@ -107,9 +143,9 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
                                 <input
                                     className="input"
                                     type="email"
-                                    name="emailPessoa"
-                                    placeholder="Digite seu email"
-                                    value={formData.emailPessoa}
+                                    name="emailCliente"
+                                    placeholder="Digite o email"
+                                    value={formData.emailCliente}
                                     onChange={handleChange}
                                     required
                                 />

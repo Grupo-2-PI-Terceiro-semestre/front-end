@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderEmpresa from "../../components/headerEmpresa/HeaderEmpresa";
-import Carrossel from "./components/carrossel/Carrossel"
+import Carrossel from "./components/carrossel/Carrossel";
 import AboutUs from "./components/aboutUs/AboutUs";
 import './HomeEmpresa.css';
 import Previa from "./components/previa/Previa";
@@ -12,7 +12,8 @@ import FooterEmpresa from "../../components/footerEmpresa/FooterEmpresa";
 function HomeEmpresa() {
   return (
     <div className="main-home">
-      <HeaderEmpresa width="60vw"
+      <HeaderEmpresa
+        width="60vw"
         navLinks={[
           { name: 'Início', url: '#inicio' },
           { name: 'Sobre', url: '#sobre' },
@@ -22,9 +23,9 @@ function HomeEmpresa() {
           { name: 'Login', url: '/login' }
         ]}
         buttonText="Para Clientes"
+        url="/cliente"
       />
 
-      {/* <FirstSectionEmpresa /> */}
       <Carrossel />
       <AboutUs />
       <Previa />

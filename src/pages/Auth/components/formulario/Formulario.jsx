@@ -5,10 +5,13 @@ import Button from '../../../../components/button/Button';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { cadastroUser } from '../../authRouter'
 import { auth } from '../../../../services/firebase';
+import { useNavigate } from 'react-router-dom';
 
 
 
-function Formulario() {
+function Formulario({toggleBarraContainer}) {
+    const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('');
     const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({
         nomePessoa: '',
@@ -27,6 +30,7 @@ function Formulario() {
     const handleGoogleSignIn = async () => {
         const provider = new GoogleAuthProvider();
         try {
+            toggleBarraContainer();
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
             const userData = {
@@ -39,6 +43,7 @@ function Formulario() {
             setUser(userData);
             await cadastroUser(userData);
             toggleBarraContainer();
+            navigate('/login')
         } catch (error) {
             toggleBarraContainer();
             setErrorMessage('Erro ao fazer  com o Google.');
@@ -51,8 +56,8 @@ function Formulario() {
             setErrorMessage('As senhas não coincidem');
         } else {
             try {
+                toggleBarraContainer();
                 await cadastroUser(formData);
-                alert('Cadastro realizado com sucesso!');
                 setFormData({
                     nomePessoa: '',
                     emailPessoa: '',
@@ -61,7 +66,10 @@ function Formulario() {
                     confirmar: '',
                     tiposDeUsuario: 'ADMIN'
                 });
+                toggleBarraContainer();
+                navigate('/login')
             } catch (error) {
+                toggleBarraContainer();
                 setErrorMessage('Erro ao cadastrar o usuário.');
             }
         }
@@ -126,7 +134,7 @@ function Formulario() {
                         />
                     </div>
                 </div>
-
+                {errorMessage && <p className='error-message'>{errorMessage}</p>}
                 <div className='botoes'>
                     <Button
                         size="60%"

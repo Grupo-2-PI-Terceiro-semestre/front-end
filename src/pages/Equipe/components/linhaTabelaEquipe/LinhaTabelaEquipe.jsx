@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import './LinhaClientes.css';
+import './LinhaTabelaEquipe.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-// import { faClipboard } from '@fortawesome/free-regular-svg-icons';
-import ModalExcluir from "../modalExcluir/ModalExcluir";
+import { faClipboard } from '@fortawesome/free-regular-svg-icons';
+// import ModalExcluir from "../../../../components/modalExcluir/ModalExcluir";
 // import ModalEditar from "../modalEditar/ModalEditar";
-import ModalEditarCliente from "../modalEditarCliente/ModalEditarCliente";
-// import ModalDesc from "../modalDesc/ModalDesc";
+// import ModalDesc from "../../../../components/modalDesc/ModalDesc";
 
-function LinhaClientes({ nome, telefone, email }) {
+function LinhaTabelaEquipe({ nome, telefone, funcao, visivel }) {
 
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
     const [isModalOpenExcluir, setIsModalOpenExcluir] = useState(false);
+    const [isModalOpenDesc, setIsModalOpenDesc] = useState(false);
 
     const openModalExcluir = () => {
         setIsModalOpenExcluir(true);
@@ -30,48 +30,51 @@ function LinhaClientes({ nome, telefone, email }) {
         setIsModalOpen(false);
     };
 
-    // const openModalDesc = () => {
-    //     setIsModalOpenDesc(true);
-    // };
+    const openModalDesc = () => {
+        setIsModalOpenDesc(true);
+    };
 
-    // const closeModalDesc = () => {
-    //     setIsModalOpenDesc(false);
-    // };
+    const closeModalDesc = () => {
+        setIsModalOpenDesc(false);
+    };
 
     return (
         <>
-            <div className="container-linha-cliente">
+            <div className="container-linha-tabela">
                 <div className="tabela">
 
                     <div className="linha">
-                    
+                        {/* <div className="cor">
+                            
+                        </div> */}
                         <label htmlFor="text">{nome}</label>
                         <label htmlFor="text">{telefone}</label>
-                        <label htmlFor="text">{email}</label>
+                        <label htmlFor="text">{funcao}</label>
+                        <label htmlFor="text">{visivel}</label>
                         <label className="icons" htmlFor="text">
 
                             <FontAwesomeIcon onClick={openModalEditar} icon={faPenToSquare} className="icon-pen" />
                             <FontAwesomeIcon onClick={openModalExcluir} icon={faTrashCan} className="icon-trash" />
-                            {/* <FontAwesomeIcon onClick={openModalDesc} icon={faClipboard} className="icon-clip" /> */}
+                            <FontAwesomeIcon onClick={openModalDesc} icon={faClipboard} className="icon-clip" />
                         </label>
                     </div>
                 </div>
 
                 {isModalOpenEditar && (
-                    <ModalEditarCliente onClose={closeModalEditar} titulo="Editar Cliente" />
+                    <ModalEditar onClose={closeModalEditar} titulo="Editar Colaborador" />
                 )}
 
                 {isModalOpenExcluir && (
-                    <ModalExcluir tipo="esse cliente" onClose={closeModalExcluir} />
+                    <ModalExcluir tipo="esse colaborador" onClose={closeModalExcluir} />
                 )}
 
-                {/* {isModalOpenDesc && (
+                {isModalOpenDesc && (
                     <ModalDesc onClose={closeModalDesc} />
-                )} */}
+                )}
             </div>
 
         </>
     )
 }
 
-export default LinhaClientes;
+export default LinhaTabelaEquipe;
