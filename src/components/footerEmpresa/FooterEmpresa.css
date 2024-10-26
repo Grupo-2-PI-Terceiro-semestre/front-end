@@ -29,6 +29,14 @@
     display: flex;
     justify-content: space-between;
 }
+.main-footer-empresa .container-footer-empresa .borda .titulos a {
+    color: white;
+    text-decoration: none;
+}
+
+.main-footer-empresa .container-footer-empresa .borda .titulos a:hover {
+    color: rgb(0, 114, 255); /* Efeito de hover para os links */
+}
 
 .main-footer-empresa .container-footer-empresa .borda .titulos label {
     cursor: pointer;
