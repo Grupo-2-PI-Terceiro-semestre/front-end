@@ -1,0 +1,128 @@
+.modal-agendamento {
+    position: fixed;
+    top: 0;
+    right: -30vw; /* Inicialmente fora da tela */
+    width: 30vw;
+    height: 100vh;
+    background: rgb(33, 34, 45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    border-radius: 20px 0 0 20px;
+    overflow: hidden;
+    transition: right 0.4s ease; /* Transição suave */
+}
+
+.modal-aberto {
+    right: 0;
+}
+
+.modal-fechado {
+    right: -30vw; 
+}
+
+.container-modal {
+    height: 88vh;
+    width: 26vw;
+    display: flex;
+    flex-wrap: wrap;
+} 
+
+.container-modal .botao {
+    background-color: #ff5f5f;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.container-modal .form-modal {
+    margin-top: 3rem;
+    height: 60vh;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-direction: column;
+
+}
+
+.form-agendamento {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    height: auto;
+}
+
+.form-agendamento .dropdown-item {
+    color: white;
+}
+
+.form-agendamento .dropdown-item:hover {
+    font-weight: bold;
+    color: white;
+}
+
+.css-1dune0f-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 0 5px !important;
+}
+
+.form-agendamento input {
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    border: none;
+    padding: 0 5px !important;
+    border-radius: 5px;
+    background-color: #171821;
+    width: 100%;
+    color: #eee;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    outline: 1px solid 444;
+}
+
+.form-agendamento button {
+    padding: 5px !important;
+    font-size: 1rem;
+    margin-top: 0 !important;
+}
+
+.form-agendamento label {
+    color: white;
+}
+
+.form-agendamento .autocomplete {
+    width: 100%;
+}
+
+.button-agendar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-agendamento .inputLabel .cliente-plus {
+    width: 26vw;
+    /* border: 1px solid blue; */
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+
+.form-agendamento .inputLabel .cliente-plus .icon-plus {
+    cursor: pointer;
+    color: white;
+    z-index: 1;
+}
+
+.form-agendamento .inputLabel .cliente-plus .input-cliente-plus {
+    width: 23vw;
+    /* border: 1px solid red; */
+}
+
+.form-agendamento .inputLabel .cliente-plus .input-cliente-plus .input-cliente {
+    width: 20vw;
+}
