@@ -31,7 +31,7 @@ function Visibilidade() {
     }, []);
 
     return (
-        <div id="contato" className="main-visibilidade">
+        <div  className="main-visibilidade">
             <div className="container-visibilidade">
                 <div className="textos">
                     <div className="tituloVisibilidade">
@@ -44,8 +44,11 @@ function Visibilidade() {
                     </div>
 
                     <div className="botao">
-                        <button>Comece a testar gratuitamente</button>
+                        <button onClick={() => window.location.href = '/cadastro'}>
+                            Comece a testar gratuitamente
+                        </button>
                     </div>
+
                 </div>
 
                 <div className="imagem" ref={imageRef}>
