@@ -3,10 +3,6 @@ import './LinhaTabelaEquipe.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faClipboard } from '@fortawesome/free-regular-svg-icons';
-// import ModalExcluir from "../../../../components/modalExcluir/ModalExcluir";
-// import ModalEditar from "../modalEditar/ModalEditar";
-// import ModalDesc from "../../../../components/modalDesc/ModalDesc";
 
 function LinhaTabelaEquipe({ nome, telefone, funcao, visivel }) {
 
@@ -55,7 +51,6 @@ function LinhaTabelaEquipe({ nome, telefone, funcao, visivel }) {
 
                             <FontAwesomeIcon onClick={openModalEditar} icon={faPenToSquare} className="icon-pen" />
                             <FontAwesomeIcon onClick={openModalExcluir} icon={faTrashCan} className="icon-trash" />
-                            <FontAwesomeIcon onClick={openModalDesc} icon={faClipboard} className="icon-clip" />
                         </label>
                     </div>
                 </div>
