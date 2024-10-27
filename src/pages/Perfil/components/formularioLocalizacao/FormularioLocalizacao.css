@@ -14,3 +14,19 @@
 .personalize input {
     width: 100%;
 }
+
+.input-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  
+  .loading-icon {
+    position: absolute;
+    right: 30px; /* Alinha o loader ao lado direito */
+    top: 50%;
+    transform: translateY(-40%); /* Centraliza verticalmente */
+    pointer-events: none; /* Não bloqueia interações com o input */
+  }
