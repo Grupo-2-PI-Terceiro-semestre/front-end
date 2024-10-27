@@ -107,7 +107,6 @@ const MyDragAndDropCalendar = () => {
   };
 
   const handleDateChange = (day) => {
-    debugger
     buscarColaboradores(formaterDate(day));
     setSelectedDate(day);
   };
