@@ -73,7 +73,7 @@
 .container-tela-equipe .tabelaCompleta .tituloTabela {
     display: flex;
     align-items: center;
-    width: 77vw;
+    width: 76vw;
     height: 5vh;
     color: white;
     padding: 0 1.2vw;
@@ -86,7 +86,7 @@
 
 .container-tela-equipe .tabelaCompleta .tituloTabela label {
     text-align: center;
-    width: 22vw;
+    width: 15vw;
 }
 
 .container-linha-tabela .tabela .linha {
