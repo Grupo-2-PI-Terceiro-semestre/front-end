@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FaCalendarAlt, FaUser, FaChartBar, FaUsers, FaBriefcase, FaSignOutAlt, FaServicestack } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { findByEmpresa, uploadImage } from '../../services/empresaServices';
 import Cookies from 'js-cookie';
 import './Menu.css';
 import Tooltip from '@mui/material/Tooltip';
-import Swal from 'sweetalert2';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Menu = ({ activeMenuItem }) => {
   const [user, setUser] = useState(null);
   const [empresa, setEmpresa] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const timeoutRef = useRef(null);
+
+  const logoutSuccess = () => {
+    toast.info("Logout realizado com sucesso!", {
+      toastStyle: { backgroundColor: '#2196F3', color: '#fff' }, // Azul com texto branco
+    });
+  }
 
   useEffect(() => {
     const userData = Cookies.get('user');
@@ -45,18 +51,14 @@ const Menu = ({ activeMenuItem }) => {
   };
 
   const logout = () => {
-    Swal.fire({
-      position: "top-end",
-      icon: "info",
-      title: "Logout",
-      showConfirmButton: false,
-      timer: 1500
-    });
-    Cookies.remove('token');
-    Cookies.remove('user');
-    Cookies.remove('empresa');
-    navigate('/login');
-  }
+    logoutSuccess();
+    timeoutRef.current = setTimeout(() => {
+      navigate('/login');
+      Cookies.remove('token');
+      Cookies.remove('user');
+      Cookies.remove('empresa');
+    }, 2500);
+  };
 
   const handleUploadImage = async (selectedFile) => {
     if (!selectedFile) {
@@ -85,6 +87,7 @@ const Menu = ({ activeMenuItem }) => {
 
   return (
     <div className="sidebar">
+      <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} />
       <div className="profile">
         <input
           type="file"
@@ -138,6 +141,7 @@ const Menu = ({ activeMenuItem }) => {
         <span>Sair</span>
       </div>
     </div>
+
   );
 }
 export default Menu;
