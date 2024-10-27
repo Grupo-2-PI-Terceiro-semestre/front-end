@@ -1,7 +1,9 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import useAuth from '../router/useAuth';
 
 const API_URL = import.meta.env.VITE_API_URL;
+const { logout } = useAuth();
 
 if (!import.meta.env.PROD) {
     console.log('API URL:', import.meta.env.VITE_API_URL);
@@ -29,14 +31,16 @@ export const getData = async (endpoint, pathParams = {}, queryParams = {}) => {
 
         return response;
     } catch (error) {
-        console.error(`Erro ao fazer GET no endpoint ${formattedEndpoint}:`, error);
+        if (error.status === 401) {
+            logout();
+        }
         throw error;
     }
 };
 
 export const postData = async (endpoint, data, pathParams = {}, queryParams = {}) => {
+    let formattedEndpoint = endpoint;
     try {
-        let formattedEndpoint = endpoint;
         for (const [key, value] of Object.entries(pathParams)) {
             formattedEndpoint = formattedEndpoint.replace(`:${key}`, value);
         }
@@ -54,7 +58,9 @@ export const postData = async (endpoint, data, pathParams = {}, queryParams = {}
 
         return response;
     } catch (error) {
-        console.error(`Erro ao fazer POST em ${formattedEndpoint}:`, error);
+        if (error.status === 401) {
+            logout();
+        }
         throw error;
     }
 };
@@ -79,7 +85,9 @@ export const putData = async (endpoint, data, pathParams = {}, queryParams = {})
 
         return response;
     } catch (error) {
-        console.error(`Erro ao fazer PUT em ${formattedEndpoint}:`, error);
+        if (error.status === 401) {
+            logout();
+        }
         throw error;
     }
 };
@@ -104,7 +112,9 @@ export const deleteData = async (endpoint, pathParams = {}, queryParams = {}) =>
 
         return response;
     } catch (error) {
-        console.error(`Erro ao fazer DELETE em ${formattedEndpoint}:`, error);
+        if (error.status === 401) {
+            logout();
+        }
         throw error;
     }
 };
