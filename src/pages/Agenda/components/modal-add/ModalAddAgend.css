@@ -14,14 +14,12 @@
     transition: right 0.4s ease; /* Transição suave */
 }
 
-/* Quando o modal está visível */
 .modal-aberto {
-    right: 0; /* Modal entra na tela */
+    right: 0;
 }
 
-/* Quando o modal está fechado */
 .modal-fechado {
-    right: -30vw; /* Modal sai da tela */
+    right: -30vw; 
 }
 
 .container-modal {
@@ -104,4 +102,27 @@
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.form-agendamento .inputLabel .cliente-plus {
+    width: 26vw;
+    /* border: 1px solid blue; */
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+
+.form-agendamento .inputLabel .cliente-plus .icon-plus {
+    cursor: pointer;
+    color: white;
+    z-index: 1;
+}
+
+.form-agendamento .inputLabel .cliente-plus .input-cliente-plus {
+    width: 23vw;
+    /* border: 1px solid red; */
+}
+
+.form-agendamento .inputLabel .cliente-plus .input-cliente-plus .input-cliente {
+    width: 20vw;
 }

@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie';
-
 import { postData } from '../../router/router';
 
 export const loginUser = async (userData) => {
@@ -22,5 +21,11 @@ export const loginUser = async (userData) => {
 };
 
 export const cadastroUser = async (userData) => {
-    return await postData('usuarios', userData);
+    try {
+        const response = await postData('usuarios', userData);
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao cadastrar usuário", error);
+        throw error;
+    }
 };

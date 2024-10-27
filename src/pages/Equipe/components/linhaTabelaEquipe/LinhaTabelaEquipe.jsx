@@ -1,61 +1,56 @@
 import React, { useState } from "react";
 import './LinhaTabelaEquipe.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faClipboard } from '@fortawesome/free-regular-svg-icons';
-// import ModalExcluir from "../../../../components/modalExcluir/ModalExcluir";
-// import ModalEditar from "../modalEditar/ModalEditar";
-// import ModalDesc from "../../../../components/modalDesc/ModalDesc";
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 function LinhaTabelaEquipe({ nome, telefone, funcao, visivel }) {
-
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
     const [isModalOpenExcluir, setIsModalOpenExcluir] = useState(false);
     const [isModalOpenDesc, setIsModalOpenDesc] = useState(false);
 
-    const openModalExcluir = () => {
-        setIsModalOpenExcluir(true);
-    };
+    const openModalEditar = () => setIsModalOpen(true);
+    const closeModalEditar = () => setIsModalOpen(false);
 
-    const closeModalExcluir = () => {
-        setIsModalOpenExcluir(false);
-    };
+    const openModalExcluir = () => setIsModalOpenExcluir(true);
+    const closeModalExcluir = () => setIsModalOpenExcluir(false);
 
-    const openModalEditar = () => {
-        setIsModalOpen(true);
-    };
+    const openModalDesc = () => setIsModalOpenDesc(true);
+    const closeModalDesc = () => setIsModalOpenDesc(false);
 
-    const closeModalEditar = () => {
-        setIsModalOpen(false);
-    };
-
-    const openModalDesc = () => {
-        setIsModalOpenDesc(true);
-    };
-
-    const closeModalDesc = () => {
-        setIsModalOpenDesc(false);
-    };
+    const renderTooltip = (message) => <Tooltip>{message}</Tooltip>;
 
     return (
         <>
             <div className="container-linha-tabela">
                 <div className="tabela">
-
                     <div className="linha">
-                        {/* <div className="cor">
-                            
-                        </div> */}
                         <label htmlFor="text">{nome}</label>
                         <label htmlFor="text">{telefone}</label>
                         <label htmlFor="text">{funcao}</label>
                         <label htmlFor="text">{visivel}</label>
                         <label className="icons" htmlFor="text">
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={renderTooltip("Editar")}
+                            >
+                                <FontAwesomeIcon
+                                    onClick={openModalEditar}
+                                    icon={faPenToSquare}
+                                    className="icon-pen"
+                                />
+                            </OverlayTrigger>
 
-                            <FontAwesomeIcon onClick={openModalEditar} icon={faPenToSquare} className="icon-pen" />
-                            <FontAwesomeIcon onClick={openModalExcluir} icon={faTrashCan} className="icon-trash" />
-                            <FontAwesomeIcon onClick={openModalDesc} icon={faClipboard} className="icon-clip" />
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={renderTooltip("Excluir")}
+                            >
+                                <FontAwesomeIcon
+                                    onClick={openModalExcluir}
+                                    icon={faTrashCan}
+                                    className="icon-trash"
+                                />
+                            </OverlayTrigger>
                         </label>
                     </div>
                 </div>
@@ -72,9 +67,8 @@ function LinhaTabelaEquipe({ nome, telefone, funcao, visivel }) {
                     <ModalDesc onClose={closeModalDesc} />
                 )}
             </div>
-
         </>
-    )
+    );
 }
 
 export default LinhaTabelaEquipe;

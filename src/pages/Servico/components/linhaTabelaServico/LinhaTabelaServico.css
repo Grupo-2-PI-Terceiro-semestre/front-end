@@ -2,8 +2,9 @@
     width: 76vw;
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center; /* Mudei para 'center' para melhor alinhamento */
     height: 7vh;
+    overflow: hidden;
 }
 
 .container-linha-tabela .tabela {
@@ -31,21 +32,21 @@
     border-radius: 2px;
 }
 
-.container-linha-tabela .tabela .linha .icons .icon-pen {
-    color: rgb(224, 175, 0);
-    cursor: pointer;
-    height: 2.5vh;
-}
-
-.container-linha-tabela .tabela .linha .icons .icon-trash {
-    color: rgb(202 2 2);
-    cursor: pointer;
-    height: 2.5vh;
-}
-
+.container-linha-tabela .tabela .linha .icons .icon-pen,
+.container-linha-tabela .tabela .linha .icons .icon-trash,
 .container-linha-tabela .tabela .linha .icons .icon-clip {
     cursor: pointer;
     height: 2.5vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.container-linha-tabela .tabela .linha .icons .icon-pen {
+    color: rgb(224, 175, 0);
+}
+
+.container-linha-tabela .tabela .linha .icons .icon-trash {
+    color: rgb(202, 2, 2);
 }
 
 .container-linha-tabela .tabela .linha label {
@@ -53,6 +54,6 @@
     text-align: center;
 }
 
-.container-linha-tabela .tabela .linha label:last-child {
-    text-align: center;
+.tooltip {
+    position: fixed !important;
 }

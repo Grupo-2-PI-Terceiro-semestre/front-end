@@ -5,7 +5,7 @@ import { findServicos, findClientes, CancelarAgendamento } from '../../services/
 import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 
 const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose, refreshDate }) => {

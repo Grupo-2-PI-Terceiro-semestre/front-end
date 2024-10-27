@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './ModalAddCliente.css';
 import Swal from 'sweetalert2';
-import HeadeModal from '../../../../components/header-modal/HeaderModal';
+import HeadeModal from "../../../../components/header-modal/HeaderModal";
 
 function ModalAddCliente({ onCloseCliente, titulo }) {
 
@@ -69,35 +69,11 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
                 });
             }
         });
-
-        // e.preventDefault();
-        // try {
-        //     await cadastroService(formData);
-        //     alert('Cadastro realizado com sucesso!');
-        //     setFormData({
-        //         nomeCliente: '',
-        //         telefoneCliente: '',
-        //         emailCliente: '',
-        //     });
-        // } catch (error) {
-        //     setErrorMessage('Erro ao cadastrar o cliente.');
-        // }
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         await cadastroService(formData);  // Função de cadastro que você já tem
-    //         alert('Cadastro realizado com sucesso!');
-    //         setFormData(initialFormData);  // Reseta o formulário
-    //     } catch (error) {
-    //         alert('Erro ao cadastrar o serviço.');
-    //     }
-    // };
-
     const handleClose = () => {
-        setIsVisibleAdd(false); // Inicia a animação de saída
-        setTimeout(onCloseCliente, 300); // Fecha o modal após a animação
+        setIsVisibleAdd(false);
+        setTimeout(onCloseCliente, 300);
     };
 
     return (

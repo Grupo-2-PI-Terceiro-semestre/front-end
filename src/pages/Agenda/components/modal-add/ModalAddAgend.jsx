@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import './ModalAdd.css';
+import React, { useState, useEffect } from 'react';
+import './ModalAddAgend.css';
 import { findServicos, findClientes, createAgendamento } from '../../services/agendaServices';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
@@ -10,10 +10,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import ModalClienteAgend from '../modal-add-cliente/ModalClienteAgend';
+import Tooltip from '@mui/material/Tooltip';
 
-
-
-function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault, refreshDate }) {
+function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshDate }) {
 
     const [servicos, setServicos] = useState([]);
     const [clientes, setClientes] = useState([]);
@@ -23,6 +25,7 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault, refreshDate }
     const [dataHoraAgendamento, setDataHoraAgendamento] = useState('');
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isModalOpenAddCliente, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         buscarServicos(idEmpresa);
@@ -118,6 +121,14 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault, refreshDate }
         }
     };
 
+    const openModalAddCliente = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModalAddCliente = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div className={`modal-agendamento ${isVisible ? 'modal-aberto' : 'modal-fechado'}`}>
             <div className="container-modal">
@@ -125,14 +136,22 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault, refreshDate }
                 <form className="form-modal" onSubmit={handleSubmit} noValidate>
                     <div className="form-agendamento">
                         <div className='inputLabel'>
-                            <label>Cliente:</label>
-                            <SearchableDropdown
-                                options={clientes}
-                                required={true}
-                                onSelectOption={handleClientesChange}
-                                displayField={(option) => option.nomePessoa}
-                                uniqueKey={(option) => option.idCliente}
-                            />
+                            <label>Cliente: </label>
+                            <div className="cliente-plus">
+                                <div className="input-cliente-plus">
+                                    <SearchableDropdown className="input-cliente"
+                                        options={clientes}
+                                        required={true}
+                                        onSelectOption={handleClientesChange}
+                                        displayField={(option) => option.nomePessoa}
+                                        uniqueKey={(option) => option.idCliente}
+                                    />
+                                </div>
+
+                                <Tooltip title="Adicionar Cliente" arrow>
+                                    <FontAwesomeIcon icon={faPlus} onClick={openModalAddCliente} className="icon-plus" />
+                                </Tooltip>
+                            </div>
                         </div>
                     </div>
 
@@ -189,9 +208,13 @@ function ModalAdd({ onClose, idEmpresa, funcionarios, dateDefault, refreshDate }
                     <CircularSize width="100%" height="100%" />
                 ) : null}
             </div>
+
+            {isModalOpenAddCliente && (
+                <ModalClienteAgend onClose={closeModalAddCliente} />
+            )}
         </div>
 
     )
 }
 
-export default ModalAdd;
+export default ModalAddAgend;

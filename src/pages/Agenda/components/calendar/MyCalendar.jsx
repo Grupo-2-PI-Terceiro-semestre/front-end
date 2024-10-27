@@ -15,7 +15,7 @@ import Cookies from 'js-cookie';
 import CircularIntegration from '../../../../components/botao-download/CircularIntegration';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
 import DetalheAgendamento from '../detalhe-agendamento/DetalheAgendamento';
-import ModalAdd from '../modal-add/ModalAdd';
+import ModalAddAgend from '../modal-add/ModalAddAgend';
 import Modal from '@mui/material/Modal';
 import Swal from 'sweetalert2'
 import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
@@ -107,7 +107,6 @@ const MyDragAndDropCalendar = () => {
   };
 
   const handleDateChange = (day) => {
-    debugger
     buscarColaboradores(formaterDate(day));
     setSelectedDate(day);
   };
@@ -341,7 +340,7 @@ const MyDragAndDropCalendar = () => {
       {/* Modal de Adicionar Agendamento */}
       <Modal open={openModalAdd} onClose={handleCloseModalAdd}>
         <div className="modal-content">
-          <ModalAdd
+          <ModalAddAgend
             onClose={handleCloseModalAdd}
             idEmpresa={user.idEmpresa}
             funcionarios={resources}

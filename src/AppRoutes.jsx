@@ -14,19 +14,19 @@ import Clientes from './pages/Clientes/Clientes';
 import Equipe from './pages/Equipe/Equipe';
 import ProtectedRoute from './ProtectedRoute'; // Importe o componente ProtectedRoute
 
-const AppRoutes = ({ isAuthenticated }) => {
+const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<HomeEmpresa />} />
             <Route path="/cliente" element={<HomeCliente />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/servico" element={<ProtectedRoute element={<Servico />} isAuthenticated={isAuthenticated} />} />
-            <Route path="/agenda" element={<ProtectedRoute element={<Agenda />} isAuthenticated={isAuthenticated} />} />
-            <Route path="/perfil" element={<ProtectedRoute element={<Perfil />} isAuthenticated={isAuthenticated} />} />
-            <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} isAuthenticated={isAuthenticated} />} />
-            <Route path="/clientes" element={<ProtectedRoute element={<Clientes />} isAuthenticated={isAuthenticated} />} />
-            <Route path="/equipe" element={<ProtectedRoute element={<Equipe />} isAuthenticated={isAuthenticated} />} />
+            <Route path="/servico" element={<ProtectedRoute element={<Servico />} />} />
+            <Route path="/agenda" element={<ProtectedRoute element={<Agenda />} />} />
+            <Route path="/perfil" element={<ProtectedRoute element={<Perfil />} />} />
+            <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+            <Route path="/clientes" element={<ProtectedRoute element={<Clientes />} />} />
+            <Route path="/equipe" element={<ProtectedRoute element={<Equipe />} />} />
         </Routes>
     );
 };

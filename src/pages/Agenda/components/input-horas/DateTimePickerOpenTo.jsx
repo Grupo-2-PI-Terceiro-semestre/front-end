@@ -17,7 +17,12 @@ export default function DateTimePickerOpenTo({ valordefault, onChange }) {
 
   const handleDateChange = (newValue) => {
     setSelectedDateTime(newValue);
-    onChange(newValue); 
+    onChange(newValue);
+  };
+
+  const shouldDisableTime = (time) => {
+    const hour = time.hour();
+    return hour < 6 || hour > 22;
   };
 
   return (
@@ -29,6 +34,8 @@ export default function DateTimePickerOpenTo({ valordefault, onChange }) {
           value={selectedDateTime}
           onChange={handleDateChange}
           renderInput={(params) => <TextField {...params} />}
+          shouldDisableTime={shouldDisableTime}
+          disablePast
         />
       </Box>
     </LocalizationProvider>
