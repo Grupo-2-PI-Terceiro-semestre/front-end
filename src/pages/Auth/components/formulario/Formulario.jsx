@@ -6,10 +6,11 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { cadastroUser } from '../../authRouter'
 import { auth } from '../../../../services/firebase';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
-function Formulario({toggleBarraContainer}) {
+function Formulario({ toggleBarraContainer }) {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
     const [user, setUser] = useState(null);
@@ -33,21 +34,36 @@ function Formulario({toggleBarraContainer}) {
             toggleBarraContainer();
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
+
             const userData = {
                 nomePessoa: user.displayName,
                 emailPessoa: user.email,
                 firebaseUid: user.uid,
                 tiposDeUsuario: 'ADMIN',
-                representante: "true",
+                representante: 'true',
             };
+
             setUser(userData);
             await cadastroUser(userData);
             toggleBarraContainer();
-            navigate('/login')
+            successCadastro();
         } catch (error) {
             toggleBarraContainer();
-            setErrorMessage('Erro ao fazer  com o Google.');
+            console.error('Erro:', error);
+
+            if (error.status === 400) {
+                setErrorMessage('Usuário já cadastrado.');
+            } else {
+                setErrorMessage('Erro ao cadastrar o usuário. Tente novamente mais tarde.');
+            }
         }
+    };
+
+    const successCadastro = () => {
+        toast.success('Cadastro realizado com sucesso!', {
+            toastStyle: { backgroundColor: '#2196F3', color: '#fff' },
+            onClose: () => navigate('/login')
+        });
     };
 
     const handleSubmit = async (e) => {
@@ -67,7 +83,7 @@ function Formulario({toggleBarraContainer}) {
                     tiposDeUsuario: 'ADMIN'
                 });
                 toggleBarraContainer();
-                navigate('/login')
+                successCadastro();
             } catch (error) {
                 toggleBarraContainer();
                 setErrorMessage('Erro ao cadastrar o usuário.');
@@ -78,6 +94,7 @@ function Formulario({toggleBarraContainer}) {
     return (
 
         <div className="form-container">
+            <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} />
             <h2>Cadastro</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
