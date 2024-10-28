@@ -11,7 +11,7 @@ function Dashboard() {
 
     // Cabeçalhos da tabela
     const headers = ["Funcionário", "Receita", "Comissão"];
-    const headers2 = ["Cliente", "Serviço", "Data","Horário", "Atendente"];
+    const headers2 = ["Cliente", "Serviço", "Data", "Horário", "Atendente"];
 
     // Dados da tabela
     const data = [
@@ -22,7 +22,7 @@ function Dashboard() {
         ["Pedro", "R$1.500,00", "R$ 450,00"],
     ];
 
-    const data2= [
+    const data2 = [
         ["João", "Corte", "10/10/2021", "10:00", "Maria"],
         ["João", "Corte", "10/10/2021", "10:00", "Maria"],
         ["João", "Corte", "10/10/2021", "10:00", "Maria"],
@@ -34,11 +34,11 @@ function Dashboard() {
             <Menu activeMenuItem={activeMenuItem} />
             <div className="conteudo-dashboard">
                 <div className="superior">
-                    <CardDashboard title="" height="140px" width="500px">
+                    <div class="quadradoKPI">
                         <Kpi
-                            endPoint = 'agendamentos/empresa'
-                            idEmpresa = "1"
-                            mes = "10"
+                            endPoint='agendamentos/empresa'
+                            idEmpresa="1"
+                            mes="10"
                             description="Receita Total"
                             icon={
                                 <span className="material-symbols-outlined">
@@ -70,7 +70,18 @@ function Dashboard() {
                             iconColor="#20AEF3"
                             percent="+3% Mês anterior">
                         </Kpi>
-                    </CardDashboard>
+                        <Kpi
+                            valor="10"
+                            description="Ticket Médio"
+                            icon={
+                                <span class="material-symbols-outlined">
+                                    payments
+                                </span>
+                            }
+                            iconColor="#3CD856"
+                            percent="+3% Mês anterior">
+                        </Kpi>
+                        </div>
                 </div>
                 <div className="meio">
                     <CardDashboard title="Total de Clientes por dia da semana" height="250px" width="410px" >
@@ -85,7 +96,7 @@ function Dashboard() {
                 </div>
                 <div className="inferior">
                     <CardDashboard title="Próximos Atendimentos" height="270px" width="620px">
-                    <TabelaDashboard headers={headers2} data={data2} />
+                        <TabelaDashboard headers={headers2} data={data2} />
                     </CardDashboard>
                     <CardDashboard title="Receita por Mês" height="270px" width="620px">
                         <Chart title="" type="spline" seriesData={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20]} xAxisData={['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']} lineColor={'white'} heightChart={200} colorChart={'#3CD856'} />
