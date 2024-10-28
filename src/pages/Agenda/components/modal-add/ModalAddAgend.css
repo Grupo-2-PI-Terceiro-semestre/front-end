@@ -1,7 +1,7 @@
 .modal-agendamento {
     position: fixed;
     top: 0;
-    right: -30vw; /* Inicialmente fora da tela */
+    right: -30vw;
     width: 30vw;
     height: 100vh;
     background: rgb(33, 34, 45);
@@ -11,7 +11,11 @@
     z-index: 2;
     border-radius: 20px 0 0 20px;
     overflow: hidden;
-    transition: right 0.4s ease; /* Transição suave */
+    transition: right 0.4s ease;
+}
+
+.css-1umw9bq-MuiSvgIcon-root {
+    color: white !important;
 }
 
 .modal-aberto {
@@ -19,7 +23,7 @@
 }
 
 .modal-fechado {
-    right: -30vw; 
+    right: -30vw;
 }
 
 .container-modal {
@@ -27,7 +31,7 @@
     width: 26vw;
     display: flex;
     flex-wrap: wrap;
-} 
+}
 
 .container-modal .botao {
     background-color: #ff5f5f;
