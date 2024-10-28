@@ -9,7 +9,7 @@ function ModalDesc({onClose}) {
                 <div className="borda">
                     <h1 className="titulo">Descrição <button className="botaoDesc" onClick={onClose}>X</button></h1>
 
-                    <label htmlFor="text">Corte de cabelo para homens cis hétero top, logo, Elizeu Duarte Filho</label>
+                    <label htmlFor="text">Corte de cabelo para homens.</label>
                 </div>
 
 
