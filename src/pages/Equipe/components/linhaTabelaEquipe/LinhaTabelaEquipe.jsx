@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
-function LinhaTabelaEquipe({ nome, telefone, funcao, visivel }) {
+function LinhaTabelaEquipe({ nome, telefone, funcao }) {
 
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
     const [isModalOpenExcluir, setIsModalOpenExcluir] = useState(false);
@@ -46,7 +46,7 @@ function LinhaTabelaEquipe({ nome, telefone, funcao, visivel }) {
                         <label htmlFor="text">{nome}</label>
                         <label htmlFor="text">{telefone}</label>
                         <label htmlFor="text">{funcao}</label>
-                        <label htmlFor="text">{visivel}</label>
+                        {/* <label htmlFor="text">{visivel}</label> */}
                         <label className="icons" htmlFor="text">
 
                             <FontAwesomeIcon onClick={openModalEditar} icon={faPenToSquare} className="icon-pen" />

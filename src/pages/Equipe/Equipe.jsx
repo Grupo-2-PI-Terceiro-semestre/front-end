@@ -20,7 +20,7 @@ function Equipe() {
                         </div>
                     </div>
 
-                    <TelaEquipe titulo="Serviços" placeholder="Pesquisar colaborador" titulo1="NOME" titulo2="TELEFONE" titulo3="FUNÇÃO" titulo4="VISÍVEL" titulo5="AÇÕES"/>
+                    <TelaEquipe titulo="Serviços" placeholder="Pesquisar colaborador" titulo1="NOME" titulo2="TELEFONE" titulo3="FUNÇÃO" titulo4="AÇÕES"/>
                 </div>
 
             </div>
