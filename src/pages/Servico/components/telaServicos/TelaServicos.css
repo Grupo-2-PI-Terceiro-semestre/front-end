@@ -7,6 +7,7 @@
     gap: 2vh;
     padding: 1.9vh;
     height: 84vh;
+    overflow: hidden;
 }
 
 .main-tela-servicos .container-tela-servicos {
