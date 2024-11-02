@@ -3,7 +3,12 @@ import Cookies from 'js-cookie';
 
 const useAuth = () => {
 
-    const logout = () => {
+    const sessionExpired = () => {
+
+        if (verifyAuth()) {
+            return
+        }
+        clearCookies();
         Swal.fire({
             title: "Atenção!",
             text: "Sessão expirada. Você será redirecionado para a página de login.",
@@ -11,16 +16,23 @@ const useAuth = () => {
             confirmButtonText: "Ok",
             showCancelButton: false,
             allowOutsideClick: false,
-            
+
             didClose: () => {
-                clearCookies();
-                document.location.href = '/login';
+                redirectToLogin();
             }
         });
     };
 
-    return { logout };
+    return { sessionExpired };
 };
+
+const verifyAuth = () => {
+    return Cookies.get('token') === undefined
+}
+
+const redirectToLogin = () => {
+    document.location.href = '/login';
+}
 
 const clearCookies = () => {
     Cookies.remove('user');

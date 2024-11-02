@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import useAuth from '../router/useAuth';
 
 const API_URL = import.meta.env.VITE_API_URL;
-const { logout } = useAuth();
+const { sessionExpired } = useAuth();
 
 if (!import.meta.env.PROD) {
     console.log('API URL:', import.meta.env.VITE_API_URL);
@@ -32,7 +32,7 @@ export const getData = async (endpoint, pathParams = {}, queryParams = {}) => {
         return response;
     } catch (error) {
         if (error.status === 401) {
-            logout();
+            sessionExpired();
         }
         throw error;
     }
@@ -59,7 +59,7 @@ export const postData = async (endpoint, data, pathParams = {}, queryParams = {}
         return response;
     } catch (error) {
         if (error.status === 401) {
-            logout();
+            sessionExpired();
         }
         throw error;
     }
@@ -86,7 +86,7 @@ export const putData = async (endpoint, data, pathParams = {}, queryParams = {})
         return response;
     } catch (error) {
         if (error.status === 401) {
-            logout();
+            sessionExpired();
         }
         throw error;
     }
@@ -113,7 +113,7 @@ export const deleteData = async (endpoint, pathParams = {}, queryParams = {}) =>
         return response;
     } catch (error) {
         if (error.status === 401) {
-            logout();
+            sessionExpired();
         }
         throw error;
     }
