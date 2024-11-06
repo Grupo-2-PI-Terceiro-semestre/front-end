@@ -25,7 +25,7 @@ const FormularioFuncionamento = () => {
 
   return (
     <div className='container-formulario-perfil'>
-       <form onSubmit={onSubmit(onSubmit)} className="app-container">
+      <form onSubmit={onSubmit(onSubmit)} className="app-container">
         <h2>Horários</h2>
         <div className='container-horarios'>
           {Object.keys(horarios).map((dia) => (
