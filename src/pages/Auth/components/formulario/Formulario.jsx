@@ -70,7 +70,11 @@ function Formulario({ toggleBarraContainer }) {
         e.preventDefault();
         if (formData.senha !== formData.confirmar) {
             setErrorMessage('As senhas não coincidem');
-        } else {
+        } else if (formData.emailPessoa.indexOf('@') == -1 || formData.emailPessoa.indexOf('.') == -1) {
+            setErrorMessage('Insira um E-mail válido');
+        } else if (formData.senha.length < 6) {
+            setErrorMessage('Sua senha precisa conter mais de 6 caracteres');
+        } {
             try {
                 toggleBarraContainer();
                 await cadastroUser(formData);
@@ -86,7 +90,9 @@ function Formulario({ toggleBarraContainer }) {
                 successCadastro();
             } catch (error) {
                 toggleBarraContainer();
-                setErrorMessage('Erro ao cadastrar o usuário.');
+                setTimeout(() => {
+                    setErrorMessage('Erro ao cadastrar o usuário.');
+                }, 3000);
             }
         }
     };
