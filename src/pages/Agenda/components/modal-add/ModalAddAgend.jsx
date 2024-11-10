@@ -27,9 +27,17 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
     const [loading, setLoading] = useState(false);
     const [isModalOpenAddCliente, setIsModalOpen] = useState(false);
 
+    const clientesSessao = localStorage.getItem('clientes') ? JSON.parse(localStorage.getItem('clientes')) : null;
+    const servicosSessao = localStorage.getItem('servicos') ? JSON.parse(localStorage.getItem('servicos')) : null;
+
     useEffect(() => {
-        buscarServicos(idEmpresa);
-        buscarClientes(idEmpresa)
+        if (clientesSessao == null || servicosSessao == null) {
+            buscarServicos(idEmpresa);
+            buscarClientes(idEmpresa)
+        } else {
+            setClientes(clientesSessao);
+            setServicos(servicosSessao);
+        }
         setIsVisible(true);
         setDataHoraAgendamento(dateDefault);
     }, [idEmpresa]);
@@ -49,11 +57,22 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
     const buscarServicos = async (idEmpresa) => {
         try {
             const response = await findServicos(idEmpresa);
+            localStorage.setItem('servicos', JSON.stringify(response.data));
             setServicos(response.data);
         } catch (error) {
             console.error('Erro ao buscar os serviços:', error);
         }
     };
+
+    const buscarClientes = async (idEmpresa) => {
+        try {
+            const response = await findClientes(idEmpresa);
+            localStorage.setItem('clientes', JSON.stringify(response.data));
+            setClientes(response.data)
+        } catch (error) {
+
+        }
+    }
 
     const criarAgendamento = async (agendamento) => {
         setLoading(true);
@@ -75,14 +94,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
     };
 
 
-    const buscarClientes = async (idEmpresa) => {
-        try {
-            const response = await findClientes(idEmpresa);
-            setClientes(response.data)
-        } catch (error) {
 
-        }
-    }
 
     const handleClose = () => {
         setIsVisible(false);
