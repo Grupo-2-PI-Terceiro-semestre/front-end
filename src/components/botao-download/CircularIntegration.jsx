@@ -106,8 +106,8 @@ export default function CircularIntegration({ endpoint, path, param }) {
                         sx={{
                             color: green[500],
                             position: 'absolute',
-                            top: -1.8,
-                            left: -2,
+                            top: -2,
+                            left: -3,
                             zIndex: 1,
                         }}
                     />
