@@ -3,7 +3,6 @@ import './TelaClientes.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import LinhaClientes from "../linhaClientes/LinhaClientes";
-import { makeStyles } from "@mui/styles";
 import Pagination from "@mui/material/Pagination";
 import Stack from '@mui/material/Stack';
 import { findClientes } from "../../services/clienteServices";

@@ -19,6 +19,8 @@ import ModalAddAgend from '../modal-add/ModalAddAgend';
 import Modal from '@mui/material/Modal';
 import Swal from 'sweetalert2'
 import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
+import ButtonRollback from "../button-rollback/ButtonRollback"
+import { Pilha } from "../../../../utils/Pilha";
 
 
 moment.locale("pt-br");
@@ -38,7 +40,10 @@ const MyDragAndDropCalendar = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openModalAdd, setOpenModalAdd] = useState(false);
 
+
   const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
+  const pilhaSessao = localStorage.getItem('pilha') ? JSON.parse(localStorage.getItem('pilha')) : null;
+
 
   useEffect(() => {
     const today = new Date();
@@ -119,10 +124,9 @@ const MyDragAndDropCalendar = () => {
   const isSelected = (day) => {
     return selectedDate.toDateString() === new Date(day).toDateString();
   };
+
   const moveEvent = async ({ event, start, end, resourceId }) => {
-
     const updatedEvent = { ...event, start, end, resourceId };
-
     const request = {
       idAgendamento: updatedEvent.id,
       horaAgendamento: converterGMTParaBrasilia(updatedEvent.start),
@@ -140,21 +144,37 @@ const MyDragAndDropCalendar = () => {
     });
 
     if (result.isConfirmed) {
+      if (pilhaSessao == null) {
+        let pilha = new Pilha();
+        const objAcao = {
+          idAgendamento: updatedEvent.id,
+          horaAgendamento: converterGMTParaBrasilia(event.start),
+          idAgenda: event.resourceId
+        }
+        pilha.push(objAcao);
+        localStorage.setItem('pilha', JSON.stringify(pilha));
+      } else {
+        let pilha = new Pilha();
+        pilha.pilha = pilhaSessao.pilha;
+        pilha.topo = pilhaSessao.topo;
+        const objAcao = {
+          idAgendamento: updatedEvent.id,
+          horaAgendamento: converterGMTParaBrasilia(event.start),
+          idAgenda: event.resourceId
+        }
+        pilha.push(objAcao);
+        localStorage.setItem('pilha', JSON.stringify(pilha));
+      }
+
       setLoading(true);
       try {
+
         await atualizarEvento(request);
 
         const nextEvents = events.map(existingEvent =>
           existingEvent.id === event.id ? updatedEvent : existingEvent
         );
-
         setEvents(nextEvents);
-
-        Swal.fire({
-          title: "Sucesso!",
-          text: "Agendamento atualizado com sucesso!",
-          icon: "success"
-        });
       } catch (error) {
         Swal.fire({
           title: "Erro!",
@@ -234,7 +254,7 @@ const MyDragAndDropCalendar = () => {
           <span
             onClick={() => {
               const yesterday = new Date();
-              yesterday.setDate(yesterday.getDate() - 1); // Subtrai um dia
+              yesterday.setDate(yesterday.getDate() - 1);
               handleDateChange(yesterday);
             }}
             className={isSelected(new Date(new Date().setDate(new Date().getDate() - 1))) ? "custom-span selected" : "custom-span"}
@@ -268,7 +288,6 @@ const MyDragAndDropCalendar = () => {
           <Button
             size="auto"
             content="Adicionar Agendamento"
-            height="2rem"
             fontSize="14px"
             widthImage="1.5rem"
             heightImage="1.5rem"
@@ -279,6 +298,10 @@ const MyDragAndDropCalendar = () => {
             endpoint='usuarios/agendamentos/exportar/'
             path={user.idEmpresa}
             param={formaterDate(selectedDate)} />
+          <ButtonRollback
+            data={converterGMTParaBrasilia(selectedDate)}
+            refreshDate={handleDateChange}
+          />
         </div>
       </div>
       <div className="agenda-principal">
