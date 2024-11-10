@@ -6,6 +6,8 @@ import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
 import Swal from 'sweetalert2';
+import { Pilha } from "../../../../utils/Pilha";
+
 
 
 const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose, refreshDate }) => {
@@ -21,7 +23,9 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
     const [profissionalSelecionado, setProfissionalSelecionado] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const dropdownRef = useRef(null); 
+    const dropdownRef = useRef(null);
+    const pilhaSessao = localStorage.getItem('pilha') ? JSON.parse(localStorage.getItem('pilha')) : null;
+
 
     const toggleEditing = () => {
         setIsEditing(!isEditing);
@@ -48,7 +52,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
             const response = await findClientes(idEmpresa);
             setClientes(response.data)
         } catch (error) {
-
+            console.error('Erro ao buscar os clientes:', error);
         }
     }
 
@@ -63,17 +67,33 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Sim",
             });
-    
+
             if (result.isConfirmed) {
+                if (pilhaSessao == null) {
+                    let pilha = new Pilha();
+                    const objAcao = {
+                        idAgendamento: idAgendamento,
+                        horaAgendamento: null,
+                        idAgenda: null,
+                    }
+                    pilha.push(objAcao);
+                    localStorage.setItem('pilha', JSON.stringify(pilha));
+                } else {
+                    let pilha = new Pilha();
+                    pilha.pilha = pilhaSessao.pilha;
+                    pilha.topo = pilhaSessao.topo;
+                    const objAcao = {
+                        idAgendamento: idAgendamento,
+                        horaAgendamento: null,
+                        idAgenda: null,
+                    }
+                    pilha.push(objAcao);
+                    localStorage.setItem('pilha', JSON.stringify(pilha));
+                }
+
                 setLoading(true);
                 try {
-                    await CancelarAgendamento(idAgendamento);
-                    await Swal.fire({
-                        title: "Sucesso!",
-                        text: "Agendamento cancelado com sucesso!",
-                        icon: "success",
-                    });
-    
+                    await CancelarAgendamento(idAgendamento, "CANCELADO");
                     onClose();
                     refreshDate(event.start)
                 } catch (error) {
@@ -89,7 +109,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
             throw new Error("Erro ao deletar o agendamento");
         }
     };
-    
+
 
     const handleSave = () => {
         console.log('Dados salvos:', { profissional, horarioInicio, horarioFim, descricaoServico, servicoSelecionado });
@@ -119,7 +139,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                     {isEditing ? (
                         <div ref={dropdownRef}>
                             <SearchableDropdown
-                                options={clientes} // Lista de serviços
+                                options={clientes}
                                 onSelectOption={handleClientesChange}
                                 placeholder={event.nomeCliente}
                                 displayField={(option) => option.nomePessoa} // Exibe o campo `nomeServico`
