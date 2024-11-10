@@ -56,9 +56,9 @@ export const AtualizarEvento = async (eventoAtualizado) => {
     }
 }
 
-export const CancelarAgendamento = async (idAgendamento) => {
+export const CancelarAgendamento = async (idAgendamento, status) => {
     try {
-        const response = await putData(`agendamentos/${idAgendamento}`)
+        const response = await putData(`agendamentos/${idAgendamento}?status=${status}`)
         return response;
     } catch (error) {
         console.log("Serviço: Erro ao Deletar o Agendamento")

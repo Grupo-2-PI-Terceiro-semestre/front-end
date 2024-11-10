@@ -15,7 +15,7 @@ const Menu = ({ activeMenuItem }) => {
   const timeoutRef = useRef(null);
 
   const logoutSuccess = () => {
-    toast.info("Logout realizado com sucesso!", {
+    toast.info("Redirecionando para o Login!", {
       toastStyle: { backgroundColor: '#2196F3', color: '#fff' }, // Azul com texto branco
     });
   }
@@ -49,16 +49,20 @@ const Menu = ({ activeMenuItem }) => {
     setImageFile(event.target.files[0]);
     handleUploadImage(event.target.files[0]);
   };
-
   const logout = () => {
     logoutSuccess();
     timeoutRef.current = setTimeout(() => {
       navigate('/login');
-      Cookies.remove('token');
-      Cookies.remove('user');
-      Cookies.remove('empresa');
+      
+      Object.keys(Cookies.get()).forEach((cookieName) => {
+        Cookies.remove(cookieName); // Remove o cookie pelo nome
+      });
+  
+      localStorage.clear();
     }, 2500);
   };
+  
+  
 
   const handleUploadImage = async (selectedFile) => {
     if (!selectedFile) {
