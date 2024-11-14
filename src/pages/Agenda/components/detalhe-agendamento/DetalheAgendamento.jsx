@@ -1,21 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './DetalheAgendamento.css'; // Estilizações
 import Button from '../../../../components/button/Button';
-import { findServicos, findClientes, CancelarAgendamento } from '../../services/agendaServices';
+import { findServicos, findClientes, CancelarAgendamento, AtualizarEvento } from '../../services/agendaServices';
 import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
 import Swal from 'sweetalert2';
 import { Pilha } from "../../../../utils/Pilha";
+import { ToastContainer } from 'react-toastify';
+import { successToast, errorToast } from '../../../../utils/Toats';
+import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
+import dayjs from 'dayjs';
+
+
 
 
 
 const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose, refreshDate }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [profissional, setProfissional] = useState(event.title);
     const [horarioInicio, setHorarioInicio] = useState(event.start);
-    const [horarioFim, setHorarioFim] = useState(event.end);
-    const [descricaoServico, setDescricaoServico] = useState(detalhes.descricaoServico);
     const [servicos, setServicos] = useState([]);
     const [clientes, setClientes] = useState([]);
     const [servicoSelecionado, setServicoSelecionado] = useState('');
@@ -34,8 +37,6 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
     useEffect(() => {
         buscarServicos(idEmpresa);
         buscarClientes(idEmpresa)
-        setServicoSelecionado(event.title);
-        setProfissionalSelecionado(event.nomeFuncionario);
     }, [idEmpresa, event.title]);
 
     const buscarServicos = async (idEmpresa) => {
@@ -95,6 +96,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                 try {
                     await CancelarAgendamento(idAgendamento, "CANCELADO");
                     onClose();
+                    debugger
                     refreshDate(event.start)
                 } catch (error) {
                     await Swal.fire({
@@ -111,25 +113,61 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
     };
 
 
-    const handleSave = () => {
-        console.log('Dados salvos:', { profissional, horarioInicio, horarioFim, descricaoServico, servicoSelecionado });
-        setIsEditing(false);
+    const handleEdit = () => {
+
+        const agora = dayjs();
+        const agendamento = dayjs(horarioInicio);
+
+        if (clienteSelecionado === '' || profissionalSelecionado === '' || servicoSelecionado === '' || horarioInicio === '') {
+            errorToast('Por favor, preencha todos os campos!');
+            return;
+        }
+
+        if (agendamento.isBefore(agora)) {
+            errorToast('Não é possível agendar para uma data/hora anterior a atual');
+            return;
+        }
+
+        const eventoAtualizado = {
+            idAgendamento: event.id,
+            idCliente: clienteSelecionado,
+            idServico: servicoSelecionado,
+            idAgenda: profissionalSelecionado,
+            dataAgendamento: converterGMTParaBrasilia(horarioInicio),
+        }
+
+        atualizarEvento(eventoAtualizado)
+
     };
 
+    const atualizarEvento = async (eventoAtualizado) => {
+        try {
+            setLoading(true);
+            await AtualizarEvento("agendamentos", eventoAtualizado);
+            successToast('Agendamento atualizado com sucesso!');
+            onClose();
+            setLoading(false);
+            refreshDate(new Date(horarioInicio));
+        } catch (error) {
+            console.error('Erro ao atualizar o agendamento:', error);
+        }
+    }
+
     const handleServicoChange = (servico) => {
-        setServicoSelecionado(servico.nomeServico);
+        setServicoSelecionado(servico.idServico);
     };
 
     const handleFuncionarioChange = (funcionario) => {
-        setServicoSelecionado(funcionario.title);
+        setProfissionalSelecionado(funcionario.id);
     };
 
     const handleClientesChange = (cliente) => {
-        setClienteSelecionado(cliente.nomePessoa);
+        setClienteSelecionado(cliente.idCliente);
     };
 
     return (
         <div className="detalhe-agendamento">
+            <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} />
             <span className='botao-fechar' onClick={onClose}>X</span>
             <h3>Detalhes do Agendamento</h3>
 
@@ -147,13 +185,13 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                             />
                         </div>
                     ) : (
-                        <p>{clienteSelecionado || event.nomeCliente}</p>
+                        <p>{event.nomeCliente}</p>
                     )}
                 </div>
 
                 <div className="detalhe-campo">
                     <label>Telefone do Cliente</label>
-                    <p>{event.telefoneCliente}</p>
+                    <p>{event.cliente.numeroTelefone}</p>
                 </div>
             </div>
 
@@ -171,7 +209,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                             />
                         </div>
                     ) : (
-                        <p>{servicoSelecionado || event.title}</p>
+                        <p>{event.title}</p>
                     )}
                 </div>
 
@@ -188,7 +226,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                             />
                         </div>
                     ) : (
-                        <p>{profissionalSelecionado || funcionarios.title}</p>
+                        <p>{event.nomeFuncionario}</p>
                     )}
                 </div>
             </div>
@@ -210,7 +248,6 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                 <label>Descrição do Serviço</label>
                 <textarea
                     value={event.descricaoServico}
-                    onChange={(e) => setDescricaoServico(e.target.value)}
                     disabled={!isEditing}
                 />
             </div>
@@ -232,7 +269,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                         fontWeight='bold'
                         content="Salvar"
                         backgroundColor='#28A745'
-                        onClick={handleSave}
+                        onClick={handleEdit}
                     />
                 ) : (
                     <Button

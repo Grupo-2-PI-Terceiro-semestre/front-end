@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { buscarEndereco, atualizarEndereco } from '../../services/perfilServices';
+import Cookies from 'js-cookie';
 import './FormularioLocalizacao.css';
 import '../formularioDadosPrincipais/FormularioPrincipal.css';
 import CircularProgress from '@mui/material/CircularProgress';
-import { ToastContainer, toast } from 'react-toastify';
-
+import { successToast, errorToast, infoToast } from '../../../../utils/Toats';
+import axios from 'axios';
 
 function FormularioLocalizacao() {
+
+    const [cepOriginal, setCepOriginal] = useState('');
     const [cep, setCep] = useState('');
     const [logradouro, setLogradouro] = useState('');
     const [uf, setUf] = useState('');
@@ -14,15 +17,54 @@ function FormularioLocalizacao() {
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
     const [loading, setLoading] = useState(false);
+    const [endereco, setEndereco] = useState(null);
+    const [user, setUser] = useState(null);
+
+
+    useEffect(() => {
+        const user = JSON.parse(Cookies.get('user'));
+        setUser(user);
+        const enderecoCookie = Cookies.get('endereco');
+        if (enderecoCookie) {
+            setEndereco(JSON.parse(enderecoCookie));
+            const enderecoData = JSON.parse(enderecoCookie);
+            setCepOriginal(enderecoData.cep);
+            setCep(enderecoData.cep);
+            setNumero(enderecoData.numero);
+            setLogradouro(enderecoData.logradouro);
+            setUf(enderecoData.uf);
+            setCidade(enderecoData.cidade);
+            setComplemento(enderecoData.complemento);
+        } else {
+            console.log()
+            findEndereco(user.idEmpresa);
+        }
+    }, []);
+
+    const findEndereco = async (idEmpresa) => {
+        setLoading(true);
+        try {
+            const response = await buscarEndereco(idEmpresa);
+            setEndereco(response);
+
+            Cookies.set('endereco', JSON.stringify(response), { expires: 7 });
+
+            setCep(response.cep);
+            setNumero(response.numero);
+            setLogradouro(response.logradouro);
+            setUf(response.uf);
+            setCidade(response.cidade);
+            setComplemento(response.complemento);
+        } catch (error) {
+            errorToast('Erro ao carregar endereço');
+        } finally {
+            setLoading(false);
+        }
+    };
 
 
     const handleCepChange = async (e) => {
-        if (e.target.value.length < 9) {
-            setLogradouro('');
-            setUf('');
-            setCidade('');
-            setComplemento('');
-        }
+
         if (e.target.value.length >= 1) {
             setLoading(true);
         } else {
@@ -34,7 +76,8 @@ function FormularioLocalizacao() {
         }
         setCep(cepDigitado);
 
-        if (cepDigitado.length === 9) {
+        if (cepDigitado.length == 9) {
+
             const cepSemMascara = cepDigitado.replace('-', '');
             try {
                 const response = await axios.get(`https://viacep.com.br/ws/${cepSemMascara}/json/`);
@@ -57,23 +100,54 @@ function FormularioLocalizacao() {
         }
     };
 
-    const errorToast = (message) => {
-        toast.error(message, {
-            toastStyle: { backgroundColor: '#FF0000', color: '#fff' },
-        });
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        if (cepOriginal != cep) {
+            const data = {
+                idEndereco: endereco.idEndereco,
+                cep,
+                logradouro,
+                numero,
+                uf,
+                cidade,
+                complemento
+            };
+            debugger
+            cadastrar(data, user.idEmpresa);
+        } else {
+            infoToast('Nenhum dado foi alterado');
+            return
+        }
     };
+
+    const cadastrar = async (data, idEmpresa) => {
+        try {
+            setLoading(true);
+            const response = await atualizarEndereco(data, idEmpresa);
+
+            setCepOriginal(response.cep);
+            setCep(response.cep);
+            setNumero(response.numero);
+            setLogradouro(response.logradouro);
+            setUf(response.uf);
+            setCidade(response.cidade);
+            setComplemento(response.complemento);
+            Cookies.set('endereco', JSON.stringify(response), { expires: 7 });
+
+            successToast('Endereço atualizado com sucesso');
+        } catch (error) {
+            errorToast('Erro ao atualizar endereço');
+        } finally {
+            setLoading(false);
+        }
+    }
+
 
     return (
         <div className='container-formulario-perfil'>
-            <ToastContainer position="top-right" autoClose={4000} hideProgressBar={false} />
             <h2>Localização</h2>
             <form onSubmit={handleSubmit} className='app-container'>
-                <div className="form-group">
+                <div className="form-group cep-localizacao">
                     <label>CEP *</label>
                     <div className="input-container">
                         <input
@@ -144,7 +218,13 @@ function FormularioLocalizacao() {
                 </div>
 
                 <div className='button-form'>
-                    <button type="submit">Salvar Alterações</button>
+                    <button
+                        type="submit"
+                        onClick={handleSubmit}
+                    >
+
+                        Salvar Alterações
+                    </button>
                 </div>
             </form>
 

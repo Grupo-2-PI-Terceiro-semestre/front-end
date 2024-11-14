@@ -1,50 +1,159 @@
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from "react";
 import './FormularioPrincipal.css';
 import InputMask from 'react-input-mask';
+import Cookies from 'js-cookie';
+import { atualizarDadosDePerfil } from '../../services/perfilServices';
+import CircularProgress from '@mui/material/CircularProgress';
+import { successToast, errorToast, infoToast } from '../../../../utils/Toats'
+  ;
+import { set } from "react-hook-form";
 
-const FormularioPrincipal = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+const FormularioPrincipal = ({ setRefreshKey }) => {
+  const [user, setUser] = useState(null);
+  const [empresa, setEmpresa] = useState(null);
 
-  const onSubmit = () => {
+  const [name, setName] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [nomeEmpresa, setNomeEmpresa] = useState('');
+  const [cnpj, setCnpj] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const [nomeOriginal, setNomeOriginal] = useState('');
+  const [telefoneOriginal, setTelefoneOriginal] = useState('');
+  const [cpfOriginal, setCpfOriginal] = useState('');
+  const [nomeEmpresaOriginal, setNomeEmpresaOriginal] = useState('');
+  const [cnpjOriginal, setCnpjOriginal] = useState('');
+
+
+  useEffect(() => {
+    const empresaData = Cookies.get('empresa');
+    const userData = Cookies.get('user');
+
+    if (userData) {
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
+      setName(parsedUser.nome || '');
+      setCpf(parsedUser.cpf || '');
+
+      setNomeOriginal(parsedUser.nome);
+      setCpfOriginal(parsedUser.cpf);
+    }
+    if (empresaData) {
+      const parseEmpresa = (JSON.parse(empresaData));
+      setTelefone(parseEmpresa?.telefone || '');
+      setNomeEmpresa(parseEmpresa?.nomeEmpresa || '');
+      setCnpj(parseEmpresa?.cnpj || '');
+
+      setTelefoneOriginal(parseEmpresa?.telefone)
+      setNomeEmpresaOriginal(parseEmpresa?.nomeEmpresa)
+      setCnpjOriginal(parseEmpresa?.cnpj)
+    }
+  }, []);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const user = JSON.parse(Cookies.get('user'));
+
+    if (
+      name !== nomeOriginal ||
+      nomeEmpresa !== nomeEmpresaOriginal ||
+      cpf !== cpfOriginal ||
+      cnpj !== cnpjOriginal ||
+      telefone !== telefoneOriginal
+    ) {
+      const usuario = {
+        idPessoa: user.id,
+        nome: name,
+        cpf: cpf,
+      };
+
+      const empresa = {
+        idEmpresa: user.idEmpresa,
+        nomeEmpresa: nomeEmpresa,
+        cnpj: cnpj,
+        telefone: telefone,
+      };
+
+      const data = {
+        usuario,
+        empresa,
+      };
+
+      cadastrar(data, user.idEmpresa)
+    } else {
+
+      infoToast('Nenhum dado foi alterado');
+      return;
+
+    }
+
+
+  };
+
+  const cadastrar = async (data) => {
+    setLoading(true);
+    try {
+      const response = await atualizarDadosDePerfil(data);
+      Cookies.set('empresa', JSON.stringify(response.empresa), { expires: 7 });
+      Cookies.set('user', JSON.stringify(response.usuario), { expires: 7 });
+
+      const empresaData = Cookies.get('empresa');
+      const userData = Cookies.get('user');
+
+      const parseEmpresa = (JSON.parse(empresaData));
+
+      const parsedUser = JSON.parse(userData);
+      setNomeOriginal(parsedUser.nome);
+      setCpfOriginal(parsedUser.cpf);
+
+      setTelefoneOriginal(parseEmpresa?.telefone)
+      setNomeEmpresaOriginal(parseEmpresa?.nomeEmpresa)
+      setCnpjOriginal(parseEmpresa?.cnpj)
+
+
+      setRefreshKey((prev) => prev + 1);
+      successToast('Dados atualizados com sucesso');
+    } catch (error) {
+      console.error('Erro ao atualizar os dados da empresa', error);
+      errorToast('Erro ao atualizar os dados da empresa');
+    } finally {
+      setLoading(false);
+    }
 
   };
 
   return (
     <div className='container-formulario-perfil'>
       <h2>Dados Principais</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="app-container">
+      <form onSubmit={onSubmit} className="app-container">
         <div className="form-group">
           <label>Nome do Responsável *</label>
           <input
             type="text"
-            required={true}
-            placeholder={
-              errors?.name?.type === 'required'
-                ? 'Nome do responsável obrigatório'
-                : 'Seu nome'
-            }
-            {...register('name', { required: true })}
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Seu nome"
           />
+          {loading && (
+            <div className="loading-icon">
+              <CircularProgress size={35} />
+            </div>
+          )}
         </div>
+
         <div className='input-mesma-linha-phone'>
           <div className="form-group">
             <label>Telefone *</label>
             <InputMask
-              required={true}
+              required
+              value={telefone}
               type="tel"
-              placeholder={
-                errors?.telefone?.type === 'required'
-                  ? 'Telefone obrigatório'
-                  : 'Seu telefone'
-              }
+              onChange={(e) => setTelefone(e.target.value)}
               mask="(99) 9999-99999"
-              {...register('telefone', {
-                required: true
-              })}
+              placeholder="Seu telefone"
             />
           </div>
 
@@ -52,23 +161,11 @@ const FormularioPrincipal = () => {
             <label>CPF *</label>
             <InputMask
               type="text"
-              required={true}
-              placeholder={
-                errors?.cpf?.type === 'required'
-                  ? 'CPF obrigatório'
-                  : errors?.cpf?.type === 'minLength' || errors?.cpf?.type === 'maxLength'
-                    ? 'CPF deve ter 11 dígitos'
-                    : errors?.cpf?.type === 'pattern'
-                      ? 'Apenas números'
-                      : 'Seu CPF'
-              }
+              required
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
               mask="999.999.999-99"
-              {...register('cpf', {
-                required: true,
-                minLength: 11,
-                maxLength: 14,
-                pattern: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
-              })}
+              placeholder="Seu CPF"
             />
           </div>
         </div>
@@ -76,48 +173,30 @@ const FormularioPrincipal = () => {
         <div className="form-group">
           <label>Nome do Estabelecimento *</label>
           <input
-            type="email"
-            required={true}
-            placeholder={
-              errors?.email?.type === 'required'
-                ? 'Nome do estabelecimento obrigatório'
-                : 'Nome do Estabelecimento'
-            }
-            {...register('email', { required: true })}
+            type="text"
+            required
+            value={nomeEmpresa}
+            onChange={(e) => setNomeEmpresa(e.target.value)}
+            placeholder="Nome do Estabelecimento"
           />
         </div>
-
 
         <div className="form-group">
           <label>CNPJ *</label>
           <InputMask
             type="text"
-            required={true}
-            placeholder={
-              errors?.cnpj?.type === 'required'
-                ? 'CNPJ obrigatório'
-                : errors?.cnpj?.type === 'minLength' || errors?.cnpj?.type === 'maxLength'
-                  ? 'CNPJ deve ter 14 dígitos'
-                  : errors?.cnpj?.type === 'pattern'
-                    ? 'Apenas números'
-                    : 'Seu CNPJ'
-            }
+            required
+            value={cnpj}
+            onChange={(e) => setCnpj(e.target.value)}
             mask="99.999.999/9999-99"
-            {...register('cnpj', {
-              required: true,
-              minLength: 18,
-              maxLength: 18,
-              pattern: /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/
-            })}
+            placeholder="Seu CNPJ"
           />
         </div>
         <div className="button-form">
           <button type="submit">Salvar Alterações</button>
         </div>
       </form>
-
     </div>
-
   );
 };
 

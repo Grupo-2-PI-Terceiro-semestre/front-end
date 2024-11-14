@@ -17,6 +17,7 @@ addLocale('br', {
 });
 
 export default function IconDemo({content, onDateChange }) {
+
     const [date, setDate] = useState(null); 
 
     const handleDateChange = (e) => {
@@ -30,7 +31,7 @@ export default function IconDemo({content, onDateChange }) {
                 Agenda
             </label>
             <Calendar
-                value={date}
+                value={content}
                 onChange={handleDateChange} 
                 locale="br"
                 id="buttondisplay"

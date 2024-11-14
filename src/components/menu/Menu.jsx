@@ -5,20 +5,16 @@ import { findByEmpresa, uploadImage } from '../../services/empresaServices';
 import Cookies from 'js-cookie';
 import './Menu.css';
 import Tooltip from '@mui/material/Tooltip';
-import { ToastContainer, toast } from 'react-toastify';
+import { infoToast } from '../../utils/Toats'
 
-const Menu = ({ activeMenuItem }) => {
+
+const Menu = ({ activeMenuItem, refreshKey }) => {
   const [user, setUser] = useState(null);
   const [empresa, setEmpresa] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
 
-  const logoutSuccess = () => {
-    toast.info("Redirecionando para o Login!", {
-      toastStyle: { backgroundColor: '#2196F3', color: '#fff' }, // Azul com texto branco
-    });
-  }
 
   useEffect(() => {
     const userData = Cookies.get('user');
@@ -33,7 +29,7 @@ const Menu = ({ activeMenuItem }) => {
         buscarEmpresa(parsedUser.idEmpresa);
       }
     }
-  }, []);
+  }, [refreshKey]);
 
   const buscarEmpresa = async (idEmpresa) => {
     try {
@@ -49,20 +45,17 @@ const Menu = ({ activeMenuItem }) => {
     setImageFile(event.target.files[0]);
     handleUploadImage(event.target.files[0]);
   };
+
   const logout = () => {
-    logoutSuccess();
+    infoToast('Você será redirecionado para a página de login.');
     timeoutRef.current = setTimeout(() => {
       navigate('/login');
-      
       Object.keys(Cookies.get()).forEach((cookieName) => {
-        Cookies.remove(cookieName); // Remove o cookie pelo nome
+        Cookies.remove(cookieName);
       });
-  
       localStorage.clear();
     }, 2500);
   };
-  
-  
 
   const handleUploadImage = async (selectedFile) => {
     if (!selectedFile) {
@@ -91,7 +84,6 @@ const Menu = ({ activeMenuItem }) => {
 
   return (
     <div className="sidebar">
-      <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} />
       <div className="profile">
         <input
           type="file"
@@ -145,7 +137,6 @@ const Menu = ({ activeMenuItem }) => {
         <span>Sair</span>
       </div>
     </div>
-
   );
-}
+};
 export default Menu;

@@ -31,6 +31,7 @@ const MyDragAndDropCalendar = () => {
 
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectDateFormatted, setSelectDateFormatted] = useState(new Date());
   const [colaboradorInfo, setColaboradorInfo] = useState(null);
   const [detalhes, setDetalhes] = useState([]);
   const [resources, setResources] = useState([]);
@@ -112,8 +113,10 @@ const MyDragAndDropCalendar = () => {
   };
 
   const handleDateChange = (day) => {
+    debugger
     buscarColaboradores(formaterDate(day));
     setSelectedDate(day);
+    setSelectDateFormatted(formatDateToBRWithMonthName(day));
   };
 
   const formaterDate = (date) => {
@@ -191,7 +194,7 @@ const MyDragAndDropCalendar = () => {
 
   const atualizarEvento = async (novoEvento) => {
     try {
-      const response = await AtualizarEvento(novoEvento);
+      const response = await AtualizarEvento("agendamentos/parcial", novoEvento);
       return response.data;
     } catch (error) {
       throw new Error("Erro ao atualizar o agendamento");
@@ -219,6 +222,7 @@ const MyDragAndDropCalendar = () => {
   };
 
   function formatDateToBRWithMonthName(dateString) {
+
     const date = new Date(dateString);
 
     const day = String(date.getDate()).padStart(2, '0');
@@ -231,8 +235,10 @@ const MyDragAndDropCalendar = () => {
     ];
     const month = monthNames[date.getMonth()];
     const year = date.getFullYear();
+
     return `${day} - ${month} - ${year}`;
   }
+
 
   const CustomToolbar = () => {
     return (
@@ -256,6 +262,7 @@ const MyDragAndDropCalendar = () => {
               const yesterday = new Date();
               yesterday.setDate(yesterday.getDate() - 1);
               handleDateChange(yesterday);
+              setSelectedDate(yesterday);
             }}
             className={isSelected(new Date(new Date().setDate(new Date().getDate() - 1))) ? "custom-span selected" : "custom-span"}
           >
@@ -266,6 +273,7 @@ const MyDragAndDropCalendar = () => {
             onClick={() => {
               const today = new Date();
               handleDateChange(today);
+              setSelectedDate(today);
             }}
             className={isSelected(new Date()) ? "custom-span selected" : "custom-span"}
           >
@@ -277,6 +285,7 @@ const MyDragAndDropCalendar = () => {
               const tomorrow = new Date();
               tomorrow.setDate(tomorrow.getDate() + 1);
               handleDateChange(tomorrow);
+              setSelectedDate(tomorrow);
             }}
             className={isSelected(new Date(new Date().setDate(new Date().getDate() + 1))) ? "custom-span selected" : "custom-span"}
           >

@@ -6,7 +6,8 @@ import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import Button from '../../../../components/button/Button';
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import dayjs from 'dayjs';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import { successToast, errorToast } from '../../../../utils/Toats'
 import 'react-toastify/dist/ReactToastify.css';
 import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
@@ -78,7 +79,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
         setLoading(true);
         try {
             await createAgendamento(agendamento);
-            toast.success('Agendamento criado com sucesso!');
+            successToast('Agendamento criado com sucesso!');
             refreshDate(new Date(dataHoraAgendamento));
 
             setLoading(false);
@@ -111,7 +112,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
 
         if (dataHoraAgendamento != undefined || dataHoraAgendamento != null) {
             if (agendamento.isBefore(agora)) {
-                toast.error("Data Inválida, por favor selecione uma data futura!");
+                errorToast('Data e hora do agendamento não pode ser menor que a data e hora atual');
                 return;
             }
 
@@ -129,7 +130,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
 
             criarAgendamento(agendamentoData);
         } else {
-            toast.error("Insira uma data e hora válida!");
+            errorToast('Selecione uma data e hora para o agendamento');
         }
     };
 
