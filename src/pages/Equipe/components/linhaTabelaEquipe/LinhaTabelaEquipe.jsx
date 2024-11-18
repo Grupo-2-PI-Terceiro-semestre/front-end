@@ -29,7 +29,6 @@ function LinhaTabelaEquipe({ nome, telefone, funcao }) {
                         <label htmlFor="text">{nome}</label>
                         <label htmlFor="text">{telefone}</label>
                         <label htmlFor="text">{funcao}</label>
-                        {/* <label htmlFor="text">{visivel}</label> */}
                         <label className="icons" htmlFor="text">
                             <OverlayTrigger
                                 placement="top"
