@@ -45,6 +45,7 @@ const MyDragAndDropCalendar = () => {
 
   const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
   const pilhaSessao = localStorage.getItem('pilha') ? JSON.parse(localStorage.getItem('pilha')) : null;
+  const API_URL = import.meta.env.VITE_API_URL;
 
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const MyDragAndDropCalendar = () => {
 
   useEffect(() => {
 
-    const eventSource = new EventSource("http://localhost:8080/api/v1/agendamentos/sse");
+    const eventSource = new EventSource(`${API_URL}agendamentos/sse`);
     eventSource.addEventListener('refrash', (event) => {
       if (event.data) {
         const today = new Date();
@@ -145,8 +146,6 @@ const MyDragAndDropCalendar = () => {
   };
 
   const refrashSse = async (day) => {
-    debugger
-
     const response = await findColaborador(user.idEmpresa, day);
 
     const formattedResources = response.data.map(colaborador => ({
