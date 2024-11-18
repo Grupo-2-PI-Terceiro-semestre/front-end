@@ -81,6 +81,7 @@
     height: 10vh;
     display: flex;
     justify-content: center;
+    align-items: center;
     /* right: 0.5vw;
     position: relative; */
 }
@@ -185,6 +186,7 @@
     width: 14vw;
     box-shadow: 0 5px rgb(6, 89, 212);
     transition: background-color 0.5s ease;
+align-items: center;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .botaoCadastrar:hover {

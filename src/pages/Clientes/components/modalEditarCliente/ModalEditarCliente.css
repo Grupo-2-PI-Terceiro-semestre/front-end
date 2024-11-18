@@ -37,8 +37,9 @@
     width: 26vw;
     display: flex;
     flex-wrap: wrap;
-    gap: 3vh;
+    gap: 10vh;
     transition: transform 0.3s ease;
+    
 }
 
 .modal-overlay-editar.visible .container-modal-editar {
@@ -59,15 +60,16 @@
 }
 
 .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar {
-    height: 88vh;
+    height: 40vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 27vw;
+    align-items: center;
 }
 
 .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar {
-    height: 10vh;
+    height: 9vh;
     display: flex;
     justify-content: center;
 }
