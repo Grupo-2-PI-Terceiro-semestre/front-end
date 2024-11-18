@@ -114,3 +114,27 @@
     top: 6vh;
     position: relative;
 }
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 3vh;
+    width: 76vw;
+}
+
+.css-16mmgyz-MuiButtonBase-root-MuiPaginationItem-root {
+    color: white !important;
+}
+
+.css-16mmgyz-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: rgba(58, 46, 234, 0.571) !important;
+}
+
+.css-16mmgyz-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+    background-color: rgba(22, 13, 147, 0.571) !important;
+}
+
+.css-16mmgyz-MuiButtonBase-root-MuiPaginationItem-root:hover {
+    background-color: rgba(22, 13, 147, 0.571) !important;
+}
