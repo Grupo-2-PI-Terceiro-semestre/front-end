@@ -111,9 +111,6 @@ const MyDragAndDropCalendar = () => {
           }))
         );
         setEvents(eventsFeature);
-        if (!refrashDinamico) {
-          infoToast('Houve Uma Atualição na Agenda');
-        }
       } catch (error) {
         console.error('Erro ao buscar colaboradores ou agendamentos:', error);
       } finally {
@@ -142,7 +139,7 @@ const MyDragAndDropCalendar = () => {
   };
 
   const handleDateChange = (day) => {
-    buscarColaboradores(formaterDate(day, refrashDinamico));
+    buscarColaboradores(formaterDate(day));
     setSelectedDate(day);
     setSelectDateFormatted(formatDateToBRWithMonthName(day));
   };
