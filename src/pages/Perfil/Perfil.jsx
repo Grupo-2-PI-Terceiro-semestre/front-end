@@ -9,18 +9,19 @@ import FormularioNotificacao from "./components/formularioNotificacao/Formulario
 
 function Perfil() {
   const [activeButton, setActiveButton] = useState('dados');
+  const [refreshKey, setRefreshKey] = useState(0);
 
   return (
     <div className="main-perfil">
-      <Menu />
+      <Menu activeMenuItem="Perfil" refreshKey={refreshKey} />
       <div className="principal">
         <div className="conteudo-perfil">
-
           <BotoesPerfil activeButton={activeButton} setActiveButton={setActiveButton} />
-            {activeButton === 'dados' && <FormularioPrincipal />}
-            {activeButton === 'localizacao' && <FormularioLocalizacao />}
-            {activeButton === 'horario' && <FormularioFuncionamento />}
-            {activeButton === 'notificacoes' && <FormularioNotificacao />}
+          
+          {activeButton === 'dados' && <FormularioPrincipal setRefreshKey={setRefreshKey} />}
+          {activeButton === 'localizacao' && <FormularioLocalizacao />}
+          {activeButton === 'horario' && <FormularioFuncionamento />}
+          {activeButton === 'notificacoes' && <FormularioNotificacao />}
         </div>
       </div>
     </div>

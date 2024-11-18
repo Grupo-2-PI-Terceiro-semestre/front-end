@@ -23,9 +23,9 @@
   }
   
   
-  .loading-icon {
+  .cep-localizacao .loading-icon {
     position: absolute;
-    right: 30px; /* Alinha o loader ao lado direito */
+    right: 10px; /* Alinha o loader ao lado direito */
     top: 50%;
     transform: translateY(-40%); /* Centraliza verticalmente */
     pointer-events: none; /* Não bloqueia interações com o input */

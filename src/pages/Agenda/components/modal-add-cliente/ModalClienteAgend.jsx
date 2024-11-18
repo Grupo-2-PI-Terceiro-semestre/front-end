@@ -53,7 +53,6 @@ function ModalClienteAgend({ onClose }) {
                     icon: "success"
                 });
             } else if (
-                /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire({

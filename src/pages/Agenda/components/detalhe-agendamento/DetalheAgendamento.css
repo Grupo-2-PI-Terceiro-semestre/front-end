@@ -54,6 +54,11 @@
   font-size: 14px;
 }
 
+.detalhe-campo textarea {
+  min-height: 7rem;
+  max-height: 10rem;
+}
+
 .detalhe-campo input:disabled,
 .detalhe-campo textarea:disabled {
   background-color: #3c3a4a;

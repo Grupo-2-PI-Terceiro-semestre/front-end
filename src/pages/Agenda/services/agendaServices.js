@@ -45,10 +45,10 @@ export const findClientes = async (idEmpresa) => {
     }
 }
 
-export const AtualizarEvento = async (eventoAtualizado) => {
+export const AtualizarEvento = async (endpoint, eventoAtualizado) => {
 
     try {
-        const response = await putData(`agendamentos`, eventoAtualizado)
+        const response = await putData(endpoint, eventoAtualizado)
         return response;
     } catch (error) {
         console.log("Erro ao autalizar o agendamento")

@@ -70,7 +70,7 @@ export default function ButtonRollback({ refreshDate, data }) {
         setError(false);
 
         try {
-            await AtualizarEvento(objAcao);
+            await AtualizarEvento("agendamentos/parcial", objAcao);
             viewSuccess('Ação Desfeita');
         } catch (error) {
             viewError('Erro ao Reverter Ação');

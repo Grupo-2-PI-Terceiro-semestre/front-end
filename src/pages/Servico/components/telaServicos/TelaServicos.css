@@ -7,7 +7,7 @@
     gap: 2vh;
     padding: 1.9vh;
     height: 84vh;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .main-tela-servicos .container-tela-servicos {
@@ -113,4 +113,32 @@
     overflow: auto;
     top: 6vh;
     position: relative;
+}
+
+.paginacao-servico {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 7vh;
+    width: 76vw;
+}
+
+.css-16mmgyz-MuiButtonBase-root-MuiPaginationItem-root {
+    color: white !important;
+}
+
+.css-16mmgyz-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: rgba(58, 46, 234, 0.571) !important;
+}
+
+.css-16mmgyz-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+    background-color: rgba(22, 13, 147, 0.571) !important;
+}
+
+.css-16mmgyz-MuiButtonBase-root-MuiPaginationItem-root:hover {
+    background-color: rgba(22, 13, 147, 0.571) !important;
+}
+
+.erroCliente {
+    color: white;
 }

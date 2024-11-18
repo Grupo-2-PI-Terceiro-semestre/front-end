@@ -33,7 +33,11 @@ export default function DateTimePickerOpenTo({ valordefault, onChange }) {
           ampm={false}
           value={selectedDateTime}
           onChange={handleDateChange}
-          renderInput={(params) => <TextField {...params} />}
+          renderInput={(params) => <TextField {...params}
+            sx={{
+              svg: { color: 'blue' },
+              input: { color: '#fff' }
+            }} />}
           shouldDisableTime={shouldDisableTime}
           disablePast
         />

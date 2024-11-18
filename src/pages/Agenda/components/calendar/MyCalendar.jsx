@@ -21,6 +21,7 @@ import Swal from 'sweetalert2'
 import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
 import ButtonRollback from "../button-rollback/ButtonRollback"
 import { Pilha } from "../../../../utils/Pilha";
+import { infoToast } from "../../../../utils/Toats";
 
 
 moment.locale("pt-br");
@@ -31,6 +32,7 @@ const MyDragAndDropCalendar = () => {
 
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectDateFormatted, setSelectDateFormatted] = useState(new Date());
   const [colaboradorInfo, setColaboradorInfo] = useState(null);
   const [detalhes, setDetalhes] = useState([]);
   const [resources, setResources] = useState([]);
@@ -52,9 +54,34 @@ const MyDragAndDropCalendar = () => {
     buscarColaboradores(formattedDate);
   }, []);
 
+  useEffect(() => {
+
+    const eventSource = new EventSource("http://localhost:8080/api/v1/agendamentos/sse");
+    eventSource.addEventListener('refrash', (event) => {
+      if (event.data) {
+        const today = new Date();
+        const localDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const formattedDate = localDate.toISOString().split('T')[0];
+        refrashSse(formattedDate)
+      }
+    })
+
+    eventSource.onerror = (error) => {
+      console.error("Erro na conexão SSE:", error);
+      eventSource.close();
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
+
+
   const buscarColaboradores = async (day) => {
     if (user.idEmpresa) {
+
       setLoading(true);
+
       try {
         const response = await findColaborador(user.idEmpresa, day);
 
@@ -84,6 +111,9 @@ const MyDragAndDropCalendar = () => {
           }))
         );
         setEvents(eventsFeature);
+        if (!refrashDinamico) {
+          infoToast('Houve Uma Atualição na Agenda');
+        }
       } catch (error) {
         console.error('Erro ao buscar colaboradores ou agendamentos:', error);
       } finally {
@@ -112,9 +142,44 @@ const MyDragAndDropCalendar = () => {
   };
 
   const handleDateChange = (day) => {
-    buscarColaboradores(formaterDate(day));
+    buscarColaboradores(formaterDate(day, refrashDinamico));
     setSelectedDate(day);
+    setSelectDateFormatted(formatDateToBRWithMonthName(day));
   };
+
+  const refrashSse = async (day) => {
+    debugger
+
+    const response = await findColaborador(user.idEmpresa, day);
+
+    const formattedResources = response.data.map(colaborador => ({
+      id: colaborador.idAgenda,
+      title: colaborador.nomeFuncionario,
+    }));
+
+    setColaboradorInfo(response);
+    setResources(formattedResources);
+
+    const colaboradores = response.data;
+    const eventsFeature = colaboradores.flatMap(colaborador =>
+      colaborador.agendamentoDTOS.map(evento => ({
+        id: evento.idAgendamento,
+        title: evento.servico.nomeServico,
+        start: new Date(evento.horaAgendamento),
+        end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
+        nomeFuncionario: colaborador.nomeFuncionario,
+        nomeCliente: evento.cliente.nomePessoa,
+        funcionario: colaborador,
+        cliente: evento.cliente,
+        telefoneCliente: evento.cliente.telefone,
+        descricaoServico: evento.servico.descricao,
+        resourceId: colaborador.idFuncionario,
+        corReferenciaHex: evento.servico.corReferenciaHex,
+      }))
+    );
+    setEvents(eventsFeature);
+    infoToast('Houve Uma Atualição na Agenda');
+  }
 
   const formaterDate = (date) => {
     const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -191,7 +256,7 @@ const MyDragAndDropCalendar = () => {
 
   const atualizarEvento = async (novoEvento) => {
     try {
-      const response = await AtualizarEvento(novoEvento);
+      const response = await AtualizarEvento("agendamentos/parcial", novoEvento);
       return response.data;
     } catch (error) {
       throw new Error("Erro ao atualizar o agendamento");
@@ -219,6 +284,7 @@ const MyDragAndDropCalendar = () => {
   };
 
   function formatDateToBRWithMonthName(dateString) {
+
     const date = new Date(dateString);
 
     const day = String(date.getDate()).padStart(2, '0');
@@ -231,8 +297,10 @@ const MyDragAndDropCalendar = () => {
     ];
     const month = monthNames[date.getMonth()];
     const year = date.getFullYear();
+
     return `${day} - ${month} - ${year}`;
   }
+
 
   const CustomToolbar = () => {
     return (
@@ -256,6 +324,7 @@ const MyDragAndDropCalendar = () => {
               const yesterday = new Date();
               yesterday.setDate(yesterday.getDate() - 1);
               handleDateChange(yesterday);
+              setSelectedDate(yesterday);
             }}
             className={isSelected(new Date(new Date().setDate(new Date().getDate() - 1))) ? "custom-span selected" : "custom-span"}
           >
@@ -266,6 +335,7 @@ const MyDragAndDropCalendar = () => {
             onClick={() => {
               const today = new Date();
               handleDateChange(today);
+              setSelectedDate(today);
             }}
             className={isSelected(new Date()) ? "custom-span selected" : "custom-span"}
           >
@@ -277,6 +347,7 @@ const MyDragAndDropCalendar = () => {
               const tomorrow = new Date();
               tomorrow.setDate(tomorrow.getDate() + 1);
               handleDateChange(tomorrow);
+              setSelectedDate(tomorrow);
             }}
             className={isSelected(new Date(new Date().setDate(new Date().getDate() + 1))) ? "custom-span selected" : "custom-span"}
           >
