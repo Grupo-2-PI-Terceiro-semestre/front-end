@@ -11,7 +11,7 @@ import CircularSize from '../../../../components/circulo-load/CircularSize';
 import { findServicos } from "../../services/servicoServices";
 
 function TelaServicos({ placeholder, titulo1, titulo2, titulo3, titulo4
- }) {
+}) {
 
     const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
     const [servicos, setServicos] = useState([]);
@@ -24,15 +24,15 @@ function TelaServicos({ placeholder, titulo1, titulo2, titulo3, titulo4
         const value = event.target.value;
         setSearchTerm(value);
         findByServicoOuEmpresa(value);
-      };
+    };
 
-      useEffect(() => {
+    useEffect(() => {
         if (user && user.idEmpresa) {
             buscarListaServicos(user.idEmpresa, paginaAtual, 8);
         }
     }, [paginaAtual]);
 
-    
+
     const buscarListaServicos = async (idEmpresa, pagina, tamanho) => {
         try {
             setLoading(true);
@@ -62,7 +62,7 @@ function TelaServicos({ placeholder, titulo1, titulo2, titulo3, titulo4
     const handlePageChange = (event, page) => {
         console.log(`Mudando para a página: ${page}`);
         setPaginaAtual(page);
-        buscarListaServicos(user.idEmpresa, page, 8);  
+        buscarListaServicos(user.idEmpresa, page, 8);
     };
 
     return (
@@ -87,15 +87,15 @@ function TelaServicos({ placeholder, titulo1, titulo2, titulo3, titulo4
                     </div>
 
                     <div className="conjuntoLinhas">
-                    {Array.isArray(servicos) && servicos.length > 0 ? (
+                        {Array.isArray(servicos) && servicos.length > 0 ? (
                             servicos.map((servico) => (
                                 <LinhaTabelaServico
-                                key={servico.idServico}
-                                nome={servico.nomeServico}
-                                valor={servico.valorServico}
-                                descricaoServico={servico.descricao}
-                                corReferencia={servico.corReferenciaHex}
-                                tempoExecucao={servico.duracao}
+                                    key={servico.idServico}
+                                    nome={servico.nomeServico}
+                                    valor={servico.valorServico}
+                                    descricaoServico={servico.descricao}
+                                    corReferencia={servico.corReferenciaHex}
+                                    tempoExecucao={servico.duracao}
                                 />
                             ))
                         ) : (
@@ -105,19 +105,19 @@ function TelaServicos({ placeholder, titulo1, titulo2, titulo3, titulo4
                 </div>
 
                 {loading ? (
-                        <CircularSize width="100%" height="100%" />
-                    ) : null}
+                    <CircularSize width="100%" height="100%" />
+                ) : null}
 
-                    <div className="paginacao">
-                        <Stack spacing={2}>
-                            <Pagination
-                                count={totalPags}
-                                page={paginaAtual}
-                                onChange={handlePageChange}
-                                size="large"
-                            />
-                        </Stack>
-                    </div>
+                <div className="paginacao-servico">
+                    <Stack spacing={2}>
+                        <Pagination
+                            count={totalPags}
+                            page={paginaAtual}
+                            onChange={handlePageChange}
+                            size="large"
+                        />
+                    </Stack>
+                </div>
 
             </div>
         </div>

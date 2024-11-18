@@ -7,7 +7,7 @@
     gap: 2vh;
     padding: 1.9vh;
     height: 84vh;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .main-tela-servicos .container-tela-servicos {
@@ -115,11 +115,11 @@
     position: relative;
 }
 
-.paginacao {
+.paginacao-servico {
     display: flex;
     justify-content: center;
     position: relative;
-    top: 3vh;
+    bottom: 7vh;
     width: 76vw;
 }
 
@@ -137,4 +137,8 @@
 
 .css-16mmgyz-MuiButtonBase-root-MuiPaginationItem-root:hover {
     background-color: rgba(22, 13, 147, 0.571) !important;
+}
+
+.erroCliente {
+    color: white;
 }
