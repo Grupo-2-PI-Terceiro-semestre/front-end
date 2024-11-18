@@ -1,7 +1,7 @@
 import React from "react";
 import './ModalDesc.css';
 
-function ModalDesc({onClose}) {
+function ModalDesc({onClose, descricao}) {
     return(
 
         <div className="main-desc">
@@ -9,7 +9,7 @@ function ModalDesc({onClose}) {
                 <div className="borda">
                     <h1 className="titulo">Descrição <button className="botaoDesc" onClick={onClose}>X</button></h1>
 
-                    <label htmlFor="text">Corte de cabelo para homens.</label>
+                    <label htmlFor="text">{descricao}</label>
                 </div>
 
 
