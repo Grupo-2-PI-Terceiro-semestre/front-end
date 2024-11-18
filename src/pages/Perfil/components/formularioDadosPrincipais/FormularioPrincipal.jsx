@@ -193,7 +193,9 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
           />
         </div>
         <div className="button-form">
-          <button type="submit">Salvar Alterações</button>
+          <button style={{
+            backgroundColor: loading ? '#6c7d8c' : '#2196F3'
+          }} disabled={loading} type="submit">Salvar Alterações</button>
         </div>
       </form>
     </div>

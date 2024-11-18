@@ -21,6 +21,7 @@ import Swal from 'sweetalert2'
 import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
 import ButtonRollback from "../button-rollback/ButtonRollback"
 import { Pilha } from "../../../../utils/Pilha";
+import { infoToast } from "../../../../utils/Toats";
 
 
 moment.locale("pt-br");
@@ -50,12 +51,34 @@ const MyDragAndDropCalendar = () => {
     const today = new Date();
     const localDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     const formattedDate = localDate.toISOString().split('T')[0];
-    buscarColaboradores(formattedDate);
+    buscarColaboradores(formattedDate, true);
   }, []);
 
-  const buscarColaboradores = async (day) => {
+  useEffect(() => {
+
+    const eventSource = new EventSource("http://localhost:8080/api/v1/agendamentos/sse");
+    eventSource.addEventListener('refrash', (event) => {
+      if (event.data) {
+        refrashSse(new Date())
+      }
+    })
+
+    eventSource.onerror = (error) => {
+      console.error("Erro na conexão SSE:", error);
+      eventSource.close();
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
+
+
+  const buscarColaboradores = async (day, refrashDinamico) => {
     if (user.idEmpresa) {
-      setLoading(true);
+      if (refrashDinamico) {
+        setLoading(true);
+      }
       try {
         const response = await findColaborador(user.idEmpresa, day);
 
@@ -85,10 +108,15 @@ const MyDragAndDropCalendar = () => {
           }))
         );
         setEvents(eventsFeature);
+        if (!refrashDinamico) {
+          infoToast('Houve Uma Atualição na Agenda');
+        }
       } catch (error) {
         console.error('Erro ao buscar colaboradores ou agendamentos:', error);
       } finally {
-        setLoading(false);
+        if (refrashDinamico) {
+          setLoading(false);
+        }
       }
     }
   };
@@ -113,11 +141,42 @@ const MyDragAndDropCalendar = () => {
   };
 
   const handleDateChange = (day) => {
-    debugger
-    buscarColaboradores(formaterDate(day));
+    buscarColaboradores(formaterDate(day, refrashDinamico));
     setSelectedDate(day);
     setSelectDateFormatted(formatDateToBRWithMonthName(day));
   };
+
+  const refrashSse = async (day) => {
+
+    const response = await findColaborador(user.idEmpresa, day);
+
+    const formattedResources = response.data.map(colaborador => ({
+      id: colaborador.idAgenda,
+      title: colaborador.nomeFuncionario,
+    }));
+
+    setColaboradorInfo(response);
+    setResources(formattedResources);
+
+    const colaboradores = response.data;
+    const eventsFeature = colaboradores.flatMap(colaborador =>
+      colaborador.agendamentoDTOS.map(evento => ({
+        id: evento.idAgendamento,
+        title: evento.servico.nomeServico,
+        start: new Date(evento.horaAgendamento),
+        end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
+        nomeFuncionario: colaborador.nomeFuncionario,
+        nomeCliente: evento.cliente.nomePessoa,
+        funcionario: colaborador,
+        cliente: evento.cliente,
+        telefoneCliente: evento.cliente.telefone,
+        descricaoServico: evento.servico.descricao,
+        resourceId: colaborador.idFuncionario,
+        corReferenciaHex: evento.servico.corReferenciaHex,
+      }))
+    );
+    setEvents(eventsFeature);
+  }
 
   const formaterDate = (date) => {
     const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());

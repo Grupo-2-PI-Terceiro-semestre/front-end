@@ -40,3 +40,23 @@ export const atualizarDadosDePerfil = async (dados) => {
         throw error;
     }
 }
+
+export const buscarNotificacoes = async (idEmpresa) => {
+    try {
+        const response = await getData(`empresas/${idEmpresa}/notificacao`, {}, {});
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao buscar as notificações", error);
+        throw error;
+    }
+}
+
+export const atualizarNotificacoes = async (idEmpresa, notificacoes) => {
+    try {
+        const response = await postData(`empresas/${idEmpresa}/notificacao`, notificacoes, {});
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao atualizar as notificações", error);
+        throw error;
+    }
+}

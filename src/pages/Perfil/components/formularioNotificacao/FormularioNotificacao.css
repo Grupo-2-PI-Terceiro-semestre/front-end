@@ -12,13 +12,18 @@
     max-height: 11rem;
 }
 
-.app-container-notifica .form-group{
+.app-container-notifica .form-group {
     height: auto;
 }
 
-.app-container-notifica{
+.app-container-notifica {
     width: 90%;
     gap: 2rem;
     display: flex;
     flex-direction: column;
+}
+
+.app-container-notifica .loading-icon {
+    top: 15%;
+    right: 6.8%;
 }
