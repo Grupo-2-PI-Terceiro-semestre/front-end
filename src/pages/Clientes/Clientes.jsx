@@ -1,10 +1,8 @@
 import React from "react";
 import './Clientes.css';
-// import ModalAdd from "../../components/modalAdd/ModalAdd";
 import Menu from "../../components/menu/Menu";
 import TelaClientes from "./components/telaClientes/TelaClientes";
 import HeaderCliente from "../../components/headerCliente/HeaderCliente";
-// import HeaderInterna from "../../components/headerInterna/HeaderInterna";
 
 function Clientes() {
 
@@ -17,25 +15,11 @@ function Clientes() {
         { label: 'Descrição', name: 'descricao', type: 'textarea', placeholder: 'Descrição do Serviço', required: true },
     ];
 
-    // const camposCadastroProduto = [
-    //     { label: 'Nome do Produto', name: 'nomeProduto', type: 'text', placeholder: 'Nome do Produto', required: true },
-    //     { label: 'Preço', name: 'preco', type: 'number', placeholder: 'Preço', required: true },
-    //     { label: 'Categoria', name: 'categoria', type: 'text', placeholder: 'Categoria do Produto', required: true },
-    //     { label: 'Descrição', name: 'descricao', type: 'textarea', placeholder: 'Descrição do Produto', required: true },
-    // ];
-
     return (
         <div className="main-clientes">
             <div className="container-clientes">
 
                 <Menu />
-
-                {/* <ModalAdd
-                    titulo="Cadastrar Serviço"
-                    onClose={() => setIsModalOpen(false)}
-                    campos={camposCadastroServico}
-                    tituloBotao="Cadastrar"
-                />             */}
 
                 <div className="principal">
 
@@ -48,17 +32,6 @@ function Clientes() {
 
                     <TelaClientes titulo="Clientes" placeholder="Pesquisar cliente" titulo1="NOME" titulo2="TELEFONE" titulo3="EMAIL" titulo4="AÇÕES" />
 
-
-                    {/* {isModalOpen && (
-                        // <ModalAdd onClose={closeModalAdd} titulo="Adicionar Novo Serviço" />
-
-                        <ModalAdd
-                            titulo="Cadastrar Serviço"
-                            onClose={() => setIsModalOpen(false)}
-                            campos={camposCadastroServico}
-                            tituloBotao="Cadastrar"
-                        />
-                    )} */}
                 </div>
 
             </div>
