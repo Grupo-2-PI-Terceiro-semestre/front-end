@@ -168,7 +168,6 @@ function ModalEditar({ onClose, titulo }) {
                                 </select>
                             </div>
                         </div >
-
                         <div className="form-group-text">
                             <div className='inputLabel'>
                                 <label>Descrição:</label>
@@ -181,7 +180,6 @@ function ModalEditar({ onClose, titulo }) {
                                 />
                             </div>
                         </div>
-
                         <button className="botaoCadastrar" onClick={handleSubmit}>Editar</button>
                     </form >
                 </div>
