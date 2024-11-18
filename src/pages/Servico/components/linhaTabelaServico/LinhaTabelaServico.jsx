@@ -7,17 +7,21 @@ import ModalEditar from "../modalEditar/ModalEditar";
 import ModalDesc from "../../../../components/modalDesc/ModalDesc";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria }) {
+function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria, corReferencia, descricaoServico }) {
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
     const [isModalOpenExcluir, setIsModalOpenExcluir] = useState(false);
     const [isModalOpenDesc, setIsModalOpenDesc] = useState(false);
+    const [modalDescData, setModalDescData] = useState(null);
 
     const openModalExcluir = () => setIsModalOpenExcluir(true);
     const closeModalExcluir = () => setIsModalOpenExcluir(false);
     const openModalEditar = () => setIsModalOpen(true);
     const closeModalEditar = () => setIsModalOpen(false);
-    const openModalDesc = () => setIsModalOpenDesc(true);
-    const closeModalDesc = () => setIsModalOpenDesc(false);
+
+    const openModalDesc = () => {
+        setModalDescData(descricaoServico); // Define a descrição do serviço
+        setIsModalOpenDesc(true); // Abre o modal
+    }; const closeModalDesc = () => setIsModalOpenDesc(false);
 
     const renderTooltip = (message) => (
         <Tooltip>{message}</Tooltip>
@@ -28,7 +32,7 @@ function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria }) {
             <div className="container-linha-tabela">
                 <div className="tabela">
                     <div className="linha">
-                        <div className="cor"></div>
+                        <div className="cor" style={{ backgroundColor: corReferencia }}></div>
                         <label htmlFor="text">{nome}</label>
                         <label htmlFor="text">{valor}</label>
                         <label htmlFor="text">{tempoExecucao}</label>
@@ -80,8 +84,12 @@ function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria }) {
                 )}
 
                 {isModalOpenDesc && (
-                    <ModalDesc onClose={closeModalDesc} />
+                    <ModalDesc
+                        onClose={closeModalDesc}
+                        descricao={descricaoServico}
+                    />
                 )}
+
             </div>
         </>
     );
