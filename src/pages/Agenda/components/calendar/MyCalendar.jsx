@@ -51,7 +51,7 @@ const MyDragAndDropCalendar = () => {
     const today = new Date();
     const localDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     const formattedDate = localDate.toISOString().split('T')[0];
-    buscarColaboradores(formattedDate, true);
+    buscarColaboradores(formattedDate);
   }, []);
 
   useEffect(() => {
@@ -59,7 +59,10 @@ const MyDragAndDropCalendar = () => {
     const eventSource = new EventSource("http://localhost:8080/api/v1/agendamentos/sse");
     eventSource.addEventListener('refrash', (event) => {
       if (event.data) {
-        refrashSse(new Date())
+        const today = new Date();
+        const localDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const formattedDate = localDate.toISOString().split('T')[0];
+        refrashSse(formattedDate)
       }
     })
 
@@ -74,11 +77,11 @@ const MyDragAndDropCalendar = () => {
   }, []);
 
 
-  const buscarColaboradores = async (day, refrashDinamico) => {
+  const buscarColaboradores = async (day) => {
     if (user.idEmpresa) {
-      if (refrashDinamico) {
-        setLoading(true);
-      }
+
+      setLoading(true);
+
       try {
         const response = await findColaborador(user.idEmpresa, day);
 
@@ -114,9 +117,7 @@ const MyDragAndDropCalendar = () => {
       } catch (error) {
         console.error('Erro ao buscar colaboradores ou agendamentos:', error);
       } finally {
-        if (refrashDinamico) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     }
   };
@@ -147,6 +148,7 @@ const MyDragAndDropCalendar = () => {
   };
 
   const refrashSse = async (day) => {
+    debugger
 
     const response = await findColaborador(user.idEmpresa, day);
 
@@ -176,6 +178,7 @@ const MyDragAndDropCalendar = () => {
       }))
     );
     setEvents(eventsFeature);
+    infoToast('Houve Uma Atualição na Agenda');
   }
 
   const formaterDate = (date) => {
