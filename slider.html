@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img id="img_teste" width="250px" height="150px" src="" alt="">
+
+
+    <div style="display: flex;">
+        <button onclick="anterior()">←</button>
+
+        <div id="div_bolinhas"></div>
+
+        <button onclick="proximo()">→</button>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var urls = [
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1IYHGcQpi33pV6YbWwOtHV9Y81kqL6bUD_Q&s',
+        'https://services.meteored.com/img/article/inteligencia-artificial-aprende-a-reconstruir-imagens-vistas-por-pessoas-ciencia-fotos-1679175318563_1280.jpg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNanOuAap9E56GxGyagm1ssphQRH9QU8--6A&s'
+    ]
+    var index = 0;
+
+    atualizarImagem();
+
+    function atualizarImagem() {
+        document.getElementById('img_teste').src = urls[index];
+
+        atualizarBolinhas();
+    }
+
+    function atualizarBolinhas() {
+        var divBolinhas = document.getElementById('div_bolinhas');
+        divBolinhas.innerHTML = '';
+
+
+
+        for (var i = 0; i < urls.length; i++) {
+            if (i == index) {
+                divBolinhas.innerHTML += '<span style="font-size: 30px; color: red;">•</span>';
+            } else {
+                divBolinhas.innerHTML += '<span style="font-size: 30px; color: gray;">•</span>';
+            }
+        }
+    }
+
+    function proximo() {
+        index++;
+        if (index >= urls.length) {
+            index = 0;
+        }
+        atualizarImagem();
+    }
+
+    function anterior() {
+        index--;
+        if (index < 0) {
+            index = urls.length - 1;
+        }
+        atualizarImagem();
+    }
+</script>

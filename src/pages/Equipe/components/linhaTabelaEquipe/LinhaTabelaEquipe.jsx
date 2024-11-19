@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-function LinhaTabelaEquipe({ nome, telefone, funcao }) {
+function LinhaTabelaEquipe({key, nome, telefone, funcao }) {
 
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
     const [isModalOpenExcluir, setIsModalOpenExcluir] = useState(false);
