@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    padding: 1rem;
+    z-index: 1000;
+  }
+  
+  .social-icons a {
+    color: #fff;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+    margin-right: 2rem;
+    font-weight: bold;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    margin-right: 1.5rem;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .business-link a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .business-link a:hover {
+    text-decoration: underline;
+  }
+  

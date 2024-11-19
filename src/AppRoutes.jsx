@@ -13,6 +13,9 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Clientes from './pages/Clientes/Clientes';
 import Equipe from './pages/Equipe/Equipe';
 import ProtectedRoute from './ProtectedRoute'; // Importe o componente ProtectedRoute
+import Agendamento from './pages/Agendamento/Agendamento';
+
+
 
 const AppRoutes = () => {
     return (
@@ -27,6 +30,8 @@ const AppRoutes = () => {
             <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
             <Route path="/clientes" element={<ProtectedRoute element={<Clientes />} />} />
             <Route path="/equipe" element={<ProtectedRoute element={<Equipe />} />} />
+            <Route path="/agendamento" element={<Agendamento />} />
+
         </Routes>
     );
 };

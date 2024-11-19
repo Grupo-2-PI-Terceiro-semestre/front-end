@@ -1,0 +1,41 @@
+.banner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    justify-content: flex-start;
+    /* border: solid 1px #000; */    /* Adicione uma borda para visualizar o container */
+    margin-top: 10vh;
+  }
+
+  .banner-content {
+    max-width: 90%;
+    overflow: hidden;
+    border-radius: 10px; /* Ajuste o arredondamento das bordas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: inherit;
+  }
+
+.info-empresa{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.info-empresa h3{
+    margin: 0;
+    padding: 0;
+}
+
+.info-empresa p{
+    margin: 0;
+    padding: 0;
+}
+  
