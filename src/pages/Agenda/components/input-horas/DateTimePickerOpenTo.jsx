@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import dayjs from 'dayjs';
@@ -28,16 +28,14 @@ export default function DateTimePickerOpenTo({ valordefault, onChange }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <DateTimePicker
+        <MobileDateTimePicker
           openTo="day"
           ampm={false}
+          
           value={selectedDateTime}
           onChange={handleDateChange}
           renderInput={(params) => <TextField {...params}
-            sx={{
-              svg: { color: 'blue' },
-              input: { color: '#fff' }
-            }} />}
+             />}
           shouldDisableTime={shouldDisableTime}
           disablePast
         />
