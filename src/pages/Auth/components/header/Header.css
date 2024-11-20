@@ -5,34 +5,37 @@
   left: 0;
   height: 14vh;
   width: 100vw;
-  justify-content: center; /* Centraliza o conteúdo horizontalmente */
-    align-items: center;     /* Centraliza o conteúdo verticalmente */
-    border-bottom: 1px solid #ddd; /* Borda inferior leve */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  }
-  
-  /* Logo e link */
-  .logo-container {
-    text-align: center;
-    justify-content: center;
-    padding-top: 5vh;
-  }
-  
-  .logo-link {
-    font-size: 28px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #007bff; /* Cor do link (azul) */
-    font-family: 'Arial', sans-serif; /* Fonte padrão */
-  }
-  
-  .logo-link:hover {
-    color: #0056b3; /* Muda cor do link ao passar o mouse */
-  }
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .barra-container {
-    margin-top: 4vh;
-    justify-content: end;
-    align-items: end;
-    display: none;
+/* Logo e link */
+.logo-container {
+  text-align: center;
+  justify-content: center;
+  padding-top: 5vh;
+}
+
+.logo-link {
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #007bff;
+  /* Cor do link (azul) */
+  font-family: 'Arial', sans-serif;
+  /* Fonte padrão */
+}
+
+.logo-link:hover {
+  color: #0056b3;
+  /* Muda cor do link ao passar o mouse */
+}
+
+.barra-container {
+  margin-top: 4vh;
+  justify-content: end;
+  align-items: end;
+  display: none;
 }
