@@ -3,6 +3,7 @@
     height: 100vh;
     background-color: rgb(23, 24, 33);
     display: flex;
+    overflow: hidden;
 }
 
 .conteudo-dashboard {
@@ -35,10 +36,51 @@
 }
 
 .quadradoKPI{
-    width: 60%;
+    width: 70%;
     height: 100%;
     display: flex;
     background-color: #21222D;
     justify-content: space-evenly;
     align-items: center;
 }
+
+.espaço_filtro{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: start;
+}
+
+.quadrado_filtro{
+    width: 15%;
+    height: 25%;
+    background-color: #20AEF3;
+    border-radius: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quadrado_filtro:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+
+.filter{
+    color: white;
+}
+
+.filter:hover{
+    color: #000;
+}
+
+.espaço-botao {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: self-start;
+}
+
