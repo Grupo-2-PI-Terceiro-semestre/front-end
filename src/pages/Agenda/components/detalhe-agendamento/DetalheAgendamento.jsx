@@ -96,7 +96,6 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                 try {
                     await CancelarAgendamento(idAgendamento, "CANCELADO");
                     onClose();
-                    debugger
                     refreshDate(event.start)
                 } catch (error) {
                     await Swal.fire({

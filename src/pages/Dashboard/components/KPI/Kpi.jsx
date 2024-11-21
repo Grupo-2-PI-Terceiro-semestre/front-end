@@ -22,6 +22,14 @@ function Kpi(props) {
                 case "agendamentos/ticket":
                     setDados({ valor: response.ticketMedio, percent: 0 });
                     break;
+                case "agendamentos/aReceber":
+                    setDados({ valor: response, percent: 0 });
+                    break;
+                case "agendamentos/novosClientes":
+                    debugger;
+                    setDados({ valor: response.totalClientes, percent: response.comparativoClientes });
+                    console.log(response.totalClientes + " " + response.comparativoClientes);
+                    break;
                 default:
                     console.warn(`Endpoint ${endPoint} não reconhecido.`);
             }
@@ -35,8 +43,13 @@ function Kpi(props) {
     }, [buscarDados]);
 
     const formatarValorFunc = (valor) => {
-        if (formatarValor) ;
-        return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(valor);
+        if (isNaN(valor)) {
+            return "Valor inválido";
+        }
+        if (formatarValor) {
+            return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(valor);
+        }
+        return valor;
     };
 
     return (

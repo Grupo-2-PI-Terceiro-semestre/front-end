@@ -112,7 +112,6 @@ function FormularioLocalizacao() {
                 cidade,
                 complemento
             };
-            debugger
             cadastrar(data, user.idEmpresa);
         } else {
             infoToast('Nenhum dado foi alterado');

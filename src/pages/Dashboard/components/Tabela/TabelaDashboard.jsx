@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from "react";
 import "./TabelaDashboard.css";
-import {findListaAgendamentos} from "../../services/dashboardServices";
+import {findListaAgendamentos, findListaReceitaPorFuncionario} from "../../services/dashboardServices";
 
-function TabelaDashboard({ headers, idEmpresa }) {
+function TabelaDashboard({ headers, idEmpresa, endPoint }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        buscarListaAgendameno();
-    }, []);
+        buscarDados();
+    }, [endPoint]);
 
-    const buscarListaAgendameno = async () => {
+    const buscarDados = async () => {
         try {
-            const response = await findListaAgendamentos(idEmpresa);
+         
+            let response;
+            switch (endPoint) {
+                case "agendamentos":
+                    response = await findListaAgendamentos(idEmpresa);
+                    break;
+                case "receitaPorFuncionario":
+                    response = await findListaReceitaPorFuncionario(idEmpresa);
+                    break;
+                default:
+                    console.warn(`Endpoint ${endPoint} não reconhecido.`);
+                    return;
+            }
             setData(response);
         } catch (error) {
             console.error("Erro ao buscar os dados", error);
         }
-    }
+    };
 
     return (
         <div className="tabela-dashboard-container">
@@ -41,5 +53,4 @@ function TabelaDashboard({ headers, idEmpresa }) {
         </div>
     );
 }
-
 export default TabelaDashboard;
