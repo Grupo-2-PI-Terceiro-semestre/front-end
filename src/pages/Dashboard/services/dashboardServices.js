@@ -73,4 +73,18 @@ export const findChartServiceData = async (idEmpresa, endPoint) => {
         console.error("Erro ao buscar o dashboard", error);
         throw error;
     }
+};
+
+export const findChartReceitaServiceData = async (idEmpresa, endPoint) => {
+    try {
+        const response = await getData(`agendamentos/${endPoint}/${idEmpresa}`, {}, {});
+        const data = response.data;
+        const seriesData = data.map(item => item.receita);
+        const xAxisData = data.map(item => item.servico);
+
+        return { seriesData, xAxisData };
+    } catch (error) {
+        console.error("Erro ao buscar o dashboard", error);
+        throw error;
+    }
 }

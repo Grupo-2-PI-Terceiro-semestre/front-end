@@ -68,6 +68,13 @@ function Kpi(props) {
         }
     }
 
+    const mensagemComparativoMes = (valor) => {
+        if (valor > 0) {
+            return `+${ajustarCasasDecimais(valor)}% mês anterior`;
+        } else if (valor < 0) {
+            return `+${ajustarCasasDecimais(valor)}% mês anterior`;
+        }
+    }
     return (
         <div className="conteiner_kpi">
             <div className="icon_dashboard" style={{ color: iconColor }}>
@@ -82,7 +89,7 @@ function Kpi(props) {
                 </div>
                 {mensagemMes && (
                     <div className="percent" style={{ color: ajustarCor(dados.percent) }}>
-                    {ajustarCasasDecimais(dados.percent)}% Mês anterior
+                         {mensagemComparativoMes(dados.percent)}
                 </div>
                 )}
             </div>
