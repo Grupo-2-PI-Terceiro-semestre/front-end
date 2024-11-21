@@ -1,21 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Chart.css";
-import Highcharts, { color, Legend } from 'highcharts';
+import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { findChartClientData } from "../../services/dashboardServices";
 
+const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colorChart, lineColor }) => {
+    const [seriesData, setSeriesData] = useState([]);
+    const [xAxisData, setXAxisData] = useState([]);
 
-const Chart = ({ title, type, seriesData, xAxisData, heightChart, widthChart,colorChart, lineColor }) => {
+    const buscarDados = async () => {
+        try {
+            const response = await findChartClientData(idEmpresa, endPoint);
+            setSeriesData(response.seriesData);
+            setXAxisData(response.xAxisData);
+        } catch (error) {
+            console.error("Erro ao buscar os dados do gráfico", error);
+        }
+    };
+
+    useEffect(() => {
+        buscarDados();
+    }, [endPoint]);
+
     const options = {
         chart: {
             type: type,
             backgroundColor: 'transparent',
             height: heightChart,
             width: widthChart,
-
         },
         title: {
             text: title,
-
         },
         series: [{
             data: seriesData,
@@ -31,9 +46,7 @@ const Chart = ({ title, type, seriesData, xAxisData, heightChart, widthChart,col
                     color: 'white'
                 }
             },
-           
             lineColor: lineColor,
-            
         },
         yAxis: {
             title: {
@@ -50,7 +63,6 @@ const Chart = ({ title, type, seriesData, xAxisData, heightChart, widthChart,col
         legend: {
             enabled: false
         }
-
     };
 
     return (

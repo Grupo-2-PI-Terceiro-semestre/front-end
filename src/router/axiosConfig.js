@@ -2,7 +2,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 axios.interceptors.request.use((config) => {
-    debugger
     const token = Cookies.get('token');
 
     if (token) {

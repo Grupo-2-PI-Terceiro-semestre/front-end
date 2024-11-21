@@ -100,12 +100,20 @@ function Dashboard() {
                         <TabelaDashboard headers={['Cliente', 'Servico', 'Dia', 'Hora', 'Atendente']} idEmpresa={user.idEmpresa} endPoint="agendamentos" />
                     </CardDashboard>
                     <CardDashboard title="Receita por Mês" height="270px" width="620px">
-                        <Chart title="" type="spline" seriesData={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20]} xAxisData={['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']} lineColor={'white'} heightChart={200} colorChart={'#3CD856'} />
+                        <Chart
+                            type="spline"
+                            endPoint="receitaPorMes"
+                            idEmpresa={user.idEmpresa}
+                            heightChart={200}
+                            widthChart={600}
+                            colorChart={'#3CD856'}
+                            lineColor={'white'}
+                        />
                     </CardDashboard>
 
-                </div>
             </div>
         </div>
+        </div >
     );
 }
 

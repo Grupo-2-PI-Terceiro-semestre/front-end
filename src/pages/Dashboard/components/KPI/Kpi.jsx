@@ -26,7 +26,7 @@ function Kpi(props) {
                     setDados({ valor: response, percent: 0 });
                     break;
                 case "agendamentos/novosClientes":
-                    debugger;
+                    
                     setDados({ valor: response.totalClientes, percent: response.comparativoClientes });
                     console.log(response.totalClientes + " " + response.comparativoClientes);
                     break;
@@ -52,6 +52,22 @@ function Kpi(props) {
         return valor;
     };
 
+    const ajustarCasasDecimais = (valor) => {
+        if (isNaN(valor)) {
+            return "Valor inválido";
+        }
+        return valor.toFixed(2);
+    }
+
+    const ajustarCor = (valor) => {
+        if (valor > 0) {
+            
+            return "#3CD856";
+        } else if (valor < 0) {
+            return "#FF0000";
+        }
+    }
+
     return (
         <div className="conteiner_kpi">
             <div className="icon_dashboard" style={{ color: iconColor }}>
@@ -65,9 +81,9 @@ function Kpi(props) {
                     {description}
                 </div>
                 {mensagemMes && (
-                    <div className="percent">
-                        {dados.percent}% Mês anterior
-                    </div>
+                    <div className="percent" style={{ color: ajustarCor(dados.percent) }}>
+                    {ajustarCasasDecimais(dados.percent)}% Mês anterior
+                </div>
                 )}
             </div>
         </div>

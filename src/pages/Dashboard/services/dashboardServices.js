@@ -34,13 +34,17 @@
 }
 
 
-    export const findChartClientData = async (idEmpresa, endPoint) => {
-        try {
-            const response = await getData(`${endPoint}/${idEmpresa}`, {}, {});
-            return response.data;
-        } catch (error) {
-            console.error("Erro ao buscar o dashboard", error);
-            throw error;
-        }
+export const findChartClientData = async (idEmpresa, endPoint) => {
+    try {
+        const response = await getData(`agendamentos/${endPoint}/${idEmpresa}`, {}, {});
+        const data = response.data;
+        const seriesData = data.map(item => item.receita);
+        const xAxisData = data.map(item => item.ano_mes);
+
+        return { seriesData, xAxisData };
+    } catch (error) {
+        console.error("Erro ao buscar o dashboard", error);
+        throw error;
     }
+};
 
