@@ -56,7 +56,7 @@ export const AtualizarEvento = async (endpoint, eventoAtualizado) => {
     }
 }
 
-export const CancelarAgendamento = async (idAgendamento, status) => {
+export const atualizarStatus = async (idAgendamento, status) => {
     try {
         const response = await putData(`agendamentos/${idAgendamento}?status=${status}`)
         return response;

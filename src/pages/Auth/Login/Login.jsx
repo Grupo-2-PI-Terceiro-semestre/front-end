@@ -4,8 +4,6 @@ import FormularioLogin from '../components/formulario-login/FormularioLogin';
 import './Login.css';
 import SectionIcons from '../components/section-icons/SectionIcons';
 import Header from '../components/header/Header';
-import LinearProgress from '../../../components/barra-load/LinearProgress';
-import { FALSE } from 'sass';
 
 const Login = () => {
   const [barraVisible, setBarraVisible] = useState(false);

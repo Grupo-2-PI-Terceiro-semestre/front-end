@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './DetalheAgendamento.css'; // Estilizações
 import Button from '../../../../components/button/Button';
-import { findServicos, findClientes, CancelarAgendamento, AtualizarEvento } from '../../services/agendaServices';
+import { findServicos, findClientes, atualizarStatus, AtualizarEvento } from '../../services/agendaServices';
 import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
@@ -16,7 +16,7 @@ import dayjs from 'dayjs';
 
 
 
-const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose, refreshDate }) => {
+const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose, refreshDate, paraConfirmar, realizado }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [horarioInicio, setHorarioInicio] = useState(event.start);
     const [servicos, setServicos] = useState([]);
@@ -57,19 +57,24 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
         }
     }
 
-    const cancelarAgendamento = async (idAgendamento) => {
+    const updateStatus = async (idAgendamento, status) => {
         try {
-            const result = await Swal.fire({
-                title: "Atenção!",
-                text: "Você tem certeza que deseja cancelar esse agendamento?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sim",
-            });
+            let resutado = true;
+            if (status == 'CANCELADO') {
 
-            if (result.isConfirmed) {
+                const result = await Swal.fire({
+                    title: "Atenção!",
+                    text: "Você tem certeza que deseja cancelar esse agendamento?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sim",
+                });
+                resutado = result.isConfirmed;
+            }
+
+            if (resutado) {
                 if (pilhaSessao == null) {
                     let pilha = new Pilha();
                     const objAcao = {
@@ -94,9 +99,8 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
 
                 setLoading(true);
                 try {
-                    await CancelarAgendamento(idAgendamento, "CANCELADO");
+                    await atualizarStatus(idAgendamento, status);
                     onClose();
-                    debugger
                     refreshDate(event.start)
                 } catch (error) {
                     await Swal.fire({
@@ -150,6 +154,8 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
             refreshDate(new Date(horarioInicio));
         } catch (error) {
             console.error('Erro ao atualizar o agendamento:', error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -253,34 +259,63 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
             </div>
 
             <div className="detalhe-actions">
-                <Button
-                    type="submit"
-                    content="Cancelar Agendamento"
-                    backgroundColor='#F0242D'
-                    fontWeight='bold'
-                    fontSize='15px'
-                    size='47%'
-                    onClick={() => cancelarAgendamento(event.id)}
-                />
-                {isEditing ? (
+                {!realizado ? (
+                    <>
+                        {paraConfirmar ? (
+                            <Button
+                                size="100%"
+                                fontSize="15px"
+                                fontWeight="bold"
+                                content="Confirmar Agendamento"
+                                backgroundColor="#4E9F65" /* Verde escuro */
+                                onClick={() => updateStatus(event.id, "AGENDADO")}
+                            />
+                        ) : (
+                            <Button
+                                size="100%"
+                                content="Finalizar"
+                                fontWeight="bold"
+                                fontSize="15px"
+                                backgroundColor="#4A90E2" /* Azul suave */
+                                onClick={() => updateStatus(event.id, "REALIZADO")}
+                            />
+                        )}
+                        <Button
+                            type="submit"
+                            content="Cancelar Agendamento"
+                            backgroundColor="#D32F2F" /* Vermelho escuro */
+                            fontWeight="bold"
+                            fontSize="15px"
+                            size="100%"
+                            onClick={() => updateStatus(event.id, "CANCELADO")}
+                        />
+                    </>
+                ) : null}
+
+                {/* Botões de Editar e Salvar só aparecem quando o serviço está "REALIZADO" */}
+                {!realizado && isEditing ? (
                     <Button
-                        size='47%'
-                        fontSize='15px'
-                        fontWeight='bold'
+                        size="100%"
+                        fontSize="15px"
+                        fontWeight="bold"
                         content="Salvar"
-                        backgroundColor='#28A745'
+                        backgroundColor="#388E3C" /* Verde escuro */
                         onClick={handleEdit}
                     />
-                ) : (
+                ) : !realizado ? (
                     <Button
-                        size='47%'
+                        size="100%"
                         content="Editar"
-                        fontWeight='bold'
-                        fontSize='15px'
-                        backgroundColor='#F9A220'
+                        fontWeight="bold"
+                        fontSize="15px"
+                        backgroundColor="#F9A825" /* Amarelo escuro */
                         onClick={toggleEditing}
                     />
-                )}
+                ) : null}
+
+
+
+
                 {loading ? (
                     <CircularSize width="100%" height="100%" />
                 ) : null}

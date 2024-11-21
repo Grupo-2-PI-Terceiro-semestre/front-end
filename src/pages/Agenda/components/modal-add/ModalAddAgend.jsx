@@ -94,9 +94,6 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
         }
     };
 
-
-
-
     const handleClose = () => {
         setIsVisible(false);
         setTimeout(onClose, 400);
@@ -125,7 +122,8 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                 idCliente: clienteSelecionado,
                 idServico: servicoSelecionado,
                 idAgenda: profissionalSelecionado,
-                dataAgendamento: converterGMTParaBrasilia(dataHoraAgendamento)
+                dataAgendamento: converterGMTParaBrasilia(dataHoraAgendamento),
+                statusAgendamento: 'PENDENTE'
             }
 
             criarAgendamento(agendamentoData);

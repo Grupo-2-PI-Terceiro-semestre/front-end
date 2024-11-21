@@ -10,7 +10,7 @@ import "./MyCalendar.css";
 import Button from "../../../../components/button/Button";
 import plusIcon from "../../../../assets/plus.png";
 import IconDemo from '../agenda/Agenda';
-import { findColaborador, AtualizarEvento } from '../../services/agendaServices'
+import { findColaborador, AtualizarEvento, atualizarStatus } from '../../services/agendaServices'
 import Cookies from 'js-cookie';
 import CircularIntegration from '../../../../components/botao-download/CircularIntegration';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
@@ -22,6 +22,9 @@ import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
 import ButtonRollback from "../button-rollback/ButtonRollback"
 import { Pilha } from "../../../../utils/Pilha";
 import { infoToast } from "../../../../utils/Toats";
+import Tooltip from '@mui/material/Tooltip';
+import Check from '../../../../assets/check.png';
+import Alert from '../../../../assets/alert.png';
 
 
 moment.locale("pt-br");
@@ -49,10 +52,7 @@ const MyDragAndDropCalendar = () => {
 
 
   useEffect(() => {
-    const today = new Date();
-    const localDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const formattedDate = localDate.toISOString().split('T')[0];
-    buscarColaboradores(formattedDate);
+    buscarColaboradores(dateOficial());
   }, []);
 
   useEffect(() => {
@@ -60,10 +60,7 @@ const MyDragAndDropCalendar = () => {
     const eventSource = new EventSource(`${API_URL}agendamentos/sse`);
     eventSource.addEventListener('refrash', (event) => {
       if (event.data) {
-        const today = new Date();
-        const localDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-        const formattedDate = localDate.toISOString().split('T')[0];
-        refrashSse(formattedDate)
+        refrashSse(dateOficial())
       }
     })
 
@@ -98,7 +95,7 @@ const MyDragAndDropCalendar = () => {
         const eventsFeature = colaboradores.flatMap(colaborador =>
           colaborador.agendamentoDTOS.map(evento => ({
             id: evento.idAgendamento,
-            title: evento.servico.nomeServico,
+            title: `${evento.servico.nomeServico}`,
             start: new Date(evento.horaAgendamento),
             end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
             nomeFuncionario: colaborador.nomeFuncionario,
@@ -109,6 +106,9 @@ const MyDragAndDropCalendar = () => {
             descricaoServico: evento.servico.descricao,
             resourceId: colaborador.idFuncionario,
             corReferenciaHex: evento.servico.corReferenciaHex,
+            precisaConfirmar: evento.statusAgendamento == 'PENDENTE',
+            realizado: evento.statusAgendamento == 'REALIZADO',
+            status: filterStatus(evento.statusAgendamento)
           }))
         );
         setEvents(eventsFeature);
@@ -120,6 +120,13 @@ const MyDragAndDropCalendar = () => {
     }
   };
 
+  const dateOficial = () => {
+    const today = new Date();
+    const localDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const formattedDate = localDate.toISOString().split('T')[0];
+    return formattedDate;
+  }
+
   const handleCloseModalDetalhes = () => {
     setOpenModal(false);
     setSelectedEvent(null);
@@ -129,15 +136,61 @@ const MyDragAndDropCalendar = () => {
     setOpenModalAdd(false);
   };
 
-  const eventPropGetter = (event) => {
-    const borderColor = event.corReferenciaHex || '#00929B';
 
+  const eventPropGetter = (event) => {
+    const borderColor = event.corReferenciaHex || "#00929B";
+    const backgroundColor = event.precisaConfirmar ? "#424242d5" : "#424242";
     return {
       style: {
         borderLeft: `solid 8px ${borderColor}`,
-      },
+        backgroundColor: backgroundColor,
+      }
     };
   };
+
+
+  const CustomEvent = ({ event }) => {
+    const backgroundImage = event.realizado
+      ? 'url("https://cdn-icons-png.flaticon.com/512/5610/5610944.png")'
+      : event.precisaConfirmar
+        ? 'url("https://icones.pro/wp-content/uploads/2021/05/symbole-d-avertissement-jaune.png")'
+        : '';
+    return (
+      <div className="custom-event" style={{ position: "relative" }}>
+        {backgroundImage && (
+          <div
+            style={{
+              position: "absolute",
+              top: "-15px",
+              right: "-2px",
+              width: "15px",
+              height: "15px",
+              backgroundImage: backgroundImage,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
+          ></div>
+        )}
+        <div className="rbc-event-content">
+          {event.title}
+          <br />
+          <br />
+          Status: {event.status}
+        </div>
+      </div>
+    );
+  };
+
+  const filterStatus = (status) => {
+    if (status == 'PENDENTE') {
+      return "Pendente";
+    } else if (status == 'AGENDADO') {
+      return "Confirmado";
+    } else if (status == 'REALIZADO') {
+      return "Finalizado";
+    }
+  }
 
   const handleDateChange = (day) => {
     buscarColaboradores(formaterDate(day));
@@ -171,6 +224,9 @@ const MyDragAndDropCalendar = () => {
         descricaoServico: evento.servico.descricao,
         resourceId: colaborador.idFuncionario,
         corReferenciaHex: evento.servico.corReferenciaHex,
+        precisaConfirmar: evento.statusAgendamento == 'PENDENTE',
+        realizado: evento.statusAgendamento == 'REALIZADO',
+        status: filterStatus(evento.statusAgendamento)
       }))
     );
     setEvents(eventsFeature);
@@ -388,13 +444,14 @@ const MyDragAndDropCalendar = () => {
             onEventDrop={moveEvent}
             resizable
             onEventResize={resizeEvent}
-            onSelectEvent={handleEventClick} // Adicione aqui
+            onSelectEvent={handleEventClick}
             step={30}
             timeslots={2}
             min={new Date(0, 0, 0, 6, 0, 0)}
             max={new Date(0, 0, 0, 23, 0, 0)}
             components={{
               toolbar: CustomToolbar,
+              event: CustomEvent,
             }}
             formats={{
               dayFormat: 'DD',
@@ -423,6 +480,8 @@ const MyDragAndDropCalendar = () => {
               funcionarios={resources}
               refreshDate={handleDateChange}
               onClose={handleCloseModalDetalhes}
+              paraConfirmar={selectedEvent.precisaConfirmar}
+              realizado={selectedEvent.realizado}
             />
           )}
         </div>
