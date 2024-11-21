@@ -48,3 +48,29 @@ export const findChartClientData = async (idEmpresa, endPoint) => {
     }
 };
 
+export const findChartServiceData = async (idEmpresa, endPoint) => {
+    try {
+        const response = await getData(`agendamentos/${endPoint}/${idEmpresa}`, {}, {});
+        const data = response.data;
+
+        // Mapeando os dados para o formato esperado pelo Highcharts
+        const seriesData = data.map(item => item.totalServicos);
+        const xAxisData = data.map(item => {
+            switch (item.dia_semana) {
+                case 0: return 'Domingo';
+                case 1: return 'Segunda-feira';
+                case 2: return 'Terça-feira';
+                case 3: return 'Quarta-feira';
+                case 4: return 'Quinta-feira';
+                case 5: return 'Sexta-feira';
+                case 6: return 'Sábado';
+                default: return 'Desconhecido';
+            }
+        });
+
+        return { seriesData, xAxisData };
+    } catch (error) {
+        console.error("Erro ao buscar o dashboard", error);
+        throw error;
+    }
+}

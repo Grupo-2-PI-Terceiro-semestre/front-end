@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Chart.css";
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { findChartClientData } from "../../services/dashboardServices";
+import { findChartClientData, findChartServiceData } from "../../services/dashboardServices";
 
 const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colorChart, lineColor }) => {
     const [seriesData, setSeriesData] = useState([]);
@@ -10,7 +10,19 @@ const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colo
 
     const buscarDados = async () => {
         try {
-            const response = await findChartClientData(idEmpresa, endPoint);
+            let response;
+            switch (endPoint) {
+                case "receitaPorMes":
+                    response = await findChartClientData(idEmpresa, endPoint);
+                    break;
+                case "servicoDiaSemana":
+                    debugger;
+                    response = await findChartServiceData(idEmpresa, endPoint);
+                    break;
+                default:
+                    console.warn(`Endpoint ${endPoint} não reconhecido.`);
+                    return;
+            }
             setSeriesData(response.seriesData);
             setXAxisData(response.xAxisData);
         } catch (error) {

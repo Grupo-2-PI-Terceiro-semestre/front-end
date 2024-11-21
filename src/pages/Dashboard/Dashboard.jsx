@@ -86,7 +86,17 @@ function Dashboard() {
                 </div>
                 <div className="meio">
                     <CardDashboard title="Total de Clientes por dia da semana" height="250px" width="410px" >
-                        <Chart title="" type="column" seriesData={[1, 2, 3, 4, 5, 6, 7]} xAxisData={['Dom', 'Seg', 'Ter', 'Qua', 'Qui', "Sex", "Sab"]} lineColor={'white'} heightChart={200} />
+
+                        <Chart
+                            title=""
+                            type="column"
+                            endPoint="servicoDiaSemana"
+                            idEmpresa={user.idEmpresa}
+                            heightChart={200}
+                            colorChart={''}
+                            lineColor={'white'}
+                        />
+
                     </CardDashboard>
                     <CardDashboard title="Total de Receita por Serviço" height="250px" width="410px">
                         <Chart title="" type="bar" seriesData={[1, 2, 3, 4, 5, 6, 7]} xAxisData={['Corte', 'Sobrancelha', 'Barba', 'Tintura', 'Hidratação', 'Limpeza de Pele', 'Massagem Facial']} lineColor={'white'} heightChart={200} />
@@ -111,8 +121,8 @@ function Dashboard() {
                         />
                     </CardDashboard>
 
+                </div>
             </div>
-        </div>
         </div >
     );
 }
