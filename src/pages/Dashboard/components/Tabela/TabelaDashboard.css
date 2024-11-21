@@ -5,19 +5,19 @@
     position: relative;
 }
 
-/* Estilos para a barra de rolagem */
+
 .tabela-dashboard-container::-webkit-scrollbar {
-    width: 8px; /* Largura da barra de rolagem */
-    height: 8px; /* Altura da barra de rolagem horizontal */
+    width: 8px; 
+    height: 8px; 
 }
 
 .tabela-dashboard-container::-webkit-scrollbar-thumb {
-    background-color: #2196F3; /* Cor da barra de rolagem */
-    border-radius: 10px; /* Bordas arredondadas */
+    background-color: #2196F3;
+    border-radius: 10px; 
 }
 
 .tabela-dashboard-container::-webkit-scrollbar-track {
-    background: #171821; /* Cor do trilho da barra de rolagem */
+    background: #171821;
 }
 
 .tabela-dashboard {
@@ -29,7 +29,7 @@
 .tabela-dashboard thead {
     position: sticky;
     top: 0;
-    background-color:#21222D; /* Cor de fundo do cabeçalho */
+    background-color:#21222D; 
     z-index: 1;
 }
 
