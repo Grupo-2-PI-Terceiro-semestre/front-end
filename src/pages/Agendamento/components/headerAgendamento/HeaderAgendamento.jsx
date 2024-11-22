@@ -4,7 +4,7 @@ import './HeaderAgendamento.css';
 
 const HeaderAgendamento = () => {
   return (
-    <div className="header-agendamento">
+    <header className="header">
       <div className="social-icons">
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
           <FaInstagram />
@@ -19,12 +19,12 @@ const HeaderAgendamento = () => {
       <div className="nav-links">
         <span className="brand-name">Order Hub</span>
         <a href="#inicio">Início</a>
-        <a href="#solicite">Solicite</a>
-        <a href="#contato">Contato</a>
+        <a href="#solicite">Login</a>
+        <a href="#contato">Cadastro</a>
       </div>
       <div className="business-link">
       </div>
-    </div>
+    </header>
   );
 };
 
