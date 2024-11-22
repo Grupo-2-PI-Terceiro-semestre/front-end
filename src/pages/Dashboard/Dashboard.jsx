@@ -12,8 +12,6 @@ import Cookies from 'js-cookie';
 function Dashboard() {
     const activeMenuItem = "Dashboard";
 
-    const data = ['Teste']
-
 
     const mesAtual = new Date().getMonth() + 1;
     const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
@@ -39,10 +37,12 @@ function Dashboard() {
             mensagemMes: true,
         },
         {
-
+            endPoint: "agendamentos/novosClientes",
+            idEmpresa: user.idEmpresa,
             description: "Novos clientes",
             icon: <span className="material-symbols-outlined">account_circle</span>,
             iconColor: "#20AEF3",
+            mensagemMes: true,
         },
         {
             endPoint: "agendamentos/ticket",
@@ -53,7 +53,8 @@ function Dashboard() {
             formatarValor: true,
         },
         {
-            endPoint: "agendamentos/receita",
+            endPoint: "agendamentos/aReceber",
+            idEmpresa: user.idEmpresa,
             description: "Receita a Receber",
             icon: <span class="material-symbols-outlined">schedule</span>,
             iconColor: "#F5D007",
@@ -85,26 +86,50 @@ function Dashboard() {
                 </div>
                 <div className="meio">
                     <CardDashboard title="Total de Clientes por dia da semana" height="250px" width="410px" >
-                        <Chart title="" type="column" seriesData={[1, 2, 3, 4, 5, 6, 7]} xAxisData={['Dom', 'Seg', 'Ter', 'Qua', 'Qui', "Sex", "Sab"]} lineColor={'white'} heightChart={200} />
+                        <Chart
+                            title=""
+                            type="column"
+                            endPoint="servicoDiaSemana"
+                            idEmpresa={user.idEmpresa}
+                            heightChart={200}
+                            colorChart={''}
+                            lineColor={'white'}
+                        />
+
                     </CardDashboard>
                     <CardDashboard title="Total de Receita por Serviço" height="250px" width="410px">
-                        <Chart title="" type="bar" seriesData={[1, 2, 3, 4, 5, 6, 7]} xAxisData={['Corte', 'Sobrancelha', 'Barba', 'Tintura', 'Hidratação', 'Limpeza de Pele', 'Massagem Facial']} lineColor={'white'} heightChart={200} />
+                        <Chart
+                            title=""
+                            type="bar"
+                            endPoint="receitaPorServico"
+                            idEmpresa={user.idEmpresa}
+                            heightChart={200}
+                            colorChart={''}
+                            lineColor={'white'} />
                     </CardDashboard>
-                    <CardDashboard title="Top Performances" height="250px" width="410px">
-                        <TabelaDashboard headers={['Atendente','Receita','Comissão']} data={data}/>
+                    <CardDashboard title="Receita por Funcionário" height="250px" width="410px">
+                        <TabelaDashboard headers={['Atendente', 'Receita']} idEmpresa={user.idEmpresa} endPoint="receitaPorFuncionario" />
                     </CardDashboard>
                 </div>
                 <div className="inferior">
-                <CardDashboard title="Próximos Atendimentos" height="270px" width="620px">
-                        <TabelaDashboard headers={['Cliente', 'Servico', 'Dia', 'Hora', 'Atendente']} data={data} endpoint={[`/${user.idEmpresa}`]} idEmpresa={[user.idEmpresa]} />
+                    <CardDashboard title="Próximos Atendimentos" height="270px" width="620px">
+                        <TabelaDashboard headers={['Cliente', 'Servico', 'Dia', 'Hora', 'Atendente']} idEmpresa={user.idEmpresa} endPoint="agendamentos" />
                     </CardDashboard>
                     <CardDashboard title="Receita por Mês" height="270px" width="620px">
-                        <Chart title="" type="spline" seriesData={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20]} xAxisData={['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']} lineColor={'white'} heightChart={200} colorChart={'#3CD856'} />
+                        <Chart
+                            type="spline"
+                            endPoint="receitaPorMes"
+                            idEmpresa={user.idEmpresa}
+                            heightChart={200}
+                            widthChart={600}
+                            colorChart={'#3CD856'}
+                            lineColor={'white'}
+                        />
                     </CardDashboard>
-                    
+
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

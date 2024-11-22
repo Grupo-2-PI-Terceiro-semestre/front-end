@@ -1,6 +1,6 @@
 import React from 'react';
 import Tooltip from '@mui/material/Tooltip';
-import { CancelarAgendamento, AtualizarEvento } from '../../services/agendaServices';
+import { atualizarStatus, AtualizarEvento } from '../../services/agendaServices';
 import CheckIcon from '@mui/icons-material/Check';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -85,7 +85,7 @@ export default function ButtonRollback({ refreshDate, data }) {
         setError(false);
 
         try {
-            await CancelarAgendamento(idAgendamento, status);
+            await atualizarStatus(idAgendamento, status);
             viewSuccess('Ação Desfeita');
         } catch (error) {
             viewError('Erro ao Reverter Ação');

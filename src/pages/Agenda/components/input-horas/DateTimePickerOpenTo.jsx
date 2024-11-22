@@ -31,7 +31,6 @@ export default function DateTimePickerOpenTo({ valordefault, onChange }) {
         <MobileDateTimePicker
           openTo="day"
           ampm={false}
-          
           value={selectedDateTime}
           onChange={handleDateChange}
           renderInput={(params) => <TextField {...params}

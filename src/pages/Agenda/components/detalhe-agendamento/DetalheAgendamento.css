@@ -65,9 +65,11 @@
 }
 
 .detalhe-actions {
+  width: 100%;
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .detalhe-actions button {
@@ -78,7 +80,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 10px;
-  width: 47%;
+  width: 100%;
 }
 
 .detalhe-actions button:hover {

@@ -5,7 +5,7 @@
     justify-content: center;
     background-color: #171821;
     border-radius: 10px;
-    width: 150px;
+    width: 160px;
     height: 110px;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .percent {
-    font-size: 10px;
+    font-size: 14px;
     color: #fff;
     font-weight: 300;
     margin-left: 5%;
