@@ -141,14 +141,14 @@
     font-size: 1rem;
 }
 
-.inputLabel label {
+/* .inputLabel label {
     display: block;
     color: white;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-size: 1rem;
-}
+} */
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel .input {
     width: 100%;
@@ -186,7 +186,7 @@
     width: 14vw;
     box-shadow: 0 5px rgb(6, 89, 212);
     transition: background-color 0.5s ease;
-align-items: center;
+    align-items: center;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .botaoCadastrar:hover {
