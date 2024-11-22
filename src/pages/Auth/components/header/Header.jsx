@@ -5,7 +5,7 @@ import Barra from '../../../../components/barra-load/LinearProgress';
 const Header = ({barraVisible}) => {
   return (
 
-    <header className="header">
+    <header className="header-login">
       <div className="logo-container">
         <a href="/" className="logo-link">
           OrderHub
