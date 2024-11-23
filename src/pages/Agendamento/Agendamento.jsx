@@ -4,6 +4,7 @@ import HeaderAgendamento from "./components/headerAgendamento/HeaderAgendamento"
 import ServiceList from "./components/serviceList/ServiceList";
 import Banner from "./components/banner/Banner";
 import Map from "./components/map/Map";
+import ModalAgendamento from "../../components/modalAgendamento/ModalAgendamento";
 
 function Agendamento() {
   return <>
@@ -14,6 +15,7 @@ function Agendamento() {
           <Banner />
           <Map />
         </div>
+        <ModalAgendamento />
         <ServiceList />
       </div>
     </div>

@@ -4,7 +4,7 @@ import './HeaderAgendamento.css';
 
 const HeaderAgendamento = () => {
   return (
-    <header className="header">
+    <header className="header_agendamento">
       <div className="social-icons">
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
           <FaInstagram />
