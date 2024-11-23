@@ -5,8 +5,8 @@ import Cookies from 'js-cookie';
 import { atualizarDadosDePerfil } from '../../services/perfilServices';
 import CircularProgress from '@mui/material/CircularProgress';
 import { successToast, errorToast, infoToast } from '../../../../utils/Toats'
-  ;
-import { set } from "react-hook-form";
+import { findByCategorias } from '../../../../services/homeClienteServices'
+import SearchableDropdown from '../../../Agenda/components/autocomplete/SearchableDropdown';
 
 const FormularioPrincipal = ({ setRefreshKey }) => {
   const [user, setUser] = useState(null);
@@ -24,9 +24,13 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
   const [cpfOriginal, setCpfOriginal] = useState('');
   const [nomeEmpresaOriginal, setNomeEmpresaOriginal] = useState('');
   const [cnpjOriginal, setCnpjOriginal] = useState('');
+  const [categoria, setCategoria] = useState([]);
+  const [categoriaFront, setCategoriaFront] = useState('');
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
 
 
   useEffect(() => {
+    buscarCategorias();
     const empresaData = Cookies.get('empresa');
     const userData = Cookies.get('user');
 
@@ -44,12 +48,28 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
       setTelefone(parseEmpresa?.telefone || '');
       setNomeEmpresa(parseEmpresa?.nomeEmpresa || '');
       setCnpj(parseEmpresa?.cnpj || '');
+      setCategoriaFront(parseEmpresa?.nomeCategoria || '');
 
       setTelefoneOriginal(parseEmpresa?.telefone)
       setNomeEmpresaOriginal(parseEmpresa?.nomeEmpresa)
       setCnpjOriginal(parseEmpresa?.cnpj)
+      setCategoriaFront(parseEmpresa?.nomeCategoria)
     }
   }, []);
+
+  const buscarCategorias = async () => {
+    try {
+      const response = await findByCategorias();
+      setCategoria(response);
+    } catch (error) {
+      console.error("Erro de autenticação", error);
+      throw error;
+    }
+  }
+
+  const handleCategoriaChange = (categoria) => {
+    setCategoriaSelecionada(categoria.idCategoria);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -62,6 +82,7 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
       cpf !== cpfOriginal ||
       cnpj !== cnpjOriginal ||
       telefone !== telefoneOriginal
+
     ) {
       const usuario = {
         idPessoa: user.id,
@@ -74,13 +95,13 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
         nomeEmpresa: nomeEmpresa,
         cnpj: cnpj,
         telefone: telefone,
+        idCategoria: categoriaSelecionada
       };
 
       const data = {
         usuario,
         empresa,
       };
-
       cadastrar(data, user.idEmpresa)
     } else {
 
@@ -88,8 +109,6 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
       return;
 
     }
-
-
   };
 
   const cadastrar = async (data) => {
@@ -111,7 +130,7 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
       setTelefoneOriginal(parseEmpresa?.telefone)
       setNomeEmpresaOriginal(parseEmpresa?.nomeEmpresa)
       setCnpjOriginal(parseEmpresa?.cnpj)
-
+      setCategoriaFront(parseEmpresa?.nomeCategoria)
 
       setRefreshKey((prev) => prev + 1);
       successToast('Dados atualizados com sucesso');
@@ -170,15 +189,32 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
           </div>
         </div>
 
-        <div className="form-group">
-          <label>Nome do Estabelecimento *</label>
-          <input
-            type="text"
-            required
-            value={nomeEmpresa}
-            onChange={(e) => setNomeEmpresa(e.target.value)}
-            placeholder="Nome do Estabelecimento"
-          />
+        <div className='input-mesma-linha-phone'>
+
+          <div className="form-group">
+            <label>Nome do Estabelecimento *</label>
+            <input
+              type="text"
+              required
+              value={nomeEmpresa}
+              onChange={(e) => setNomeEmpresa(e.target.value)}
+              placeholder="Nome do Estabelecimento"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Categoria *</label>
+            <SearchableDropdown
+              options={categoria}
+              required={true}
+              value={categoriaFront} // Valor inicial
+              placeholder="Selecione uma categoria"
+              onSelectOption={handleCategoriaChange}
+              displayField={(option) => option.nomeCategoria}
+              uniqueKey={(option) => option.idCategoria}
+              width="105%"
+            />
+          </div>
         </div>
 
         <div className="form-group">

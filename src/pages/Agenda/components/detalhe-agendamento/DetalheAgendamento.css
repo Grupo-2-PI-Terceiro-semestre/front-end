@@ -25,7 +25,7 @@
 
 .detalhe-campo p {
   margin-top: .2rem;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .detalhe-campo {
@@ -39,7 +39,7 @@
   font-weight: bold;
   color: #e0e0e0;
   margin-bottom: 5px;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .detalhe-campo input,
@@ -51,7 +51,7 @@
   border-radius: 4px;
   outline: none;
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .detalhe-campo textarea {

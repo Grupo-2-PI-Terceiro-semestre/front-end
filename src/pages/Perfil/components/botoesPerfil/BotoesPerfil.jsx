@@ -21,12 +21,12 @@ function BotoesPerfil({ activeButton, setActiveButton }) {
       >
         <FaMapMarkerAlt className="icon" /> Localização
       </div>
-      {/* <div 
+      <div 
         className={`button ${activeButton === 'horario' ? 'active' : ''}`} 
         onClick={() => handleButtonClick('horario')}
       >
         <FaClock className="icon" /> Horário de Funcionamento
-      </div> */}
+      </div>
       <div 
         className={`button ${activeButton === 'notificacoes' ? 'active' : ''}`} 
         onClick={() => handleButtonClick('notificacoes')}

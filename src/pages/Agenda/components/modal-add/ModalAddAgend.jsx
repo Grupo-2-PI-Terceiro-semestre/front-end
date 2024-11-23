@@ -153,6 +153,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                                     <SearchableDropdown className="input-cliente"
                                         options={clientes}
                                         required={true}
+                                        value={''}
                                         onSelectOption={handleClientesChange}
                                         displayField={(option) => option.nomePessoa}
                                         uniqueKey={(option) => option.idCliente}
@@ -172,6 +173,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                             <SearchableDropdown
                                 options={servicos}
                                 required={true}
+                                value={''}
                                 placeholder={"Selecione um serviço"}
                                 onSelectOption={handleServicoChange}
                                 displayField={(option) => option.nomeServico}
@@ -186,6 +188,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                             <SearchableDropdown
                                 options={funcionarios}
                                 required={true}
+                                value={''}
                                 placeholder={"Selecione um profissional"}
                                 onSelectOption={handleFuncionarioChange}
                                 displayField={(option) => option.title}

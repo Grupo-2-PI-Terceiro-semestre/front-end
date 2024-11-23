@@ -5,7 +5,6 @@ import './FormularioNotificacao.css';
 import Cookies from 'js-cookie';
 import { infoToast, successToast, errorToast } from '../../../../utils/Toats'
 import CircularProgress from '@mui/material/CircularProgress';
-import { set } from 'react-hook-form';
 
 const FormularioNotificacao = () => {
   const [formData, setFormData] = useState({
@@ -78,6 +77,7 @@ const FormularioNotificacao = () => {
   };
 
   const handleSubmit = async (event) => {
+    debugger
     event.preventDefault();
     if (areObjectsEqual(formData, dataOrigin)) {
       infoToast('Nenhum dado foi alterado');
@@ -105,7 +105,6 @@ const FormularioNotificacao = () => {
       setButtonDisable(false);
       setColor('#2196F3');
     }
-
   };
 
 
