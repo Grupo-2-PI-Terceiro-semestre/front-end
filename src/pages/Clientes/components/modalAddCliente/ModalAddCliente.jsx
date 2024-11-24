@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './ModalAddCliente.css';
-import Swal from 'sweetalert2';
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import { createCliente, findClientes } from "../../services/clienteServices";
 import Cookies from 'js-cookie';
+import { successToast, errorToast } from '../../../../utils/Toats';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function ModalAddCliente({ onCloseCliente, titulo, refreshDate }) {
+
     const [formData, setFormData] = useState({
         nomePessoa: '',
         numeroTelefone: '',
@@ -29,46 +31,34 @@ function ModalAddCliente({ onCloseCliente, titulo, refreshDate }) {
         setFormData({ ...formData, [name]: value });
     };
 
-    const criarCliente = async (cliente) => {
+    const criarCliente = async (cliente, idEmpresa) => {
         setLoading(true);
         try {
-            await createCliente(cliente);
+            await createCliente(cliente, idEmpresa);
+            successToast('Cliente criado com sucesso!');
+
             console.log("Cliente criado com sucesso:", cliente);
+
             buscarListaClientes(user.idEmpresa, paginaAtual, 8);
-            setLoading(false);
+
             setTimeout(() => onCloseCliente(), 3000);
         } catch (error) {
-            console.error("Erro ao criar cliente:", error);
+            errorToast('Cliente não criado');
+
+        } finally {
             setLoading(false);
         }
     };
 
     const handleSubmit = (event) => {
-        // const paginacao = { pagina: pagina - 1, tamanho };
-        idEmpresa = user.idEmpresa;
-        console.log(idEmpresa + ' id empresa');
+        event.preventDefault();
 
-        event.preventDefault(); // Evita o refresh da página
-        console.log("Dados do Cliente:", formData); // Exibe os valores no console
-        criarCliente(formData); // Envia os dados ao servidor
+        const idEmpresa = user.idEmpresa;
 
-        Swal.fire({
-            title: "Confirmar cadastro?",
-            text: "Deseja realmente cadastrar este cliente?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Sim, cadastrar!",
-            cancelButtonText: "Cancelar",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire("Cadastrado!", "O cliente foi cadastrado.", "success");
-            } else {
-                Swal.fire("Cancelado", "O cliente não foi cadastrado.", "error");
-            }
-        });
+        criarCliente(formData, idEmpresa);
 
-        
     };
+
 
     const buscarListaClientes = async (idEmpresa, pagina, tamanho) => {
         try {
@@ -77,18 +67,14 @@ function ModalAddCliente({ onCloseCliente, titulo, refreshDate }) {
             const response = await findClientes(idEmpresa, paginacao);
 
             setClientes(response.data.itens);
-            console.log(JSON.stringify(response) + ' response');
-            console.log('set clientes ' + setClientes);
 
             var totalItens = Number(response.data.totalItens);
             var totalPagsCalc = Math.ceil(totalItens / tamanho);
 
             setTotalPags(totalPagsCalc);
-            console.log(totalPagsCalc + ' pags');
-            console.log(paginaAtual + ' pag atual');
 
         } catch (error) {
-            console.error('Erro ao buscar clientes:', error);
+            errorToast('Cliente não encontrado');
             setClientes([]);
             setTotalPags(0);
         } finally {
@@ -108,44 +94,64 @@ function ModalAddCliente({ onCloseCliente, titulo, refreshDate }) {
                     <HeadeModal title={titulo} handleClose={onCloseCliente} />
                     <form className="form-modal" onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label>Nome:</label>
-                            <input
-                                type="text"
-                                name="nomePessoa"
-                                placeholder="Nome do Cliente"
-                                value={formData.nomePessoa}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className='inputLabel'>
+                                <label>Nome:</label>
+                                <input
+                                    className="input"
+                                    type="text"
+                                    name="nomePessoa"
+                                    placeholder="Nome do Cliente"
+                                    value={formData.nomePessoa}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
 
                         <div className="form-group">
-                            <label>Telefone:</label>
-                            <input
-                                type="text"
-                                name="numeroTelefone"
-                                placeholder="(XX) XXXXX-XXXX"
-                                value={formData.numeroTelefone}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className='inputLabel'>
+                                <label>Telefone:</label>
+                                <input
+                                    className="input"
+                                    type="text"
+                                    name="numeroTelefone"
+                                    placeholder="(XX) XXXXX-XXXX"
+                                    value={formData.numeroTelefone}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
 
                         <div className="form-group">
-                            <label>E-mail:</label>
-                            <input
-                                type="email"
-                                name="emailPessoa"
-                                placeholder="Digite o email"
-                                value={formData.emailPessoa}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className='inputLabel'>
+                                <label>E-mail:</label>
+                                <input
+                                    className="input"
+                                    type="email"
+                                    name="emailPessoa"
+                                    placeholder="Digite o email"
+                                    value={formData.emailPessoa}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
 
-                        <button type="submit" className="botaoCadastrar">
-                            Cadastrar
-                        </button>
+                        <div className="botao-add-cliente">
+                            <button style={{
+                                backgroundColor: loading ? '#6c7d8c' : '#2196F3'
+                            }} type="submit" className="botaoCadastrar" disabled={loading}>
+                                Cadastrar
+                            </button>
+
+                        </div>
+
+                        {loading && (
+                            <div className="loading-icon">
+                                <CircularProgress size={35} />
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>

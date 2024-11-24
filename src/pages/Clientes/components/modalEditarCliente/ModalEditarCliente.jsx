@@ -100,7 +100,7 @@ function ModalEditarCliente({ onClose, titulo }) {
             <div className="modal-header-editar">
                 <div className="container-modal-editar">
                 <HeadeModal title={titulo} handleClose={onClose} />
-                    <form className="form-modal-editar" onSubmit={handleSubmit}>
+                    <form className="form-modal-editar-cliente" onSubmit={handleSubmit}>
                         <div className="form-group-editar">
                             <div className='inputLabel-editar'>
                                 <label>Nome:</label>
