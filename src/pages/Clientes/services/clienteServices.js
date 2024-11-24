@@ -11,10 +11,10 @@ export const findClientes = async (idEmpresa, paginacao) => {
     }
 }
 
-export const createCliente = async (cliente) => {
+export const createCliente = async (cliente, idEmpresa) => {
     try {
         console.log("entrei no create cliente" + cliente);
-        const response = await postData(`clientes`, cliente);
+        const response = await postData(`clientes/empresa/${idEmpresa}`, cliente);
         return response;
     } catch (e) {
         console.log("Erro ao criar o cliente")
