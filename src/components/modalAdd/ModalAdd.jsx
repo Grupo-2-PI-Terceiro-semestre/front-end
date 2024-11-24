@@ -1,69 +1,132 @@
 import React, { useState, useEffect } from "react";
 import './ModalAdd.css';
 import HeadeModal from '../header-modal/HeaderModal';
+import { createServico, findServicos } from "../../pages/Servico/services/servicoServices";
+import Cookies from 'js-cookie';
+import { errorToast } from "../../utils/Toats";
+import Select from 'react-select'; // Importa o react-select
 
 function ModalAdd({ onClose, titulo }) {
-
-    // const initialFormData = campos.reduce((acc, campo) => {
-    //     acc[campo.name] = campo.defaultValue || '';  // Inicializa os campos com valores padrão ou string vazia
-    //     return acc;
-    // }, {});
-
-    // const [formData, setFormData] = useState(initialFormData);
-
     const [formData, setFormData] = useState({
         nomeServico: '',
         valorServico: '',
-        tempoExecucao: '',
-        corReferencia: '#000000',
+        tempoExecucao: '', // Horário inicial agora vazio
+        corReferenciaHexHex: '#000000',
         descricao: '',
-        categoria: '',
         tiposDeUsuario: 'ADMIN'
     });
 
     const [isVisibleAdd, setIsVisibleAdd] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
+    const [servicos, setServicos] = useState([]);
+    const [totalPags, setTotalPags] = useState(0);
+    const [paginaAtual, setPaginaAtual] = useState(1);
+
+    const customStyles = {
+        control: (provided) => ({
+            ...provided,
+            backgroundColor: '#f4f4f4', // Cor de fundo do controle principal
+            borderColor: '#ccc', // Cor da borda
+            boxShadow: 'none', // Remove a sombra
+            '&:hover': {
+                borderColor: '#888', // Cor da borda ao passar o mouse
+            },
+        }),
+        menu: (provided) => ({
+            ...provided,
+            backgroundColor: '#414141', // Cor de fundo do menu dropdown
+            zIndex: 999, // Garante que o dropdown fique sobreposto
+        }),
+        option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isSelected
+                ? '#777676' // Cor do item selecionado
+                : state.isFocused
+                    ? '#777676' // Cor do item ao passar o mouse
+                    : '#414141', // Cor padrão
+            color: state.isSelected ? '#414141' : '#ffff', // Cor do texto
+        }),
+    };
 
     useEffect(() => {
         setIsVisibleAdd(true);
     }, []);
+
+    // Gerar opções para o Select
+    const generateTimeOptions = () => {
+        const options = [];
+        for (let hour = 0; hour < 24; hour++) {
+            for (let minute = 0; minute < 60; minute += 15) {
+                const time = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+                options.push({ value: time, label: time });
+            }
+        }
+        return options;
+    };
+
+    const timeOptions = generateTimeOptions(); // Cria as opções no formato HH:mm
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleColorChange = (e) => {
-        setFormData({ ...formData, corReferencia: e.target.value });
+    const handleTimeChange = (selectedOption) => {
+        const tempoComSegundos = `${selectedOption.value}:00`; // Adiciona ":00" ao tempo
+        setFormData({ ...formData, tempoExecucao: tempoComSegundos }); // Atualiza o estado com o valor no formato HH:mm:ss
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+
+    const handleColorChange = (e) => {
+        setFormData({ ...formData, corReferenciaHex: e.target.value });
+    };
+
+    const criarServico = async (servico, idEmpresa) => {
+        setLoading(true);
         try {
-            await cadastroService(formData);
-            alert('Cadastro realizado com sucesso!');
-            setFormData({
-                nomeServico: '',
-                valorServico: '',
-                representante: "true",
-                tempoExecucao: '',
-                corReferencia: '#000000',
-                categoria: '',
-            });
+            await createServico(servico, idEmpresa);
+
+            console.log("Serviço criado com sucesso:", servico);
+
+            buscarListaServicos(user.idEmpresa, paginaAtual, 8);
+
+            setTimeout(() => onClose(), 3000);
         } catch (error) {
-            setErrorMessage('Erro ao cadastrar o serviço.');
+            errorToast('Serviço não criado');
+        } finally {
+            setLoading(false);
         }
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         await cadastroService(formData);  // Função de cadastro que você já tem
-    //         alert('Cadastro realizado com sucesso!');
-    //         setFormData(initialFormData);  // Reseta o formulário
-    //     } catch (error) {
-    //         alert('Erro ao cadastrar o serviço.');
-    //     }
-    // };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const idEmpresa = user.idEmpresa;
+
+        criarServico(formData, idEmpresa);
+    };
+
+    const buscarListaServicos = async (idEmpresa, pagina, tamanho) => {
+        try {
+            setLoading(true);
+            const paginacao = { pagina: pagina - 1, tamanho };
+            const response = await findServicos(idEmpresa, paginacao);
+
+            setServicos(response.data.itens);
+
+            var totalItens = Number(response.data.totalItens);
+            var totalPagsCalc = Math.ceil(totalItens / tamanho);
+
+            setTotalPags(totalPagsCalc);
+        } catch (error) {
+            errorToast('Serviço não encontrado');
+            setServicos([]);
+            setTotalPags(0);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleClose = () => {
         setIsVisibleAdd(false); // Inicia a animação de saída
@@ -71,13 +134,12 @@ function ModalAdd({ onClose, titulo }) {
     };
 
     return (
-
         <div className={`modal-overlay ${isVisibleAdd ? 'visible' : 'hidden'}`}>
             <div className="modal-header">
                 <div className="container-modal">
                     <HeadeModal title={titulo} handleClose={onClose} />
-                    <form className="form-modal" onSubmit={handleSubmit}>
-                        <div className="form-group">
+                    <form className="form-modal-serv" onSubmit={handleSubmit}>
+                        <div className="form-grupo-serv">
                             <div className='inputLabel'>
                                 <label>Nome:</label>
                                 <input
@@ -92,7 +154,7 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-grupo-serv">
                             <div className='inputLabel'>
                                 <label>Valor:</label>
                                 <input
@@ -107,58 +169,40 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-grupo-serv">
                             <div className='inputLabel'>
                                 <label>Tempo de Execução:</label>
-                                <input
-                                    className="input"
-                                    type="text"
-                                    name="tempoExecucao"
-                                    placeholder="Tempo de Execução"
-                                    defaultValue={formData.tempoExecucao}
-                                    onChange={handleChange}
-                                    required
+                                <Select
+                                    options={timeOptions} // Opções de horários
+                                    onChange={handleTimeChange} // Atualiza o estado com segundos
+                                    placeholder="Selecione a duração"
+                                    isSearchable={false} // Sem barra de pesquisa
+                                    className="time-picker-dropdown"
+                                    styles={customStyles}
                                 />
+
                             </div>
                         </div>
 
-                        <div className="form-group-cor">
+                        <div className="form-grupo-serv-cor">
                             <div className='inputLabel-cor'>
                                 <label>Cor de Referência:</label>
                                 <div className="color-picker-container">
                                     <input
                                         className="color-picker-input"
                                         type="color"
-                                        name="corReferencia"
-                                        value={formData.corReferencia}
+                                        name="corReferenciaHex"
+                                        value={formData.corReferenciaHexHex}
                                         onChange={handleColorChange}
                                     />
                                     <span className="color-name">
-                                        {formData.corReferencia}
+                                        {formData.corReferenciaHexHex}
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="form-group">
-                            <div className='inputLabel'>
-                                <label htmlFor="categoria">Categoria:</label>
-                                <select
-                                    id="categoria"
-                                    name="categoria"
-                                    defaultValue={formData.categoria}
-                                    onChange={handleChange}
-                                    required
-                                >
-                                    <option value="">Selecione a Categoria</option>
-                                    <option value="categoria1">Categoria 1</option>
-                                    <option value="categoria2">Categoria 2</option>
-                                    <option value="categoria3">Categoria 3</option>
-                                </select>
-                            </div>
-                        </div >
-
-                        <div className="form-group-text">
+                        <div className="form-grupo-serv-text">
                             <div className='inputLabel'>
                                 <label>Descrição:</label>
                                 <textarea
@@ -171,13 +215,16 @@ function ModalAdd({ onClose, titulo }) {
                             </div>
                         </div>
 
-                        <button className="botaoCadastrar" onClick={handleSubmit}>Cadastrar</button>
+                        <div className="botao-add-serv">
+                            <button type="submit" className="botaoCadastrar">
+                                Cadastrar
+                            </button>
+                        </div>
                     </form >
                 </div>
             </div>
         </div>
-
-    )
+    );
 }
 
 export default ModalAdd;

@@ -60,15 +60,17 @@
     border-radius: 5px;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal {
-    height: 87vh;
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv {
+    height: 82vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 26vw;
+    /* border: 1px solid; */
+    gap: 3vh;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group {
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv {
     height: 10vh;
     display: flex;
     justify-content: center;
@@ -76,21 +78,26 @@
     position: relative; */
 }
 
-.form-group-cor {
-    height: 11vh;
+.form-grupo-serv-cor {
+    /* height: 11vh;
     display: flex;
-    /* justify-content: center; */
-    /* border: 1px solid; */
-    width: 27vw;
+    width: 27vw; */
+    height: 10vh;
+    display: flex;
+    justify-content: center;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group-text {
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv-text {
     height: 19vh;
     display: flex;
     width: 27vw;
+
+    /* height: 10vh; */
+    display: flex;
+    justify-content: center;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel {
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel {
     width: 26vw;
     height: 9vh;
 }
@@ -113,7 +120,7 @@
     color: white;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel label {
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel label {
     display: block;
     color: white;
     display: flex;
@@ -140,7 +147,20 @@
     font-size: 1rem;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel .input {
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel .input {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+    height: 5vh;
+    padding: 8px;
+    background-color: rgb(65, 65, 65);
+    color: white !important;
+    flex-wrap: wrap;
+    gap: 3vh;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel select {
     width: 100%;
     border: none;
     border-radius: 5px;
@@ -153,20 +173,7 @@
     gap: 3vh;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel select {
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
-    height: 5vh;
-    padding: 8px;
-    background-color: rgb(65, 65, 65);
-    color: white;
-    flex-wrap: wrap;
-    gap: 3vh;
-}
-
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .botaoCadastrar {
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .botaoCadastrar {
     background-color: rgb(33, 150, 243);
     color: white;
     border: none;
@@ -178,7 +185,7 @@
     transition: background-color 0.5s ease;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .botaoCadastrar:hover {
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .botaoCadastrar:hover {
     background-color: var(--hoverColor, #0056b3);
 }
 
@@ -206,4 +213,17 @@
     font-family: Arial, sans-serif;
     width: 23vw;
     display: flex;
+}
+
+.css-g30jg2-control {
+    background-color: #414141 !important;
+    border: none !important;
+}
+
+.css-1dimb5e-singleValue {
+    color: white !important;
+}
+
+.botao-add-serv {
+    width: 27vw;
 }
