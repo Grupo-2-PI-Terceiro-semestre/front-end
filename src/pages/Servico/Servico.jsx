@@ -1,8 +1,9 @@
 import React from "react";
 import './Servico.css';
-import HeaderInterna from "../../components/headerInterna/HeaderInterna";
+// import HeaderInterna from "../../components/headerInterna/HeaderInterna";
 import TelaServicos from "./components/telaServicos/TelaServicos";
 import Menu from "../../components/menu/Menu";
+import HeaderServico from "./components/headerServico/HeaderServico";
 
 function Servico() {
     const activeMenuItem = 'Serviços';
@@ -16,7 +17,7 @@ function Servico() {
                         <div className="titulo-servico">
                             <div className="container-titulo-servico">
                                 <h3>Serviços</h3>
-                                <HeaderInterna texto="Novo Serviço" />
+                                <HeaderServico texto="Novo Serviço" />
                             </div>
                         </div>
 

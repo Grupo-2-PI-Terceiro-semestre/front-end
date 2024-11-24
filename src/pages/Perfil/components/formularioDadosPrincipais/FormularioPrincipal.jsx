@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { successToast, errorToast, infoToast } from '../../../../utils/Toats'
 import { findByCategorias } from '../../../../services/homeClienteServices'
 import SearchableDropdown from '../../../Agenda/components/autocomplete/SearchableDropdown';
+import { set } from "react-hook-form";
 
 const FormularioPrincipal = ({ setRefreshKey }) => {
   const [user, setUser] = useState(null);

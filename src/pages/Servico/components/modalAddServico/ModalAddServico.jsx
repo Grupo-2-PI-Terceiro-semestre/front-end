@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import './ModalAdd.css';
-import HeadeModal from '../header-modal/HeaderModal';
-import { createServico, findServicos } from "../../pages/Servico/services/servicoServices";
+import './ModalAddServico.css';
 import Cookies from 'js-cookie';
-import { errorToast } from "../../utils/Toats";
-import Select from 'react-select'; // Importa o react-select
+import Select from 'react-select'; 
+import HeadeModal from "../../../../components/header-modal/HeaderModal";
+import { createServico, findServicos } from "../../services/servicoServices";
+import { errorToast } from "../../../../utils/Toats";
 
-function ModalAdd({ onClose, titulo }) {
+function ModalAddServico({ onCloseServico, titulo }) {
     const [formData, setFormData] = useState({
         nomeServico: '',
         valorServico: '',
-        tempoExecucao: '', // Horário inicial agora vazio
+        tempoExecucao: '', 
         corReferenciaHexHex: '#000000',
         descricao: '',
         tiposDeUsuario: 'ADMIN'
@@ -26,26 +26,26 @@ function ModalAdd({ onClose, titulo }) {
     const customStyles = {
         control: (provided) => ({
             ...provided,
-            backgroundColor: '#f4f4f4', // Cor de fundo do controle principal
-            borderColor: '#ccc', // Cor da borda
-            boxShadow: 'none', // Remove a sombra
+            backgroundColor: '#f4f4f4', 
+            borderColor: '#ccc', 
+            boxShadow: 'none', 
             '&:hover': {
-                borderColor: '#888', // Cor da borda ao passar o mouse
+                borderColor: '#888',
             },
         }),
         menu: (provided) => ({
             ...provided,
-            backgroundColor: '#414141', // Cor de fundo do menu dropdown
-            zIndex: 999, // Garante que o dropdown fique sobreposto
+            backgroundColor: '#414141', 
+            zIndex: 999, 
         }),
         option: (provided, state) => ({
             ...provided,
             backgroundColor: state.isSelected
-                ? '#777676' // Cor do item selecionado
+                ? '#777676' 
                 : state.isFocused
-                    ? '#777676' // Cor do item ao passar o mouse
-                    : '#414141', // Cor padrão
-            color: state.isSelected ? '#414141' : '#ffff', // Cor do texto
+                    ? '#777676'
+                    : '#414141', 
+            color: state.isSelected ? '#414141' : '#ffff', 
         }),
     };
 
@@ -53,7 +53,6 @@ function ModalAdd({ onClose, titulo }) {
         setIsVisibleAdd(true);
     }, []);
 
-    // Gerar opções para o Select
     const generateTimeOptions = () => {
         const options = [];
         for (let hour = 0; hour < 24; hour++) {
@@ -65,7 +64,7 @@ function ModalAdd({ onClose, titulo }) {
         return options;
     };
 
-    const timeOptions = generateTimeOptions(); // Cria as opções no formato HH:mm
+    const timeOptions = generateTimeOptions(); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -73,8 +72,8 @@ function ModalAdd({ onClose, titulo }) {
     };
 
     const handleTimeChange = (selectedOption) => {
-        const tempoComSegundos = `${selectedOption.value}:00`; // Adiciona ":00" ao tempo
-        setFormData({ ...formData, tempoExecucao: tempoComSegundos }); // Atualiza o estado com o valor no formato HH:mm:ss
+        const tempoComSegundos = `${selectedOption.value}:00`; 
+        setFormData({ ...formData, tempoExecucao: tempoComSegundos });
     };
 
 
@@ -91,7 +90,7 @@ function ModalAdd({ onClose, titulo }) {
 
             buscarListaServicos(user.idEmpresa, paginaAtual, 8);
 
-            setTimeout(() => onClose(), 3000);
+            setTimeout(() => onCloseServico(), 3000);
         } catch (error) {
             errorToast('Serviço não criado');
         } finally {
@@ -129,15 +128,15 @@ function ModalAdd({ onClose, titulo }) {
     };
 
     const handleClose = () => {
-        setIsVisibleAdd(false); // Inicia a animação de saída
-        setTimeout(onClose, 300); // Fecha o modal após a animação
+        setIsVisibleAdd(false); 
+        setTimeout(onCloseServico, 300); 
     };
 
     return (
         <div className={`modal-overlay ${isVisibleAdd ? 'visible' : 'hidden'}`}>
             <div className="modal-header">
                 <div className="container-modal">
-                    <HeadeModal title={titulo} handleClose={onClose} />
+                    <HeadeModal title={titulo} handleClose={onCloseServico} />
                     <form className="form-modal-serv" onSubmit={handleSubmit}>
                         <div className="form-grupo-serv">
                             <div className='inputLabel'>
@@ -173,10 +172,10 @@ function ModalAdd({ onClose, titulo }) {
                             <div className='inputLabel'>
                                 <label>Tempo de Execução:</label>
                                 <Select
-                                    options={timeOptions} // Opções de horários
-                                    onChange={handleTimeChange} // Atualiza o estado com segundos
+                                    options={timeOptions}
+                                    onChange={handleTimeChange} 
                                     placeholder="Selecione a duração"
-                                    isSearchable={false} // Sem barra de pesquisa
+                                    isSearchable={false} 
                                     className="time-picker-dropdown"
                                     styles={customStyles}
                                 />
@@ -227,4 +226,4 @@ function ModalAdd({ onClose, titulo }) {
     );
 }
 
-export default ModalAdd;
+export default ModalAddServico;

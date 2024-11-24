@@ -1,7 +1,7 @@
 import React from "react";
 import './Equipe.css';
 import Menu from "../../components/menu/Menu";
-import HeaderInterna from "../../components/headerInterna/HeaderInterna";
+import HeaderInterna from "./components/headerInterna/HeaderInterna";
 import TelaEquipe from "./components/telaEquipe/TelaEquipe";
 
 function Equipe() {
