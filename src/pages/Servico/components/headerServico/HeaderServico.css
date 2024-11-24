@@ -1,22 +1,3 @@
-/* .main-header-interna {
-    width: 80vw;
-    height: 11vh;
-    background-color: rgb(33, 34, 45);
-    border-radius: 5px;
-}
-
-.main-header-interna .container-header-interna {
-    width: 100%;
-    height: 11vh;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-} */
-
-/* .main-header-interna .container-header-interna .botao {
-    width: 20vw;
-} */
-
 .main-header-interna .container-header-interna .botao button {
     height: 5vh;
     width: 12vw;
