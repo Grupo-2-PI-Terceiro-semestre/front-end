@@ -27,7 +27,7 @@ export default function DateTimePickerOpenTo({ valordefault, onChange }) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Box sx={{  display: 'flex', flexDirection: 'column', gap: 2 }}>
         <MobileDateTimePicker
           openTo="day"
           ampm={false}
