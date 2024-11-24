@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './MenuCategorias.css';
-import { findByCategorias } from '../../../../services/homeClienteServices';
+import { findByCategorias, findEmpresasPorCategoria } from '../../../../services/homeClienteServices';
 
-const MenuCategorias = () => {
+const MenuCategorias = ({ onSearchResults, setLoading }) => {
   const [categories, setCategories] = useState([
     "Salões de Beleza",
     "Barbearias",
@@ -20,6 +20,19 @@ const MenuCategorias = () => {
     }
   };
 
+  const handleClickByCategoria = async (categoria) => {
+    try {
+      setLoading(true)
+      const response = await findEmpresasPorCategoria(categoria)
+      onSearchResults(response)
+    }
+    catch (e) {
+      console.error("Erro ao buscar empresas")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -28,7 +41,7 @@ const MenuCategorias = () => {
     <div className="category-bar">
       <ul className="category-list">
         {categories.map((category, index) => (
-          <li key={index} className="category-item">
+          <li onClick={() => handleClickByCategoria(category)} key={index} className="category-item">
             {category}
           </li>
         ))}

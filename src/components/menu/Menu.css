@@ -15,6 +15,17 @@
   transition: 300ms;
 }
 
+.profile .loading-icon {
+  display: flex;
+  position: absolute;
+  margin-top: -7.15%;
+}
+
+
+.profile .loading-icon-hidden {
+  display: none;
+}
+
 .profile-image:hover {
   opacity: 0.8;
 }
@@ -98,3 +109,5 @@
   text-align: left;
   font-size: 16px;
 }
+
+

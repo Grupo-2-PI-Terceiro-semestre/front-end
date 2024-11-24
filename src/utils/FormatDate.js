@@ -13,3 +13,11 @@ export const converterGMTParaBrasilia = (horarioGMT) => {
 
     return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
 }
+
+
+export const formatDuration = (duration) => {
+    if (duration.length === 8) {
+        return duration.slice(0, 5);
+    }
+    return duration;
+};

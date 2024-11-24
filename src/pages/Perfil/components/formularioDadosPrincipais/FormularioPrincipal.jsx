@@ -10,7 +10,6 @@ import SearchableDropdown from '../../../Agenda/components/autocomplete/Searchab
 
 const FormularioPrincipal = ({ setRefreshKey }) => {
   const [user, setUser] = useState(null);
-  const [empresa, setEmpresa] = useState(null);
 
   const [name, setName] = useState('');
   const [telefone, setTelefone] = useState('');

@@ -9,6 +9,7 @@ const SearchableDropdown = ({
     uniqueKey,
     value,
     required,
+    disabled,
     width = '95%'
 }) => {
     const [inputValue, setInputValue] = useState(value);
@@ -51,6 +52,7 @@ const SearchableDropdown = ({
             }} className="autocomplete" ref={dropdownRef}>
                 <input
                     type="text"
+                    disabled={disabled}
                     required={required}
                     placeholder={placeholder || 'Selecione uma opção'}
                     value={inputValue ? inputValue : value}

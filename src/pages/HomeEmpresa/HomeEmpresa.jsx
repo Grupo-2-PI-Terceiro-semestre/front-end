@@ -23,7 +23,7 @@ function HomeEmpresa() {
           { name: 'Login', url: '/login' }
         ]}
         buttonText="Para Clientes"
-        url="/cliente"
+        url="/"
       />
 
       <Carrossel />
