@@ -227,3 +227,11 @@
 .botao-add-serv {
     width: 27vw;
 }
+
+.input-cliente {
+    width: 20vw;
+}
+
+.icon-plus {
+    cursor: pointer;
+}
