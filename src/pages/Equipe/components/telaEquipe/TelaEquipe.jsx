@@ -32,6 +32,7 @@ function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4
     }, [paginaAtual]);
 
     const buscarListaUsuarios = async (idEmpresa, pagina, tamanho) => {
+        debugger
         try {
             setLoading(true);
             const paginacao = { pagina: pagina - 1, tamanho };
@@ -88,10 +89,10 @@ function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4
                         {Array.isArray(usuario) && usuario.length > 0 ? (
                             usuario.map((usuario) => (
                                 <LinhaTabelaEquipe
-                                    key={usuario.idPessoa}
-                                    nome={usuario.nomePessoa}
-                                    telefone={usuario.numeroTelefone}
-                                    funcao={usuario.funcao.nomeFuncao}
+                                    key={usuario.idPessoa ? usuario.idPessoa : 'Sem id'}
+                                    nome={usuario.nomePessoa != null ? usuario.nomePessoa : 'Sem nome'}
+                                    telefone={usuario.numeroTelefone != null ? usuario.numeroTelefone : 'Sem telefone'}
+                                    funcao={usuario.funcao.nomeFuncao != null ? usuario.funcao.nomeFuncao : 'Sem função'}
                                 />
                             ))
                         ) : (

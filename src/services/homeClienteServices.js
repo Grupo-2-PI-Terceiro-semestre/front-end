@@ -19,3 +19,12 @@ export const findByServicoOuEmpresa = async (termo) => {
     }
 }
 
+export const findEmpresasPorCategoria = async (categoria) => {
+    try {
+        const response = await getData(`empresas/buscar/categoria/${categoria}`, {}, {})
+        return response.data;
+    } catch (error) {
+
+    }
+}
+

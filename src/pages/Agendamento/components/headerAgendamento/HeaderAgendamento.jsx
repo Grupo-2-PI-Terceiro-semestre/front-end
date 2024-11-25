@@ -18,7 +18,7 @@ const HeaderAgendamento = () => {
       </div>
       <div className="nav-links">
         <span className="brand-name">Order Hub</span>
-        <a href="#inicio">Início</a>
+        <a href="/">Início</a>
         <a href="#solicite">Login</a>
         <a href="#contato">Cadastro</a>
       </div>

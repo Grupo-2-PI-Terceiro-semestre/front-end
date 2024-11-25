@@ -7,7 +7,7 @@ import iconGoogle from '../../../../assets/logoGoogle.png'
 import { useNavigate } from 'react-router-dom';
 import './FormularioLogin.css'
 
-const FormularioLogin = ({toggleBarraContainer}) => {
+const FormularioLogin = ({ toggleBarraContainer }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -42,7 +42,7 @@ const FormularioLogin = ({toggleBarraContainer}) => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      toggleBarraContainer(); 
+      toggleBarraContainer();
       const user = result.user;
       const userData = {
         emailPessoa: user.email,
@@ -99,7 +99,7 @@ const FormularioLogin = ({toggleBarraContainer}) => {
             content="Google"
             onClick={handleGoogleSignIn}
             image={iconGoogle}
-            //quando apertar o botão display do barra-container como block (ele está none)
+          //quando apertar o botão display do barra-container como block (ele está none)
           />
         </div>
       </form>

@@ -1,14 +1,32 @@
-import React, { useState } from 'react'; // Importando useState
+import React, { useState, useEffect } from 'react';
 import './BannerCliente.css';
 import { findByServicoOuEmpresa } from '../../../../services/homeClienteServices';
 
-const BannerCliente = () => {
-  const [searchTerm, setSearchTerm] = useState(''); // Inicializando o estado
+const BannerCliente = ({ onSearchResults, setLoading }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const handleKeyUp = (event) => {
+
+  useEffect(() => {
+    setLoading(true);
+    buscarServico('ba')
+  }, []);
+
+  const handleKeyUp = async (event) => {
     const value = event.target.value;
     setSearchTerm(value);
-    findByServicoOuEmpresa(value); // Chama a função com o valor atual
+    buscarServico(value);
+  };
+
+  const buscarServico = async (value) => {
+    try {
+      setLoading(true);
+      const response = await findByServicoOuEmpresa(value);
+      onSearchResults(response);
+    } catch (error) {
+      console.error("Erro ao buscar serviços ou empresas", error);
+    } finally {
+      setLoading(false)
+    }
   };
 
   return (
