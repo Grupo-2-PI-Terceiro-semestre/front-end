@@ -1,10 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import './ModalAddEquipe.css';
-// import HeadeModal from '../header-modal/HeaderModal';
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import Cookies from 'js-cookie';
 import { successToast, errorToast } from '../../../../utils/Toats';
-import { createColaborador } from "../../services/equipeServices";
+import { createColaborador, findFuncoes } from "../../services/equipeServices";
+import SearchableDropdown from '../autocomplete/SearchableDropdown';
+// import Tooltip from '@mui/material/Tooltip';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faPlus } from '@fortawesome/free-solid-svg-icons';
+// import ModalAddFuncao from "../modalAddFuncao/ModalAddFuncao";
 
 function ModalAddEquipe({ onClose, titulo }) {
     const [isVisibleAdd, setIsVisibleAdd] = useState(false);
@@ -13,16 +17,23 @@ function ModalAddEquipe({ onClose, titulo }) {
     const [clientes, setClientes] = useState([]);
     const [totalPags, setTotalPags] = useState(0);
     const [paginaAtual, setPaginaAtual] = useState(1);
+    const [funcoes, setFuncoes] = useState([]);
+    const [isModalOpenAddFuncao, setIsModalOpen] = useState(false);
+    const [funcaoSelecionado, setFuncaoSelecionada] = useState('');
+
+    const [nomeSelecionado, setNomeSelecionado] = useState('');
+
 
     const [formData, setFormData] = useState({
         nomePessoa: '',
         numeroTelefone: '',
-        funcao: '',
+        nomeFuncao: '',
         tiposDeUsuario: 'ADMIN'
     });
 
     useEffect(() => {
         setIsVisibleAdd(true);
+        buscarFuncoes();
     }, []);
 
     const handleClose = () => {
@@ -48,20 +59,45 @@ function ModalAddEquipe({ onClose, titulo }) {
             setTimeout(() => onCloseEquipe(), 3000);
         } catch (error) {
             errorToast('Colaborador não criado');
-            
+
         } finally {
             setLoading(false);
         }
     };
-    
+
     const handleSubmit = (event) => {
+
+        const colaboradorData = {
+            // idCliente: clienteSelecionado,
+            // idServico: servicoSelecionado,
+            // idAgenda: profissionalSelecionado,
+            // dataAgendamento: converterGMTParaBrasilia(dataHoraAgendamento),
+            // statusAgendamento: 'PENDENTE'
+
+            nomePessoa: nomePessoa
+        }
+
+        console.log(colaboradorData + ' colaborador data');
+
         event.preventDefault();
-    
+
         const idEmpresa = user.idEmpresa;
 
         criarColaborador(formData, idEmpresa);
 
     };
+
+    const buscarFuncoes = async () => {
+        try {
+            const response = await findFuncoes();
+            localStorage.setItem('funcoes', JSON.stringify(response.data));
+            setFuncoes(response.data);
+
+            console.log(funcoes + ' funções');
+        } catch (error) {
+
+        }
+    }
 
     const buscarListaUsuarios = async (idEmpresa, pagina, tamanho) => {
         try {
@@ -89,7 +125,25 @@ function ModalAddEquipe({ onClose, titulo }) {
         }
     };
 
-    return(
+    // const handleNomeChange (nomePessoa) => {
+    //     setNomeSelecionado(funcao.nomePessoa);
+    // }
+
+    const handleFuncoesChange = (funcao) => {
+        setFuncaoSelecionada(funcao.idFuncao);
+        nomeFuncao = funcao.nomeFuncao;
+        console.log(nomeFuncao + ' nome da função no handle change');
+    };
+
+    const openModalAddFuncao = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModalAddFuncao = () => {
+        setIsModalOpen(false);
+    };
+
+    return (
         <div className={`modal-overlay ${isVisibleAdd ? 'visible' : 'hidden'}`}>
             <div className="modal-header">
                 <div className="container-modal">
@@ -103,13 +157,13 @@ function ModalAddEquipe({ onClose, titulo }) {
                                     type="text"
                                     name="nomePessoa"
                                     placeholder="Nome do Colaborador"
-                                    value={formData.nomePessoa}
-                                    onChange={handleChange}
+                                    value={nomePessoa}
+                                    onChange={handleNomeChange}
                                     required
                                 />
                             </div>
                         </div>
-                        
+
                         <div className="form-grupo-serv">
                             <div className='inputLabel'>
                                 <label>Telefone:</label>
@@ -129,17 +183,40 @@ function ModalAddEquipe({ onClose, titulo }) {
                         <div className="form-grupo-serv">
                             <div className='inputLabel'>
                                 <label>Função</label>
-                                <input
-                                    className="input"
-                                    type="text"
-                                    name="funcao"
-                                    placeholder="Função"
-                                    value={formData.funcao.nomeFuncao}
-                                    onChange={handleChange}
-                                    required
+                                <SearchableDropdown className="input-cliente"
+                                    name="nomeFuncao"
+                                    options={funcoes}
+                                    required={true}
+                                    value={formData.nomeFuncao}
+                                    onSelectOption={handleFuncoesChange}
+                                    displayField={(option) => option.nomeFuncao}
+                                    uniqueKey={(option) => option.idFuncao}
                                 />
                             </div>
+
+                            {/* <Tooltip title="Adicionar Cliente" arrow>
+                                <FontAwesomeIcon icon={faPlus} onClick={openModalAddFuncao} className="icon-plus" />
+                            </Tooltip> */}
+
                         </div>
+
+                        {/* <div className='inputLabel'>
+                            <label>Cliente: </label>
+                            <div className="cliente-plus">
+                                <div className="input-cliente-plus">
+                                    <SearchableDropdown className="input-cliente"
+                                        options={clientes}
+                                        required={true}
+                                        value={''}
+                                        onSelectOption={handleClientesChange}
+                                        displayField={(option) => option.nomePessoa}
+                                        uniqueKey={(option) => option.idCliente}
+                                    />
+                                </div>
+
+
+                            </div>
+                        </div> */}
 
 
                         <div className="botao-add-serv">
@@ -150,6 +227,10 @@ function ModalAddEquipe({ onClose, titulo }) {
                     </form >
                 </div>
             </div>
+
+            {/* {isModalOpenAddFuncao && (
+                <ModalAddFuncao onClose={closeModalAddFuncao} />
+            )} */}
         </div>
     )
 }
