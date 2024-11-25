@@ -21,3 +21,14 @@ export const createColaborador = async (colaborador, idEmpresa) => {
         throw e
     }
 }
+
+export const findFuncoes = async () => {
+    try {
+        const response = await getData(`funcoes`)
+        return response;
+    }
+    catch (e) {
+        console.error("Erro ao consultar as funções" + e)
+        throw e
+    }
+}
