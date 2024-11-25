@@ -48,12 +48,12 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
       setTelefone(parseEmpresa?.telefone || '');
       setNomeEmpresa(parseEmpresa?.nomeEmpresa || '');
       setCnpj(parseEmpresa?.cnpj || '');
-      setCategoriaFront(parseEmpresa?.nomeCategoria || '');
+      setCategoriaFront(parseEmpresa?.categoria || '');
 
       setTelefoneOriginal(parseEmpresa?.telefone)
       setNomeEmpresaOriginal(parseEmpresa?.nomeEmpresa)
       setCnpjOriginal(parseEmpresa?.cnpj)
-      setCategoriaFront(parseEmpresa?.nomeCategoria)
+      setCategoriaFront(parseEmpresa?.categoria)
     }
   }, []);
 
@@ -130,7 +130,7 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
       setTelefoneOriginal(parseEmpresa?.telefone)
       setNomeEmpresaOriginal(parseEmpresa?.nomeEmpresa)
       setCnpjOriginal(parseEmpresa?.cnpj)
-      setCategoriaFront(parseEmpresa?.nomeCategoria)
+      setCategoriaFront(parseEmpresa?.categoria)
 
       setRefreshKey((prev) => prev + 1);
       successToast('Dados atualizados com sucesso');
@@ -207,11 +207,11 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
             <SearchableDropdown
               options={categoria}
               required={true}
-              value={categoriaFront} // Valor inicial
-              placeholder="Selecione uma categoria"
+              value=''
+              placeholder={categoriaFront?.nome || ''}
               onSelectOption={handleCategoriaChange}
-              displayField={(option) => option.nomeCategoria}
-              uniqueKey={(option) => option.idCategoria}
+              displayField={(option) => option?.nomeCategoria || ''}
+              uniqueKey={(option) => option?.idCategoria || ''}
               width="105%"
             />
           </div>
