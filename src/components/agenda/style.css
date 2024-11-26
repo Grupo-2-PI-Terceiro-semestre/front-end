@@ -5,6 +5,36 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.custom-calendar-fixed {
+    width: 100%;
+    height: 21.5rem;
+    font-size: 15px;
+}
+
+.custom-calendar-fixed .p-datepicker {
+    padding: 0;
+}
+
+.time-button .selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.time-button:disabled {
+    background-color: #e0e0e0;
+    color: #b0b0b0;
+    border-color: #dcdcdc;
+    cursor: not-allowed;
+}
+
+.custom-calendar-fixed .p-datepicker table td>span {
+    width: 1.3rem;
+    height: 1.3rem;
+    font-size: 14.5px;
+    font-weight: 600;
+}
+
+
 .custom-calendar:focus {
     border-color: #007bff;
     box-shadow: 0 0 1px rgba(0, 123, 255, 0.5);

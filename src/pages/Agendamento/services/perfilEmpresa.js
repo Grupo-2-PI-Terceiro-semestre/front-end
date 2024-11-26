@@ -9,3 +9,13 @@ export const buscarDadosDePerfil = async (idEmpresa) => {
         throw error;
     }
 }
+
+export const buscarHorariosDisponiveis = async (idEmpresa, idProfissional, data) => {
+    try {
+        const response = await getData(`agendas/horarios-indisponiveis/empresa/${idEmpresa}`, {}, { idProfissional, data });
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao buscar horários disponíveis", error);
+        throw error;
+    }
+}
