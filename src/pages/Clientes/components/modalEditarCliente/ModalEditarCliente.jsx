@@ -7,7 +7,7 @@ import './ModalEditarCliente.css';
 // import { useParams } from "react-router-dom";
 import Swal from 'sweetalert2';
 
-function ModalEditarCliente({ onClose, titulo }) {
+function ModalEditarCliente({ onClose, titulo, nome, telefone, email }) {
 
     const [isVisible, setIsVisible] = useState(false);
 
@@ -108,8 +108,8 @@ function ModalEditarCliente({ onClose, titulo }) {
                                     className="input"
                                     type="text"
                                     name="nomeCliente"
-                                    placeholder="Nome do Cliente"
-                                    value={formData.nomeCliente}
+                                    placeholder={nome}
+                                    value={nome}
                                     onChange={handleChange}
                                     required
                                 />
@@ -123,8 +123,8 @@ function ModalEditarCliente({ onClose, titulo }) {
                                     className="input"
                                     type="text"
                                     name="telefoneCliente"
-                                    placeholder="(XX) XXXXX-XXXX"
-                                    defaultValue={formData.telefoneCliente}
+                                    placeholder={telefone}
+                                    defaultValue={telefone}
                                     onChange={handleChange}
                                     required
                                 />
@@ -138,8 +138,8 @@ function ModalEditarCliente({ onClose, titulo }) {
                                     className="input"
                                     type="email"
                                     name="emailCliente"
-                                    placeholder="Digite o email"
-                                    value={formData.emailCliente}
+                                    placeholder={email}
+                                    value={email}
                                     onChange={handleChange}
                                     required
                                 />

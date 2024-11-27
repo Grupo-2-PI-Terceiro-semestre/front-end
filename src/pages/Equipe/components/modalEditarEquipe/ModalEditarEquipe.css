@@ -1,4 +1,4 @@
-.main-header-interna .container-header-interna .modal-overlay {
+.modal-overlay-equipe {
     position: fixed;
     top: 0;
     right: 0;
@@ -14,12 +14,12 @@
     z-index: 4;
 }
 
-.modal-overlay.visible {
+.modal-overlay-equipe.visible {
     opacity: 1;
     visibility: visible;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header {
+.modal-overlay-equipe .modal-header {
     background: rgb(33, 34, 45);
     border-radius: 10px;
     height: 100vh;
@@ -33,7 +33,7 @@
     /* overflow: auto; */
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal {
+.modal-overlay-equipe .modal-header .container-modal {
     height: 97vh;
     width: 26vw;
     display: flex;
@@ -43,15 +43,15 @@
     transition: transform 0.3s ease;
 }
 
-.modal-overlay.visible .container-modal {
+.modal-overlay-equipe.visible .container-modal {
     transform: translateX(0);
 }
 
-.modal-overlay.hidden .container-modal {
+.modal-overlay-equipe.hidden .container-modal {
     transform: translateX(100%);
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .botao {
+.modal-overlay-equipe .modal-header .container-modal .botao {
     background-color: #ff5f5f;
     color: white;
     border: none;
@@ -60,7 +60,7 @@
     border-radius: 5px;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv {
+.modal-overlay-equipe .modal-header .container-modal .form-modal-serv {
     height: 82vh;
     display: flex;
     justify-content: center;
@@ -70,7 +70,7 @@
     gap: 3vh;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv {
+.modal-overlay-equipe .modal-header .container-modal .form-modal-serv .form-grupo-serv {
     height: 10vh;
     display: flex;
     justify-content: center;
@@ -87,7 +87,7 @@
     justify-content: center;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv-text {
+.modal-overlay-equipe .modal-header .container-modal .form-modal-serv .form-grupo-serv-text {
     height: 19vh;
     display: flex;
     width: 27vw;
@@ -97,7 +97,7 @@
     justify-content: center;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel {
+.modal-overlay-equipe .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel {
     width: 26vw;
     height: 9vh;
 }
@@ -120,7 +120,7 @@
     color: white;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel label {
+.modal-overlay-equipe .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel label {
     display: block;
     color: white;
     display: flex;
@@ -147,7 +147,7 @@
     font-size: 1rem;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel .input {
+.modal-overlay-equipe .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel .input {
     width: 100%;
     border: none;
     border-radius: 5px;
@@ -160,7 +160,7 @@
     gap: 3vh;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel select {
+.modal-overlay-equipe .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel select {
     width: 100%;
     border: none;
     border-radius: 5px;
@@ -173,7 +173,7 @@
     gap: 3vh;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .botaoCadastrar {
+.modal-overlay-equipe .modal-header .container-modal .form-modal-serv .botaoCadastrar {
     background-color: rgb(33, 150, 243);
     color: white;
     border: none;
@@ -185,7 +185,7 @@
     transition: background-color 0.5s ease;
 }
 
-.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .botaoCadastrar:hover {
+.modal-overlay-equipe .modal-header .container-modal .form-modal-serv .botaoCadastrar:hover {
     background-color: var(--hoverColor, #0056b3);
 }
 

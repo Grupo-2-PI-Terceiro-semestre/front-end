@@ -3,8 +3,9 @@ import './ModalEditar.css';
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
+import Select from 'react-select'; 
 
-function ModalEditar({ onClose, titulo }) {
+function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServico }) {
 
     const [isVisible, setIsVisible] = useState(false);
 
@@ -12,13 +13,52 @@ function ModalEditar({ onClose, titulo }) {
         setIsVisible(true);
     }, []);
 
+    const generateTimeOptions = () => {
+        const options = [];
+        for (let hour = 0; hour < 24; hour++) {
+            for (let minute = 0; minute < 60; minute += 15) {
+                const time = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+                options.push({ value: time, label: time });
+            }
+        }
+        return options;
+    };
+
+    const timeOptions = generateTimeOptions(); 
+
+    const customStyles = {
+        control: (provided) => ({
+            ...provided,
+            backgroundColor: '#f4f4f4', 
+            borderColor: '#ccc', 
+            boxShadow: 'none', 
+            '&:hover': {
+                borderColor: '#888',
+            },
+        }),
+        menu: (provided) => ({
+            ...provided,
+            backgroundColor: '#414141', 
+            zIndex: 999, 
+        }),
+        option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isSelected
+                ? '#777676' 
+                : state.isFocused
+                    ? '#777676'
+                    : '#414141', 
+            color: state.isSelected ? '#414141' : '#ffff', 
+        }),
+    };
+
     const [formData, setFormData] = useState({
         nomeServico: '',
         valorServico: '',
         tempoExecucao: '',
         corReferencia: '#000000',
         descricao: '',
-        categoria: '',
+        // categoria: '',
         tiposDeUsuario: 'ADMIN'
     });
 
@@ -29,7 +69,7 @@ function ModalEditar({ onClose, titulo }) {
     const [tempoExecucao, setTempoExecucao] = useState("");
     const [corReferencia, setCorReferencia] = useState("");
     const [descricao, setDescricao] = useState("");
-    const [categoria, setCategoria] = useState("");
+    // const [categoria, setCategoria] = useState("");
 
     // useEffect(() => {
     //     api.get(`/${idServico}`).then((response) => {
@@ -69,7 +109,7 @@ function ModalEditar({ onClose, titulo }) {
                 tempoExecucao: '',
                 corReferencia: '#000000',
                 descricao: '',
-                categoria: '',
+                // categoria: '',
                 representante: "true",
             });
         } catch (error) {
@@ -95,8 +135,8 @@ function ModalEditar({ onClose, titulo }) {
                                     className="input"
                                     type="text"
                                     name="nomeServico"
-                                    placeholder="Nome do Serviço"
-                                    value={formData.nomeServico}
+                                    placeholder={nome}
+                                    value={nome}
                                     onChange={handleChange}
                                     required
                                 />
@@ -110,8 +150,8 @@ function ModalEditar({ onClose, titulo }) {
                                     className="input"
                                     type="number"
                                     name="valorServico"
-                                    placeholder="Valor do Serviço"
-                                    value={formData.valorServico}
+                                    placeholder={valor}
+                                    value={valor}
                                     onChange={handleChange}
                                     required
                                 />
@@ -121,14 +161,23 @@ function ModalEditar({ onClose, titulo }) {
                         <div className="form-group-editar">
                             <div className='inputLabel-editar'>
                                 <label>Tempo de Execução:</label>
-                                <input
+                                {/* <input
                                     className="input"
                                     type="text"
                                     name="tempoExecucao"
-                                    placeholder="Tempo de Execução"
-                                    defaultValue={formData.tempoExecucao}
+                                    placeholder={tempo}
+                                    defaultValue={tempo}
                                     onChange={handleChange}
                                     required
+                                /> */}
+
+                                <Select
+                                    options={timeOptions}
+                                    onChange={handleChange}
+                                    placeholder={tempo}
+                                    isSearchable={false}
+                                    className="time-picker-dropdown"
+                                    styles={customStyles}
                                 />
                             </div>
                         </div>
@@ -140,18 +189,18 @@ function ModalEditar({ onClose, titulo }) {
                                     <input
                                         className="color-picker-input"
                                         type="color"
-                                        name="corReferencia"
-                                        value={formData.corReferencia}
+                                        name={cor}
+                                        value={cor}
                                         onChange={handleColorChange}
                                     />
                                     <span className="color-name">
-                                        {formData.corReferencia}
+                                        {cor}
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="form-group-editar">
+                        {/* <div className="form-group-editar">
                             <div className='inputLabel-editar'>
                                 <label htmlFor="categoria">Categoria:</label>
                                 <select
@@ -167,14 +216,15 @@ function ModalEditar({ onClose, titulo }) {
                                     <option value="categoria3">Categoria 3</option>
                                 </select>
                             </div>
-                        </div >
+                        </div > */}
+
                         <div className="form-group-text">
                             <div className='inputLabel'>
                                 <label>Descrição:</label>
                                 <textarea
                                     name="descricao"
-                                    placeholder="Descrição"
-                                    defaultValue={formData.descricao}
+                                    placeholder={descricaoServico}
+                                    defaultValue={descricaoServico}
                                     onChange={handleChange}
                                     required
                                 />

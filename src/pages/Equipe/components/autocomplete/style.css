@@ -1,16 +1,7 @@
 .autocomplete {
     position: relative;
     width: 95%;
-    border-radius: 5px;
-    /* height: 6vh; */
 }
-
-/* .input-searchable {
-    background-color: rgb(65, 65, 65);
-    width: 100%;
-    border-radius: 5px;
-    height: 6vh;
-} */
 
 .dropdown-list {
     position: absolute;
@@ -40,7 +31,6 @@
 .dropdown-item:hover {
     background-color: rgb(51, 0, 255) !important;
 }
-
 .inputContainer{
     width: 100%;
 }

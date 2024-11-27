@@ -21,3 +21,25 @@ export const createColaborador = async (colaborador, idEmpresa) => {
         throw e
     }
 }
+
+export const findFuncoes = async () => {
+    try {
+        const response = await getData(`funcoes`)
+        return response;
+    }
+    catch (e) {
+        console.error("Erro ao consultar as funções" + e)
+        throw e
+    }
+}
+
+export const AtualizarUsuario = async (endpoint, eventoAtualizado) => {
+
+    try {
+        const response = await putData(endpoint, eventoAtualizado)
+        return response;
+    } catch (e) {
+        console.log("Erro ao autalizar o usuário")
+        throw e
+    }
+}

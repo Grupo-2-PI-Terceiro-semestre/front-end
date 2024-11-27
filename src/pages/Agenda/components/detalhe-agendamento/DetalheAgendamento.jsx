@@ -36,7 +36,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
 
     useEffect(() => {
         buscarServicos(idEmpresa);
-        buscarClientes(idEmpresa)
+        buscarClientes(idEmpresa);
     }, [idEmpresa, event.title]);
 
     const buscarServicos = async (idEmpresa) => {

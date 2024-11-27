@@ -5,8 +5,6 @@ import Chart from "./components/chart/Chart";
 import CardDashboard from "./components/cardDashboard/CardDashboard";
 import Kpi from "./components/KPI/Kpi";
 import TabelaDashboard from "./components/Tabela/TabelaDashboard";
-import Button from "../../components/button/Button";
-import filterIcon from "../../assets/filter.png"
 import Cookies from 'js-cookie';
 
 function Dashboard() {

@@ -7,7 +7,7 @@ import ModalEditar from "../modalEditar/ModalEditar";
 import ModalDesc from "../../../../components/modalDesc/ModalDesc";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria, corReferencia, descricaoServico }) {
+function LinhaTabelaServico({ nome, valor, tempoExecucao, corReferencia, descricaoServico }) {
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
     const [isModalOpenExcluir, setIsModalOpenExcluir] = useState(false);
     const [isModalOpenDesc, setIsModalOpenDesc] = useState(false);
@@ -81,10 +81,12 @@ function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria, corReferenc
                     <ModalEditar
                         onClose={closeModalEditar}
                         titulo="Editar Serviço"
-                        selectedEvent={selectedEvent}
-                        detalhes={detalhes}
-                        idEmpresa={user.idEmpresa}
-                        // funcionarios={resources}
+                        // nome, valor, tempoExecucao, corReferencia, descricaoServico
+                        nome={nome}
+                        valor={valor}
+                        tempo={tempoExecucao}
+                        cor={corReferencia}
+                        descricaoServico={descricaoServico}
                     />
                 )}
 
