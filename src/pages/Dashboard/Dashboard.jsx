@@ -73,16 +73,7 @@ function Dashboard() {
                         ))}
                     </div>
 
-                    <div className="espaço-botao">
-                        <Button
-                            type="submit"
-                            content="Fltrar"
-                            backgroundColor='#2196f3'
-                            fontSize='15px'
-                            size='30%'
-                            image={filterIcon}
-                        />
-                    </div>
+                
                 </div>
                 <div className="meio">
                     <CardDashboard title="Total de Clientes por dia da semana" height="250px" width="410px" >

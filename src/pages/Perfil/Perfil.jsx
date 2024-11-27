@@ -20,7 +20,7 @@ function Perfil() {
           
           {activeButton === 'dados' && <FormularioPrincipal setRefreshKey={setRefreshKey} />}
           {activeButton === 'localizacao' && <FormularioLocalizacao />}
-          {activeButton === 'horario' && <FormularioFuncionamento />}
+          {activeButton === 'galeria' && <FormularioFuncionamento />}
           {activeButton === 'notificacoes' && <FormularioNotificacao />}
         </div>
       </div>
