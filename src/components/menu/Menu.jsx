@@ -53,12 +53,12 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
   const logout = () => {
     infoToast('Você será redirecionado para a página de login.');
     timeoutRef.current = setTimeout(() => {
-      navigate('/login');
       Object.keys(Cookies.get()).forEach((cookieName) => {
         Cookies.remove(cookieName);
       });
       localStorage.clear();
     }, 2500);
+    navigate('/login');
   };
 
   const handleUploadImage = async (selectedFile) => {

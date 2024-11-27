@@ -18,6 +18,7 @@ function PerfilEmpresa() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     buscarEmpresa(idEmpresa);
   }, [idEmpresa]);
 

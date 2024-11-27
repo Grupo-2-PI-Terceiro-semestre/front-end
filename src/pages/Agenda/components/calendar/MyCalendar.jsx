@@ -9,7 +9,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./MyCalendar.css";
 import Button from "../../../../components/button/Button";
 import plusIcon from "../../../../assets/plus.png";
-import IconDemo from '../agenda/Agenda';
+import IconDemo from '../../../../components/agenda/Agenda';
 import { findColaborador, AtualizarEvento, atualizarStatus } from '../../services/agendaServices'
 import Cookies from 'js-cookie';
 import CircularIntegration from '../../../../components/botao-download/CircularIntegration';
@@ -18,14 +18,10 @@ import DetalheAgendamento from '../detalhe-agendamento/DetalheAgendamento';
 import ModalAddAgend from '../modal-add/ModalAddAgend';
 import Modal from '@mui/material/Modal';
 import Swal from 'sweetalert2'
-import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
+import { converterGMTParaBrasilia, formatDateToBRWithMonthName, formaterDate } from '../../../../utils/FormatDate';
 import ButtonRollback from "../button-rollback/ButtonRollback"
 import { Pilha } from "../../../../utils/Pilha";
 import { infoToast } from "../../../../utils/Toats";
-import Tooltip from '@mui/material/Tooltip';
-import Check from '../../../../assets/check.png';
-import Alert from '../../../../assets/alert.png';
-
 
 moment.locale("pt-br");
 const localizer = momentLocalizer(moment);
@@ -233,11 +229,6 @@ const MyDragAndDropCalendar = () => {
     infoToast('Houve Uma Atualição na Agenda');
   }
 
-  const formaterDate = (date) => {
-    const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    return localDate.toISOString().split('T')[0];
-  }
-
   const isSelected = (day) => {
     return selectedDate.toDateString() === new Date(day).toDateString();
   };
@@ -335,24 +326,6 @@ const MyDragAndDropCalendar = () => {
     setOpenModalAdd(true);
   };
 
-  function formatDateToBRWithMonthName(dateString) {
-
-    const date = new Date(dateString);
-
-    const day = String(date.getDate()).padStart(2, '0');
-    const monthNames = ['Jan', 'Fev',
-      'Mar', 'Abr',
-      'Mai', 'Jun',
-      'Jul', 'Ago',
-      'Set', 'Out',
-      'Nov', 'Dez'
-    ];
-    const month = monthNames[date.getMonth()];
-    const year = date.getFullYear();
-
-    return `${day} - ${month} - ${year}`;
-  }
-
 
   const CustomToolbar = () => {
     return (
@@ -368,7 +341,7 @@ const MyDragAndDropCalendar = () => {
     <div className="calendar-container">
       <div className="custom-toolbar">
         <div className="buscaAgenda">
-          <IconDemo content={formatDateToBRWithMonthName(selectedDate)} onDateChange={handleDateChange} />
+          <IconDemo content={formatDateToBRWithMonthName(selectedDate)} onDateChange={handleDateChange} isFixed={false} />
         </div>
         <div className="buttonDay">
           <span

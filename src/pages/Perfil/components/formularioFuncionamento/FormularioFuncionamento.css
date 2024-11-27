@@ -1,36 +1,90 @@
-.horario {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin: 10px 0;
-    width: 90%;
-}
-
-input[type="time"] {
-    padding: 5px;
-    border-radius: 5px;
-    border: none;
-    background-color: #171821;
-    color: #eee;
-}
-
-input[type="time"]::webkit-calendar-picker-indicator {
-    filter: invert(1);
-}
-
-.title-horario {
-    width: 2rem;
-    text-align: start;
-}
-
-.container-horarios{
+.container-formulario-galeria {
+    background: #21222D;
+    width: 40vw;
+    height: 80vh;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    align-items: center;
+    padding: 1.5rem 1rem;
+    border-radius: 15px;
+    color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.time-input::-webkit-calendar-picker-indicator {
-    filter: invert(1);
+.container-formulario-galeria h1 {
+    color: #ffffff;
+    align-self: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.container-galeria {
+    display: grid; /* Use grid para alinhar os itens */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Responsividade */
+    gap: 1rem; /* Espaçamento entre os itens */
+    justify-content: center;
+    overflow-y: auto; 
+    flex-grow: 1;
+    height: 100%;
+    padding: 0.5rem;
+}
+
+.container-galeria::-webkit-scrollbar {
+    width: 8px; /* Largura da barra */
+}
+
+.container-galeria::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 4px;
+}
+
+.container-galeria::-webkit-scrollbar-thumb:hover {
+    background-color: #0056b3;
+}
+
+.container-galeria::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+.gallery-item {
+    width: 100%;
+    height: 150px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.button-upload {
+    background: #1a6db0;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
     cursor: pointer;
+    width: auto;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    align-self: center;
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.button-upload:hover {
+    background: #155c91;
+    transform: scale(1.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
