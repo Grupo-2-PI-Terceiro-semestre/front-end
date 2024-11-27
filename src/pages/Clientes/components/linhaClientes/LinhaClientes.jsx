@@ -83,7 +83,7 @@ function LinhaClientes({ nome, telefone, email }) {
                 </div>
 
                 {isModalOpenEditar && (
-                    <ModalEditarCliente onClose={closeModalEditar} titulo="Editar Cliente" />
+                    <ModalEditarCliente onClose={closeModalEditar} titulo="Editar Cliente" nome={nome} telefone={telefone} email={email}/>
                 )}
             </div>
         </>
