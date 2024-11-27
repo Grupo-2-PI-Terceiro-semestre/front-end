@@ -9,14 +9,25 @@
     left: 0;
     z-index: 1000;
     /* border: 1px solid; */
-    transition: background-color 0.3s ease-in-out; /* Para a transição suave */
+    transition: background-color 0.3s ease-in-out;
+    /* Para a transição suave */
+}
+
+.headerEmpresa a {
+    text-decoration: none;
+    color: white;
+
 }
 
 .headerEmpresa .icones {
     display: flex;
     justify-content: space-between;
-    width: 5vw;
     color: white;
+    align-items: center;
+}
+
+.headerEmpresa .icones a {
+    display: flex;
 }
 
 .headerEmpresa .icones .icon {
@@ -35,7 +46,7 @@
 
 .headerEmpresa .titulos span {
     color: white;
-    font-size: 1.6rem;
+    font-size: 2rem;
 }
 
 .headerEmpresa .titulos .opcoes {
@@ -50,17 +61,20 @@
 .headerEmpresa .titulos .opcoes .nav a {
     text-decoration: none;
     color: white;
-    transition: color 0.3s ease-in-out; /* Para a transição suave na cor do texto */
+    transition: color 0.3s ease-in-out;
+    /* Para a transição suave na cor do texto */
 }
 
 .headerEmpresa .titulos .opcoes .nav a:hover {
-    color: #ccc; /* Cor do texto ao passar o mouse */
+    color: #ccc;
+    /* Cor do texto ao passar o mouse */
 }
 
 .headerEmpresa .botaoCliente a {
     text-decoration: none;
     color: rgb(255, 255, 255);
     font-weight: bold;
+    font-size: 12px;
 }
 
 .headerEmpresa .botaoCliente a .icon {
@@ -71,4 +85,15 @@
 .headerScroll {
     background-color: #00000051;
     transition: background-color 0.3s ease-in-out;
+}
+
+.auth-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 60px;
+}
+
+.auth-buttons a {
+    cursor: pointer;
 }

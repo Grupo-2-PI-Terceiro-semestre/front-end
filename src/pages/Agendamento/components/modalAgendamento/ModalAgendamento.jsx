@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { formatDuration } from '../../../../utils/FormatDate';
 import { useParams } from "react-router-dom";
-import { Calendar } from 'primereact/calendar';
 import { formaterDate } from '../../../../utils/FormatDate';
 import IconDemo from '../../../../components/agenda/Agenda';
 import "./ModalAgendamento.css";
@@ -19,13 +18,26 @@ function ModalAgendamento({ onClose, servico, equipe }) {
     const [date, setDate] = useState(null);
     const { idEmpresa } = useParams();
 
-    // Função para buscar horários quando a data ou o profissional mudar
     useEffect(() => {
         if (selectedProfissional && date) {
-            const formattedDate = formaterDate(date); // Formata a data
+            const formattedDate = formaterDate(date);
             buscarHorarios(idEmpresa, formattedDate, selectedProfissional);
         }
-    }, [date, selectedProfissional]); // A requisição é feita sempre que data ou profissional mudar
+    }, [date, selectedProfissional]);
+    
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden"; 
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, []);
+
+    const handleOverlayClick = (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+            onClose();
+        }
+    };
 
     const buscarHorarios = async (idEmpresa, formattedDate, idProfissional) => {
 
@@ -41,11 +53,11 @@ function ModalAgendamento({ onClose, servico, equipe }) {
     };
 
     const handleDateChange = (date) => {
-        setDate(date); // Atualiza a data quando o usuário seleciona uma nova data
+        setDate(date);
     };
 
     const handleChange = (e) => {
-        setSelectedProfissional(e.target.value); // Atualiza o profissional selecionado
+        setSelectedProfissional(e.target.value);
     };
 
     const handleHorarioSelecionado = (horario) => {
@@ -53,7 +65,7 @@ function ModalAgendamento({ onClose, servico, equipe }) {
     };
 
     return (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={handleOverlayClick}>
             <div className="modal-container">
                 <button className="close-button" onClick={onClose}>X</button>
                 <h3 className="modal-title">Serviço: {servico.nomeServico}</h3>
@@ -86,7 +98,6 @@ function ModalAgendamento({ onClose, servico, equipe }) {
                         <p>Horários Disponíveis</p>
                     </div>
 
-                    {/* Exibe os horários ou o indicador de carregamento */}
                     <div className="time-options">
                         {isLoaded ? <LoadingDots size={10} /> : (
                             horarios.length > 0 ? (
@@ -114,7 +125,7 @@ function ModalAgendamento({ onClose, servico, equipe }) {
                         <p className="total">
                             Valor: R$ <strong>{servico.precoServico}</strong>
                         </p>
-                        <p className="duration">{formatDuration(servico.duracaoServico)}</p>
+                        <p className="duration">Tempo: {formatDuration(servico.duracaoServico)}</p>
                     </div>
                 </div>
                 <button className="confirm-button">Confirmar</button>

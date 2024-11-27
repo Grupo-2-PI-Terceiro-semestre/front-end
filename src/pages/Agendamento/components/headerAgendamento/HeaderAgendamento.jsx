@@ -3,8 +3,15 @@ import './HeaderAgendamento.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faFacebookF, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import UserMenu from '../modal-user/UserMenu';
 
-function HeaderAgendamento({width, background }) {
+function HeaderAgendamento({ width, background }) {
+
+
+    const handleLogout = () => {
+        console.log("Logout");
+    }
+
     return (
         <header className="headerAgendamento" style={{ backgroundColor: background }}>
             <div className="icones">
@@ -27,6 +34,11 @@ function HeaderAgendamento({width, background }) {
                 <a href="/">
                     Voltar <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon" />
                 </a>
+                <UserMenu
+                    userName="João da Silva"
+                    userEmail="joao@email.com"
+                    onLogout={handleLogout}
+                />
             </div>
 
         </header>

@@ -44,7 +44,6 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
     }, [idEmpresa]);
 
     const handleServicoChange = (servico) => {
-        debugger
         setServicoSelecionado(servico.idServico);
     };
 
