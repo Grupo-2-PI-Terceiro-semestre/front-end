@@ -32,3 +32,14 @@ export const findFuncoes = async () => {
         throw e
     }
 }
+
+export const AtualizarUsuario = async (endpoint, eventoAtualizado) => {
+
+    try {
+        const response = await putData(endpoint, eventoAtualizado)
+        return response;
+    } catch (e) {
+        console.log("Erro ao autalizar o usuário")
+        throw e
+    }
+}
