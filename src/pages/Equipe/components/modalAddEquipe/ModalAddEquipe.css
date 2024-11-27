@@ -1,0 +1,237 @@
+.main-header-interna .container-header-interna .modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    /* opacity: 0; */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.9s ease;
+    z-index: 4;
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header {
+    background: rgb(33, 34, 45);
+    border-radius: 10px;
+    height: 100vh;
+    width: 30vw;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow: auto; */
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal {
+    height: 97vh;
+    width: 26vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3vh;
+    /* transform: translateX(0); */
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.visible .container-modal {
+    transform: translateX(0);
+}
+
+.modal-overlay.hidden .container-modal {
+    transform: translateX(100%);
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .botao {
+    background-color: #ff5f5f;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv {
+    height: 82vh;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 26vw;
+    /* border: 1px solid; */
+    gap: 3vh;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    /* right: 0.5vw;
+    position: relative; */
+}
+
+.form-grupo-serv-cor {
+    /* height: 11vh;
+    display: flex;
+    width: 27vw; */
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv-text {
+    height: 19vh;
+    display: flex;
+    width: 27vw;
+
+    /* height: 10vh; */
+    display: flex;
+    justify-content: center;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel {
+    width: 26vw;
+    height: 9vh;
+}
+
+.inputLabel-cor {
+    width: 26vw;
+    height: 9vh;
+}
+
+.inputLabel {
+    width: 26vw;
+    height: 15vh;
+}
+
+.inputLabel textarea{
+    width: 26vw;
+    height: 15vh;
+    border-radius: 5px;
+    background-color: rgb(65, 65, 65);
+    color: white;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel label {
+    display: block;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.inputLabel-cor label {
+    display: block;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.inputLabel label {
+    display: block;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel .input {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+    height: 5vh;
+    padding: 8px;
+    background-color: rgb(65, 65, 65);
+    color: white !important;
+    flex-wrap: wrap;
+    gap: 3vh;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel select {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+    height: 5vh;
+    padding: 8px;
+    background-color: rgb(65, 65, 65);
+    color: white;
+    flex-wrap: wrap;
+    gap: 3vh;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .botaoCadastrar {
+    background-color: rgb(33, 150, 243);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 6vh;
+    width: 14vw;
+    box-shadow: 0 5px rgb(6, 89, 212);
+    transition: background-color 0.5s ease;
+}
+
+.main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .botaoCadastrar:hover {
+    background-color: var(--hoverColor, #0056b3);
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 5vh;
+    padding-left: 0.5vw;
+    border-radius: 5px;
+    background-color: rgb(65, 65, 65);
+}
+
+.color-picker-input {
+    width: 2vw;
+    height: 4vh;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px; 
+}
+
+.color-name {
+    font-size: 14px; 
+    color: white;
+    font-family: Arial, sans-serif;
+    width: 23vw;
+    display: flex;
+}
+
+.css-g30jg2-control {
+    background-color: #414141 !important;
+    border: none !important;
+}
+
+.css-1dimb5e-singleValue {
+    color: white !important;
+}
+
+.botao-add-serv {
+    width: 27vw;
+}
+
+.input-cliente {
+    width: 20vw;
+}
+
+.icon-plus {
+    cursor: pointer;
+}

@@ -1,5 +1,5 @@
 
-import { getData, postData } from "../../../router/router";
+import { getData, postData, putData } from "../../../router/router";
 
 export const buscarDadosDePerfil = async (idEmpresa) => {
     try {
@@ -33,7 +33,7 @@ export const atualizarEndereco = async (endereco, idEmpresa) => {
 
 export const atualizarDadosDePerfil = async (dados) => {
     try {
-        const response = await postData(`usuarios/perfil`, dados, {});
+        const response = await putData(`usuarios/perfil`, dados, {});
         return response.data;
     } catch (error) {
         console.error("Erro ao atualizar os dados da empresa", error);
@@ -53,7 +53,7 @@ export const buscarNotificacoes = async (idEmpresa) => {
 
 export const atualizarNotificacoes = async (idEmpresa, notificacoes) => {
     try {
-        const response = await postData(`empresas/${idEmpresa}/notificacao`, notificacoes, {});
+        const response = await putData(`empresas/${idEmpresa}/notificacao`, notificacoes, {});
         return response.data;
     } catch (error) {
         console.error("Erro ao atualizar as notificações", error);

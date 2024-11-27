@@ -3,8 +3,9 @@ import './LinhaTabelaEquipe.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import ModalEditarEquipe from "../modalEditarEquipe/ModalEditarEquipe";
 
-function LinhaTabelaEquipe({key, nome, telefone, funcao }) {
+function LinhaTabelaEquipe({idPessoa, nome, telefone, email, funcao }) {
 
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
     const [isModalOpenExcluir, setIsModalOpenExcluir] = useState(false);
@@ -26,8 +27,10 @@ function LinhaTabelaEquipe({key, nome, telefone, funcao }) {
             <div className="container-linha-tabela">
                 <div className="tabela">
                     <div className="linha">
+                        <label htmlFor="text">{idPessoa}</label>
                         <label htmlFor="text">{nome}</label>
                         <label htmlFor="text">{telefone}</label>
+                        <label htmlFor="text">{email}</label>
                         <label htmlFor="text">{funcao}</label>
                         <label className="icons" htmlFor="text">
                             <OverlayTrigger
@@ -56,7 +59,7 @@ function LinhaTabelaEquipe({key, nome, telefone, funcao }) {
                 </div>
 
                 {isModalOpenEditar && (
-                    <ModalEditar onClose={closeModalEditar} titulo="Editar Colaborador" />
+                    <ModalEditarEquipe onClose={closeModalEditar} titulo="Editar Colaborador" idPessoa={idPessoa} nome={nome} telefone={telefone} email={email} funcao={funcao} />
                 )}
 
                 {isModalOpenExcluir && (

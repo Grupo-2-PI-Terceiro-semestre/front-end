@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import './ModalAddCliente.css';
-import Swal from 'sweetalert2';
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
+import { createCliente, findClientes } from "../../services/clienteServices";
+import Cookies from 'js-cookie';
+import { successToast, errorToast } from '../../../../utils/Toats';
+import CircularProgress from '@mui/material/CircularProgress';
 
-function ModalAddCliente({ onCloseCliente, titulo }) {
-
-    // const initialFormData = campos.reduce((acc, campo) => {
-    //     acc[campo.name] = campo.defaultValue || '';  // Inicializa os campos com valores padrão ou string vazia
-    //     return acc;
-    // }, {});
-
-    // const [formData, setFormData] = useState(initialFormData);
+function ModalAddCliente({ onCloseCliente, titulo, refreshDate }) {
 
     const [formData, setFormData] = useState({
-        nomeCliente: '',
-        telefoneCliente: '',
-        emailCliente: '',
+        nomePessoa: '',
+        numeroTelefone: '',
+        emailPessoa: '',
         tiposDeUsuario: 'ADMIN'
     });
 
     const [isVisibleAddCliente, setIsVisibleAdd] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
+    const [clientes, setClientes] = useState([]);
+    const [totalPags, setTotalPags] = useState(0);
+    const [paginaAtual, setPaginaAtual] = useState(1);
 
     useEffect(() => {
         setIsVisibleAdd(true);
@@ -30,45 +31,55 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleColorChange = (e) => {
-        setFormData({ ...formData, corReferencia: e.target.value });
+    const criarCliente = async (cliente, idEmpresa) => {
+        setLoading(true);
+        try {
+            await createCliente(cliente, idEmpresa);
+            successToast('Cliente criado com sucesso!');
+
+            console.log("Cliente criado com sucesso:", cliente);
+
+            buscarListaClientes(user.idEmpresa, paginaAtual, 8);
+
+            setTimeout(() => onCloseCliente(), 3000);
+        } catch (error) {
+            errorToast('Cliente não criado');
+
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: "btn btn-success",
-                cancelButton: "btn btn-danger"
-            },
-            buttonsStyling: false
-        });
-        swalWithBootstrapButtons.fire({
-            title: "Tem certeza?",
-            text: "Um novo cliente será criado!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Sim, cadastrar!",
-            cancelButtonText: "Não, cancelar!",
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                swalWithBootstrapButtons.fire({
-                    title: "Cadastrado!",
-                    text: "O cliente foi cadastrado.",
-                    icon: "success"
-                });
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire({
-                    title: "Cancelado",
-                    text: "O cliente não foi cadastrado",
-                    icon: "error"
-                });
-            }
-        });
+        const idEmpresa = user.idEmpresa;
+
+        criarCliente(formData, idEmpresa);
+
+    };
+
+
+    const buscarListaClientes = async (idEmpresa, pagina, tamanho) => {
+        try {
+            setLoading(true);
+            const paginacao = { pagina: pagina - 1, tamanho };
+            const response = await findClientes(idEmpresa, paginacao);
+
+            setClientes(response.data.itens);
+
+            var totalItens = Number(response.data.totalItens);
+            var totalPagsCalc = Math.ceil(totalItens / tamanho);
+
+            setTotalPags(totalPagsCalc);
+
+        } catch (error) {
+            errorToast('Cliente não encontrado');
+            setClientes([]);
+            setTotalPags(0);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleClose = () => {
@@ -77,7 +88,6 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
     };
 
     return (
-
         <div className={`modal-overlay ${isVisibleAddCliente ? 'visible' : 'hidden'}`}>
             <div className="modal-header">
                 <div className="container-modal">
@@ -89,9 +99,9 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
                                 <input
                                     className="input"
                                     type="text"
-                                    name="nomeCliente"
+                                    name="nomePessoa"
                                     placeholder="Nome do Cliente"
-                                    value={formData.nomeCliente}
+                                    value={formData.nomePessoa}
                                     onChange={handleChange}
                                     required
                                 />
@@ -104,9 +114,9 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
                                 <input
                                     className="input"
                                     type="text"
-                                    name="telefoneCliente"
+                                    name="numeroTelefone"
                                     placeholder="(XX) XXXXX-XXXX"
-                                    defaultValue={formData.telefoneCliente}
+                                    value={formData.numeroTelefone}
                                     onChange={handleChange}
                                     required
                                 />
@@ -119,22 +129,34 @@ function ModalAddCliente({ onCloseCliente, titulo }) {
                                 <input
                                     className="input"
                                     type="email"
-                                    name="emailCliente"
+                                    name="emailPessoa"
                                     placeholder="Digite o email"
-                                    value={formData.emailCliente}
+                                    value={formData.emailPessoa}
                                     onChange={handleChange}
                                     required
                                 />
                             </div>
                         </div>
 
-                        <button className="botaoCadastrar" onClick={handleSubmit}>Cadastrar</button>
-                    </form >
+                        <div className="botao-add-cliente">
+                            <button style={{
+                                backgroundColor: loading ? '#6c7d8c' : '#2196F3'
+                            }} type="submit" className="botaoCadastrar" disabled={loading}>
+                                Cadastrar
+                            </button>
+
+                        </div>
+
+                        {loading && (
+                            <div className="loading-icon">
+                                <CircularProgress size={35} />
+                            </div>
+                        )}
+                    </form>
                 </div>
             </div>
         </div>
-
-    )
+    );
 }
 
 export default ModalAddCliente;

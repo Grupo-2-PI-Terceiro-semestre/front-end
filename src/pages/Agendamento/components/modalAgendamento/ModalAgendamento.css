@@ -1,0 +1,153 @@
+.modal-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-container {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+
+.modal-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+
+.modal-calendar {
+  margin-top: 10px;
+}
+
+.display-info p {
+  height: 2rem;
+  align-items: end;
+  display: flex;
+  font-size: 16px;
+  color: #777;
+  margin: 0;
+}
+
+
+.time-options {
+  width: 100%;
+  height: 5rem;
+  overflow-x: auto;
+  display: flex;
+  gap: 10px;
+  display: flex;
+  text-align: start;
+  justify-content: center;
+  white-space: nowrap;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.time-options::-webkit-scrollbar {
+  height: 8px;
+}
+
+.time-options::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 4px;
+}
+
+.time-options::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3;
+}
+
+.time-options::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+.time-button {
+  padding: 10px 15px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 70%;
+  font-size: 16px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.time-button:hover {
+  background: #ddd;
+}
+
+.time-options p {
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+}
+
+.modal-summary {
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.modal-summary .total {
+  margin: 10px 0 0 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+.modal-summary .duration {
+  font-size: 14px;
+  color: #777;
+  margin: 0;
+  text-align: left;
+}
+
+.confirm-button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.confirm-button:hover {
+  background: #0056b3;
+}
+
+.dropdown-profissional {
+  display: flex;
+}
+
+.dropdown-profissional select {
+  width: 40%;
+}

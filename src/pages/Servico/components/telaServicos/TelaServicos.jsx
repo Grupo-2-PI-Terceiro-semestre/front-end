@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import './TelaServicos.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import LinhaTabela from "../linhaTabelaServico/LinhaTabelaServico";
 import LinhaTabelaServico from "../linhaTabelaServico/LinhaTabelaServico";
 import Pagination from "@mui/material/Pagination";
 import Stack from '@mui/material/Stack';

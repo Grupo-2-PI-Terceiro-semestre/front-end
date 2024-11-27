@@ -7,11 +7,13 @@ import ModalEditar from "../modalEditar/ModalEditar";
 import ModalDesc from "../../../../components/modalDesc/ModalDesc";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria, corReferencia, descricaoServico }) {
+function LinhaTabelaServico({ nome, valor, tempoExecucao, corReferencia, descricaoServico }) {
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
     const [isModalOpenExcluir, setIsModalOpenExcluir] = useState(false);
     const [isModalOpenDesc, setIsModalOpenDesc] = useState(false);
     const [modalDescData, setModalDescData] = useState(null);
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [detalhes, setDetalhes] = useState([]);
 
     const openModalExcluir = () => setIsModalOpenExcluir(true);
     const closeModalExcluir = () => setIsModalOpenExcluir(false);
@@ -76,7 +78,16 @@ function LinhaTabelaServico({ nome, valor, tempoExecucao, categoria, corReferenc
                 </div>
 
                 {isModalOpenEditar && (
-                    <ModalEditar onClose={closeModalEditar} titulo="Editar Serviço" />
+                    <ModalEditar
+                        onClose={closeModalEditar}
+                        titulo="Editar Serviço"
+                        // nome, valor, tempoExecucao, corReferencia, descricaoServico
+                        nome={nome}
+                        valor={valor}
+                        tempo={tempoExecucao}
+                        cor={corReferencia}
+                        descricaoServico={descricaoServico}
+                    />
                 )}
 
                 {isModalOpenExcluir && (

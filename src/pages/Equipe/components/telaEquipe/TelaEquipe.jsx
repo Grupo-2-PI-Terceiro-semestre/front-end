@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
 import { findUsuarios } from "../../services/equipeServices";
 
-function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4
+function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4, titulo5
 }) {
 
     const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
@@ -32,6 +32,7 @@ function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4
     }, [paginaAtual]);
 
     const buscarListaUsuarios = async (idEmpresa, pagina, tamanho) => {
+        debugger
         try {
             setLoading(true);
             const paginacao = { pagina: pagina - 1, tamanho };
@@ -82,16 +83,20 @@ function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4
                         <label htmlFor="text">{titulo2}</label>
                         <label htmlFor="text">{titulo3}</label>
                         <label htmlFor="text">{titulo4}</label>
+                        <label htmlFor="text">{titulo5}</label>
                     </div>
 
                     <div className="conjuntoLinhas">
                         {Array.isArray(usuario) && usuario.length > 0 ? (
                             usuario.map((usuario) => (
+                                // console.log(usuario.idPessoa)
                                 <LinhaTabelaEquipe
-                                    key={usuario.idPessoa}
-                                    nome={usuario.nomePessoa}
-                                    telefone={usuario.numeroTelefone}
-                                    funcao={usuario.funcao.nomeFuncao}
+                                    idPessoa={usuario.idPessoa}
+                                    nome={usuario.nomePessoa != null ? usuario.nomePessoa : 'Sem nome'}
+                                    telefone={usuario.numeroTelefone != null ? usuario.numeroTelefone : 'Sem telefone'}
+                                    email={usuario.emailPessoa != null ? usuario.emailPessoa : 'Sem e-mail'}
+                                    funcao={usuario.funcao.nomeFuncao != null ? usuario.funcao.nomeFuncao : 'Sem função'}
+                                    // idPessoa={usuario.idPessoa}
                                 />
                             ))
                         ) : (

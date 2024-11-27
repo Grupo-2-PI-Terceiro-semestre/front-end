@@ -126,3 +126,7 @@
 .form-agendamento .inputLabel .cliente-plus .input-cliente-plus .input-cliente {
     width: 20vw;
 }
+
+.icon-plus {
+    cursor: pointer;
+}

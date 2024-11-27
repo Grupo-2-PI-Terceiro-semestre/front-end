@@ -58,10 +58,15 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
     const buscarServicos = async (idEmpresa) => {
         try {
             const response = await findServicos(idEmpresa);
-            localStorage.setItem('servicos', JSON.stringify(response.data));
-            setServicos(response.data);
+            const servicosList = response.data || [];
+            if (servicosList.length === 0) {
+                console.warn('Nenhum serviço cadastrado.');
+            }
+            localStorage.setItem('servicos', JSON.stringify(servicosList));
+            setServicos(servicosList);
         } catch (error) {
             console.error('Erro ao buscar os serviços:', error);
+            setServicos([]);
         }
     };
 
@@ -153,9 +158,14 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                                     <SearchableDropdown className="input-cliente"
                                         options={clientes}
                                         required={true}
+                                        value={''}
+                                        placeholder={
+                                            clientes.length === 0 ? "Nenhum Cliente Cadastrado" : "Selecione um serviço"
+                                        }
                                         onSelectOption={handleClientesChange}
                                         displayField={(option) => option.nomePessoa}
                                         uniqueKey={(option) => option.idCliente}
+                                        disabled={clientes.length === 0}
                                     />
                                 </div>
 
@@ -172,10 +182,14 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                             <SearchableDropdown
                                 options={servicos}
                                 required={true}
-                                placeholder={"Selecione um serviço"}
+                                value={''}
+                                placeholder={
+                                    servicos.length === 0 ? "Nenhum serviço disponível" : "Selecione um serviço"
+                                }
                                 onSelectOption={handleServicoChange}
                                 displayField={(option) => option.nomeServico}
                                 uniqueKey={(option) => option.idServico}
+                                disabled={servicos.length === 0} // Desativa se a lista estiver vazia
                             />
                         </div>
                     </div>
@@ -186,6 +200,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                             <SearchableDropdown
                                 options={funcionarios}
                                 required={true}
+                                value={''}
                                 placeholder={"Selecione um profissional"}
                                 onSelectOption={handleFuncionarioChange}
                                 displayField={(option) => option.title}

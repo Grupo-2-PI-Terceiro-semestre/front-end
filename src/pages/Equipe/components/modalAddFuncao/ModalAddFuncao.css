@@ -1,0 +1,97 @@
+.main-modal-funcao {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.container-modal-funcao {
+    padding: 2rem;
+    border-radius: 10px;
+    width: 40%;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.detalhe-modal {
+    background-color: #1c1b26;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    z-index: 8;
+    margin: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 50vh;
+}
+
+.container-modal-agend {
+    /* border: 1px solid; */
+    height: 43vh;
+    width: 32vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.detalhe-modal h3 {
+    margin-bottom: 3rem;
+}
+
+.inputModalAdd {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    width: 26vw;
+    /* border: 1px solid red; */
+    height: 35vh;
+}
+
+.inputModalAdd .form-modal-agend {
+    width: 26vw;
+    /* border: 1px solid; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.inputModalAdd .form-modal-agend .form-group-agenda {
+    width: 24vw;
+}
+
+.inputModalAdd .form-modal-agend .form-group-agenda .inputLabelModal label {
+    color: white;
+}
+
+.inputModalAdd .form-modal-agend .form-group-agenda .inputLabelModal input {
+    color: white;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+    border: none;
+    padding: 0 5px !important;
+    border-radius: 5px;
+    background-color: #171821;
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    outline: 1px solid 444;
+}
+
+.inputModalAdd .form-modal-agend .botao {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -7,9 +7,12 @@ const SearchableDropdown = ({
     placeholder,
     displayField,
     uniqueKey,
-    required
+    value,
+    required,
+    disabled,
+    width = '95%'
 }) => {
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState(value);
     const [selectedOption, setSelectedOption] = useState(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -44,17 +47,20 @@ const SearchableDropdown = ({
 
     return (
         <div className="inputContainer">
-            <div className="autocomplete" ref={dropdownRef}>
+            <div style={{
+                width: width
+            }} className="autocomplete" ref={dropdownRef}>
                 <input
                     type="text"
+                    disabled={disabled}
                     required={required}
                     placeholder={placeholder || 'Selecione uma opção'}
-                    value={inputValue}
+                    value={inputValue ? inputValue : value}
                     onChange={handleInputChange}
                     onFocus={() => setIsDropdownOpen(true)}
                 />
                 {selectedOption === null && required && (
-                    <input type="hidden" required /> // Garantir validação.
+                    <input type="hidden" required />
                 )}
                 {isDropdownOpen && (
                     <ul className="dropdown-list">

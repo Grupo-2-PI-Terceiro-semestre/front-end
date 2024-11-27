@@ -6,6 +6,9 @@ import Cookies from 'js-cookie';
 import './Menu.css';
 import Tooltip from '@mui/material/Tooltip';
 import { infoToast } from '../../utils/Toats'
+import CircularProgress from '@mui/material/CircularProgress';
+import { errorToast, successToast } from '../../utils/Toats'
+
 
 
 const Menu = ({ activeMenuItem, refreshKey }) => {
@@ -14,6 +17,7 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
   const [imageFile, setImageFile] = useState(null);
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
@@ -49,32 +53,32 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
   const logout = () => {
     infoToast('Você será redirecionado para a página de login.');
     timeoutRef.current = setTimeout(() => {
-      navigate('/login');
       Object.keys(Cookies.get()).forEach((cookieName) => {
         Cookies.remove(cookieName);
       });
       localStorage.clear();
     }, 2500);
+    navigate('/login');
   };
 
   const handleUploadImage = async (selectedFile) => {
     if (!selectedFile) {
-      alert("Por favor, selecione uma imagem para fazer o upload.");
       return;
     }
-
+    setLoading(true);
     try {
       const formData = new FormData();
-      formData.append('imagem', selectedFile);
+      formData.append('file', selectedFile);
+      const response = await uploadImage(user.idEmpresa, formData);
+      setEmpresa(prevState => ({ ...prevState, urlLogo: response }));
+      Cookies.set('empresa', JSON.stringify({ ...empresa, urlLogo: response }), { expires: 7 });
 
-      const response = await uploadImage(empresa.id, formData);
-      setEmpresa(prevState => ({ ...prevState, urlLogo: response.urlLogo }));
-      Cookies.set('empresa', JSON.stringify({ ...empresa, urlLogo: response.urlLogo }), { expires: 7 });
-
-      alert("Imagem carregada com sucesso!");
+      successToast('Imagem atualizada com sucesso');
     } catch (error) {
       console.error("Erro ao fazer o upload da imagem", error);
-      alert("Erro ao fazer o upload da imagem. Tente novamente.");
+      errorToast('Erro ao fazer o upload da imagem');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,6 +105,7 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
             className="profile-image"
             onClick={() => document.getElementById('imageUpload').click()}
           />
+          <CircularProgress size={100} className={loading ? 'loading-icon' : 'loading-icon-hidden'} />
         </Tooltip>
 
         <span className="profile-name">{empresa ? empresa.nomeEmpresa : 'Nome da Empresa'}</span>

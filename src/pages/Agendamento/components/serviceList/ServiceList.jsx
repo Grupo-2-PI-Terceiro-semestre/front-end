@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { formatDuration } from '../../../../utils/FormatDate';
 import './ServiceList.css';
 
-function ServiceList() {
-  const services = [
-    { name: 'Corte Masculino', price: '45,00', duration: '00:45' },
-    { name: 'Luzes', price: '45,00', duration: '00:45' },
-    { name: 'Limpeza de pele', price: '45,00', duration: '00:45' },
-    { name: 'Pézinho', price: '45,00', duration: '00:45' },
-    { name: 'Sobrancelha', price: '45,00', duration: '00:45' },
-  ];
+function ServiceList({ servicos, openModal }) {
+
+
+  if (!servicos) return null;
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredServices = servicos.filter((service) =>
+    service.nomeServico.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleServiceClick = (service) => {
+    openModal(service);
+  }
 
   return (
     <div className="service-list">
@@ -18,24 +25,26 @@ function ServiceList() {
           type="text"
           placeholder="Pesquisar Por Serviço"
           className="service-search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
       <ul className="service-container">
-        {services.map((service, index) => (
+        {filteredServices.map((service, index) => (
           <li key={index} className="service-item">
             <div className="service-details">
-              <span className="service-name">{service.name}</span>
+              <span className="service-name">{service.nomeServico}</span>
             </div>
             <div className="service-info">
-              <span className="service-price">R$ {service.price}</span>
-              <span className="service-duration">{service.duration}</span>
-              <button className="service-button">Reservar</button>
+              <span className="service-price">R$ {service.precoServico}</span>
+              <span className="service-duration">{formatDuration(service.duracaoServico)}</span>
+              <button onClick={() => handleServiceClick(service)} className="service-button">Reservar</button>
             </div>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
 
 export default ServiceList;

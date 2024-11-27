@@ -13,3 +13,35 @@ export const converterGMTParaBrasilia = (horarioGMT) => {
 
     return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
 }
+
+
+export const formatDuration = (duration) => {
+    if (duration.length === 8) {
+        return duration.slice(0, 5);
+    }
+    return duration;
+};
+
+
+export const formatDateToBRWithMonthName = (dateString) => {
+
+    const date = new Date(dateString);
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const monthNames = ['Jan', 'Fev',
+        'Mar', 'Abr',
+        'Mai', 'Jun',
+        'Jul', 'Ago',
+        'Set', 'Out',
+        'Nov', 'Dez'
+    ];
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+
+    return `${day} - ${month} - ${year}`;
+}
+
+export const formaterDate = (date) => {
+    const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    return localDate.toISOString().split('T')[0];
+}

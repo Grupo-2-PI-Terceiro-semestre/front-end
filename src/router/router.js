@@ -119,3 +119,31 @@ export const deleteData = async (endpoint, pathParams = {}, queryParams = {}) =>
     }
 };
 
+
+export const postImage = async (endpoint, data, pathParams = {}, queryParams = {}) => {
+    let formattedEndpoint = endpoint;
+    try {
+        for (const [key, value] of Object.entries(pathParams)) {
+            formattedEndpoint = formattedEndpoint.replace(`:${key}`, value);
+        }
+
+        const queryString = new URLSearchParams(queryParams).toString();
+        const urlWithParams = queryString ? `${API_URL}${formattedEndpoint}?${queryString}` : `${API_URL}${formattedEndpoint}`;
+
+        const token = Cookies.get('token');
+
+        const response = await axios.post(urlWithParams, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response;
+    } catch (error) {
+        if (error.status === 401) {
+            sessionExpired();
+        }
+        throw error;
+    }
+};
+

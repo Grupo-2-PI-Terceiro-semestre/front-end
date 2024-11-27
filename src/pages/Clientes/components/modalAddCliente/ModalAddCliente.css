@@ -70,11 +70,13 @@
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal {
-    height: 87vh;
+    height: 81vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 26vw;
+    /* border: 1px solid red; */
+    gap: 14vh;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group {
@@ -141,14 +143,14 @@
     font-size: 1rem;
 }
 
-.inputLabel label {
+/* .inputLabel label {
     display: block;
     color: white;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-size: 1rem;
-}
+} */
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .form-group .inputLabel .input {
     width: 100%;
@@ -186,7 +188,7 @@
     width: 14vw;
     box-shadow: 0 5px rgb(6, 89, 212);
     transition: background-color 0.5s ease;
-align-items: center;
+    align-items: center;
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal .botaoCadastrar:hover {
@@ -217,4 +219,31 @@ align-items: center;
     font-family: Arial, sans-serif;
     width: 23vw;
     display: flex;
+}
+
+.loading-icon {
+    position: absolute;
+    right: 10px; /* Alinha o loader ao lado direito */
+    top: 50%;
+    transform: translateY(-40%); /* Centraliza verticalmente */
+    pointer-events: none; /* Não bloqueia interações com o input */
+}
+
+.input {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+    height: 5vh;
+    padding: 8px;
+    background-color: rgb(65, 65, 65);
+    color: white !important;
+    flex-wrap: wrap;
+    gap: 3vh;
+}
+
+.botao-add-cliente {
+    /* border: 1px solid; */
+    width: 26vw;
+    height: 7vh;
 }

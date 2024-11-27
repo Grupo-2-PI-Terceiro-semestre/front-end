@@ -36,7 +36,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
 
     useEffect(() => {
         buscarServicos(idEmpresa);
-        buscarClientes(idEmpresa)
+        buscarClientes(idEmpresa);
     }, [idEmpresa, event.title]);
 
     const buscarServicos = async (idEmpresa) => {
@@ -186,6 +186,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                                 options={clientes}
                                 onSelectOption={handleClientesChange}
                                 placeholder={event.nomeCliente}
+                                value={''}
                                 displayField={(option) => option.nomePessoa} // Exibe o campo `nomeServico`
                                 uniqueKey={(option) => option.idCliente} // Usa `idServico` como chave única
                             />
@@ -210,6 +211,7 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                                 options={servicos} // Lista de serviços
                                 onSelectOption={handleServicoChange}
                                 placeholder={event.title}
+                                value={''}
                                 displayField={(option) => option.nomeServico} // Exibe o campo `nomeServico`
                                 uniqueKey={(option) => option.idServico} // Usa `idServico` como chave única
                             />
@@ -226,7 +228,8 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
                             <SearchableDropdown
                                 options={funcionarios} // Lista de funcionários
                                 onSelectOption={handleFuncionarioChange}
-                                placeholder={profissionalSelecionado}
+                                placeholder={event.nomeFuncionario}
+                                value={''}
                                 displayField={(option) => option.title}
                                 uniqueKey={(option) => option.id}
                             />

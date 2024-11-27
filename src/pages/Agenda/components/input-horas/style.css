@@ -1,3 +1,8 @@
-.css-1umw9bq-MuiSvgIcon-root{
+.css-1umw9bq-MuiSvgIcon-root {
     color: rgb(255, 255, 255) !important;
+}
+
+.css-1dune0f-MuiInputBase-input-MuiOutlinedInput-input {
+    height: 2.5rem !important;
+    font-size: 16px !important;
 }

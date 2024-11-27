@@ -10,3 +10,14 @@ export const findServicos = async (idEmpresa, paginacao) => {
         throw e
     }
 }
+
+export const createServico = async (servico, idEmpresa) => {
+    try {
+        console.log("entrei no create servico" + servico);
+        const response = await postData(`servicos/${idEmpresa}`, servico);
+        return response;
+    } catch (e) {
+        console.log("Erro ao criar o servico")
+        throw e
+    }
+}

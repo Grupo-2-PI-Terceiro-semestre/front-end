@@ -10,10 +10,13 @@ import axios from 'axios';
 function FormularioLocalizacao() {
 
     const [cepOriginal, setCepOriginal] = useState('');
+    const [numeroOriginal, setNumeroOriginal] = useState('');
+    const [complementoOriginal, setComplementoOriginal] = useState('');
     const [cep, setCep] = useState('');
     const [logradouro, setLogradouro] = useState('');
     const [uf, setUf] = useState('');
     const [cidade, setCidade] = useState('');
+    const [bairro, setBairro] = useState('');
     const [complemento, setComplemento] = useState('');
     const [numero, setNumero] = useState('');
     const [loading, setLoading] = useState(false);
@@ -29,11 +32,14 @@ function FormularioLocalizacao() {
             setEndereco(JSON.parse(enderecoCookie));
             const enderecoData = JSON.parse(enderecoCookie);
             setCepOriginal(enderecoData.cep);
+            setNumeroOriginal(enderecoData.numero);
+            setComplementoOriginal(enderecoData.complemento);
             setCep(enderecoData.cep);
             setNumero(enderecoData.numero);
             setLogradouro(enderecoData.logradouro);
             setUf(enderecoData.uf);
             setCidade(enderecoData.cidade);
+            setBairro(enderecoData.bairro);
             setComplemento(enderecoData.complemento);
         } else {
             console.log()
@@ -50,10 +56,14 @@ function FormularioLocalizacao() {
             Cookies.set('endereco', JSON.stringify(response), { expires: 7 });
 
             setCep(response.cep);
+            setCepOriginal(response.cep);
+            setComplementoOriginal(response.complemento);
+            setNumeroOriginal(response.numero);
             setNumero(response.numero);
             setLogradouro(response.logradouro);
             setUf(response.uf);
             setCidade(response.cidade);
+            setBairro(response.bairro);
             setComplemento(response.complemento);
         } catch (error) {
             errorToast('Erro ao carregar endereço');
@@ -88,6 +98,7 @@ function FormularioLocalizacao() {
                     setUf(data.uf);
                     setCidade(data.localidade);
                     setComplemento(data.complemento);
+                    setBairro(data.bairro);
                     setLoading(false);
                 } else {
                     errorToast('CEP Inválido');
@@ -102,14 +113,16 @@ function FormularioLocalizacao() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (cepOriginal != cep) {
+        if (cepOriginal != cep || numeroOriginal != numero || complementoOriginal != complemento) {
+            
             const data = {
-                idEndereco: endereco.idEndereco,
+                idEndereco: endereco != null ? endereco.idEndereco : null,
                 cep,
                 logradouro,
                 numero,
                 uf,
                 cidade,
+                bairro,
                 complemento
             };
             cadastrar(data, user.idEmpresa);
@@ -130,6 +143,7 @@ function FormularioLocalizacao() {
             setLogradouro(response.logradouro);
             setUf(response.uf);
             setCidade(response.cidade);
+            setBairro(response.bairro);
             setComplemento(response.complemento);
             Cookies.set('endereco', JSON.stringify(response), { expires: 7 });
 
@@ -205,6 +219,15 @@ function FormularioLocalizacao() {
                             onChange={(e) => setUf(e.target.value)}
                         />
                     </div>
+                </div>
+                <div className='form-group'>
+                    <label>Bairro</label>
+                    <input
+                        type="text"
+                        disabled={true}
+                        value={bairro}
+                        onChange={(e) => setComplemento(e.target.value)}
+                    />
                 </div>
                 <div className='form-group'>
                     <label>Complemento</label>

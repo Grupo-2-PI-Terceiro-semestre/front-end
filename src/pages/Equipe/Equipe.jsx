@@ -1,7 +1,7 @@
 import React from "react";
 import './Equipe.css';
 import Menu from "../../components/menu/Menu";
-import HeaderInterna from "../../components/headerInterna/HeaderInterna";
+import HeaderInterna from "./components/headerInterna/HeaderInterna";
 import TelaEquipe from "./components/telaEquipe/TelaEquipe";
 
 function Equipe() {
@@ -20,7 +20,7 @@ function Equipe() {
                         </div>
                     </div>
 
-                    <TelaEquipe titulo="Serviços" placeholder="Pesquisar colaborador" titulo1="NOME" titulo2="TELEFONE" titulo3="FUNÇÃO" titulo4="AÇÕES"/>
+                    <TelaEquipe titulo="Serviços" placeholder="Pesquisar colaborador" titulo1="NOME" titulo2="TELEFONE" titulo3="E-MAIL" titulo4="FUNÇÃO" titulo5="AÇÕES" />
                 </div>
 
             </div>

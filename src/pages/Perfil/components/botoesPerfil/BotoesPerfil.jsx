@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaUser, FaMapMarkerAlt, FaClock, FaBell } from 'react-icons/fa'; 
+import { AiFillPicture } from "react-icons/ai";
 import './BotoesPerfil.css';
 
 function BotoesPerfil({ activeButton, setActiveButton }) {
@@ -21,12 +22,12 @@ function BotoesPerfil({ activeButton, setActiveButton }) {
       >
         <FaMapMarkerAlt className="icon" /> Localização
       </div>
-      {/* <div 
-        className={`button ${activeButton === 'horario' ? 'active' : ''}`} 
-        onClick={() => handleButtonClick('horario')}
+      <div 
+        className={`button ${activeButton === 'galeria' ? 'active' : ''}`} 
+        onClick={() => handleButtonClick('galeria')}
       >
-        <FaClock className="icon" /> Horário de Funcionamento
-      </div> */}
+        <AiFillPicture className="icon" /> Galeria
+      </div>
       <div 
         className={`button ${activeButton === 'notificacoes' ? 'active' : ''}`} 
         onClick={() => handleButtonClick('notificacoes')}

@@ -59,29 +59,32 @@
     border-radius: 5px;
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar {
-    height: 40vh;
+.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente {
+    /* align-items: center; */
+
+    height: 81vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 27vw;
-    align-items: center;
+    width: 26vw;
+    /* border: 1px solid red; */
+    gap: 14vh;
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar {
+.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .form-group-editar {
     height: 9vh;
     display: flex;
     justify-content: center;
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-text {
+.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .form-group-text {
     height: 19vh;
     display: flex;
     justify-content: center;
     width: 27vw;
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar {
+.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .form-group-editar .inputLabel-editar {
     width: 26vw;
     height: 10vh;
 }
@@ -91,7 +94,7 @@
     height: 19vh;
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar label {
+.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .form-group-editar .inputLabel-editar label {
     display: block;
     color: white;
     display: flex;
@@ -109,7 +112,7 @@
     font-size: 1rem;
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar .input {
+.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .form-group-editar .inputLabel-editar .input {
     width: 100%;
     border: none;
     border-radius: 5px;
@@ -122,7 +125,7 @@
     gap: 3vh;
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .form-group-editar .inputLabel-editar select {
+.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .form-group-editar .inputLabel-editar select {
     width: 100%;
     border: none;
     border-radius: 5px;
@@ -135,7 +138,7 @@
     gap: 3vh;
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .botaoCadastrar {
+.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .botaoCadastrar {
     background-color: rgb(33, 150, 243);
     color: white;
     border: none;
@@ -147,7 +150,7 @@
     transition: background-color 0.5s ease;
 }
 
-.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar .botaoCadastrar:hover {
+.modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .botaoCadastrar:hover {
     background-color: var(--hoverColor, #0056b3);
 }
 
