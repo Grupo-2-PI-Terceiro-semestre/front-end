@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./CadastroForm.css";
-import Button from "../../../../components/Button/Button";
+import Button from "../../../../components/button/Button";
 import { auth } from '../../../../services/firebase';
 import iconGoogle from '../../../../assets/logoGoogle.png'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
