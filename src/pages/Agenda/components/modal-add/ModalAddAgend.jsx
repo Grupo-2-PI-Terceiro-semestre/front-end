@@ -3,7 +3,7 @@ import './ModalAddAgend.css';
 import { findServicos, findClientes, createAgendamento } from '../../services/agendaServices';
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
-import Button from '../../../../components/button/Button';
+import Button from "../../../../components/button/Button";
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import dayjs from 'dayjs';
 import { ToastContainer } from 'react-toastify';
