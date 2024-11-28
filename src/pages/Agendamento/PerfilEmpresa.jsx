@@ -7,7 +7,11 @@ import Banner from "./components/banner/Banner";
 import Map from "./components/map/Map";
 import { buscarDadosDePerfil } from './services/perfilEmpresa';
 import ModalAgendamento from "./components/modalAgendamento/ModalAgendamento";
-import LoadingDots from "../HomeCliente/components/loading/LoadingDots"; // Importa o componente de loading
+import LoadingDots from "../HomeCliente/components/loading/LoadingDots";
+import HeaderEmpresa from "../../components/headerEmpresa/HeaderEmpresa";
+import CadastroForm from "../HomeCliente/components/modal-cadastro/CadastroForm";
+import LoginForm from "../HomeCliente/components/modal-login/LoginForm";
+
 
 function PerfilEmpresa() {
   const { idEmpresa } = useParams();
@@ -16,6 +20,8 @@ function PerfilEmpresa() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [servicoSelecionado, setServicoSelecionado] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isCadastroModalOpen, setIsCadastroModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,6 +42,11 @@ function PerfilEmpresa() {
     }
   };
 
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const openCadastroModal = () => setIsCadastroModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
+  const closeCadastroModal = () => setIsCadastroModalOpen(false);
+
   const openModal = (servico) => {
     setServicoSelecionado(servico);
     setIsModalOpen(true);
@@ -47,7 +58,16 @@ function PerfilEmpresa() {
 
   return (
     <div className="main-agendamento">
-      <HeaderAgendamento />
+      <HeaderEmpresa
+        buttonText="Voltar"
+        url="/"
+        width="30vw"
+        widthOpcoes="0"
+        onLoginClick={openLoginModal}
+        onCadastroClick={openCadastroModal}
+        isButtonVisible={true}
+        isHomeCliente={false}
+      />
       {isLoading ? (
         <div className="loading-container">
           <LoadingDots size={35} />
@@ -68,6 +88,13 @@ function PerfilEmpresa() {
           servico={servicoSelecionado}
           equipe={empresa.usuario || []}
         />
+      )}
+
+      {isLoginModalOpen && (
+        <LoginForm onClose={closeLoginModal} />
+      )}
+      {isCadastroModalOpen && (
+        <CadastroForm onClose={closeCadastroModal} />
       )}
     </div>
   );

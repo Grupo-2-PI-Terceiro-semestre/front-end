@@ -114,7 +114,7 @@ function FormularioLocalizacao() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (cepOriginal != cep || numeroOriginal != numero || complementoOriginal != complemento) {
-            debugger
+            
             const data = {
                 idEndereco: endereco != null ? endereco.idEndereco : null,
                 cep,

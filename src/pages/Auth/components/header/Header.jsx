@@ -7,7 +7,7 @@ const Header = ({barraVisible}) => {
 
     <header className="header-login">
       <div className="logo-container">
-        <a href="/" className="logo-link">
+        <a href="/empresa" className="logo-link">
           OrderHub
         </a>
       </div>

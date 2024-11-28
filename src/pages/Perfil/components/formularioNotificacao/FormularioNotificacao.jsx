@@ -77,7 +77,7 @@ const FormularioNotificacao = () => {
   };
 
   const handleSubmit = async (event) => {
-    debugger
+    
     event.preventDefault();
     if (areObjectsEqual(formData, dataOrigin)) {
       infoToast('Nenhum dado foi alterado');

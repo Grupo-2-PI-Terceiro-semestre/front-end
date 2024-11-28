@@ -8,15 +8,8 @@
   top: 0;
   left: 0;
   z-index: 1000;
-  transition: background-color 0.3s ease-in-out; /* Para a transição suave */
+  transition: background-color 0.3s ease-in-out;
   background-color: #00000051;
-}
-
-.headerAgendamento .icones {
-  display: flex;
-  justify-content: space-between;
-  width: 5vw;
-  color: white;
 }
 
 .headerAgendamento .icones .icon {
@@ -50,11 +43,13 @@
 .headerAgendamento .titulos .opcoes .nav a {
   text-decoration: none;
   color: white;
-  transition: color 0.3s ease-in-out; /* Para a transição suave na cor do texto */
+  transition: color 0.3s ease-in-out;
+  /* Para a transição suave na cor do texto */
 }
 
 .headerAgendamento .titulos .opcoes .nav a:hover {
-  color: #ccc; /* Cor do texto ao passar o mouse */
+  color: #ccc;
+  /* Cor do texto ao passar o mouse */
 }
 
 .headerAgendamento .botaoCliente a {
@@ -67,4 +62,3 @@
   height: 2vh;
   color: white;
 }
-

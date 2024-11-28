@@ -1,0 +1,81 @@
+/* Contêiner principal */
+.user-menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.user-icon-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: #48a1ff;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.user-icon-button:hover {
+    background-color: #1888ff;
+}
+
+.user-menu {
+    position: absolute;
+    top: 45px;
+    right: -80px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    min-width: 200px;
+    width: auto;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.user-info {
+    margin-bottom: 10px;
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.user-email {
+    font-size: 14px;
+    color: #777;
+    margin: 0;
+}
+
+.user-actions .menu-action,
+.user-info .menu-action {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.user-actions .menu-action:hover,
+.user-info .menu-action:hover {
+    background: #007bff;
+    color: white;
+}
+
+.user-info {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
