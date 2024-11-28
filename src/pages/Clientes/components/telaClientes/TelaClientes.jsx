@@ -89,7 +89,7 @@ function TelaClientes({ placeholder, titulo1, titulo2, titulo3, titulo4
                         {Array.isArray(clientes) && clientes.length > 0 ? (
                             clientes.map((cliente) => (
                                 <LinhaClientes
-                                    key={cliente.idCliente}
+                                    idCliente={cliente.idCliente}
                                     nome={cliente.nomePessoa}
                                     telefone={cliente.telefone}
                                     email={cliente.email}

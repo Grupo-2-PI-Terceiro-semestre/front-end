@@ -6,7 +6,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import ModalEditarCliente from "../modalEditarCliente/ModalEditarCliente";
 import Swal from 'sweetalert2';
 
-function LinhaClientes({ nome, telefone, email }) {
+function LinhaClientes({ idCliente, nome, telefone, email }) {
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
 
     const openModalExcluir = () => {
@@ -83,7 +83,7 @@ function LinhaClientes({ nome, telefone, email }) {
                 </div>
 
                 {isModalOpenEditar && (
-                    <ModalEditarCliente onClose={closeModalEditar} titulo="Editar Cliente" nome={nome} telefone={telefone} email={email}/>
+                    <ModalEditarCliente onClose={closeModalEditar} titulo="Editar Cliente" idCliente={idCliente} nome={nome} telefone={telefone} email={email}/>
                 )}
             </div>
         </>
