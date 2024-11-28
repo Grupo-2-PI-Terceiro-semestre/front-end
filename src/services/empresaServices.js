@@ -20,3 +20,13 @@ export const uploadImage = async (idEmpresa, image) => {
         throw error;
     }
 };
+
+export const uploadImagemGaleria = async (idEmpresa, image) => {
+    try {
+        const response = await postImage(`empresas/imagem/uploadImagem/${idEmpresa}`, image, {}, {});
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao buscar a empresa", error);
+        throw error;
+    }
+}

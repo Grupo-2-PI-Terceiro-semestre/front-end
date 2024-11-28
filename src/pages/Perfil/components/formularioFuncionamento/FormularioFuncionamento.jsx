@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './FormularioFuncionamento.css'; // Certifique-se de criar este arquivo para estilos
 import { getData, postData } from '../../../../router/router';
+import { uploadImagemGaleria } from '../../../../services/empresaServices';
 import Cookies from 'js-cookie';
 
 const FormularioFuncionamento = () => {
@@ -9,10 +10,14 @@ const FormularioFuncionamento = () => {
 
   const userData = JSON.parse(Cookies.get('user'));
 
+  useEffect(() => {
+    buscarImagens();
+  }, []);
+
   const buscarImagens = async () => {
     try {
       const response = await getData(`empresas/imagens/${userData.idEmpresa}`);
-      setImages(response.data); // Supondo que response.data contenha a lista de URLs das imagens
+      setImages(response.data);
     } catch (error) {
       console.error("Erro ao buscar as imagens", error);
     }
@@ -21,24 +26,21 @@ const FormularioFuncionamento = () => {
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
-
+  
   const handleFileChange = async (event) => {
     const files = event.target.files;
     if (files.length > 0) {
       const formData = new FormData();
       formData.append('file', files[0]);
       try {
-        const response = await postData(`empresas/imagens/${userData.idEmpresa}`, formData);
-        setImages([...images, response.data]); // Adiciona a nova imagem à lista de imagens
+        const response = await uploadImagemGaleria(userData.idEmpresa, formData);
+        console.log(response);
+        setImages(prevImages => [...prevImages, response]);
       } catch (error) {
         console.error("Erro ao fazer upload da imagem", error);
       }
     }
   };
-
-  useEffect(() => {
-    buscarImagens();
-  }, []);
 
   return (
     <div className='container-formulario-galeria'>
@@ -46,7 +48,7 @@ const FormularioFuncionamento = () => {
       <div className='container-galeria'>
         {images.map((imagem, index) => (
           <div key={index} className="gallery-item">
-            <img src={imagem.urlImagem} alt={`Gallery item`} />
+            <img src={imagem?.urlImagem || imagem} alt={`Gallery item`} />
           </div>
         ))}
       </div>
@@ -57,6 +59,7 @@ const FormularioFuncionamento = () => {
         type="file"
         ref={fileInputRef}
         style={{ display: 'none' }}
+        accept="image/*" // Aceita apenas arquivos de imagem
         onChange={handleFileChange}
       />
     </div>
