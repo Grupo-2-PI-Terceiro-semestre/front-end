@@ -26,18 +26,13 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isModalOpenAddCliente, setIsModalOpen] = useState(false);
-
+/* 
     const clientesSessao = localStorage.getItem('clientes') ? JSON.parse(localStorage.getItem('clientes')) : null;
-    const servicosSessao = localStorage.getItem('servicos') ? JSON.parse(localStorage.getItem('servicos')) : null;
+    const servicosSessao = localStorage.getItem('servicos') ? JSON.parse(localStorage.getItem('servicos')) : null; */
 
     useEffect(() => {
-        if (clientesSessao == null || servicosSessao == null) {
-            buscarServicos(idEmpresa);
-            buscarClientes(idEmpresa)
-        } else {
-            setClientes(clientesSessao);
-            setServicos(servicosSessao);
-        }
+        buscarServicos(idEmpresa);
+        buscarClientes(idEmpresa)
         setIsVisible(true);
         setDataHoraAgendamento(dateDefault);
     }, [idEmpresa]);
