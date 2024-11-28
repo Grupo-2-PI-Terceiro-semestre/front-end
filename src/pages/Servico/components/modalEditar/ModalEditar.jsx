@@ -4,13 +4,25 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import Select from 'react-select'; 
+import { AtualizarServico } from "../../services/servicoServices";
+import { successToast, errorToast } from '../../../../utils/Toats';
 
-function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServico }) {
+function ModalEditar({ onClose, titulo, idServico, nome, valor, tempo, cor, descricaoServico }) {
 
     const [isVisible, setIsVisible] = useState(false);
+    const navigate = useNavigate();
+    // const { idServico } = useParams();
+    const [nomeSelecionado, setNomeServico] = useState(nome || '');
+    const [valorSelecionado, setValorSelecionado] = useState(valor || '');
+    const [tempoExecucaoSelecionado, setTempoSelecionado] = useState(tempo || '');
+    const [corReferenciaSelecionada, setCorSelecionada] = useState(cor || '');
+    const [descricaoSelecionada, setDescricaoSelecionada] = useState(descricaoServico || '');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setIsVisible(true);
+
+        console.log(idServico + ' id serviço')
     }, []);
 
     const generateTimeOptions = () => {
@@ -52,24 +64,35 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
         }),
     };
 
-    const [formData, setFormData] = useState({
-        nomeServico: '',
-        valorServico: '',
-        tempoExecucao: '',
-        corReferencia: '#000000',
-        descricao: '',
-        // categoria: '',
-        tiposDeUsuario: 'ADMIN'
-    });
+    const handleNomeChange = (event) => {
+        setNomeServico(event.target.value);
+    };
 
-    const navigate = useNavigate();
-    const { idServico } = useParams();
-    const [nomeServico, setNomeServico] = useState("");
-    const [valorServico, setValorServico] = useState("");
-    const [tempoExecucao, setTempoExecucao] = useState("");
-    const [corReferencia, setCorReferencia] = useState("");
-    const [descricao, setDescricao] = useState("");
-    // const [categoria, setCategoria] = useState("");
+    const handleValorChange = (event) => {
+        setValorSelecionado(event.target.value);
+    };
+
+    const handleTempoChange = (event) => {
+        setTempoSelecionado(event.target.value);
+    };
+
+    const handleCorChange = (event) => {
+        setCorSelecionada(event.target.value);
+    };
+
+    const handleDescricaoChange = (event) => {
+        setDescricaoSelecionada(event.target.value);
+    };
+
+    // const [formData, setFormData] = useState({
+    //     nomeServico: '',
+    //     valorServico: '',
+    //     tempoExecucao: '',
+    //     corReferencia: '#000000',
+    //     descricao: '',
+    //     // categoria: '',
+    //     tiposDeUsuario: 'ADMIN'
+    // });
 
     // useEffect(() => {
     //     api.get(`/${idServico}`).then((response) => {
@@ -88,32 +111,62 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
     // }, [idServico]);
 
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData({ ...formData, [name]: value });
+    // };
+
+    // const handleColorChange = (e) => {
+    //     setFormData({ ...formData, corReferencia: e.target.value });
+    // };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         // await api.put(`/${idCard}`, {
+    //         await cadastroService(formData);
+    //         alert('Cadastro realizado com sucesso!');
+    //         setFormData({
+    //             nomeServico: '',
+    //             valorServico: '',
+    //             tempoExecucao: '',
+    //             corReferencia: '#000000',
+    //             descricao: '',
+    //             // categoria: '',
+    //             representante: "true",
+    //         });
+    //     } catch (error) {
+    //         setErrorMessage('Erro ao cadastrar o serviço.');
+    //     }
+    // };
+
+    const handleSubmit = (event) => {
+
+        event.preventDefault(); 
+
+        const eventoAtualizado = {
+            idServico: idServico,
+            nomeServico: nomeSelecionado,
+            valorServico: valorSelecionado,
+            duracao: tempoExecucaoSelecionado,
+            descricao: descricaoSelecionada,
+            corReferenciaHex: corReferenciaSelecionada
+        };
+
+        atualizarServico(eventoAtualizado);
+
     };
 
-    const handleColorChange = (e) => {
-        setFormData({ ...formData, corReferencia: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const atualizarServico = async (eventoAtualizado) => {
         try {
-            // await api.put(`/${idCard}`, {
-            await cadastroService(formData);
-            alert('Cadastro realizado com sucesso!');
-            setFormData({
-                nomeServico: '',
-                valorServico: '',
-                tempoExecucao: '',
-                corReferencia: '#000000',
-                descricao: '',
-                // categoria: '',
-                representante: "true",
-            });
+            setLoading(true);
+            await AtualizarServico("servicos/atualizar", eventoAtualizado);
+            successToast('Serviço atualizado com sucesso!');
+            onClose();
         } catch (error) {
-            setErrorMessage('Erro ao cadastrar o serviço.');
+            console.error('Erro ao atualizar o serviço:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -135,9 +188,9 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
                                     className="input"
                                     type="text"
                                     name="nomeServico"
-                                    placeholder={nome}
-                                    value={nome}
-                                    onChange={handleChange}
+                                    // placeholder={nome}
+                                    value={nomeSelecionado}
+                                    onChange={handleNomeChange}
                                     required
                                 />
                             </div>
@@ -150,9 +203,9 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
                                     className="input"
                                     type="number"
                                     name="valorServico"
-                                    placeholder={valor}
-                                    value={valor}
-                                    onChange={handleChange}
+                                    // placeholder={valor}
+                                    value={valorSelecionado}
+                                    onChange={handleValorChange}
                                     required
                                 />
                             </div>
@@ -173,8 +226,8 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
 
                                 <Select
                                     options={timeOptions}
-                                    onChange={handleChange}
-                                    placeholder={tempo}
+                                    onChange={handleTempoChange}
+                                    // placeholder={tempo}
                                     isSearchable={false}
                                     className="time-picker-dropdown"
                                     styles={customStyles}
@@ -189,9 +242,9 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
                                     <input
                                         className="color-picker-input"
                                         type="color"
-                                        name={cor}
-                                        value={cor}
-                                        onChange={handleColorChange}
+                                        // name={cor}
+                                        value={corReferenciaSelecionada}
+                                        onChange={handleCorChange}
                                     />
                                     <span className="color-name">
                                         {cor}
@@ -223,9 +276,9 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
                                 <label>Descrição:</label>
                                 <textarea
                                     name="descricao"
-                                    placeholder={descricaoServico}
-                                    defaultValue={descricaoServico}
-                                    onChange={handleChange}
+                                    // placeholder={descricaoServico}
+                                    value={descricaoSelecionada}
+                                    onChange={handleDescricaoChange}
                                     required
                                 />
                             </div>

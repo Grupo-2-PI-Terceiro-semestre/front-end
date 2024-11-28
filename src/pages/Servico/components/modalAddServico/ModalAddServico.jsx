@@ -11,7 +11,7 @@ function ModalAddServico({ onCloseServico, titulo }) {
         nomeServico: '',
         valorServico: '',
         tempoExecucao: '', 
-        corReferenciaHexHex: '#000000',
+        corReferenciaHex: '#000000',
         descricao: '',
         tiposDeUsuario: 'ADMIN'
     });
@@ -191,11 +191,11 @@ function ModalAddServico({ onCloseServico, titulo }) {
                                         className="color-picker-input"
                                         type="color"
                                         name="corReferenciaHex"
-                                        value={formData.corReferenciaHexHex}
+                                        value={formData.corReferenciaHex}
                                         onChange={handleColorChange}
                                     />
                                     <span className="color-name">
-                                        {formData.corReferenciaHexHex}
+                                        {formData.corReferenciaHex}
                                     </span>
                                 </div>
                             </div>

@@ -21,3 +21,14 @@ export const createServico = async (servico, idEmpresa) => {
         throw e
     }
 }
+
+export const AtualizarServico = async (endpoint, eventoAtualizado) => {
+
+    try {
+        const response = await putData(endpoint, eventoAtualizado)
+        return response;
+    } catch (e) {
+        console.log("Erro ao atualizar o cliente");
+        throw e
+    }
+}
