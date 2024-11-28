@@ -24,7 +24,7 @@ function ModalEditarEquipe({ titulo, onClose, idPessoa, nome, telefone, email, f
         buscarFuncoes();
 
         setNomeOriginal(nome);
-        console.log(nomeOriginal + ' nome original')
+        console.log(nomeOriginal + ' nome original');
     }, []);
 
     const buscarFuncoes = async () => {
@@ -39,8 +39,6 @@ function ModalEditarEquipe({ titulo, onClose, idPessoa, nome, telefone, email, f
     const handleNomeChange = (event) => {
         setNomeSelecionado(event.target.value);
     };
-
-
 
     const handleTelefoneChange = (event) => {
         setTelefoneSelecionado(event.target.value);

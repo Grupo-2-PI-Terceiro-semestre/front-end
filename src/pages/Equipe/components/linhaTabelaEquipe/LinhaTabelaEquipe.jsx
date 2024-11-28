@@ -27,7 +27,7 @@ function LinhaTabelaEquipe({idPessoa, nome, telefone, email, funcao }) {
             <div className="container-linha-tabela">
                 <div className="tabela">
                     <div className="linha">
-                        <label htmlFor="text">{idPessoa}</label>
+                        {/* <label htmlFor="text">{idPessoa}</label> */}
                         <label htmlFor="text">{nome}</label>
                         <label htmlFor="text">{telefone}</label>
                         <label htmlFor="text">{email}</label>
