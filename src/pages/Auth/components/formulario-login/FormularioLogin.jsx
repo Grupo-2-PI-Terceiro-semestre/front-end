@@ -5,6 +5,7 @@ import { auth } from '../../../../services/firebase';
 import Button from '../../../../components/button/Button';
 import iconGoogle from '../../../../assets/logoGoogle.png'
 import { useNavigate } from 'react-router-dom';
+
 import './FormularioLogin.css'
 
 const FormularioLogin = ({ toggleBarraContainer }) => {

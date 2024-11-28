@@ -34,7 +34,7 @@ function App() {
       <div>
         <AppVersion />
         <AppRoutes />
-        <ToastContainer /> {/* Adicione o ToastContainer aqui */}
+        <ToastContainer /> 
       </div>
     </Router>
   );

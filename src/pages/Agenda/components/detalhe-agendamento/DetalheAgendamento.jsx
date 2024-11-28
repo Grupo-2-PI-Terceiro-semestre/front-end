@@ -7,7 +7,6 @@ import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import CircularSize from '../../../../components/circulo-load/CircularSize';
 import Swal from 'sweetalert2';
 import { Pilha } from "../../../../utils/Pilha";
-import { ToastContainer } from 'react-toastify';
 import { successToast, errorToast } from '../../../../utils/Toats';
 import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
 import dayjs from 'dayjs';
@@ -173,7 +172,6 @@ const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose,
 
     return (
         <div className="detalhe-agendamento">
-            <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} />
             <span className='botao-fechar' onClick={onClose}>X</span>
             <h3>Detalhes do Agendamento</h3>
 

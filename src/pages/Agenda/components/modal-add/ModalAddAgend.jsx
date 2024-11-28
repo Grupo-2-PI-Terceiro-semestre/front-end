@@ -6,7 +6,6 @@ import DateTimePickerOpenTo from '../input-horas/DateTimePickerOpenTo';
 import Button from "../../../../components/button/Button";
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import dayjs from 'dayjs';
-import { ToastContainer } from 'react-toastify';
 import { successToast, errorToast } from '../../../../utils/Toats'
 import 'react-toastify/dist/ReactToastify.css';
 import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
@@ -128,7 +127,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                 idServico: servicoSelecionado,
                 idAgenda: profissionalSelecionado,
                 dataAgendamento: converterGMTParaBrasilia(dataHoraAgendamento),
-                statusAgendamento: 'PENDENTE'
+                statusAgendamento: 'AGENDADO'
             }
 
             criarAgendamento(agendamentoData);
@@ -229,7 +228,6 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                         />
                     </div>
                 </form>
-                <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
                 {loading ? (
                     <CircularSize width="100%" height="100%" />
                 ) : null}
