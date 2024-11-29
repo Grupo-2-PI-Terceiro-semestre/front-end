@@ -72,7 +72,7 @@ function Kpi(props) {
         if (valor > 0) {
             return `+${ajustarCasasDecimais(valor)}% mês anterior`;
         } else if (valor < 0) {
-            return `+${ajustarCasasDecimais(valor)}% mês anterior`;
+            return `${ajustarCasasDecimais(valor)}% mês anterior`;
         }
     }
     return (

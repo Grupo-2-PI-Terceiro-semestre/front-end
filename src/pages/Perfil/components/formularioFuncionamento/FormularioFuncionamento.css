@@ -60,6 +60,7 @@
 .gallery-item:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .gallery-item img {
@@ -99,13 +100,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 10;
     cursor: pointer;
   }
   
   .modal-content-galeria {
     max-width: 90%;
     max-height: 90%;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,3 +122,29 @@
     border-radius: 8px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
   }
+  
+  .delete-button-above-modal {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #e23737; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 11; 
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+    transition: transform 0.2s ease; 
+  }
+  
+  .delete-button-above-modal:hover {
+    transform: scale(1.1); 
+  }
+  .delete-icon {
+    font-size: 20px;
+  }
+  

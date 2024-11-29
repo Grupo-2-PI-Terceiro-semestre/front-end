@@ -82,10 +82,16 @@ const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colo
 
     return (
         <div className="chart_container">
-            <HighchartsReact
-                highcharts={Highcharts}
-                options={options}
-            />
+            {seriesData.length === 0 ? (
+                <div className="no-data-message">
+                    Você ainda não possui informações! Em breve elas estarão aqui.
+                </div>
+            ) : (
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    options={options}
+                />
+            )}
         </div>
     );
 };

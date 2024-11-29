@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './FormularioFuncionamento.css';
-import { getData, postData } from '../../../../router/router';
+import { deleteData, getData, postData } from '../../../../router/router';
 import { uploadImagemGaleria } from '../../../../services/empresaServices';
 import Cookies from 'js-cookie';
+import { FaTrash } from "react-icons/fa";
+import Swal from 'sweetalert2'
+
 
 const FormularioFuncionamento = () => {
   const [images, setImages] = useState([]);
@@ -35,20 +38,29 @@ const FormularioFuncionamento = () => {
       formData.append('file', files[0]);
       try {
         const response = await uploadImagemGaleria(userData.idEmpresa, formData);
-        console.log(response);
-        setImages(prevImages => [...prevImages, response]);
+        setImages(prevImages => [...prevImages, response]); // Adiciona o objeto da imagem ao estado
       } catch (error) {
         console.error('Erro ao fazer upload da imagem', error);
       }
     }
   };
 
-  const openImage = (imageUrl) => {
-    setSelectedImage(imageUrl); // Define a imagem no estado
+  const openImage = (image) => {
+    setSelectedImage(image); // Define a imagem no estado
   };
 
   const closeModal = () => {
     setSelectedImage(null); // Reseta o estado ao fechar o modal
+  };
+
+  const deleteImage = async (idImagem) => {
+    try {
+      await deleteData(`empresas/imagem/${idImagem}`, {}, {}, {});
+      setImages(images.filter((image) => image.idImagem !== idImagem));
+      closeModal();
+    } catch (error) {
+      console.error('Erro ao deletar a imagem', error);
+    }
   };
 
   return (
@@ -56,8 +68,8 @@ const FormularioFuncionamento = () => {
       <h1>Galeria</h1>
       <div className="container-galeria">
         {images.map((imagem, index) => (
-          <div key={index} className="gallery-item" onClick={() => openImage(imagem?.urlImagem || imagem)}>
-            <img src={imagem?.urlImagem || imagem} alt={`Gallery item`} />
+          <div key={index} className="gallery-item" onClick={() => openImage(imagem)}>
+            <img src={imagem.urlImagem} alt={`Gallery item`} />
           </div>
         ))}
       </div>
@@ -73,8 +85,30 @@ const FormularioFuncionamento = () => {
       />
       {selectedImage && (
         <div className="modal-galeria" onClick={closeModal}>
-          <div className="modal-content-galeria">
-            <img src={selectedImage} alt="Imagem ampliada" />
+          <button
+            className="delete-button-above-modal"
+            onClick={(e) => {
+              e.stopPropagation();
+              Swal.fire({
+                icon: 'warning',
+                title: 'Tem certeza que deseja excluir essa imagem?',
+                showCancelButton: true,
+                confirmButtonText: 'Excluir',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#FF0000',
+                cancelButtonColor: '#007bff',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  deleteImage(selectedImage.idImagem);
+                }
+              });
+            }}
+          >
+            <FaTrash className="delete-icon" />
+            Excluir
+          </button>
+          <div className="modal-content-galeria" onClick={(e) => e.stopPropagation()}>
+            <img src={selectedImage.urlImagem} alt="Imagem ampliada" />
           </div>
         </div>
       )}
