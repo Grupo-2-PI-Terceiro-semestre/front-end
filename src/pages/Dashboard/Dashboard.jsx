@@ -6,6 +6,9 @@ import CardDashboard from "./components/cardDashboard/CardDashboard";
 import Kpi from "./components/KPI/Kpi";
 import TabelaDashboard from "./components/Tabela/TabelaDashboard";
 import Cookies from 'js-cookie';
+import CircularSize from "../../components/circulo-load/CircularSize";
+import { useState } from "react";
+
 
 function Dashboard() {
     const activeMenuItem = "Dashboard";
@@ -13,6 +16,11 @@ function Dashboard() {
 
     const mesAtual = new Date().getMonth() + 1;
     const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
+
+    const [loading, setLoading] = useState(false);
+    const carregando = (value) => {
+        setLoading(value);
+    }
 
     const kpis = [
         {
@@ -67,20 +75,9 @@ function Dashboard() {
                 <div className="superior">
                     <div class="quadradoKPI">
                         {kpis.map((kpi, index) => (
-                            <Kpi key={index} {...kpi} />
+                            <Kpi carregando={carregando} key={index} {...kpi} />
                         ))}
                     </div>
-
-                 {/*    <div className="espaço-botao">
-                        <Button
-                            type="submit"
-                            content="Fltrar"
-                            backgroundColor='#2196f3'
-                            fontSize='15px'
-                            size='30%'
-                            image={filterIcon}
-                        />
-                    </div> */}
                 </div>
                 <div className="meio">
                     <CardDashboard title="Total de Clientes por dia da semana" height="250px" width="410px" >
@@ -92,6 +89,7 @@ function Dashboard() {
                             heightChart={200}
                             colorChart={''}
                             lineColor={'white'}
+                            carregando={carregando}
                         />
 
                     </CardDashboard>
@@ -103,15 +101,17 @@ function Dashboard() {
                             idEmpresa={user.idEmpresa}
                             heightChart={200}
                             colorChart={''}
-                            lineColor={'white'} />
+                            lineColor={'white'}
+                            carregando={carregando}
+                        />
                     </CardDashboard>
                     <CardDashboard title="Receita por Funcionário" height="250px" width="410px">
-                        <TabelaDashboard headers={['Atendente', 'Receita']} idEmpresa={user.idEmpresa} endPoint="receitaPorFuncionario" />
+                        <TabelaDashboard headers={['Atendente', 'Receita']} idEmpresa={user.idEmpresa} endPoint="receitaPorFuncionario" carregando={carregando} />
                     </CardDashboard>
                 </div>
                 <div className="inferior">
                     <CardDashboard title="Próximos Atendimentos" height="270px" width="620px">
-                        <TabelaDashboard headers={['Cliente', 'Servico', 'Dia', 'Hora', 'Atendente']} idEmpresa={user.idEmpresa} endPoint="agendamentos" />
+                        <TabelaDashboard headers={['Cliente', 'Servico', 'Dia', 'Hora', 'Atendente']} idEmpresa={user.idEmpresa} endPoint="agendamentos" carregando={carregando} />
                     </CardDashboard>
                     <CardDashboard title="Receita por Mês" height="270px" width="620px">
                         <Chart
@@ -122,11 +122,15 @@ function Dashboard() {
                             widthChart={600}
                             colorChart={'#3CD856'}
                             lineColor={'white'}
+                            carregando={carregando}
                         />
                     </CardDashboard>
 
                 </div>
             </div>
+
+            {loading && <CircularSize />}
+
         </div >
     );
 }

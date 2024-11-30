@@ -4,12 +4,13 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { findChartClientData, findChartServiceData, findChartReceitaServiceData } from "../../services/dashboardServices";
 
-const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colorChart, lineColor }) => {
+const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colorChart, lineColor, carregando }) => {
     const [seriesData, setSeriesData] = useState([]);
     const [xAxisData, setXAxisData] = useState([]);
 
     const buscarDados = async () => {
         try {
+            carregando(true);
             let response;
             switch (endPoint) {
                 case "receitaPorMes":
@@ -28,8 +29,10 @@ const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colo
             }
             setSeriesData(response.seriesData);
             setXAxisData(response.xAxisData);
+            carregando(false);
         } catch (error) {
             console.error("Erro ao buscar os dados do gráfico", error);
+            carregando(false);
         }
     };
 
@@ -51,7 +54,8 @@ const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colo
             data: seriesData,
             color: colorChart,
             marker: {
-                enabled: false
+                enabled: true,
+                radius: seriesData.length === 1 ? 10 : 4,
             }
         }],
         xAxis: {
@@ -83,8 +87,17 @@ const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colo
     return (
         <div className="chart_container">
             {seriesData.length === 0 ? (
-                <div className="no-data-message">
-                    Você ainda não possui informações! Em breve elas estarão aqui.
+                <div className="no-data-container">
+                    <p className="no-data-message">
+                        Parece que é a sua primeira vez acessando a dashboard. <br />
+                        Para começar, cadastre um novo agendamento.
+                    </p>
+                    <button
+                        className="go-to-schedule-button"
+                        onClick={() => window.location.href = '/agenda'} // Altere a rota conforme sua estrutura
+                    >
+                        Ir para Agenda
+                    </button>
                 </div>
             ) : (
                 <HighchartsReact
