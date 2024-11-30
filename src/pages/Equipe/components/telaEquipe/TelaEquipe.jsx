@@ -52,6 +52,7 @@ function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4, titulo5
         } catch (error) {
             console.error('Erro ao buscar usuários:', error);
             setServicos([]);
+
             setTotalPags(0);
         } finally {
             setLoading(false);
@@ -96,6 +97,7 @@ function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4, titulo5
                                     telefone={usuario.numeroTelefone != null ? usuario.numeroTelefone : 'Sem telefone'}
                                     email={usuario.emailPessoa != null ? usuario.emailPessoa : 'Sem e-mail'}
                                     funcao={usuario.funcao.nomeFuncao != null ? usuario.funcao.nomeFuncao : 'Sem função'}
+                                    idFuncao={usuario.funcao.idFuncao}
                                 />
                             ))
                         ) : (
