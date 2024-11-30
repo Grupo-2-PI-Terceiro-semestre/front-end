@@ -10,9 +10,10 @@ function ModalAddServico({ onCloseServico, titulo }) {
     const [formData, setFormData] = useState({
         nomeServico: '',
         valorServico: '',
-        tempoExecucao: '', 
+        duracao: '', 
         corReferenciaHex: '#000000',
         descricao: '',
+        statusAtividade: 'ATIVO',
         tiposDeUsuario: 'ADMIN'
     });
 
@@ -73,7 +74,7 @@ function ModalAddServico({ onCloseServico, titulo }) {
 
     const handleTimeChange = (selectedOption) => {
         const tempoComSegundos = `${selectedOption.value}:00`; 
-        setFormData({ ...formData, tempoExecucao: tempoComSegundos });
+        setFormData({ ...formData, duracao: tempoComSegundos });
     };
 
 
@@ -103,6 +104,8 @@ function ModalAddServico({ onCloseServico, titulo }) {
 
         const idEmpresa = user.idEmpresa;
 
+        console.log("Dados enviados:", formData);
+
         criarServico(formData, idEmpresa);
     };
 
@@ -124,6 +127,9 @@ function ModalAddServico({ onCloseServico, titulo }) {
             setTotalPags(0);
         } finally {
             setLoading(false);
+            setTimeout(() => {
+                window.location.reload(); // Recarrega a página
+            }, 300);
         }
     };
 
