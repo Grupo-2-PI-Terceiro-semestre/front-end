@@ -12,10 +12,6 @@ import { successToast, errorToast } from '../../../../utils/Toats';
 import { converterGMTParaBrasilia } from '../../../../utils/FormatDate';
 import dayjs from 'dayjs';
 
-
-
-
-
 const DetalheAgendamento = ({ event, detalhes, idEmpresa, funcionarios, onClose, refreshDate, paraConfirmar, realizado }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [horarioInicio, setHorarioInicio] = useState(event.start);
