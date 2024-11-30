@@ -13,7 +13,6 @@ export const findClientes = async (idEmpresa, paginacao) => {
 
 export const createCliente = async (cliente, idEmpresa) => {
     try {
-        console.log("entrei no create cliente" + cliente);
         const response = await postData(`clientes/empresa/${idEmpresa}`, cliente);
         return response;
     } catch (e) {
@@ -32,3 +31,24 @@ export const AtualizarCliente = async (endpoint, eventoAtualizado) => {
         throw e
     }
 }
+
+export const atualizarStatus = async (idCliente) => {
+    try {
+        const response = await putData(`clientes/${idCliente}`, idCliente)
+        return response;
+    } catch (e) {
+        console.log("Serviço: Erro ao Deletar o cliente")
+        throw e
+    }
+}
+
+// export const deletarCliente = async (idCliente) => {
+
+//     try {
+//         const response = await deleteData(`clientes/deletar/${idCliente}`, idCliente);
+//         return response;
+//     } catch (e) {
+//         console.log("Erro ao deletar o cliente");
+//         throw e;
+//     }
+// }
