@@ -45,3 +45,16 @@ export const formaterDate = (date) => {
     const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     return localDate.toISOString().split('T')[0];
 }
+
+export const formatDateTimeForBackend = (date, time) => {
+    // Cria um objeto Date baseado na string da data
+    const dataObj = new Date(date);
+
+    // Extrai partes da data
+    const year = dataObj.getFullYear();
+    const month = String(dataObj.getMonth() + 1).padStart(2, '0'); // Janeiro é 0
+    const day = String(dataObj.getDate()).padStart(2, '0');
+
+    // Formata o resultado no padrão ISO-8601
+    return `${year}-${month}-${day}T${time}`;
+};

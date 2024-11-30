@@ -1,4 +1,4 @@
-import { getData } from '../../../router/router'
+import { getData, postData } from '../../../router/router'
 
 export const buscarDadosDePerfil = async (idEmpresa) => {
     try {
@@ -10,12 +10,22 @@ export const buscarDadosDePerfil = async (idEmpresa) => {
     }
 }
 
-export const buscarHorariosDisponiveis = async (idEmpresa, idProfissional, data) => {
+export const buscarHorariosDisponiveis = async (idEmpresa, idProfissional, data, idServico) => {
     try {
-        const response = await getData(`agendas/horarios-indisponiveis/empresa/${idEmpresa}`, {}, { idProfissional, data });
+        const response = await getData(`agendas/horarios-indisponiveis/empresa/${idEmpresa}`, {}, { idProfissional, data, idServico });
         return response.data;
     } catch (error) {
         console.error("Erro ao buscar horários disponíveis", error);
+        throw error;
+    }
+}
+
+export const agendarHorario = async (agendamento) => {
+    try {
+        const response = await postData('agendamentos/cliente', agendamento);
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao agendar horário", error);
         throw error;
     }
 }

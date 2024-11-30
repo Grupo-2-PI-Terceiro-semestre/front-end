@@ -5,11 +5,16 @@ import { formaterDate } from '../../../../utils/FormatDate';
 import IconDemo from '../../../../components/agenda/Agenda';
 import "./ModalAgendamento.css";
 import LoadingDots from "../../../HomeCliente/components/loading/LoadingDots";
-import { buscarHorariosDisponiveis } from '../../services/perfilEmpresa'
+import { buscarHorariosDisponiveis, agendarHorario } from '../../services/perfilEmpresa'
+import { errorToast, successToast, infoToast } from '../../../../utils/Toats'
+import { formatDateTimeForBackend } from '../../../../utils/FormatDate'
+import Cookies from 'js-cookie';
 
 function ModalAgendamento({ onClose, servico, equipe }) {
 
     if (!servico || !equipe) return null;
+
+    const user = Cookies.get('cliente') ? JSON.parse(Cookies.get('cliente')) : null;
 
     const [selectedProfissional, setSelectedProfissional] = useState("");
     const [isLoaded, setIsLoaded] = useState(false);
@@ -21,13 +26,14 @@ function ModalAgendamento({ onClose, servico, equipe }) {
     useEffect(() => {
         if (selectedProfissional && date) {
             const formattedDate = formaterDate(date);
-            buscarHorarios(idEmpresa, formattedDate, selectedProfissional);
+            buscarHorarios(idEmpresa, formattedDate, selectedProfissional, servico.idServico, 1);
         }
+
     }, [date, selectedProfissional]);
-    
+
 
     useEffect(() => {
-        document.body.style.overflow = "hidden"; 
+        document.body.style.overflow = "hidden";
         return () => {
             document.body.style.overflow = "";
         };
@@ -39,11 +45,49 @@ function ModalAgendamento({ onClose, servico, equipe }) {
         }
     };
 
-    const buscarHorarios = async (idEmpresa, formattedDate, idProfissional) => {
+    const handleConfirmClick = () => {
 
+
+
+        if (!user) {
+            infoToast('Você precisa estar logado para agendar um serviço');
+        }
+
+        if (!selectedProfissional || !horarioSelecionado || !date) {
+            errorToast('Selecione um profissional e um horário para agendar');
+            return;
+        }
+
+        const dataAgendamento = formatDateTimeForBackend(date, horarioSelecionado);
+
+        const agendamento = {
+            idCliente: user.idPessoa,
+            idServico: servico.idServico,
+            idProfissional: selectedProfissional,
+            statusAgendamento: "PENDENTE",
+            dataAgendamento: dataAgendamento,
+        }
+        criarAgendamento(agendamento);
+    }
+
+    const criarAgendamento = async (agendamento) => {
         setIsLoaded(true);
         try {
-            const horarios = await buscarHorariosDisponiveis(idEmpresa, idProfissional, formattedDate);
+            await agendarHorario(agendamento);
+            successToast('Agendamento realizado com sucesso');
+            onClose();
+        } catch (error) {
+            setIsLoaded(false);
+            errorToast('Erro ao agendar horário');
+        }
+    }
+
+
+
+    const buscarHorarios = async (idEmpresa, formattedDate, idProfissional, idServico) => {
+        setIsLoaded(true);
+        try {
+            const horarios = await buscarHorariosDisponiveis(idEmpresa, idProfissional, formattedDate, idServico);
             setHorarios(horarios);
         } catch (error) {
             console.error("Erro ao buscar horários disponíveis", error);
@@ -99,24 +143,27 @@ function ModalAgendamento({ onClose, servico, equipe }) {
                     </div>
 
                     <div className="time-options">
-                        {isLoaded ? <LoadingDots size={10} /> : (
-                            horarios.length > 0 ? (
-                                horarios.map((horario, index) => {
-                                    const horarioFormatado = horario.split(":").slice(0, 2).join(":");
-                                    return (
-                                        <button
-                                            className={`time-button ${horarioSelecionado === horario ? "selected" : ""}`}
-                                            key={index}
-                                            onClick={() => handleHorarioSelecionado(horario)}
-                                        >
-                                            {horarioFormatado}
-                                        </button>
-                                    );
-                                })
-                            ) : (
-                                <p>Selecione uma data e um profissional para visualizar os horários disponíveis.</p>
-                            )
-                        )}
+                        {isLoaded ?
+                            <div className="container-load">
+                                <LoadingDots size={20} />
+                            </div> : (
+                                horarios.length > 0 ? (
+                                    horarios.map((horario, index) => {
+                                        const horarioFormatado = horario.split(":").slice(0, 2).join(":");
+                                        return (
+                                            <button
+                                                className={`time-button ${horarioSelecionado === horario ? "selecionado" : ""}`}
+                                                key={index}
+                                                onClick={() => handleHorarioSelecionado(horario)}
+                                            >
+                                                {horarioFormatado}
+                                            </button>
+                                        );
+                                    })
+                                ) : (
+                                    <p>Selecione uma data e um profissional para visualizar os horários disponíveis.</p>
+                                )
+                            )}
                     </div>
                 </div>
 
@@ -128,7 +175,7 @@ function ModalAgendamento({ onClose, servico, equipe }) {
                         <p className="duration">Tempo: {formatDuration(servico.duracaoServico)}</p>
                     </div>
                 </div>
-                <button className="confirm-button">Confirmar</button>
+                <button onClick={handleConfirmClick} className="confirm-button">Confirmar</button>
             </div>
         </div>
     );
