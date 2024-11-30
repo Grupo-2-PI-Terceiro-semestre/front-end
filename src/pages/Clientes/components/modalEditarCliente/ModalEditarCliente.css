@@ -60,14 +60,11 @@
 }
 
 .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente {
-    /* align-items: center; */
-
     height: 81vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 26vw;
-    /* border: 1px solid red; */
     gap: 14vh;
 }
 
@@ -116,26 +113,26 @@
     width: 100%;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
     height: 5vh;
     padding: 8px;
-    background-color: rgb(65, 65, 65);
     color: white;
     flex-wrap: wrap;
     gap: 3vh;
+    background-color: #171821;    
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .form-group-editar .inputLabel-editar select {
     width: 100%;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
     height: 5vh;
     padding: 8px;
-    background-color: rgb(65, 65, 65);
     color: white;
     flex-wrap: wrap;
     gap: 3vh;
+    background-color: #171821;    
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .modal-overlay-editar .modal-header-editar .container-modal-editar .form-modal-editar-cliente .botaoCadastrar {
@@ -161,7 +158,7 @@
     height: 5vh;
     padding-left: 0.5vw;
     border-radius: 5px;
-    background-color: rgb(65, 65, 65);
+    background-color: #171821;    
 }
 
 .color-picker-input {
