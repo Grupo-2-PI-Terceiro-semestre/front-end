@@ -10,12 +10,15 @@ import FooterEmpresa from "../../components/footerEmpresa/FooterEmpresa";
 import Carousel from './components/card/Carousel ';
 import LoginForm from "./components/modal-login/LoginForm";
 import CadastroForm from "./components/modal-cadastro/CadastroForm";
+import ModalAgendaCliente from "./components/modal-agenda-cliente/ModalAgendaCliente";
 
 function HomeCliente() {
     const [searchResults, setSearchResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isCadastroModalOpen, setIsCadastroModalOpen] = useState(false);
+    const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
+
 
     const handleSearchResults = (results) => {
         setIsLoading(false);
@@ -29,10 +32,13 @@ function HomeCliente() {
         setSearchResults(results);
     };
 
+    const openAgendaModal = () => setIsAgendaModalOpen(true);
     const openLoginModal = () => setIsLoginModalOpen(true);
     const openCadastroModal = () => setIsCadastroModalOpen(true);
+
     const closeLoginModal = () => setIsLoginModalOpen(false);
     const closeCadastroModal = () => setIsCadastroModalOpen(false);
+    const closeAgendaModal = () => setIsAgendaModalOpen(false);
 
     return (
         <>
@@ -42,10 +48,11 @@ function HomeCliente() {
                     url="/empresa"
                     width="30vw"
                     widthOpcoes="0"
-                    onLoginClick={openLoginModal}
-                    onCadastroClick={openCadastroModal}
                     isHomeCliente={true}
                     isButtonVisible={true}
+                    onLoginClick={openLoginModal}
+                    onCadastroClick={openCadastroModal}
+                    onAgendaClick={openAgendaModal}
                 />
                 <BannerCliente
                     onSearchResults={handleSearchResults}
@@ -67,6 +74,9 @@ function HomeCliente() {
             )}
             {isCadastroModalOpen && (
                 <CadastroForm onClose={closeCadastroModal} />
+            )}
+            {isAgendaModalOpen && (
+                <ModalAgendaCliente onClose={closeAgendaModal} />
             )}
         </>
     );

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import "./ModalAgendamento.css";
 import { formatDuration } from '../../../../utils/FormatDate';
 import { useParams } from "react-router-dom";
 import { formaterDate } from '../../../../utils/FormatDate';
 import IconDemo from '../../../../components/agenda/Agenda';
-import "./ModalAgendamento.css";
 import LoadingDots from "../../../HomeCliente/components/loading/LoadingDots";
 import { buscarHorariosDisponiveis, agendarHorario } from '../../services/perfilEmpresa'
 import { errorToast, successToast, infoToast } from '../../../../utils/Toats'
@@ -111,7 +111,7 @@ function ModalAgendamento({ onClose, servico, equipe }) {
     return (
         <div className="modal-overlay" onClick={handleOverlayClick}>
             <div className="modal-container">
-                <button className="close-button" onClick={onClose}>X</button>
+                <button className="close-button" onClick={onClose}>x</button>
                 <h3 className="modal-title">Serviço: {servico.nomeServico}</h3>
                 <div className="modal-calendar">
                     <IconDemo content={date} onDateChange={handleDateChange} isFixed={true} />

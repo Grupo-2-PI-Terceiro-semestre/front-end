@@ -48,3 +48,13 @@ export const loginCliente = async (cliente) => {
     }
 }
 
+export const buscarAgendamentos = async (idCliente) => {
+    try {
+        const response = await getData(`agendamentos/cliente/${idCliente}`);
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao buscar agendamentos", error);
+        throw error;
+    }
+}
+

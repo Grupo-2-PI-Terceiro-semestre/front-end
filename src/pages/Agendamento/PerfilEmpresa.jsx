@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import './PerfilEmpresa.css';
-import HeaderAgendamento from "./components/headerAgendamento/HeaderAgendamento";
 import ServiceList from "./components/serviceList/ServiceList";
 import Banner from "./components/banner/Banner";
 import Map from "./components/map/Map";
@@ -11,6 +10,7 @@ import LoadingDots from "../HomeCliente/components/loading/LoadingDots";
 import HeaderEmpresa from "../../components/headerEmpresa/HeaderEmpresa";
 import CadastroForm from "../HomeCliente/components/modal-cadastro/CadastroForm";
 import LoginForm from "../HomeCliente/components/modal-login/LoginForm";
+import ModalAgendaCliente from "../HomeCliente/components/modal-agenda-cliente/ModalAgendaCliente";
 
 
 function PerfilEmpresa() {
@@ -22,6 +22,7 @@ function PerfilEmpresa() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isCadastroModalOpen, setIsCadastroModalOpen] = useState(false);
+  const [isAgendaModalOpen, setIsAgendaModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,8 +43,10 @@ function PerfilEmpresa() {
     }
   };
 
+  const openAgendaModal = () => setIsAgendaModalOpen(true);
   const openLoginModal = () => setIsLoginModalOpen(true);
   const openCadastroModal = () => setIsCadastroModalOpen(true);
+  const closeAgendaModal = () => setIsAgendaModalOpen(false);
   const closeLoginModal = () => setIsLoginModalOpen(false);
   const closeCadastroModal = () => setIsCadastroModalOpen(false);
 
@@ -65,6 +68,7 @@ function PerfilEmpresa() {
         widthOpcoes="0"
         onLoginClick={openLoginModal}
         onCadastroClick={openCadastroModal}
+        onAgendaClick={openAgendaModal}
         isButtonVisible={true}
         isHomeCliente={false}
       />
@@ -96,6 +100,10 @@ function PerfilEmpresa() {
       {isCadastroModalOpen && (
         <CadastroForm onClose={closeCadastroModal} />
       )}
+      {isAgendaModalOpen && (
+        <ModalAgendaCliente onClose={closeAgendaModal} />
+      )}
+      
     </div>
   );
 }

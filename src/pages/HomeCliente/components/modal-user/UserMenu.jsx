@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import "./UserMenu.css";
 
-function UserMenu({ onClickLogin, onClickCadastro }) {
+function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
+
     const user = Cookies.get('cliente') ? JSON.parse(Cookies.get('cliente')) : null;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,6 +48,7 @@ function UserMenu({ onClickLogin, onClickCadastro }) {
                                 className="menu-action"
                                 onClick={(e) => {
                                     e.stopPropagation();
+                                    onClickAgenda();
                                     closeMenu(e);
                                 }}
                             >
