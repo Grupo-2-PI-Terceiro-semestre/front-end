@@ -116,8 +116,8 @@
     width: 26vw;
     height: 15vh;
     border-radius: 5px;
-    background-color: rgb(65, 65, 65);
     color: white;
+    background-color: #171821;    
 }
 
 .main-header-interna .container-header-interna .modal-overlay .modal-header .container-modal .form-modal-serv .form-grupo-serv .inputLabel label {
@@ -216,8 +216,8 @@
 }
 
 .css-g30jg2-control {
-    background-color: #414141 !important;
     border: none !important;
+    background-color: #171821 !important;    
 }
 
 .css-1dimb5e-singleValue {

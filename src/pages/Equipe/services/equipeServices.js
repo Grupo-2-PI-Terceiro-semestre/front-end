@@ -43,3 +43,13 @@ export const AtualizarUsuario = async (endpoint, eventoAtualizado) => {
         throw e
     }
 }
+
+export const atualizarStatus = async (idPessoa) => {
+    try {
+        const response = await putData(`usuarios/status/${idPessoa}`, idPessoa)
+        return response;
+    } catch (e) {
+        console.log("Serviço: Erro ao Deletar o colaborador")
+        throw e
+    }
+}

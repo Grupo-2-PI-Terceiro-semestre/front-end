@@ -5,10 +5,6 @@ import Cookies from 'js-cookie';
 import { successToast, errorToast } from '../../../../utils/Toats';
 import { createColaborador, findFuncoes } from "../../services/equipeServices";
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
-// import Tooltip from '@mui/material/Tooltip';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faPlus } from '@fortawesome/free-solid-svg-icons';
-// import ModalAddFuncao from "../modalAddFuncao/ModalAddFuncao";
 
 function ModalAddEquipe({ onClose, titulo }) {
     const [loading, setLoading] = useState(false);
@@ -22,28 +18,19 @@ function ModalAddEquipe({ onClose, titulo }) {
     const [funcaoSelecionada, setFuncaoSelecionada] = useState(null);
     const [funcoes, setFuncoes] = useState([]);
 
-    // const [formData, setFormData] = useState({
-    //     nomePessoa: '',
-    //     numeroTelefone: '',
-    //     nomeFuncao: '',
-    //     tiposDeUsuario: 'ADMIN'
-    // });
-
     useEffect(() => {
         setIsVisibleAdd(true);
         buscarFuncoes();
     }, []);
 
     const handleClose = () => {
-        setTimeout(onClose, 300); // Fecha o modal após a animação
+        setTimeout(onClose, 300); 
     };
 
-    // Atualiza o estado para o nome
     const handleNomeChange = (event) => {
         setNomePessoaDigitado(event.target.value);
     };
 
-    // Atualiza o estado para o telefone
     const handleTelefoneChange = (event) => {
         setNumeroTelefoneDigitado(event.target.value);
     };
@@ -52,13 +39,10 @@ function ModalAddEquipe({ onClose, titulo }) {
         setEmailDigitado(event.target.value);
     };
 
-    // Atualiza o estado para a função selecionada no dropdown
     const handleFuncoesChange = (funcao) => {
         setFuncaoSelecionada(funcao);
     };
 
-
-    // Busca as funções disponíveis para o dropdown
     const buscarFuncoes = async () => {
         try {
             const response = await findFuncoes();
@@ -72,6 +56,7 @@ function ModalAddEquipe({ onClose, titulo }) {
     }
 
     const handleSubmit = async (event) => {
+
         event.preventDefault();
 
         if (!nomePessoaDigitado || !numeroTelefoneDigitado || !emailDigitado || !funcaoSelecionada) {
@@ -83,7 +68,8 @@ function ModalAddEquipe({ onClose, titulo }) {
             nomePessoa: nomePessoaDigitado,
             numeroTelefone: numeroTelefoneDigitado,
             emailPessoa: emailDigitado,
-            idFuncao: funcaoSelecionada.idFuncao, // ID da função selecionada
+            idFuncao: funcaoSelecionada.idFuncao,
+            statusAtividade: 'ATIVO'
         };
 
         try {
@@ -91,7 +77,11 @@ function ModalAddEquipe({ onClose, titulo }) {
             const idEmpresa = user?.idEmpresa;
             await createColaborador(colaboradorData, idEmpresa);
             successToast('Colaborador criado com sucesso!');
-            onClose(); // Fecha o modal após sucesso
+            onClose();
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 300);
         } catch (error) {
             errorToast('Erro ao criar colaborador.');
         } finally {
@@ -104,7 +94,7 @@ function ModalAddEquipe({ onClose, titulo }) {
             <div className="modal-header">
                 <div className="container-modal">
                     <HeadeModal title={titulo} handleClose={onClose} />
-                    <form className="form-modal-serv" onSubmit={handleSubmit}>
+                    <form className="form-modal-serv" onSubmit={handleSubmit}>  
                         <div className="form-grupo-serv">
                             <div className='inputLabel'>
                                 <label>Nome:</label>

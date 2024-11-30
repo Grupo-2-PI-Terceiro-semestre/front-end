@@ -89,7 +89,7 @@ function TelaServicos({ placeholder, titulo1, titulo2, titulo3, titulo4
                         {Array.isArray(servicos) && servicos.length > 0 ? (
                             servicos.map((servico) => (
                                 <LinhaTabelaServico
-                                    key={servico.idServico}
+                                    idServico={servico.idServico}
                                     nome={servico.nomeServico}
                                     valor={servico.valorServico}
                                     descricaoServico={servico.descricao}

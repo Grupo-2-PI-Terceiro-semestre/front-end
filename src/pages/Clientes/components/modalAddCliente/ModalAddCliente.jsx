@@ -12,6 +12,7 @@ function ModalAddCliente({ onCloseCliente, titulo, refreshDate }) {
         nomePessoa: '',
         numeroTelefone: '',
         emailPessoa: '',
+        statusAtividade: 'ATIVO',
         tiposDeUsuario: 'ADMIN'
     });
 
@@ -42,6 +43,10 @@ function ModalAddCliente({ onCloseCliente, titulo, refreshDate }) {
             buscarListaClientes(user.idEmpresa, paginaAtual, 8);
 
             setTimeout(() => onCloseCliente(), 3000);
+
+            setTimeout(() => {
+                window.location.reload(); // Recarrega a página
+            }, 300);
         } catch (error) {
             errorToast('Cliente não criado');
 
@@ -138,20 +143,17 @@ function ModalAddCliente({ onCloseCliente, titulo, refreshDate }) {
                             </div>
                         </div>
 
-                        <div className="botao-add-cliente">
-                            <button style={{
-                                backgroundColor: loading ? '#6c7d8c' : '#2196F3'
-                            }} type="submit" className="botaoCadastrar" disabled={loading}>
-                                Cadastrar
+                        <div className="botao-add-serv">
+                            <button type="submit" className="botaoCadastrar" disabled={loading}>
+                                {loading ? 'Cadastrando...' : 'Cadastrar'}
                             </button>
-
                         </div>
 
-                        {loading && (
+                        {/* {loading && (
                             <div className="loading-icon">
                                 <CircularProgress size={35} />
                             </div>
-                        )}
+                        )} */}
                     </form>
                 </div>
             </div>

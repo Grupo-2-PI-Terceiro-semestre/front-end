@@ -3,13 +3,14 @@ import { findDashboardData } from "../../services/dashboardServices";
 import "./Kpi.css";
 
 function Kpi(props) {
-    const { description, icon, iconColor, endPoint, mes, idEmpresa, formatarValor, mensagemMes } = props;
+    const { description, icon, iconColor, endPoint, mes, idEmpresa, formatarValor, mensagemMes, carregando } = props;
 
     const [dados, setDados] = useState({ valor: 0, percent: 0 });
 
-    
+
     const buscarDados = useCallback(async () => {
         try {
+            carregando(true);
             const response = await findDashboardData(idEmpresa, mes, endPoint);
 
             switch (endPoint) {
@@ -26,14 +27,16 @@ function Kpi(props) {
                     setDados({ valor: response, percent: 0 });
                     break;
                 case "agendamentos/novosClientes":
-                    
+
                     setDados({ valor: response.totalClientes, percent: response.comparativoClientes });
                     console.log(response.totalClientes + " " + response.comparativoClientes);
                     break;
                 default:
                     console.warn(`Endpoint ${endPoint} não reconhecido.`);
+
             }
         } catch (error) {
+            carregando(false);
             console.error("Erro ao buscar os dados", error);
         }
     }, [idEmpresa, mes, endPoint]);
@@ -61,7 +64,7 @@ function Kpi(props) {
 
     const ajustarCor = (valor) => {
         if (valor > 0) {
-            
+
             return "#3CD856";
         } else if (valor < 0) {
             return "#FF0000";
@@ -72,7 +75,7 @@ function Kpi(props) {
         if (valor > 0) {
             return `+${ajustarCasasDecimais(valor)}% mês anterior`;
         } else if (valor < 0) {
-            return `+${ajustarCasasDecimais(valor)}% mês anterior`;
+            return `${ajustarCasasDecimais(valor)}% mês anterior`;
         }
     }
     return (
@@ -89,8 +92,8 @@ function Kpi(props) {
                 </div>
                 {mensagemMes && (
                     <div className="percent" style={{ color: ajustarCor(dados.percent) }}>
-                         {mensagemComparativoMes(dados.percent)}
-                </div>
+                        {mensagemComparativoMes(dados.percent)}
+                    </div>
                 )}
             </div>
         </div>

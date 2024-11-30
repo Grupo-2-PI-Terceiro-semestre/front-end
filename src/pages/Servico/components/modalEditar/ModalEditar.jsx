@@ -3,14 +3,26 @@ import './ModalEditar.css';
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
-import Select from 'react-select'; 
+import Select from 'react-select';
+import { AtualizarServico } from "../../services/servicoServices";
+import { successToast, errorToast } from '../../../../utils/Toats';
 
-function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServico }) {
+function ModalEditar({ onClose, titulo, idServico, nome, valor, tempo, cor, descricaoServico }) {
 
     const [isVisible, setIsVisible] = useState(false);
+    const navigate = useNavigate();
+    // const { idServico } = useParams();
+    const [nomeSelecionado, setNomeServico] = useState(nome || '');
+    const [valorSelecionado, setValorSelecionado] = useState(valor || '');
+    const [tempoSelecionado, setTempoSelecionado] = useState(tempo || '');
+    const [corReferenciaSelecionada, setCorSelecionada] = useState(cor || '');
+    const [descricaoSelecionada, setDescricaoSelecionada] = useState(descricaoServico || '');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setIsVisible(true);
+
+        console.log(idServico + ' id serviço')
     }, []);
 
     const generateTimeOptions = () => {
@@ -24,96 +36,85 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
         return options;
     };
 
-    const timeOptions = generateTimeOptions(); 
+    const timeOptions = generateTimeOptions();
 
     const customStyles = {
         control: (provided) => ({
             ...provided,
-            backgroundColor: '#f4f4f4', 
-            borderColor: '#ccc', 
-            boxShadow: 'none', 
+            backgroundColor: '#f4f4f4',
+            borderColor: '#ccc',
+            boxShadow: 'none',
             '&:hover': {
                 borderColor: '#888',
             },
         }),
         menu: (provided) => ({
             ...provided,
-            backgroundColor: '#414141', 
-            zIndex: 999, 
+            backgroundColor: '#414141',
+            zIndex: 999,
         }),
         option: (provided, state) => ({
             ...provided,
             backgroundColor: state.isSelected
-                ? '#777676' 
+                ? '#777676'
                 : state.isFocused
                     ? '#777676'
-                    : '#414141', 
-            color: state.isSelected ? '#414141' : '#ffff', 
+                    : '#414141',
+            color: state.isSelected ? '#414141' : '#ffff',
         }),
     };
 
-    const [formData, setFormData] = useState({
-        nomeServico: '',
-        valorServico: '',
-        tempoExecucao: '',
-        corReferencia: '#000000',
-        descricao: '',
-        // categoria: '',
-        tiposDeUsuario: 'ADMIN'
-    });
-
-    const navigate = useNavigate();
-    const { idServico } = useParams();
-    const [nomeServico, setNomeServico] = useState("");
-    const [valorServico, setValorServico] = useState("");
-    const [tempoExecucao, setTempoExecucao] = useState("");
-    const [corReferencia, setCorReferencia] = useState("");
-    const [descricao, setDescricao] = useState("");
-    // const [categoria, setCategoria] = useState("");
-
-    // useEffect(() => {
-    //     api.get(`/${idServico}`).then((response) => {
-    //         const { data } = response;
-    //         const { nomeServico, tempoExecucao, valorServico, corReferencia, descricao, categoria } = data;
-    //         setNomeServico(nomeServico);
-    //         setTempoExecucao(tempoExecucao);
-    //         setValorServico(valorServico);
-    //         setCorReferencia(corReferencia);
-    //         setDescricao(descricao);
-    //         setCategoria(categoria);
-    //     })
-    //         .catch((error) => {
-    //             console.log("Erro ao buscar os detalhes do serviço:", error);
-    //         })
-    // }, [idServico]);
-
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+    const handleNomeChange = (event) => {
+        setNomeServico(event.target.value);
     };
 
-    const handleColorChange = (e) => {
-        setFormData({ ...formData, corReferencia: e.target.value });
+    const handleValorChange = (event) => {
+        setValorSelecionado(event.target.value);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleTempoChange = (event) => {
+        setTempoSelecionado(event.target.value);
+    };
+
+    const handleCorChange = (event) => {
+        setCorSelecionada(event.target.value);
+    };
+
+    const handleDescricaoChange = (event) => {
+        setDescricaoSelecionada(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+
+        event.preventDefault();
+
+        const eventoAtualizado = {
+            idServico: idServico,
+            nomeServico: nomeSelecionado,
+            valorServico: valorSelecionado,
+            duracao: tempoSelecionado,
+            descricao: descricaoSelecionada,
+            corReferenciaHex: corReferenciaSelecionada
+        };
+
+        atualizarServico(eventoAtualizado);
+
+    };
+
+    const atualizarServico = async (eventoAtualizado) => {
         try {
-            // await api.put(`/${idCard}`, {
-            await cadastroService(formData);
-            alert('Cadastro realizado com sucesso!');
-            setFormData({
-                nomeServico: '',
-                valorServico: '',
-                tempoExecucao: '',
-                corReferencia: '#000000',
-                descricao: '',
-                // categoria: '',
-                representante: "true",
-            });
+            setLoading(true);
+            await AtualizarServico("servicos/atualizar", eventoAtualizado);
+            successToast('Serviço atualizado com sucesso!');
+            onClose();
+
+            setTimeout(() => {
+                window.location.reload(); // Recarrega a página
+            }, 300);
         } catch (error) {
-            setErrorMessage('Erro ao cadastrar o serviço.');
+            console.error('Erro ao atualizar o serviço:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -135,9 +136,8 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
                                     className="input"
                                     type="text"
                                     name="nomeServico"
-                                    placeholder={nome}
-                                    value={nome}
-                                    onChange={handleChange}
+                                    value={nomeSelecionado}
+                                    onChange={handleNomeChange}
                                     required
                                 />
                             </div>
@@ -150,9 +150,8 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
                                     className="input"
                                     type="number"
                                     name="valorServico"
-                                    placeholder={valor}
-                                    value={valor}
-                                    onChange={handleChange}
+                                    value={valorSelecionado}
+                                    onChange={handleValorChange}
                                     required
                                 />
                             </div>
@@ -161,20 +160,11 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
                         <div className="form-group-editar">
                             <div className='inputLabel-editar'>
                                 <label>Tempo de Execução:</label>
-                                {/* <input
-                                    className="input"
-                                    type="text"
-                                    name="tempoExecucao"
-                                    placeholder={tempo}
-                                    defaultValue={tempo}
-                                    onChange={handleChange}
-                                    required
-                                /> */}
 
                                 <Select
                                     options={timeOptions}
-                                    onChange={handleChange}
-                                    placeholder={tempo}
+                                    value={tempoSelecionado}
+                                    onChange={handleTempoChange}
                                     isSearchable={false}
                                     className="time-picker-dropdown"
                                     styles={customStyles}
@@ -189,9 +179,8 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
                                     <input
                                         className="color-picker-input"
                                         type="color"
-                                        name={cor}
-                                        value={cor}
-                                        onChange={handleColorChange}
+                                        value={corReferenciaSelecionada}
+                                        onChange={handleCorChange}
                                     />
                                     <span className="color-name">
                                         {cor}
@@ -200,37 +189,25 @@ function ModalEditar({ onClose, titulo, nome, valor, tempo, cor, descricaoServic
                             </div>
                         </div>
 
-                        {/* <div className="form-group-editar">
-                            <div className='inputLabel-editar'>
-                                <label htmlFor="categoria">Categoria:</label>
-                                <select
-                                    id="categoria"
-                                    name="categoria"
-                                    defaultValue={formData.categoria}
-                                    onChange={handleChange}
-                                    required
-                                >
-                                    <option value="">Selecione a Categoria</option>
-                                    <option value="categoria1">Categoria 1</option>
-                                    <option value="categoria2">Categoria 2</option>
-                                    <option value="categoria3">Categoria 3</option>
-                                </select>
-                            </div>
-                        </div > */}
-
                         <div className="form-group-text">
                             <div className='inputLabel'>
                                 <label>Descrição:</label>
                                 <textarea
                                     name="descricao"
-                                    placeholder={descricaoServico}
-                                    defaultValue={descricaoServico}
-                                    onChange={handleChange}
+                                    value={descricaoSelecionada}
+                                    onChange={handleDescricaoChange}
                                     required
                                 />
                             </div>
                         </div>
-                        <button className="botaoCadastrar" onClick={handleSubmit}>Editar</button>
+
+                        {/* <button className="botaoCadastrar" onClick={handleSubmit}>Editar</button> */}
+
+                        <div className="botao-add-serv">
+                            <button type="submit" className="botaoCadastrar" disabled={loading}>
+                                {loading ? 'Editando...' : 'Editar'}
+                            </button>
+                        </div>
                     </form >
                 </div>
             </div>

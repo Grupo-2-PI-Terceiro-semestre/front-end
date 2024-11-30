@@ -1,20 +1,29 @@
 import React, { useEffect, useState, useRef } from 'react';
-import './FormularioFuncionamento.css'; // Certifique-se de criar este arquivo para estilos
-import { getData, postData } from '../../../../router/router';
+import './FormularioFuncionamento.css';
+import { deleteData, getData, postData } from '../../../../router/router';
+import { uploadImagemGaleria } from '../../../../services/empresaServices';
 import Cookies from 'js-cookie';
+import { FaTrash } from "react-icons/fa";
+import Swal from 'sweetalert2'
+
 
 const FormularioFuncionamento = () => {
   const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null); // Para armazenar a imagem selecionada
   const fileInputRef = useRef(null);
 
   const userData = JSON.parse(Cookies.get('user'));
 
+  useEffect(() => {
+    buscarImagens();
+  }, []);
+
   const buscarImagens = async () => {
     try {
       const response = await getData(`empresas/imagens/${userData.idEmpresa}`);
-      setImages(response.data); // Supondo que response.data contenha a lista de URLs das imagens
+      setImages(response.data);
     } catch (error) {
-      console.error("Erro ao buscar as imagens", error);
+      console.error('Erro ao buscar as imagens', error);
     }
   };
 
@@ -28,37 +37,81 @@ const FormularioFuncionamento = () => {
       const formData = new FormData();
       formData.append('file', files[0]);
       try {
-        const response = await postData(`empresas/imagens/${userData.idEmpresa}`, formData);
-        setImages([...images, response.data]); // Adiciona a nova imagem à lista de imagens
+        const response = await uploadImagemGaleria(userData.idEmpresa, formData);
+        setImages(prevImages => [...prevImages, response]);
       } catch (error) {
-        console.error("Erro ao fazer upload da imagem", error);
+        console.error('Erro ao fazer upload da imagem', error);
       }
     }
   };
 
-  useEffect(() => {
-    buscarImagens();
-  }, []);
+  const openImage = (image) => {
+    setSelectedImage(image);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
+  const deleteImage = async (idImagem) => {
+    try {
+      await deleteData(`empresas/imagem/${idImagem}`, {}, {}, {});
+      setImages(images.filter((image) => image.idImagem !== idImagem));
+      closeModal();
+    } catch (error) {
+      console.error('Erro ao deletar a imagem', error);
+    }
+  };
 
   return (
-    <div className='container-formulario-galeria'>
+    <div className="container-formulario-galeria">
       <h1>Galeria</h1>
-      <div className='container-galeria'>
+      <div className="container-galeria">
         {images.map((imagem, index) => (
-          <div key={index} className="gallery-item">
+          <div key={index} className="gallery-item" onClick={() => openImage(imagem)}>
             <img src={imagem.urlImagem} alt={`Gallery item`} />
           </div>
         ))}
       </div>
-      <button className='button-upload' onClick={handleButtonClick}>
+      <button className="button-upload" onClick={handleButtonClick}>
         Adicionar imagem
       </button>
       <input
         type="file"
         ref={fileInputRef}
         style={{ display: 'none' }}
+        accept="image/*"
         onChange={handleFileChange}
       />
+      {selectedImage && (
+        <div className="modal-galeria" onClick={closeModal}>
+          <button
+            className="delete-button-above-modal"
+            onClick={(e) => {
+              e.stopPropagation();
+              Swal.fire({
+                icon: 'warning',
+                title: 'Tem certeza que deseja excluir essa imagem?',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Excluir',
+                confirmButtonColor: '#FF0000',
+                cancelButtonColor: '#007bff',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  deleteImage(selectedImage.idImagem);
+                }
+              });
+            }}
+          >
+            <FaTrash className="delete-icon" />
+            Excluir
+          </button>
+          <div className="modal-content-galeria" onClick={(e) => e.stopPropagation()}>
+            <img src={selectedImage.urlImagem} alt="Imagem ampliada" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -41,7 +41,7 @@ function TelaClientes({ placeholder, titulo1, titulo2, titulo3, titulo4
             setClientes(response.data.itens);
             console.log(JSON.stringify(response) + ' response');
             console.log('set clientes ' + setClientes);
-
+            
             var totalItens = Number(response.data.totalItens);
             var totalPagsCalc = Math.ceil(totalItens / tamanho);
 
@@ -89,7 +89,7 @@ function TelaClientes({ placeholder, titulo1, titulo2, titulo3, titulo4
                         {Array.isArray(clientes) && clientes.length > 0 ? (
                             clientes.map((cliente) => (
                                 <LinhaClientes
-                                    key={cliente.idCliente}
+                                    idCliente={cliente.idCliente}
                                     nome={cliente.nomePessoa}
                                     telefone={cliente.telefone}
                                     email={cliente.email}

@@ -21,3 +21,24 @@ export const createServico = async (servico, idEmpresa) => {
         throw e
     }
 }
+
+export const AtualizarServico = async (endpoint, eventoAtualizado) => {
+
+    try {
+        const response = await putData(endpoint, eventoAtualizado)
+        return response;
+    } catch (e) {
+        console.log("Erro ao atualizar o cliente");
+        throw e
+    }
+}
+
+export const atualizarStatus = async (idServico) => {
+    try {
+        const response = await putData(`servicos/status/${idServico}`, idServico)
+        return response;
+    } catch (e) {
+        console.log("Serviço: Erro ao Deletar o colaborador")
+        throw e
+    }
+}
