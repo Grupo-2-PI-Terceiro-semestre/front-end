@@ -41,7 +41,7 @@ function TelaClientes({ placeholder, titulo1, titulo2, titulo3, titulo4
             setClientes(response.data.itens);
             console.log(JSON.stringify(response) + ' response');
             console.log('set clientes ' + setClientes);
-
+            
             var totalItens = Number(response.data.totalItens);
             var totalPagsCalc = Math.ceil(totalItens / tamanho);
 
