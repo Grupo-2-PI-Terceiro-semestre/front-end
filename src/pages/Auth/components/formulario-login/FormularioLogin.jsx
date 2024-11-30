@@ -5,6 +5,8 @@ import { auth } from '../../../../services/firebase';
 import Button from '../../../../components/button/Button';
 import iconGoogle from '../../../../assets/logoGoogle.png'
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 import './FormularioLogin.css'
 
 const FormularioLogin = ({ toggleBarraContainer }) => {
@@ -15,30 +17,48 @@ const FormularioLogin = ({ toggleBarraContainer }) => {
 
   const navigate = useNavigate();
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!email || !password) {
       setErrorMessage('Email e senha são obrigatórios');
-    } else {
+      return;
+    }
+
+    clearSession();
+
+    toggleBarraContainer();
+    setErrorMessage('');
+    try {
+      const userData = {
+        emailPessoa: email,
+        senha: password,
+      };
+      const response = await loginUser(userData);
+
+      setUser(response.user);
       toggleBarraContainer();
-      setErrorMessage('');
-      try {
-        const userData = {
-          emailPessoa: email,
-          senha: password,
-        };
-        const response = await loginUser(userData);
-        setUser(response.user);
-        toggleBarraContainer();
-        navigate('/agenda')
-      } catch (error) {
-        toggleBarraContainer();
-        setErrorMessage('Email ou senha invalidos');
-      }
+      navigate('/agenda');
+    } catch (error) {
+      toggleBarraContainer();
+      setErrorMessage('Email ou senha inválidos');
+    } finally {
+      toggleBarraContainer();
     }
   };
 
+  const clearSession = () => {
+    Object.keys(Cookies.get()).forEach((cookieName) => {
+      Cookies.remove(cookieName);
+    });
+    localStorage.clear();
+  };
+
   const handleGoogleSignIn = async () => {
+
+    clearSession();
+
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
@@ -55,6 +75,8 @@ const FormularioLogin = ({ toggleBarraContainer }) => {
     } catch (error) {
       toggleBarraContainer();
       setErrorMessage("Email ou senha invalidos");
+    } finally {
+      toggleBarraContainer();
     }
   };
 

@@ -3,7 +3,7 @@ import "./HeaderEmpresa.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faFacebookF, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import UserMenu from "../../pages/Agendamento/components/modal-user/UserMenu";
+import UserMenu from "../../pages/HomeCliente/components/modal-user/UserMenu";
 
 function HeaderEmpresa({
     navLinks = [],
@@ -11,10 +11,11 @@ function HeaderEmpresa({
     width,
     widthOpcoes,
     url,
-    onLoginClick,
     isHomeCliente = true,
+    isButtonVisible = false,
+    onLoginClick,
     onCadastroClick,
-    isButtonVisible = false
+    onAgendaClick
 }) {
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -29,7 +30,6 @@ function HeaderEmpresa({
         };
     }, []);
 
-    // Define o estilo de fundo dinamicamente com base em `isButtonVisible`
     const headerStyle = {
         backgroundColor: isHomeCliente ? "" : "#00000051"
     };
@@ -79,6 +79,7 @@ function HeaderEmpresa({
                 <UserMenu
                     onClickLogin={onLoginClick}
                     onClickCadastro={onCadastroClick}
+                    onClickAgenda={onAgendaClick}
                 />
             )}
         </header>

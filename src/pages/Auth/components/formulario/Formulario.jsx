@@ -6,7 +6,8 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { cadastroUser } from '../../authRouter'
 import { auth } from '../../../../services/firebase';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { successToast, errorToast } from '../../../../utils/Toats'
 
 
 
@@ -60,10 +61,8 @@ function Formulario({ toggleBarraContainer }) {
     };
 
     const successCadastro = () => {
-        toast.success('Cadastro realizado com sucesso!', {
-            toastStyle: { backgroundColor: '#2196F3', color: '#fff' },
-            onClose: () => navigate('/login')
-        });
+        successToast('Usuário cadastrado com sucesso');
+        navigate('/login')
     };
 
     const handleSubmit = async (e) => {
@@ -100,7 +99,6 @@ function Formulario({ toggleBarraContainer }) {
     return (
 
         <div className="form-container">
-            <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} />
             <h2>Cadastro</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">

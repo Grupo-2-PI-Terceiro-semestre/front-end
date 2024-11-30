@@ -1,93 +1,71 @@
 import React, { useState, useEffect } from "react";
-// import HeaderModal from "../header-modal/HeaderModal";
-// import './ModalEditarCliente.css';
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import './ModalEditarCliente.css';
-// import { useNavigate } from "react-router-dom";
-// import { useParams } from "react-router-dom";
-import Swal from 'sweetalert2';
+import { successToast, errorToast } from '../../../../utils/Toats';
+import { AtualizarCliente } from "../../services/clienteServices";
+import Button from "../../../../components/button/Button";
 
-function ModalEditarCliente({ onClose, titulo, nome, telefone, email }) {
+function ModalEditarCliente({ onClose, titulo, idCliente, nome, telefone, email }) {
 
     const [isVisible, setIsVisible] = useState(false);
+    // const [isVisibleAddCliente, setIsVisibleAdd] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [nomeSelecionado, setNomeSelecionado] = useState(nome || '');
+    const [nomeOriginal, setNomeOriginal] = useState(nome || '');
+
+    const [telefoneSelecionado, setTelefoneSelecionado] = useState(telefone || '');
+    const [emailSelecionado, setEmailSelecionado] = useState(email || '');
 
     useEffect(() => {
         setIsVisible(true);
+        // setIsVisibleAdd(true);
+
+        setNomeOriginal(nome);
+        console.log(nomeOriginal + ' nome original ' + idCliente + ' id');
     }, []);
 
-    const [formData, setFormData] = useState({
-        nomeCliente: '',
-        telefoneCliente: '',
-        emailCliente: '',
-        tiposDeUsuario: 'ADMIN'
-    });
-
-    const [isVisibleAddCliente, setIsVisibleAdd] = useState(false);
-
-    useEffect(() => {
-        setIsVisibleAdd(true);
-    }, []);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+    const handleNomeChange = (event) => {
+        setNomeSelecionado(event.target.value);
     };
 
-    const handleColorChange = (e) => {
-        setFormData({ ...formData, corReferencia: e.target.value });
+    const handleTelefoneChange = (event) => {
+        setTelefoneSelecionado(event.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleEmailChange = (event) => {
+        setEmailSelecionado(event.target.value);
+    };
 
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: "btn btn-success",
-                cancelButton: "btn btn-danger"
-            },
-            buttonsStyling: false
-        });
-        swalWithBootstrapButtons.fire({
-            title: "Tem certeza?",
-            text: "O cliente será editado!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Sim, editar!",
-            cancelButtonText: "Não, cancelar!",
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                swalWithBootstrapButtons.fire({
-                    title: "Editado!",
-                    text: "O cliente foi editado.",
-                    icon: "success"
-                });
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire({
-                    title: "Cancelado",
-                    text: "O cliente não foi editado",
-                    icon: "error"
-                });
-            }
-        });
+    const handleSubmit = (event) => {
 
+        event.preventDefault(); 
 
-        // e.preventDefault();
-        // try {
-        //     // await api.put(`/${idCard}`, {
-        //     await cadastroService(formData);
-        //     alert('Cadastro realizado com sucesso!');
-        //     setFormData({
-        //         nomeCliente: '',
-        //         telefoneCliente: '',
-        //         emailCliente: '',
-        //         representante: "true",
-        //     });
-        // } catch (error) {
-        //     setErrorMessage('Erro ao cadastrar o serviço.');
-        // }
+        const eventoAtualizado = {
+            idPessoa: idCliente,
+            nomePessoa: nomeSelecionado,
+            numeroTelefone: telefoneSelecionado,
+            emailPessoa: emailSelecionado,
+        };
+
+        atualizarCliente(eventoAtualizado);
+
+    };
+
+    const atualizarCliente = async (eventoAtualizado) => {
+        try {
+            setLoading(true);
+            await AtualizarCliente("clientes/atualizar", eventoAtualizado);
+            successToast('Cliente atualizado com sucesso!');
+            onClose();
+
+            setTimeout(() => {
+                window.location.reload(); // Recarrega a página
+            }, 300);
+        } catch (error) {
+            console.error('Erro ao atualizar o cliente:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleClose = () => {
@@ -107,10 +85,10 @@ function ModalEditarCliente({ onClose, titulo, nome, telefone, email }) {
                                 <input
                                     className="input"
                                     type="text"
-                                    name="nomeCliente"
-                                    placeholder={nome}
-                                    value={nome}
-                                    onChange={handleChange}
+                                    // name="nomeCliente"
+                                    // placeholder={nome}
+                                    value={nomeSelecionado}
+                                    onChange={handleNomeChange}
                                     required
                                 />
                             </div>
@@ -122,10 +100,10 @@ function ModalEditarCliente({ onClose, titulo, nome, telefone, email }) {
                                 <input
                                     className="input"
                                     type="text"
-                                    name="telefoneCliente"
-                                    placeholder={telefone}
-                                    defaultValue={telefone}
-                                    onChange={handleChange}
+                                    // name="telefoneCliente"
+                                    // placeholder={telefone}
+                                    value={telefoneSelecionado}
+                                    onChange={handleTelefoneChange}
                                     required
                                 />
                             </div>
@@ -137,16 +115,22 @@ function ModalEditarCliente({ onClose, titulo, nome, telefone, email }) {
                                 <input
                                     className="input"
                                     type="email"
-                                    name="emailCliente"
-                                    placeholder={email}
-                                    value={email}
-                                    onChange={handleChange}
+                                    // name="emailCliente"
+                                    // placeholder={email}
+                                    value={emailSelecionado}
+                                    onChange={handleEmailChange}
                                     required
                                 />
                             </div>
                         </div>
 
-                        <button className="botaoCadastrar" onClick={handleSubmit}>Editar</button>
+                        {/* <button className="botaoCadastrar" onClick={handleSubmit}>Editar</button> */}
+
+                        <div className="botao-add-serv">
+                            <button type="submit" className="botaoCadastrar" disabled={loading}>
+                                {loading ? 'Editando...' : 'Editar'}
+                            </button>
+                        </div>
                     </form >
                 </div>
             </div>

@@ -5,42 +5,50 @@ import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import ModalEditarCliente from "../modalEditarCliente/ModalEditarCliente";
 import Swal from 'sweetalert2';
+// import { deletarCliente } from "../../services/clienteServices";
+import { atualizarStatus } from "../../services/clienteServices";
 
-function LinhaClientes({ nome, telefone, email }) {
+function LinhaClientes({ idCliente, nome, telefone, email }) {
     const [isModalOpenEditar, setIsModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const openModalExcluir = () => {
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: "btn btn-success",
-                cancelButton: "btn btn-danger"
-            },
-            buttonsStyling: false
-        });
+    const updateStatus = async (idCliente) => {
+        try {
+            let resutado = true;
 
-        swalWithBootstrapButtons.fire({
-            title: "Tem certeza?",
-            text: "Não será possível reverter!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Sim, excluir!",
-            cancelButtonText: "Não, cancelar!",
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                swalWithBootstrapButtons.fire({
-                    title: "Excluído!",
-                    text: "O cliente foi excluído.",
-                    icon: "success"
+                const result = await Swal.fire({
+                    title: "Atenção!",
+                    text: "Você tem certeza que deseja excluir esse cliente?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sim",
                 });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                swalWithBootstrapButtons.fire({
-                    title: "Cancelado",
-                    text: "O cliente não foi excluído",
-                    icon: "error"
-                });
+                resutado = result.isConfirmed;
+
+            if (resutado) {
+
+                setLoading(true);
+                try {
+                    await atualizarStatus(idCliente);
+
+                    setTimeout(() => {
+                        window.location.reload(); // Recarrega a página
+                    }, 300);
+
+                } catch (error) {
+                    await Swal.fire({
+                        title: "Erro!",
+                        text: "Erro ao cancelar o cliente!",
+                        icon: "error",
+                    });
+                    console.error("Erro ao cancelar cliente:", error);
+                }
             }
-        });
+        } catch (error) {
+            throw new Error("Erro ao deletar o cliente");
+        }
     };
 
     const openModalEditar = () => setIsModalOpen(true);
@@ -73,7 +81,7 @@ function LinhaClientes({ nome, telefone, email }) {
                                 overlay={renderTooltip("Excluir")}
                             >
                                 <FontAwesomeIcon
-                                    onClick={openModalExcluir}
+                                    onClick={() => updateStatus(idCliente)}
                                     icon={faTrashCan}
                                     className="icon-trash"
                                 />
@@ -83,7 +91,12 @@ function LinhaClientes({ nome, telefone, email }) {
                 </div>
 
                 {isModalOpenEditar && (
-                    <ModalEditarCliente onClose={closeModalEditar} titulo="Editar Cliente" nome={nome} telefone={telefone} email={email}/>
+                    <ModalEditarCliente onClose={closeModalEditar} 
+                    titulo="Editar Cliente" 
+                    idCliente={idCliente} 
+                    nome={nome} 
+                    telefone={telefone} 
+                    email={email}/>
                 )}
             </div>
         </>

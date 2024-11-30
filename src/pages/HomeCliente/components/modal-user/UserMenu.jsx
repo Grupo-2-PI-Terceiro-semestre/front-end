@@ -2,20 +2,11 @@ import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import "./UserMenu.css";
 
-function UserMenu({ onClickLogin, onClickCadastro }) {
-    // Recupera as informações do usuário armazenadas no cookie
-    const user = Cookies.get("user");
+function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
+
+    const user = Cookies.get('cliente') ? JSON.parse(Cookies.get('cliente')) : null;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [userLogged, setUserLogged] = useState(false);
-
-    useEffect(() => {
-        if (user) {
-            setUserLogged(true);
-        } else {
-            setUserLogged(false);
-        }
-    }, [user]);
 
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
@@ -28,6 +19,11 @@ function UserMenu({ onClickLogin, onClickCadastro }) {
         setIsMenuOpen(false);
     };
 
+    const logultClick = () => {
+        Cookies.remove('cliente');
+        window.location.reload();
+    }
+
     return (
         <div className="user-menu-container">
             <button className="user-icon-button" onClick={toggleMenu}>
@@ -36,22 +32,23 @@ function UserMenu({ onClickLogin, onClickCadastro }) {
 
             {isMenuOpen && (
                 <div className="user-menu">
-                    {false ? (
+                    {user ? (
                         <div className="user-info">
                             <span>Bem Vindo!</span>
                             <div>
                                 <p className="user-name">Nome</p>
-                                <p className="user-email">Jonathan Aparecido Dos Reis Carvalho</p>
+                                <p className="user-email">{user.nomePessoa}</p>
                             </div>
                             <div>
                                 <p className="user-name">Email</p>
-                                <p className="user-email">jonathan@gmail.com</p>
+                                <p className="user-email">{user.emailPessoa}</p>
                             </div>
                             <br />
                             <button
                                 className="menu-action"
                                 onClick={(e) => {
                                     e.stopPropagation();
+                                    onClickAgenda();
                                     closeMenu(e);
                                 }}
                             >
@@ -61,6 +58,7 @@ function UserMenu({ onClickLogin, onClickCadastro }) {
                                 className="menu-action"
                                 onClick={(e) => {
                                     e.stopPropagation();
+                                    logultClick();
                                     closeMenu(e);
                                 }}
                             >

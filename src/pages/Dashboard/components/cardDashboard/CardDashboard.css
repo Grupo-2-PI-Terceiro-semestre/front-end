@@ -27,3 +27,41 @@
     overflow: auto;
 }
 
+.no-data-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ccc;
+    border-radius: 10px;
+}
+
+.no-data-message {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #fff;
+    margin-top: 2rem;
+}
+
+.go-to-schedule-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.go-to-schedule-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.go-to-schedule-button:active {
+    background-color: #004494;
+    transform: scale(0.95);
+}
