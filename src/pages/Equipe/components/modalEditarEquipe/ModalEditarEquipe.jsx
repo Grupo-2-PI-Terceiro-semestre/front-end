@@ -3,7 +3,6 @@ import './ModalEditarEquipe.css';
 import HeadeModal from "../../../../components/header-modal/HeaderModal";
 import SearchableDropdown from '../autocomplete/SearchableDropdown';
 import { findFuncoes, AtualizarUsuario } from "../../services/equipeServices";
-import Button from "../../../../components/button/Button";
 import { successToast, errorToast } from '../../../../utils/Toats';
 
 function ModalEditarEquipe({ titulo, onClose, idPessoa, nome, telefone, email, funcao }) {
@@ -11,20 +10,14 @@ function ModalEditarEquipe({ titulo, onClose, idPessoa, nome, telefone, email, f
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [nomeSelecionado, setNomeSelecionado] = useState(nome || '');
-    const [nomeOriginal, setNomeOriginal] = useState(nome || '');
-
     const [telefoneSelecionado, setTelefoneSelecionado] = useState(telefone || '');
     const [emailSelecionado, setEmailSelecionado] = useState(email || '');
-    const [funcaoSelecionada, setFuncaoSelecionada] = useState(funcao || '');
-
+    const [funcaoSelecionada, setFuncaoSelecionada] = useState(funcao || null);
     const [funcoes, setFuncoes] = useState([]);
 
     useEffect(() => {
         setIsVisible(true);
         buscarFuncoes();
-
-        setNomeOriginal(nome);
-        console.log(nomeOriginal + ' nome original');
     }, []);
 
     const buscarFuncoes = async () => {
@@ -36,30 +29,32 @@ function ModalEditarEquipe({ titulo, onClose, idPessoa, nome, telefone, email, f
         }
     };
 
-    const handleNomeChange = (event) => {
-        setNomeSelecionado(event.target.value);
-    };
-
-    const handleTelefoneChange = (event) => {
-        setTelefoneSelecionado(event.target.value);
-    };
-
-    const handleEmailChange = (event) => {
-        setEmailSelecionado(event.target.value);
-    };
+    const handleNomeChange = (event) => setNomeSelecionado(event.target.value);
+    const handleTelefoneChange = (event) => setTelefoneSelecionado(event.target.value);
+    const handleEmailChange = (event) => setEmailSelecionado(event.target.value);
 
     const handleFuncoesChange = (funcao) => {
-        setFuncaoSelecionada(funcao);
+        console.log('Função selecionada:', funcao); // Log para depuração.
+        setFuncaoSelecionada(funcao); // Atualiza o estado com a função selecionada.
     };
 
-    const handleEditSubmit = () => {
+    const handleEditSubmit = (event) => {
+        event.preventDefault();
+
+        if (!funcaoSelecionada || !funcaoSelecionada.idFuncao) {
+            errorToast('Por favor, selecione uma função válida.');
+            return;
+        }
+
         const eventoAtualizado = {
-            idPessoa: idPessoa,
+            idPessoa,
             nomePessoa: nomeSelecionado,
             numeroTelefone: telefoneSelecionado,
             emailPessoa: emailSelecionado,
-            idFuncao: funcaoSelecionada.idFuncao,
+            idFuncao: funcaoSelecionada.idFuncao, // Agora garantimos que idFuncao existe.
         };
+
+        console.log('Evento atualizado:', eventoAtualizado);
 
         atualizarEvento(eventoAtualizado);
     };
@@ -70,16 +65,21 @@ function ModalEditarEquipe({ titulo, onClose, idPessoa, nome, telefone, email, f
             await AtualizarUsuario("usuarios", eventoAtualizado);
             successToast('Usuário atualizado com sucesso!');
             onClose();
+            setTimeout(() => {
+                window.location.reload(); // Recarrega a página
+            }, 300);
         } catch (error) {
             console.error('Erro ao atualizar o usuário:', error);
+            errorToast('Erro ao atualizar o usuário.');
         } finally {
             setLoading(false);
+
         }
     };
 
     const handleClose = () => {
-        setIsVisible(false); // Inicia a animação de saída
-        setTimeout(onClose, 300); // Fecha o modal após a animação
+        setIsVisible(false);
+        setTimeout(onClose, 300);
     };
 
     return (
@@ -87,7 +87,7 @@ function ModalEditarEquipe({ titulo, onClose, idPessoa, nome, telefone, email, f
             <div className="modal-header">
                 <div className="container-modal">
                     <HeadeModal title={titulo} handleClose={onClose} />
-                    <form className="form-modal-serv">
+                    <form className="form-modal-serv" onSubmit={handleEditSubmit}>
                         <div className="form-grupo-serv">
                             <div className='inputLabel'>
                                 <label>Nome:</label>
@@ -144,15 +144,9 @@ function ModalEditarEquipe({ titulo, onClose, idPessoa, nome, telefone, email, f
                         </div>
 
                         <div className="botao-add-serv">
-                            <Button
-                                size="100%"
-                                fontSize="15px"
-                                fontWeight="bold"
-                                content={loading ? 'Editando...' : 'Editar'}
-                                backgroundColor="#388E3C"
-                                onClick={handleEditSubmit}
-                                disabled={loading}
-                            />
+                            <button type="submit" className="botaoCadastrar" disabled={loading}>
+                                {loading ? 'Editando...' : 'Editar'}
+                            </button>
                         </div>
                     </form>
                 </div>
