@@ -36,23 +36,7 @@ function ModalEditarCliente({ onClose, titulo, idCliente, nome, telefone, email 
         setEmailSelecionado(event.target.value);
     };
 
-    // const [formData, setFormData] = useState({
-    //     nomeCliente: '',
-    //     telefoneCliente: '',
-    //     emailCliente: '',
-    //     tiposDeUsuario: 'ADMIN'
-    // });
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData({ ...formData, [name]: value });
-    // };
-
-    // const handleColorChange = (e) => {
-    //     setFormData({ ...formData, corReferencia: e.target.value });
-    // };
-
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
 
         event.preventDefault(); 
 
@@ -73,6 +57,10 @@ function ModalEditarCliente({ onClose, titulo, idCliente, nome, telefone, email 
             await AtualizarCliente("clientes/atualizar", eventoAtualizado);
             successToast('Cliente atualizado com sucesso!');
             onClose();
+
+            setTimeout(() => {
+                window.location.reload(); // Recarrega a página
+            }, 300);
         } catch (error) {
             console.error('Erro ao atualizar o cliente:', error);
         } finally {
@@ -139,15 +127,9 @@ function ModalEditarCliente({ onClose, titulo, idCliente, nome, telefone, email 
                         {/* <button className="botaoCadastrar" onClick={handleSubmit}>Editar</button> */}
 
                         <div className="botao-add-serv">
-                            <Button
-                                size="100%"
-                                fontSize="15px"
-                                fontWeight="bold"
-                                content={loading ? 'Editando...' : 'Editar'}
-                                backgroundColor="#388E3C"
-                                type="submit"
-                                disabled={loading}
-                            />
+                            <button type="submit" className="botaoCadastrar" disabled={loading}>
+                                {loading ? 'Editando...' : 'Editar'}
+                            </button>
                         </div>
                     </form >
                 </div>
