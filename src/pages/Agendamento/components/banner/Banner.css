@@ -36,3 +36,22 @@
   font-size: 1rem;
   color: #555;
 }
+
+@media (max-width: 768px) {
+  .banner-content {
+    width: 80vw;
+    height: 35vh;
+  }
+
+  .info-empresa h3 {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .info-empresa p {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+
+}

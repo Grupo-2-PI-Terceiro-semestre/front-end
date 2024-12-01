@@ -1,27 +1,37 @@
-
 .main-intro {
   background-color: rgb(245, 247, 244);
 }
 
 .intro-text {
-    text-align: center;
-    margin: 20px auto 100px auto;
-    max-width: 80%;
-    padding: 0 20px;
-  }
-  
+  text-align: center;
+  margin: 20px auto 100px auto;
+  max-width: 80%;
+  padding: 0 20px;
+}
+
+.intro-text h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.intro-text p {
+  font-size: 1.2rem;
+  color: #080808;
+}
+
+.intro-text strong {
+  color: #3C70F5;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
   .intro-text h2 {
-    font-size: 2rem;
-    margin-bottom: 25px;
-    font-weight: bold;
+    font-size: 1rem;
   }
-  
+
   .intro-text p {
-    font-size: 1.2rem;
-    color: #080808;
+    font-size: 0.8rem;
+    text-align: justify;
   }
-  
-  .intro-text strong {
-    color: #3C70F5;
-    font-weight: bold;
-  }
+}

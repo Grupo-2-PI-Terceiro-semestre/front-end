@@ -129,7 +129,7 @@
   text-align: left;
 }
 
-.selecionado{
+.selecionado {
   background: #9a9a9a;
 }
 
@@ -154,4 +154,50 @@
 
 .dropdown-profissional select {
   width: 40%;
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    width: 90%;
+  }
+
+  .modal-container button {
+    padding: 0.4rem;
+    font-size: 1rem;
+  }
+
+  .modal-container .total {
+    font-size: 1rem;
+  }
+
+  .modal-container .duration {
+    font-size: 0.8rem;
+  }
+
+  .modal-container p {
+    font-size: 0.9rem;
+  }
+
+  .modal-container .modal-title {
+    font-size: 1.2rem;
+  }
+
+
+  .custom-calendar-fixed {
+    width: 100%;
+    height: 15rem;
+    font-size: 14px;
+  }
+
+  .dropdown-profissional select {
+    font-size: 0.7rem;
+    width: auto;
+  }
+
+
+
+  .time-options p {
+    font-size: 12px;
+  }
+
 }

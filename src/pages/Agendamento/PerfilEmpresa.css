@@ -46,3 +46,10 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 768px) {
+    .banner-map {
+        flex-direction: column;
+        display: flex;
+    }
+}

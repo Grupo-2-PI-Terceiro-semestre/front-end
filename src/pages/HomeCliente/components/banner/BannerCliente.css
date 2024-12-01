@@ -47,8 +47,6 @@
   margin-top: 20px;
 }
 
-
-
 .search-box input {
   width: 300px;
   padding: 10px;
@@ -56,4 +54,46 @@
   border: none;
   border-radius: 5px;
   outline: none;
+}
+
+/* Media Query para telas pequenas */
+@media screen and (max-width: 768px) {
+  .banner {
+    height: 70vh; 
+  }
+
+  .banner h1 {
+    font-size: 1.5rem; 
+    margin-bottom: 15px;
+  }
+
+  .search-box input {
+    width: 80%; /* Ajusta a largura do input para telas pequenas */
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Media Query para telas muito pequenas, como smartphones */
+@media screen and (max-width: 768px) {
+
+  .banner::before {
+    height: 60vh;
+    background-color: #000000ae;
+  }
+
+  .banner {
+    height: 60vh; /* Ajusta ainda mais a altura */
+  }
+
+  .banner h1 {
+    font-size: 1.2rem;  /* Diminui o tamanho da fonte ainda mais */
+    margin-bottom: 10px;
+  }
+
+  .search-box input {
+    width: 90%; /* Ajusta ainda mais a largura do input */
+    padding: 6px;
+    font-size: 0.8rem;
+  }
 }

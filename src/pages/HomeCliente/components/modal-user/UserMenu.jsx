@@ -1,33 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
+import { RiAccountCircleLine } from "react-icons/ri";
 import "./UserMenu.css";
 
 function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
-
     const user = Cookies.get('cliente') ? JSON.parse(Cookies.get('cliente')) : null;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const menuRef = useRef(null); // Referência para o menu
 
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
     };
 
-    const closeMenu = (e) => {
-        if (e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) {
-            return;
-        }
-        setIsMenuOpen(false);
-    };
-
     const logultClick = () => {
         Cookies.remove('cliente');
         window.location.reload();
-    }
+    };
+
+    // Fecha o menu se clicar fora dele
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     return (
-        <div className="user-menu-container">
+        <div className="user-menu-container" ref={menuRef}>
             <button className="user-icon-button" onClick={toggleMenu}>
-                <span className="user-icon">👤</span>
+                <span className="user-icon"><RiAccountCircleLine /></span>
             </button>
 
             {isMenuOpen && (
@@ -49,7 +58,7 @@ function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     onClickAgenda();
-                                    closeMenu(e);
+                                    setIsMenuOpen(false);
                                 }}
                             >
                                 Meus Agendamentos
@@ -59,7 +68,7 @@ function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     logultClick();
-                                    closeMenu(e);
+                                    setIsMenuOpen(false);
                                 }}
                             >
                                 Logoult
@@ -72,7 +81,7 @@ function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     onClickLogin();
-                                    closeMenu(e);
+                                    setIsMenuOpen(false);
                                 }}
                             >
                                 Login
@@ -82,7 +91,7 @@ function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     onClickCadastro();
-                                    closeMenu(e);
+                                    setIsMenuOpen(false);
                                 }}
                             >
                                 Cadastro
@@ -96,4 +105,3 @@ function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
 }
 
 export default UserMenu;
-

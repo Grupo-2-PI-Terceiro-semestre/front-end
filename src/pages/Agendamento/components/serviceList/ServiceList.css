@@ -1,80 +1,115 @@
 .service-list {
-    margin: 20px auto;
-    font-family: Arial, sans-serif;
-    width: 80%;
-    min-height: 80vh;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  width: 80%;
+  min-height: 80vh;
+}
+
+.service-list h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.search-container input {
+  width: 100%;
+}
+
+.service-search {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+}
+
+.service-container {
+  list-style: none;
+  padding: 0;
+}
+
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.service-details {
+  flex: 1;
+}
+
+.service-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.service-name {
+  font-size: 18px;
+}
+
+.service-price {
+  font-weight: bold;
+}
+
+.service-duration {
+  font-size: 14px;
+  color: #555;
+}
+
+.service-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.service-button:hover {
+  background-color: #0056b3;
+}
+
+
+@media (max-width: 768px) {
+
+  .service-button {
+    font-size: 11px;
   }
-  
-  h1 {
-    font-size: 36px;
-    font-weight: bold;
-  }
-  
-  .search-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
-  
-  .search-container input{
-    width: 100%;
-  }
-  
-  .service-search {
-    width: 100%; 
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #000000;
-    border-radius: 5px;
-  }
-  
-  .service-container {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .service-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .service-details {
-    flex: 1;
-  }
-  
-  .service-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .service-name {
-    font-size: 18px;
-  }
-  
-  .service-price {
-    font-weight: bold;
-  }
-  
+
   .service-duration {
-    font-size: 14px;
+    font-size: 11px;
     color: #555;
   }
-  
-  .service-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 15px;
-    font-size: 14px;
-    cursor: pointer;
+
+  .service-search {
+    width: 100%;
+    padding: 9px;
+    font-size: 12px;
   }
-  
-  .service-button:hover {
-    background-color: #0056b3;
+
+  .service-list h1 {
+    font-size: 1.2rem;
+    font-weight: bold;
   }
-  
+
+  .service-item {
+    font-size: 0.8rem;
+  }
+
+  .service-info {
+    font-size: 0.8rem;
+  }
+
+  .service-details span {
+    font-size: 0.8rem;
+  }
+}

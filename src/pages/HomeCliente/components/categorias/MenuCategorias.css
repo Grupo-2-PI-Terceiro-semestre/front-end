@@ -28,4 +28,13 @@
     color: #007bff; 
     transition: color 0.3s ease-in-out;
   }
+
+  @media screen and (max-width: 768px) {
+    .category-item {
+      color: white;
+      margin: 0 1.5%; 
+      font-size: 10.5px;
+      cursor: pointer;
+    }
+}
   

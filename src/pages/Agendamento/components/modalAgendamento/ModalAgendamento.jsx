@@ -161,7 +161,7 @@ function ModalAgendamento({ onClose, servico, equipe }) {
                                         );
                                     })
                                 ) : (
-                                    <p>Selecione uma data e um profissional para visualizar os horários disponíveis.</p>
+                                    <p>Selecione uma data e um profissional <br />para visualizar os horários disponíveis.</p>
                                 )
                             )}
                     </div>

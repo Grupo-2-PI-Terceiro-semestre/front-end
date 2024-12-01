@@ -19,12 +19,12 @@ const Card = ({ card }) => {
       <img src={card.urlLogo} alt={card.nomeEmpresa} className="card-img" />
       <div className="card-content">
         <div className="info-endereco">
-          <p>Jd Record - SP</p>
+          <p>{card.bairro}</p>
         </div>
         <h3>{card.nomeEmpresa}</h3>
         <h5>{card.categoria}</h5>
         <p>
-          <strong>Principais Serviços:</strong>
+          <strong>Principais Serviços: </strong>
           {card.servicos.slice(0, 3).map((servico, index) => (
             <span key={index}>{servico}{index < 2 ? ', ' : ''}</span>
           ))}
