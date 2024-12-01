@@ -5,28 +5,18 @@
 }
 
 .user-icon-button {
-    width: 40px;
-    height: 40px;
     border: none;
-    border-radius: 50%;
-    background-color: #48a1ff;
+    background-color: transparent;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 35px;
     position: relative;
     transition: background-color 0.3s ease;
 }
 
-.user-icon-button:hover {
-    background-color: #1888ff;
-}
-
 .user-menu {
     position: absolute;
-    top: 45px;
+    top: 50px;
     right: 0;
     background: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -56,7 +46,6 @@
 .user-actions .menu-action,
 .user-info .menu-action {
     width: 100%;
-    padding: 8px;
     border: none;
     background: #f0f0f0;
     border-radius: 4px;
@@ -84,14 +73,16 @@
 @media screen and (max-width: 768px) {
 
     .user-icon-button {
-        width: 25px;
-        height: 25px;
         border: none;
         border-radius: 50%;
     }
 
+    .user-icon-button {
+        font-size: 30px;
+    }
+
     .user-menu {
-        top: 30px;
+        top: 40px;
     }
 
     .user-menu-container {

@@ -65,7 +65,6 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
     if (!selectedFile) {
       return;
     }
-    setLoading(true);
     try {
       const formData = new FormData();
       formData.append('file', selectedFile);
@@ -77,8 +76,6 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
     } catch (error) {
       console.error("Erro ao fazer o upload da imagem", error);
       errorToast('Erro ao fazer o upload da imagem');
-    } finally {
-      setLoading(false);
     }
   };
 
