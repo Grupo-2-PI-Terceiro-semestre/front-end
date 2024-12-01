@@ -89,15 +89,8 @@ const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colo
             {seriesData.length === 0 ? (
                 <div className="no-data-container">
                     <p className="no-data-message">
-                        Parece que é a sua primeira vez acessando a dashboard. <br />
-                        Para começar, cadastre um novo agendamento.
+                        Ainda não há informações a serem exibidas<br />
                     </p>
-                    <button
-                        className="go-to-schedule-button"
-                        onClick={() => window.location.href = '/agenda'} // Altere a rota conforme sua estrutura
-                    >
-                        Ir para Agenda
-                    </button>
                 </div>
             ) : (
                 <HighchartsReact

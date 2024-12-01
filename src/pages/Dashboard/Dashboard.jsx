@@ -8,6 +8,12 @@ import TabelaDashboard from "./components/Tabela/TabelaDashboard";
 import Cookies from 'js-cookie';
 import CircularSize from "../../components/circulo-load/CircularSize";
 import { useState } from "react";
+import { IoStatsChart} from "react-icons/io5";
+import { FaRegCheckSquare, FaTicketAlt, FaRegClock } from "react-icons/fa";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { icon } from "@fortawesome/fontawesome-svg-core";
+
+
 
 
 function Dashboard() {
@@ -28,43 +34,48 @@ function Dashboard() {
             idEmpresa: user.idEmpresa,
             mes: mesAtual.toString(),
             description: "Receita Total",
-            icon: <span className="material-symbols-outlined">monitoring</span>,
+            icon: <IoStatsChart />,
             iconColor: "#FEB95A",
             formatarValor: true,
             mensagemMes: true,
+            iconSize: '24px',
         },
         {
             endPoint: "agendamentos/servicos",
             idEmpresa: user.idEmpresa,
             mes: mesAtual.toString(),
             description: "Total de Serviços",
-            icon: <span className="material-symbols-outlined">select_check_box</span>,
+            icon: <FaRegCheckSquare />,
             iconColor: "#A9DFD8",
             mensagemMes: true,
+            iconSize: '24px'
         },
         {
             endPoint: "agendamentos/novosClientes",
             idEmpresa: user.idEmpresa,
             description: "Novos clientes",
-            icon: <span className="material-symbols-outlined">account_circle</span>,
+            icon: <FaRegCircleUser />,
             iconColor: "#20AEF3",
             mensagemMes: true,
+            iconSize: '24px'
         },
         {
             endPoint: "agendamentos/ticket",
             idEmpresa: user.idEmpresa,
             description: "Ticket Médio",
-            icon: <span className="material-symbols-outlined">payments</span>,
+            icon: <FaTicketAlt />,
             iconColor: "#3CD856",
             formatarValor: true,
+            iconSize: '24px'
         },
         {
             endPoint: "agendamentos/aReceber",
             idEmpresa: user.idEmpresa,
             description: "Receita a Receber",
-            icon: <span class="material-symbols-outlined">schedule</span>,
+            icon: <FaRegClock />,
             iconColor: "#F5D007",
             formatarValor: true,
+            iconSize: '24px'
         },
     ];
 

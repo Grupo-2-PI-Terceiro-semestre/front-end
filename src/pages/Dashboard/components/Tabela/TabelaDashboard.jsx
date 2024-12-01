@@ -32,21 +32,30 @@ function TabelaDashboard({ headers, idEmpresa, endPoint, carregando }) {
         }
     };
 
+    const getNoDataMessage = () => {
+        switch (endPoint) {
+            case "agendamentos":
+                return "Seus próximos agendamentos do dia aparecerão aqui.";
+            case "receitaPorFuncionario":
+                return "A receita por funcionário aparecerá aqui.";
+            default:
+                return "Nenhuma informação disponível.";
+        }
+    };
+
+    const formatarData = (data) => {
+        const [ano, mes, dia] = data.split('-');
+        return `${dia}-${mes}-${ano}`;
+    };
+
     return (
         <div className="tabela-dashboard-container">
             {data.length === 0 ? (
                 <div className="no-data-container">
-                <p className="no-data-message">
-                    Parece que é a sua primeira vez acessando a dashboard. <br />
-                    Para começar, cadastre um novo agendamento.
-                </p>
-                <button
-                    className="go-to-schedule-button"
-                    onClick={() => window.location.href = '/agenda'} // Altere a rota conforme sua estrutura
-                >
-                    Ir para Agenda
-                </button>
-            </div>
+                    <p className="no-data-message">
+                        {getNoDataMessage()}
+                    </p>
+                </div>
             ) : (
                 <table className="tabela-dashboard">
                     <thead>
