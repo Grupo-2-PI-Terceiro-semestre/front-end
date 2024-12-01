@@ -58,3 +58,13 @@ export const formatDateTimeForBackend = (date, time) => {
     // Formata o resultado no padrão ISO-8601
     return `${year}-${month}-${day}T${time}`;
 };
+
+export const formatDateTimeForDisplay = (isoDateTime) => {
+    if (!isoDateTime) return '';
+
+    const [datePart, timePart] = isoDateTime.split('T');
+    const [year, month, day] = datePart.split('-');
+    const time = timePart?.slice(0, 5);
+
+    return `${day}/${month}/${year} às ${time}`;
+};
