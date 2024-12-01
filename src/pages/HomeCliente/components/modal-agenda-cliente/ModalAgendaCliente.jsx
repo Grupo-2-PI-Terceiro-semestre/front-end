@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { buscarAgendamentos, cancelaAgendamento } from '../../../../services/homeClienteServices';
 import Cookies from "js-cookie";
 import "./ModalAgendaCliente.css";
@@ -11,8 +11,16 @@ function ModalAgendaCliente({ onClose }) {
     const [statusFilter, setStatusFilter] = useState("");
 
     useEffect(() => {
-        findAgendamentos(user.idPessoa);
+        const fetchAgendamentos = async () => {
+            if (user?.idPessoa) {
+                await findAgendamentos(user.idPessoa);
+                await findAgendamentos(user.idPessoa);
+            }
+        };
+
+        fetchAgendamentos();
     }, []);
+
 
     const findAgendamentos = async (idCliente) => {
         try {
@@ -34,7 +42,6 @@ function ModalAgendaCliente({ onClose }) {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    debugger
                     console.log(idAgendamento);
                     await cancelaAgendamento(idAgendamento);
                     Swal.fire('Cancelado!', 'Seu agendamento foi cancelado.', 'success');
@@ -48,12 +55,17 @@ function ModalAgendaCliente({ onClose }) {
     };
 
     const capitalizeFirstLetter = (string) => {
+        if (typeof string !== 'string' || string.length === 0) {
+            return "Não definido";
+        }
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     };
 
-    const filteredAgendamentos = agendamentos.filter((agendamento) =>
-        statusFilter === "" || agendamento.status === statusFilter
-    );
+    const filteredAgendamentos = agendamentos
+        .filter((agendamento) => agendamento && agendamento.status)
+        .filter((agendamento) =>
+            statusFilter === "" || agendamento.status === statusFilter
+        );
 
     return (
         <div className="modal-overlay-cliente" onClick={(e) => e.target.classList.contains("modal-overlay-cliente") && onClose()}>
@@ -85,7 +97,7 @@ function ModalAgendaCliente({ onClose }) {
                                 <p><strong>Servico:</strong> {agendamento.nomeServico || "Não informado"}</p>
                                 <p><strong>Data:</strong> {formatDateTimeForDisplay(agendamento.dataHora) || "Data não disponível"}</p>
                                 <p><strong>Atendente:</strong> {agendamento.atendente || "Não informado"}</p>
-                                <p><strong>Status:</strong> {capitalizeFirstLetter(agendamento.status) || "Não definido"}</p>
+                                <p><strong>Status:</strong> {agendamento.status ? capitalizeFirstLetter(agendamento.status) : "Não definido"}</p>
                                 {agendamento.status !== "REALIZADO" && agendamento.status !== "CANCELADO" && (
                                     <button
                                         className="cancel-button"
