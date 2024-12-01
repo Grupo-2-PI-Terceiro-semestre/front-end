@@ -47,7 +47,7 @@
     justify-content: center;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     .banner-map {
         flex-direction: column;
         display: flex;

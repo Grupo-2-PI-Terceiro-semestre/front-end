@@ -25,7 +25,7 @@
   font-weight: bold;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
   .intro-text h2 {
     font-size: 1rem;
   }

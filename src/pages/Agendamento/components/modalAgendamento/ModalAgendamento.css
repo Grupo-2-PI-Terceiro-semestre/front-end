@@ -156,7 +156,7 @@
   width: 40%;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .modal-container {
     width: 90%;
   }

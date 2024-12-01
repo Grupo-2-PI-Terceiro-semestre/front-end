@@ -60,7 +60,7 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
 
   .title {
     font-size: 32px;

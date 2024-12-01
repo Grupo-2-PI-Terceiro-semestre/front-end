@@ -75,7 +75,7 @@
 }
 
 /* Media Query para telas muito pequenas, como smartphones */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
 
   .banner::before {
     height: 60vh;
