@@ -64,7 +64,7 @@
     gap: 1rem;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
 
     .modal-overlay-login .modal-content-login {
         width: 90%;
