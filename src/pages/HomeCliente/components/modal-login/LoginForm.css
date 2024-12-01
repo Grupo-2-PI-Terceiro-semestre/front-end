@@ -11,7 +11,7 @@
     z-index: 1000;
 }
 
-.modal-content-login {
+.modal-overlay-login .modal-content-login {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -58,8 +58,16 @@
     font-size: 16px;
 }
 
-.button-form-login{
+.button-form-login {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+@media (max-width: 500px) {
+
+    .modal-overlay-login .modal-content-login {
+        width: 90%;
+    }
+
 }

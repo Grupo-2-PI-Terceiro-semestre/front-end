@@ -14,6 +14,7 @@
   justify-content: center;
   width: 100%;
 }
+
 .loading-cards img {
   width: 10rem;
 }
@@ -79,7 +80,7 @@
 
 .card-content p {
   margin-bottom: 5px;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   color: #666;
 }
 
@@ -100,4 +101,25 @@
 
 .carousel-button:hover {
   color: #000;
+}
+
+
+@media screen and (max-width: 500px) {
+
+  .card-content h3 {
+    font-size: 1em;
+  }
+
+  .card-content h5 {
+    font-size: 0.8rem;
+  }
+
+  .card-content p {
+    font-size: 0.6rem;
+  }
+
+  .main-carrosel .card-cliente {
+    width: 250px;
+    height: 43vh;
+  }
 }

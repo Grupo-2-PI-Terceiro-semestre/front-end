@@ -27,7 +27,7 @@
 .user-menu {
     position: absolute;
     top: 45px;
-    right: -80px;
+    right: 0;
     background: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
@@ -78,4 +78,25 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+
+@media screen and (max-width: 500px) {
+
+    .user-icon-button {
+        width: 25px;
+        height: 25px;
+        border: none;
+        border-radius: 50%;
+    }
+
+    .user-menu {
+        top: 30px;
+    }
+
+    .user-menu-container {
+        position: absolute;
+        right: 50px;
+    }
+
 }
