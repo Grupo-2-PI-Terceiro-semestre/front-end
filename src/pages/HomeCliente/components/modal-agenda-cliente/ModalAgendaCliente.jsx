@@ -11,14 +11,9 @@ function ModalAgendaCliente({ onClose }) {
     const [statusFilter, setStatusFilter] = useState("");
 
     useEffect(() => {
-        const fetchAgendamentos = async () => {
-            if (user?.idPessoa) {
-                await findAgendamentos(user.idPessoa);
-                await findAgendamentos(user.idPessoa);
-            }
-        };
-
-        fetchAgendamentos();
+        if (user?.idPessoa) {
+            findAgendamentos(user.idPessoa);
+        }
     }, []);
 
 
@@ -82,6 +77,7 @@ function ModalAgendaCliente({ onClose }) {
                         onChange={(e) => setStatusFilter(e.target.value)}
                     >
                         <option value="">Todos</option>
+                        <option value="AGENDADO">Agendado</option>
                         <option value="PENDENTE">Pendente</option>
                         <option value="REALIZADO">Realizado</option>
                         <option value="CANCELADO">Cancelado</option>

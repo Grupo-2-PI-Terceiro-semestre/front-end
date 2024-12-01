@@ -35,7 +35,7 @@ export default function IconDemo({ content, onDateChange, isFixed }) {
                     className="custom-calendar-fixed"
                     locale="br"
                     inputStyle={{ width: '100%' }}
-                    disabledDays={[1, 0]}
+                    /* disabledDays={[1, 0]} */
                     minDate={today}
                 />
             ) : (
