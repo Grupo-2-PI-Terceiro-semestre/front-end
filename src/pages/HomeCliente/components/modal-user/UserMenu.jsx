@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 import { RiAccountCircleLine } from "react-icons/ri";
+import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
 import "./UserMenu.css";
 
 function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
-    const user = Cookies.get('cliente') ? JSON.parse(Cookies.get('cliente')) : null;
+    const user = Cookies.get("cliente") ? JSON.parse(Cookies.get("cliente")) : null;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const menuRef = useRef(null); // Referência para o menu
+    const menuRef = useRef(null);
 
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
     };
 
     const logultClick = () => {
-        Cookies.remove('cliente');
+        Cookies.remove("cliente");
         window.location.reload();
     };
 
@@ -33,16 +35,28 @@ function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
         };
     }, []);
 
+    const handleMessage = () =>{
+        if (user) {
+            return 'Perfil';
+        } else {
+            return 'Faça seu Login';
+        }
+    }
+
     return (
-        <div className="user-menu-container" ref={menuRef}>
-            <button className="user-icon-button" onClick={toggleMenu}>
-                <span className="user-icon"><RiAccountCircleLine /></span>
-            </button>
+        <Box className="user-menu-container" ref={menuRef}>
+            <Tooltip title={handleMessage()} arrow>
+                <button className="user-icon-button" onClick={toggleMenu}>
+                    <span className="user-icon">
+                        <RiAccountCircleLine />
+                    </span>
+                </button>
+            </Tooltip>
 
             {isMenuOpen && (
-                <div className="user-menu">
+                <Box className="user-menu" sx={{ p: 1, bgcolor: "background.paper", borderRadius: 1 }}>
                     {user ? (
-                        <div className="user-info">
+                        <Box className="user-info">
                             <span>Bem Vindo!</span>
                             <div>
                                 <p className="user-name">Nome</p>
@@ -71,11 +85,11 @@ function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
                                     setIsMenuOpen(false);
                                 }}
                             >
-                                Logoult
+                                Logout
                             </button>
-                        </div>
+                        </Box>
                     ) : (
-                        <div className="user-actions">
+                        <Box className="user-actions">
                             <button
                                 className="menu-action"
                                 onClick={(e) => {
@@ -96,11 +110,11 @@ function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
                             >
                                 Cadastro
                             </button>
-                        </div>
+                        </Box>
                     )}
-                </div>
+                </Box>
             )}
-        </div>
+        </Box>
     );
 }
 
