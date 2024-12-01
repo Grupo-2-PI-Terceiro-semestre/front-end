@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { buscarAgendamentos, cancelaAgendamento } from '../../../../services/homeClienteServices';
 import Cookies from "js-cookie";
-import "./ModalAgendaCliente.css";
-import { formatDateTimeForDisplay } from '../../../../utils/FormatDate';
 import Swal from "sweetalert2";
+import { formatDateTimeForDisplay } from '../../../../utils/FormatDate';
+import "./ModalAgendaCliente.css";
 
 function ModalAgendaCliente({ onClose }) {
     const user = Cookies.get('cliente') ? JSON.parse(Cookies.get('cliente')) : null;
@@ -19,7 +19,10 @@ function ModalAgendaCliente({ onClose }) {
     const findAgendamentos = async (idCliente) => {
         try {
             const response = await buscarAgendamentos(idCliente);
-            setAgendamentos(response);
+            const validAgendamentos = response.filter(
+                (agendamento) => agendamento && agendamento.status
+            );
+            setAgendamentos(validAgendamentos);
         } catch (error) {
             console.error("Erro ao buscar agendamentos", error);
         }
@@ -29,18 +32,18 @@ function ModalAgendaCliente({ onClose }) {
         Swal.fire({
             title: 'Tem certeza que deseja cancelar o agendamento?',
             showCancelButton: true,
-            confirmButtonText: `Sim`,
-            cancelButtonText: `Não`,
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    debugger
-                    console.log(idAgendamento);
                     await cancelaAgendamento(idAgendamento);
                     Swal.fire('Cancelado!', 'Seu agendamento foi cancelado.', 'success');
-                    setAgendamentos(prevAgendamentos => prevAgendamentos.filter(agendamento => agendamento.idAgendamento !== idAgendamento));
+                    setAgendamentos((prev) =>
+                        prev.filter((agendamento) => agendamento.idAgendamento !== idAgendamento)
+                    );
                 } catch (error) {
                     console.error("Erro ao cancelar agendamento", error);
                     Swal.fire('Erro!', 'Ocorreu um erro ao cancelar o agendamento.', 'error');
@@ -49,16 +52,19 @@ function ModalAgendaCliente({ onClose }) {
         });
     };
 
-    const capitalizeFirstLetter = (string) => {
+    const capitalizeFirstLetter = (string = '') => {
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     };
 
-    const filteredAgendamentos = agendamentos.filter((agendamento) =>
-        statusFilter === "" || agendamento.status === statusFilter
+    const filteredAgendamentos = agendamentos.filter(
+        (agendamento) => statusFilter === "" || agendamento.status === statusFilter
     );
 
     return (
-        <div className="modal-overlay-cliente" onClick={(e) => e.target.classList.contains("modal-overlay-cliente") && onClose()}>
+        <div
+            className="modal-overlay-cliente"
+            onClick={(e) => e.target.classList.contains("modal-overlay-cliente") && onClose()}
+        >
             <div className="modal-container">
                 <button className="close-button" onClick={onClose}>
                     x
@@ -84,12 +90,12 @@ function ModalAgendaCliente({ onClose }) {
                         {filteredAgendamentos.map((agendamento) => (
                             <li key={agendamento.idAgendamento} className="agendamento-item">
                                 <h3>{agendamento.servico}</h3>
-                                <p><strong>Empresa:</strong> {agendamento.nomeEmpresa}</p>
-                                <p><strong>Servico:</strong> {agendamento.nomeServico}</p>
+                                <p><strong>Empresa:</strong> {agendamento.nomeEmpresa || 'Não informado'}</p>
+                                <p><strong>Servico:</strong> {agendamento.nomeServico || 'Não informado'}</p>
                                 <p><strong>Data:</strong> {formatDateTimeForDisplay(agendamento.dataHora)}</p>
-                                <p><strong>Atendente:</strong> {agendamento.atendente}</p>
+                                <p><strong>Atendente:</strong> {agendamento.atendente || 'Não informado'}</p>
                                 <p><strong>Status:</strong> {capitalizeFirstLetter(agendamento.status)}</p>
-                                {agendamento.status !== "REALIZADO" && agendamento.status !== "CANCELADO"  && (
+                                {agendamento.status !== "REALIZADO" && agendamento.status !== "CANCELADO" && (
                                     <button
                                         className="cancel-button"
                                         onClick={() => handleCancel(agendamento.idAgendamento)}
