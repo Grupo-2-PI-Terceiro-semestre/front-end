@@ -19,7 +19,10 @@ function ModalAgendaCliente({ onClose }) {
     const findAgendamentos = async (idCliente) => {
         try {
             const response = await buscarAgendamentos(idCliente);
-            setAgendamentos(response);
+            const validAgendamentos = response.filter(
+                (agendamento) => agendamento && agendamento.status
+            );
+            setAgendamentos(validAgendamentos);
         } catch (error) {
             console.error("Erro ao buscar agendamentos", error);
         }
@@ -83,12 +86,12 @@ function ModalAgendaCliente({ onClose }) {
                     <ul className="agendamentos-list">
                         {filteredAgendamentos.map((agendamento) => (
                             <li key={agendamento.idAgendamento} className="agendamento-item">
-                                <h3>{agendamento.servico}</h3>
-                                <p><strong>Empresa:</strong> {agendamento.nomeEmpresa}</p>
-                                <p><strong>Servico:</strong> {agendamento.nomeServico}</p>
-                                <p><strong>Data:</strong> {formatDateTimeForDisplay(agendamento.dataHora)}</p>
-                                <p><strong>Atendente:</strong> {agendamento.atendente}</p>
-                                <p><strong>Status:</strong> {capitalizeFirstLetter(agendamento.status)}</p>
+                                <h3>{agendamento.servico || "Serviço não especificado"}</h3>
+                                <p><strong>Empresa:</strong> {agendamento.nomeEmpresa || "Não informado"}</p>
+                                <p><strong>Servico:</strong> {agendamento.nomeServico || "Não informado"}</p>
+                                <p><strong>Data:</strong> {formatDateTimeForDisplay(agendamento.dataHora) || "Data não disponível"}</p>
+                                <p><strong>Atendente:</strong> {agendamento.atendente || "Não informado"}</p>
+                                <p><strong>Status:</strong> {capitalizeFirstLetter(agendamento.status) || "Não definido"}</p>
                                 {agendamento.status !== "REALIZADO" && agendamento.status !== "CANCELADO" && (
                                     <button
                                         className="cancel-button"
