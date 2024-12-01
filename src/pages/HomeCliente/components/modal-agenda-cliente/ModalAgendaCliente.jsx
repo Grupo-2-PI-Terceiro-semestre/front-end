@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { buscarAgendamentos, cancelaAgendamento } from '../../../../services/homeClienteServices';
 import Cookies from "js-cookie";
 import "./ModalAgendaCliente.css";
@@ -11,18 +11,13 @@ function ModalAgendaCliente({ onClose }) {
     const [statusFilter, setStatusFilter] = useState("");
 
     useEffect(() => {
-        if (user) {
-            findAgendamentos(user.idPessoa);
-        }
+        findAgendamentos(user.idPessoa);
     }, []);
 
     const findAgendamentos = async (idCliente) => {
         try {
             const response = await buscarAgendamentos(idCliente);
-            const validAgendamentos = response.filter(
-                (agendamento) => agendamento && agendamento.status
-            );
-            setAgendamentos(validAgendamentos);
+            setAgendamentos(response);
         } catch (error) {
             console.error("Erro ao buscar agendamentos", error);
         }
@@ -68,7 +63,7 @@ function ModalAgendaCliente({ onClose }) {
                 </button>
                 <h2>Meus Agendamentos</h2>
                 <div className="filter-container">
-                    <label htmlFor="statusFilter">Filtrar por status:</label>
+                    <label htmlFor="statusFilter">Filtrar por status: </label>
                     <select
                         id="statusFilter"
                         value={statusFilter}
@@ -86,7 +81,6 @@ function ModalAgendaCliente({ onClose }) {
                     <ul className="agendamentos-list">
                         {filteredAgendamentos.map((agendamento) => (
                             <li key={agendamento.idAgendamento} className="agendamento-item">
-                                <h3>{agendamento.servico || "Serviço não especificado"}</h3>
                                 <p><strong>Empresa:</strong> {agendamento.nomeEmpresa || "Não informado"}</p>
                                 <p><strong>Servico:</strong> {agendamento.nomeServico || "Não informado"}</p>
                                 <p><strong>Data:</strong> {formatDateTimeForDisplay(agendamento.dataHora) || "Data não disponível"}</p>
