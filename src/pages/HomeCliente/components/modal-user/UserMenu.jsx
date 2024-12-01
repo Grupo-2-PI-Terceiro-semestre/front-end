@@ -71,7 +71,7 @@ function UserMenu({ onClickLogin, onClickCadastro, onClickAgenda }) {
                                     setIsMenuOpen(false);
                                 }}
                             >
-                                Logoult
+                                Logout
                             </button>
                         </div>
                     ) : (

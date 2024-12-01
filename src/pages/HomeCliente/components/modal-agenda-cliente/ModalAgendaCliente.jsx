@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { buscarAgendamentos } from '../../../../services/homeClienteServices'
+import { buscarAgendamentos, cancelaAgendamento } from '../../../../services/homeClienteServices';
 import Cookies from "js-cookie";
 import "./ModalAgendaCliente.css";
-import { formatDateTimeForDisplay } from '../../../../utils/FormatDate'
+import { formatDateTimeForDisplay } from '../../../../utils/FormatDate';
 import Swal from "sweetalert2";
 
 function ModalAgendaCliente({ onClose }) {
@@ -14,7 +14,7 @@ function ModalAgendaCliente({ onClose }) {
         if (user) {
             findAgendamentos(user.idPessoa);
         }
-    }, []);
+    }, [user]);
 
     const findAgendamentos = async (idCliente) => {
         try {
@@ -25,7 +25,7 @@ function ModalAgendaCliente({ onClose }) {
         }
     };
 
-    const handleCancel = (id) => {
+    const handleCancel = (idAgendamento) => {
         Swal.fire({
             title: 'Tem certeza que deseja cancelar o agendamento?',
             showCancelButton: true,
@@ -33,11 +33,18 @@ function ModalAgendaCliente({ onClose }) {
             cancelButtonText: `Não`,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                setAgendamentos((prev) =>
-                    prev.filter((agendamento) => agendamento.id !== id)
-                );
+                try {
+                    debugger
+                    console.log(idAgendamento);
+                    await cancelaAgendamento(idAgendamento);
+                    Swal.fire('Cancelado!', 'Seu agendamento foi cancelado.', 'success');
+                    setAgendamentos(prevAgendamentos => prevAgendamentos.filter(agendamento => agendamento.idAgendamento !== idAgendamento));
+                } catch (error) {
+                    console.error("Erro ao cancelar agendamento", error);
+                    Swal.fire('Erro!', 'Ocorreu um erro ao cancelar o agendamento.', 'error');
+                }
             }
         });
     };
@@ -75,17 +82,17 @@ function ModalAgendaCliente({ onClose }) {
                 ) : (
                     <ul className="agendamentos-list">
                         {filteredAgendamentos.map((agendamento) => (
-                            <li key={agendamento.id} className="agendamento-item">
+                            <li key={agendamento.idAgendamento} className="agendamento-item">
                                 <h3>{agendamento.servico}</h3>
                                 <p><strong>Empresa:</strong> {agendamento.nomeEmpresa}</p>
                                 <p><strong>Servico:</strong> {agendamento.nomeServico}</p>
                                 <p><strong>Data:</strong> {formatDateTimeForDisplay(agendamento.dataHora)}</p>
                                 <p><strong>Atendente:</strong> {agendamento.atendente}</p>
                                 <p><strong>Status:</strong> {capitalizeFirstLetter(agendamento.status)}</p>
-                                {agendamento.status !== "REALIZADO" && (
+                                {agendamento.status !== "REALIZADO" && agendamento.status !== "CANCELADO"  && (
                                     <button
                                         className="cancel-button"
-                                        onClick={() => handleCancel(agendamento.id)}
+                                        onClick={() => handleCancel(agendamento.idAgendamento)}
                                     >
                                         Cancelar
                                     </button>

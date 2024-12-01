@@ -1,4 +1,4 @@
-import { getData, postData } from '../router/router';
+import { getData, postData, putData } from '../router/router';
 
 export const findByCategorias = async () => {
     try {
@@ -54,6 +54,17 @@ export const buscarAgendamentos = async (idCliente) => {
         return response.data;
     } catch (error) {
         console.error("Erro ao buscar agendamentos", error);
+        throw error;
+    }
+}
+
+export const cancelaAgendamento = async (idAgendamento) => {
+    try {
+        debugger
+        const response = await putData(`agendamentos/cancelaAgendamento/${idAgendamento}`);
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao cancelar agendamento", error);
         throw error;
     }
 }
