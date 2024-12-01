@@ -108,7 +108,7 @@ function CadastroForm({ onClose }) {
                     <div className="button-form-login">
                         <Button
                             size="100%"
-                            content="Entrar"
+                            content="Cadastrar"
                             type="submit"
                             onClick={handleSubmit}
                         />

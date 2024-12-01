@@ -19,6 +19,7 @@ addLocale('br', {
 export default function IconDemo({ content, onDateChange, isFixed }) {
 
     const [date, setDate] = useState(null);
+    const today = new Date();
 
     const handleDateChange = (e) => {
         setDate(e.value);
@@ -35,6 +36,7 @@ export default function IconDemo({ content, onDateChange, isFixed }) {
                     locale="br"
                     inputStyle={{ width: '100%' }}
                     disabledDays={[1, 0]}
+                    minDate={today}
                 />
             ) : (
                 <Calendar

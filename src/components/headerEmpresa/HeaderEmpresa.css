@@ -8,15 +8,12 @@
     top: 0;
     left: 0;
     z-index: 1000;
-    /* border: 1px solid; */
     transition: background-color 0.3s ease-in-out;
-    /* Para a transição suave */
 }
 
 .headerEmpresa a {
     text-decoration: none;
     color: white;
-
 }
 
 .headerEmpresa .icones {
@@ -62,12 +59,10 @@
     text-decoration: none;
     color: white;
     transition: color 0.3s ease-in-out;
-    /* Para a transição suave na cor do texto */
 }
 
 .headerEmpresa .titulos .opcoes .nav a:hover {
     color: #ccc;
-    /* Cor do texto ao passar o mouse */
 }
 
 .headerEmpresa .botaoCliente a {
@@ -87,13 +82,33 @@
     transition: background-color 0.3s ease-in-out;
 }
 
-.auth-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-left: 60px;
-}
 
-.auth-buttons a {
-    cursor: pointer;
+@media screen and (max-width: 500px) {
+
+    .headerEmpresa .icones {
+        display: none;
+    }
+
+    .headerEmpresa {
+        justify-content: center;
+    }
+
+    .headerEmpresa .titulos {
+        width: 100%;
+    }
+
+    .headerEmpresa .icones {
+        justify-content: space-evenly;
+        margin-bottom: 10px;
+    }
+
+    .headerEmpresa .titulos span {
+        font-size: 1.2rem;
+    }
+
+    .headerEmpresa .botaoCliente {
+       position: absolute;
+       top: 1;
+       right: -40px;
+    }
 }

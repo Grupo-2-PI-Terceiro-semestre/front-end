@@ -1,61 +1,90 @@
 .location-container {
-    text-align: center;
-    padding: 20px;
-    width: 100%;
-    margin: 15px;
-    border: 1px solid #ffffff;
-    border-radius: 10px;
-  }
-  
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  margin: 15px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 62px;
+  margin-bottom: 1rem;
+  font-weight: semi-bold;
+}
+
+.subtitle {
+  font-size: 24px;
+  margin-bottom: 80px;
+  font-weight: medium;
+  color: #000000;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.map {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 30px auto 20px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 15rem;
+}
+
+.allow-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.deny-button {
+  background-color: white;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #000000;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.allow-button:hover,
+.deny-button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 500px) {
+
   .title {
-    font-size: 62px;
-    margin-bottom: 1rem;
-    font-weight: semi-bold;
+    font-size: 32px;
   }
-  
+
   .subtitle {
-    font-size: 24px;
-    margin-bottom: 80px;
-    font-weight: medium;
-    color: #000000;
-    max-width: 80%;
-    margin: 0 auto;
+    font-size: 14px;
+    text-align: justify;
+    margin-bottom: 40px;
   }
-  
-  .map {
-    width: 100%;
-    max-width: 700px;
-    height: auto;
-    margin: 30px auto 20px;
-  }
-  
+
   .buttons-container {
     display: flex;
-    justify-content: center;
-    gap: 15rem;
+    flex-direction: column;
+    gap: 10px;
   }
-  
+
   .allow-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
+    padding: 10px 15px;
+    font-size: 0.8em;
   }
-  
+
   .deny-button {
-    background-color: white;
-    color: #333;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: 1px solid #000000;
-    cursor: pointer;
-    font-size: 1em;
+    padding: 10px 15px;
+    font-size: 0.8em;
   }
-  
-  .allow-button:hover, .deny-button:hover {
-    opacity: 0.8;
-  }
-  
+}

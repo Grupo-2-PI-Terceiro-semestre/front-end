@@ -29,13 +29,15 @@
     display: flex;
     justify-content: space-between;
 }
+
 .main-footer-empresa .container-footer-empresa .borda .titulos a {
     color: white;
     text-decoration: none;
 }
 
 .main-footer-empresa .container-footer-empresa .borda .titulos a:hover {
-    color: rgb(0, 114, 255); /* Efeito de hover para os links */
+    color: rgb(0, 114, 255);
+    /* Efeito de hover para os links */
 }
 
 .main-footer-empresa .container-footer-empresa .borda .titulos label {
@@ -43,7 +45,8 @@
 }
 
 .main-footer-empresa .container-footer-empresa .borda .titulos label:hover {
-    color: rgb(0, 114, 255); /* Efeito de hover para os links */
+    color: rgb(0, 114, 255);
+    /* Efeito de hover para os links */
 }
 
 .main-footer-empresa .container-footer-empresa .icones {
@@ -67,7 +70,8 @@
 }
 
 .icones .icon:hover {
-    color: rgb(0, 114, 255); /* Efeito de hover para os ícones */
+    color: rgb(0, 114, 255);
+    /* Efeito de hover para os ícones */
 }
 
 .main-footer-empresa .container-footer-empresa .info {
@@ -99,7 +103,8 @@
 }
 
 .main-footer-empresa .container-footer-empresa .info form input:hover {
-    border-color: rgb(0, 114, 255); /* Efeito de hover no input */
+    border-color: rgb(0, 114, 255);
+    /* Efeito de hover no input */
 }
 
 .main-footer-empresa .container-footer-empresa .info form button {
@@ -116,7 +121,8 @@
 }
 
 .main-footer-empresa .container-footer-empresa .info form button:hover {
-    background-color: rgb(0, 114, 255); /* Efeito de hover para o botão */
+    background-color: rgb(0, 114, 255);
+    /* Efeito de hover para o botão */
 }
 
 .main-footer-empresa .container-footer-empresa .info .contatos {
@@ -124,4 +130,10 @@
     flex-wrap: wrap;
     width: 16vw;
     justify-content: center;
+}
+
+@media (max-width: 500px) {
+    .main-footer-empresa {
+        display: none;
+    }
 }
