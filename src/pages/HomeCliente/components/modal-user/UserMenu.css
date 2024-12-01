@@ -81,7 +81,7 @@
 }
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
 
     .user-icon-button {
         width: 25px;

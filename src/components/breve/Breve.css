@@ -88,7 +88,7 @@
     width: 26vw;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768) {
 
     .main-breve {
         height: 100vh;
