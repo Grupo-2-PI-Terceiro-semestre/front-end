@@ -87,69 +87,9 @@
     height: 74vh;
     width: 26vw;
 }
-
-@media screen and (max-width: 768) {
+@media screen and (max-width: 768px) {
 
     .main-breve {
-        height: 100vh;
-    }
-
-    .main-breve h3 {
-        font-size: 1.3rem;
-    }
-
-    .main-breve .container-breve {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .main-breve .container-breve .texto {
-        width: 80vw;
-        height: 40vh;
-        justify-content: space-evenly;
-    }
-
-    .main-breve .container-breve .texto .apple {
-        width: 88%;
-    }
-
-    .main-breve .container-breve .texto .apple .icon-apple {
-        height: 9vh;
-    }
-
-    .main-breve .container-breve .texto .apple .textosApple {
-        width: 50vw;
-        font-size: 0.7rem;
-    }
-
-    .main-breve .container-breve .texto .apple .textosApple .titulo {
-        font-size: 0.8rem;
-        text-align: right;
-    }
-
-    .main-breve .container-breve .texto .google {
-        width: 70vw;
-        height: 10vh;
-
-    }
-
-    .main-breve .container-breve .texto label {
-        font-size: 0.8rem;
-    }
-
-    .main-breve .container-breve .texto .google .imagem {
-        width: 8vw;
-    }
-
-    .main-breve .container-breve .texto .google .textosGoogle {
-        width: 50vw;
-    }
-
-    .main-breve .container-breve .texto .google .textosGoogle .titulo {
-        font-size: 1.2rem;
-    }
-
-    .main-breve .container-breve .imagem {
-        width: 80%;
+        display: none;
     }
 }
