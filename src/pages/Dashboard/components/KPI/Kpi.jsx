@@ -3,7 +3,7 @@ import { findDashboardData } from "../../services/dashboardServices";
 import "./Kpi.css";
 
 function Kpi(props) {
-    const { description, icon, iconColor, endPoint, mes, idEmpresa, formatarValor, mensagemMes, carregando } = props;
+    const { description, icon, iconColor, endPoint, mes, idEmpresa, formatarValor, mensagemMes, carregando,iconSize } = props;
 
     const [dados, setDados] = useState({ valor: 0, percent: 0 });
 
@@ -80,7 +80,7 @@ function Kpi(props) {
     }
     return (
         <div className="conteiner_kpi">
-            <div className="icon_dashboard" style={{ color: iconColor }}>
+            <div className="icon_dashboard" style={{ color: iconColor, fontSize: iconSize }}>
                 {icon}
             </div>
             <div className="content_kpi">

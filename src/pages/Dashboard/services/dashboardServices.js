@@ -57,13 +57,13 @@ export const findChartServiceData = async (idEmpresa, endPoint) => {
         const seriesData = data.map(item => item.totalServicos);
         const xAxisData = data.map(item => {
             switch (item.dia_semana) {
-                case 0: return 'Domingo';
-                case 1: return 'Segunda-feira';
-                case 2: return 'Terça-feira';
-                case 3: return 'Quarta-feira';
-                case 4: return 'Quinta-feira';
-                case 5: return 'Sexta-feira';
-                case 6: return 'Sábado';
+                case 1: return 'Domingo';
+                case 2: return 'Segunda-feira';
+                case 3: return 'Terça-feira';
+                case 4: return 'Quarta-feira';
+                case 5: return 'Quinta-feira';
+                case 6: return 'Sexta-feira';
+                case 7: return 'Sábado';
                 default: return 'Desconhecido';
             }
         });
