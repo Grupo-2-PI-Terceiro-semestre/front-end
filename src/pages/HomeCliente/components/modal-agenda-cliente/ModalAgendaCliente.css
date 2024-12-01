@@ -1,4 +1,4 @@
-.modal-overlay {
+.modal-overlay-cliente {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
-.modal-container {
+.modal-overlay-cliente .modal-container {
   background: #fff;
   border-radius: 12px;
   width: 90%;
@@ -66,13 +66,13 @@ h2 {
 
 
 .agendamento-item {
-  padding: 15px;
+  padding: 9px;
   border-bottom: 1px solid #dcd7d7;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 2px;
 }
 
 .agendamento-item:last-child {
@@ -105,7 +105,7 @@ h2 {
   font-weight: 500;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s, transform 0.1s;
-  margin-left: auto; /* Empurra o botão para a direita */
+  margin: auto;
 }
 
 .cancel-button:hover {

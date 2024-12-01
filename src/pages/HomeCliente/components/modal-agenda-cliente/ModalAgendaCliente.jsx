@@ -58,7 +58,7 @@ function ModalAgendaCliente({ onClose }) {
     );
 
     return (
-        <div className="modal-overlay" onClick={(e) => e.target.classList.contains("modal-overlay") && onClose()}>
+        <div className="modal-overlay-cliente" onClick={(e) => e.target.classList.contains("modal-overlay-cliente") && onClose()}>
             <div className="modal-container">
                 <button className="close-button" onClick={onClose}>
                     x

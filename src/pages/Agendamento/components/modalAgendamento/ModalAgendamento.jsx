@@ -40,7 +40,7 @@ function ModalAgendamento({ onClose, servico, equipe }) {
     }, []);
 
     const handleOverlayClick = (e) => {
-        if (e.target.classList.contains('modal-overlay')) {
+        if (e.target.classList.contains('modal-overlay-agenda')) {
             onClose();
         }
     };
@@ -109,7 +109,7 @@ function ModalAgendamento({ onClose, servico, equipe }) {
     };
 
     return (
-        <div className="modal-overlay" onClick={handleOverlayClick}>
+        <div className="modal-overlay-agenda" onClick={handleOverlayClick}>
             <div className="modal-container">
                 <button className="close-button" onClick={onClose}>x</button>
                 <h3 className="modal-title">Serviço: {servico.nomeServico}</h3>
