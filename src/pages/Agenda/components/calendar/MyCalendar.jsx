@@ -22,6 +22,7 @@ import { converterGMTParaBrasilia, formatDateToBRWithMonthName, formaterDate } f
 import ButtonRollback from "../button-rollback/ButtonRollback"
 import { Pilha } from "../../../../utils/Pilha";
 import { infoToast } from "../../../../utils/Toats";
+import { useNavigate } from 'react-router-dom';
 
 moment.locale("pt-br");
 const localizer = momentLocalizer(moment);
@@ -29,6 +30,7 @@ const DragAndDropCalendar = withDragAndDrop(Calendar);
 
 const MyDragAndDropCalendar = () => {
 
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectDateFormatted, setSelectDateFormatted] = useState(new Date());
@@ -72,7 +74,7 @@ const MyDragAndDropCalendar = () => {
 
 
   const buscarColaboradores = async (day) => {
-    if (user.idEmpresa) {
+    if (user.idEmpresa != null) {
 
       setLoading(true);
 
@@ -112,6 +114,21 @@ const MyDragAndDropCalendar = () => {
         console.error('Erro ao buscar colaboradores ou agendamentos:', error);
       } finally {
         setLoading(false);
+      }
+    } else {
+      const result = await Swal.fire({
+        title: "Bem Vindo!",
+        text: "Esse é o seu primeiro acesso, por favor, finalize seu perfil para visualizar sua agenda.",
+        icon: "info",
+        showCancelButton: false,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Ok",
+        allowOutsideClick: false,
+      });
+
+      const resultado = result.isConfirmed;
+      if (resultado) {
+        navigate('/perfil');
       }
     }
   };
