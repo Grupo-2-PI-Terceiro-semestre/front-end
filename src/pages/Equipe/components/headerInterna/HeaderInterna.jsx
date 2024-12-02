@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import './HeaderInterna.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import ModalAdd from "../../../../components/modalAdd/ModalAdd";
-import ModalAddCliente from "../../../Clientes/components/modalAddCliente/ModalAddCliente";
 import ModalAddEquipe from "../modalAddEquipe/ModalAddEquipe";
 
 function HeaderInterna({ texto }) {

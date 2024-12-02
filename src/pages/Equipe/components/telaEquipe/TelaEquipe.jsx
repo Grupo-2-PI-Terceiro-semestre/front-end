@@ -32,7 +32,6 @@ function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4, titulo5
     }, [paginaAtual]);
 
     const buscarListaUsuarios = async (idEmpresa, pagina, tamanho) => {
-        debugger
         try {
             setLoading(true);
             const paginacao = { pagina: pagina - 1, tamanho };
