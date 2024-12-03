@@ -154,7 +154,7 @@ function ModalAddAgend({ onClose, idEmpresa, funcionarios, dateDefault, refreshD
                                         required={true}
                                         value={''}
                                         placeholder={
-                                            clientes.length === 0 ? "Nenhum Cliente Cadastrado" : "Selecione um serviço"
+                                            clientes.length === 0 ? "Nenhum Cliente Cadastrado" : "Selecione um cliente"
                                         }
                                         onSelectOption={handleClientesChange}
                                         displayField={(option) => option.nomePessoa}
