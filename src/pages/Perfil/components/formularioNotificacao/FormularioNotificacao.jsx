@@ -97,7 +97,7 @@ const FormularioNotificacao = () => {
         mensagemAgendamento: notificacoes.mensagemAgendamento || '',
       })
       Cookies.set('notificacao', JSON.stringify(notificacoes), { expires: 7 });
-      successToast('Menagens de notificação salvas com sucesso');
+      successToast('Mensagens de notificação salvas com sucesso');
     } catch (error) {
       errorToast('Erro ao salvar as mensagens de notificação, tente novamente mais tarde');
     } finally {

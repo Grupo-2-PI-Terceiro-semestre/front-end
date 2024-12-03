@@ -5,6 +5,7 @@ import { uploadImagemGaleria } from '../../../../services/empresaServices';
 import Cookies from 'js-cookie';
 import { FaTrash } from "react-icons/fa";
 import Swal from 'sweetalert2'
+import { successToast } from '../../../../utils/Toats'
 
 
 const FormularioFuncionamento = () => {
@@ -39,6 +40,7 @@ const FormularioFuncionamento = () => {
       try {
         const response = await uploadImagemGaleria(userData.idEmpresa, formData);
         setImages(prevImages => [...prevImages, response]);
+        successToast('Imagem adicionada com sucesso!');
       } catch (error) {
         console.error('Erro ao fazer upload da imagem', error);
       }
