@@ -44,6 +44,11 @@ const FormularioNotificacao = () => {
   }, []);
 
   const findNotify = async (idEmpresa) => {
+
+    if (!idEmpresa) {
+      return;
+    }
+
     try {
       setLoading(true);
       const notificacoes = await buscarNotificacoes(idEmpresa);
@@ -77,7 +82,12 @@ const FormularioNotificacao = () => {
   };
 
   const handleSubmit = async (event) => {
-    
+
+    if (!user.idEmpresa) {
+      infoToast("Para realizar essa ação é nescessário criar uma empresa");
+      return;
+    }
+
     event.preventDefault();
     if (areObjectsEqual(formData, dataOrigin)) {
       infoToast('Nenhum dado foi alterado');
@@ -85,6 +95,7 @@ const FormularioNotificacao = () => {
     }
     try {
       setLoading(true);
+
       const notificacoes = await atualizarNotificacoes(user.idEmpresa, formData);
       setFormData({
         idNotificacao: notificacoes.idNotificacao || '',

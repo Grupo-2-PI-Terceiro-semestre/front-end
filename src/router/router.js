@@ -47,13 +47,22 @@ export const postData = async (endpoint, data, pathParams = {}, queryParams = {}
 
         const queryString = new URLSearchParams(queryParams).toString();
         const urlWithParams = queryString ? `${API_URL}${formattedEndpoint}?${queryString}` : `${API_URL}${formattedEndpoint}`;
+        let headers = {
+            'Content-Type': 'application/json'
+        }
 
-        const token = Cookies.get('token');
+        const token = Cookies.get('token') == undefined ? null : Cookies.get('token');
+
+
+        if (token != null) {
+            headers = {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        }
 
         const response = await axios.post(urlWithParams, data, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+            headers: headers
         });
 
         return response;

@@ -48,6 +48,11 @@ function FormularioLocalizacao() {
     }, []);
 
     const findEndereco = async (idEmpresa) => {
+
+        if (!idEmpresa) {
+            return;
+        }
+
         setLoading(true);
         try {
             const response = await buscarEndereco(idEmpresa);
@@ -133,6 +138,10 @@ function FormularioLocalizacao() {
     };
 
     const cadastrar = async (data, idEmpresa) => {
+
+        if(!idEmpresa)
+            return infoToast("Para realizar essa ação é nescessário criar uma empresa");
+
         try {
             setLoading(true);
             const response = await atualizarEndereco(data, idEmpresa);

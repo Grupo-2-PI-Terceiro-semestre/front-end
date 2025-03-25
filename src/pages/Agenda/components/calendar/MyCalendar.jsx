@@ -53,26 +53,6 @@ const MyDragAndDropCalendar = () => {
     buscarColaboradores(dateOficial());
   }, []);
 
-  useEffect(() => {
-
-    const eventSource = new EventSource(`${API_URL}agendamentos/sse`);
-    eventSource.addEventListener('refrash', (event) => {
-      if (event.data) {
-        refrashSse(dateOficial())
-      }
-    })
-
-    eventSource.onerror = (error) => {
-      console.error("Erro na conexão SSE:", error);
-      eventSource.close();
-    };
-
-    return () => {
-      eventSource.close();
-    };
-  }, []);
-
-
   const buscarColaboradores = async (day) => {
     if (user.idEmpresa != null) {
 
