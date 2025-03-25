@@ -100,7 +100,7 @@ function TelaEquipe({ placeholder, titulo1, titulo2, titulo3, titulo4, titulo5
                                 />
                             ))
                         ) : (
-                            <p className="erroCliente">Nenhum cliente encontrado.</p>
+                            <p className="erroCliente">Nenhum colaborador encontrado.</p>
                         )}
                         
                     </div>
