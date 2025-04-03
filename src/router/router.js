@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import useAuth from '../router/useAuth';
 
 const API_URL = import.meta.env.VITE_API_URL;
+console.log('API URL:', import.meta.env.VITE_API_URL);
 const { sessionExpired } = useAuth();
 
 if (!import.meta.env.PROD) {
