@@ -10,6 +10,9 @@ function TabelaDashboard({ headers, idEmpresa, endPoint, carregando }) {
     }, [endPoint]);
 
     const buscarDados = async () => {
+        if (!idEmpresa) {
+            return;
+        }
         try {
             carregando(true);
             let response;

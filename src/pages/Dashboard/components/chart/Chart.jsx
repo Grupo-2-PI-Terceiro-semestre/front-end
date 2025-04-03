@@ -9,6 +9,11 @@ const Chart = ({ title, type, endPoint, idEmpresa, heightChart, widthChart, colo
     const [xAxisData, setXAxisData] = useState([]);
 
     const buscarDados = async () => {
+
+        if (!idEmpresa) {
+            return;
+        }
+
         try {
             carregando(true);
             let response;

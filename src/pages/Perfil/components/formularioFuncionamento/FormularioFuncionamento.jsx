@@ -5,7 +5,8 @@ import { uploadImagemGaleria } from '../../../../services/empresaServices';
 import Cookies from 'js-cookie';
 import { FaTrash } from "react-icons/fa";
 import Swal from 'sweetalert2'
-import { successToast } from '../../../../utils/Toats'
+import { successToast, infoToast } from '../../../../utils/Toats'
+import { use } from 'react';
 
 
 const FormularioFuncionamento = () => {
@@ -20,8 +21,15 @@ const FormularioFuncionamento = () => {
   }, []);
 
   const buscarImagens = async () => {
+
+    if(!userData.idEmpresa)
+      return;
+
     try {
       const response = await getData(`empresas/imagens/${userData.idEmpresa}`);
+      if(response.data.length === 0)
+        return;
+      
       setImages(response.data);
     } catch (error) {
       console.error('Erro ao buscar as imagens', error);
@@ -29,10 +37,15 @@ const FormularioFuncionamento = () => {
   };
 
   const handleButtonClick = () => {
+
+    if(!userData.idEmpresa)
+      return infoToast("Para realizar essa ação é nescessário criar uma empresa");
+
     fileInputRef.current.click();
   };
 
   const handleFileChange = async (event) => {
+
     const files = event.target.files;
     if (files.length > 0) {
       const formData = new FormData();

@@ -135,8 +135,9 @@ const FormularioPrincipal = ({ setRefreshKey }) => {
       setRefreshKey((prev) => prev + 1);
       successToast('Dados atualizados com sucesso');
     } catch (error) {
+      debugger
       console.error('Erro ao atualizar os dados da empresa', error);
-      errorToast('Erro ao atualizar os dados da empresa');
+      errorToast(error.data?.message || 'Erro ao atualizar os dados da empresa');
     } finally {
       setLoading(false);
     }

@@ -7,7 +7,7 @@ import { cadastroUser } from '../../authRouter'
 import { auth } from '../../../../services/firebase';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { successToast, errorToast } from '../../../../utils/Toats'
+import { successToast, infoToast, errorToast } from '../../../../utils/Toats'
 
 
 
@@ -52,10 +52,11 @@ function Formulario({ toggleBarraContainer }) {
             toggleBarraContainer();
             console.error('Erro:', error);
 
-            if (error.status === 400) {
-                setErrorMessage('Usuário já cadastrado.');
+            if (error.status === 409) {
+                infoToast('Usuário já cadastrado');
+                navigate('/login')
             } else {
-                setErrorMessage('Erro ao cadastrar o usuário. Tente novamente mais tarde.');
+                errorToast('Erro ao cadastrar o usuário, tente novamente mais tarde');
             }
         }
     };

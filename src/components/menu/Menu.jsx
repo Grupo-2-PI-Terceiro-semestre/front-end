@@ -36,6 +36,9 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
   }, [refreshKey]);
 
   const buscarEmpresa = async (idEmpresa) => {
+    if (!idEmpresa) {
+      return;
+    }
     try {
       const response = await findByEmpresa(idEmpresa);
       Cookies.set('empresa', JSON.stringify(response), { expires: 7 });

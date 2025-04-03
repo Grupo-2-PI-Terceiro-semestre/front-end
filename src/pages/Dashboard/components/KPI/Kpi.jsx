@@ -9,6 +9,9 @@ function Kpi(props) {
 
 
     const buscarDados = useCallback(async () => {
+        if (!idEmpresa) {
+            return;
+        }
         try {
             carregando(true);
             const response = await findDashboardData(idEmpresa, mes, endPoint);
@@ -47,7 +50,7 @@ function Kpi(props) {
 
     const formatarValorFunc = (valor) => {
         if (isNaN(valor)) {
-            return "Valor inválido";
+            return "0";
         }
         if (formatarValor) {
             return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(valor);
@@ -57,7 +60,7 @@ function Kpi(props) {
 
     const ajustarCasasDecimais = (valor) => {
         if (isNaN(valor)) {
-            return "Valor inválido";
+            return "0";
         }
         return valor.toFixed(2);
     }

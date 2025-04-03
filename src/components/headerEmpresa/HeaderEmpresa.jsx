@@ -6,6 +6,8 @@ import { faInstagram, faFacebookF, faYoutube } from "@fortawesome/free-brands-sv
 import UserMenu from "../../pages/HomeCliente/components/modal-user/UserMenu";
 import Tooltip from '@mui/material/Tooltip';
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
+
 
 function HeaderEmpresa({
     navLinks = [],
@@ -64,7 +66,7 @@ function HeaderEmpresa({
                     {!isButtonVisible && (
                         <nav className="nav">
                             {navLinks.map((link, index) => (
-                                <a href={link.url} key={index}>{link.name}</a>
+                                <Link to={link.url} key={index}>{link.name}</Link>
                             ))}
                         </nav>
                     )}
@@ -90,7 +92,7 @@ function HeaderEmpresa({
                 </a>
             </div>
 
-            
+
         </header>
     );
 }
