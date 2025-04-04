@@ -14,6 +14,7 @@ services:
       - frontend
     networks:
       - public_network
+      - host_network  # Nova rede para acesso ao host
 
   frontend:
     build:
@@ -32,3 +33,5 @@ services:
 networks:
   public_network:
     driver: bridge
+  host_network:
+    driver: host  # Permite acesso à rede do host
