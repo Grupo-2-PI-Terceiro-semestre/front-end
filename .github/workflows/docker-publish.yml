@@ -46,3 +46,15 @@ jobs:
       - name: Push Docker Image
         run: |
           docker push jonathancarvalho039/front-end-app:latest
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_PUBLIC_IP }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            docker-compose down
+            docker pull jonathancarvalho039/front-end-app:latest
+            docker-compose up -d
