@@ -34,5 +34,5 @@ jobs:
         run: docker build -t jonathancarvalho039/front-end-app:latest .
 
       - name: Push Docker Image
-        run: docker push jonathancarvalho039/front-end-app:latest
-
+        run: |
+           docker push jonathancarvalho039/front-end-app:latest
