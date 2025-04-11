@@ -43,7 +43,7 @@ jobs:
 
   deploy-prod:
     name: Deploy to Production
-    runs-on: Linux
+    runs-on: Self-hosted
     needs: push-image
     environment:
       name: Production
