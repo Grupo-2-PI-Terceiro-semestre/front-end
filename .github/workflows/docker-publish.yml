@@ -1,4 +1,4 @@
-name: CI/CD - Production
+name: CI/CD
 
 on:
   push:
@@ -41,8 +41,8 @@ jobs:
       - name: Push Docker image
         run: docker push jonathancarvalho039/front-end-app:latest
 
-  deploy-prod:
-    name: Deploy to Production
+  deploy:
+    name: Deploy
     runs-on: [self-hosted, Linux]
     needs: push-image
 
