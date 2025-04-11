@@ -49,6 +49,6 @@ jobs:
     steps:
       - name: Pull latest image and restart container
         run: |
-          docker-compose down --remove-orphans
-          docker pull jonathancarvalho039/front-end-app:latest
-          docker-compose up -d
+          sudo docker-compose down --remove-orphans
+          sudo docker pull jonathancarvalho039/front-end-app:latest
+          sudo docker-compose up -d
