@@ -60,7 +60,6 @@ export const buscarAgendamentos = async (idCliente) => {
 
 export const cancelaAgendamento = async (idAgendamento) => {
     try {
-        debugger
         const response = await putData(`agendamentos/cancelaAgendamento/${idAgendamento}`);
         return response.data;
     } catch (error) {

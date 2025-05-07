@@ -8,6 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { infoToast } from '../../utils/Toats'
 import CircularProgress from '@mui/material/CircularProgress';
 import { errorToast, successToast } from '../../utils/Toats'
+import NotificationBell from './NotificationBell';
 
 
 
@@ -18,12 +19,14 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [idEmpresa, setIdEmpresa] = useState(null);
 
 
   useEffect(() => {
     const userData = Cookies.get('user');
     if (userData) {
       const parsedUser = JSON.parse(userData);
+      setIdEmpresa(parsedUser.idEmpresa);
       setUser(parsedUser);
 
       const empresaData = Cookies.get('empresa');
@@ -88,6 +91,7 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
 
   return (
     <div className="sidebar">
+      <NotificationBell idEmpresa={idEmpresa} />
       <div className="profile">
         <input
           type="file"

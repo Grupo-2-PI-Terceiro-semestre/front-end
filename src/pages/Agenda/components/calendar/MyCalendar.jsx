@@ -50,8 +50,20 @@ const MyDragAndDropCalendar = () => {
 
 
   useEffect(() => {
-    buscarColaboradores(dateOficial());
+    const cached = getCachedDateISO();
+    if (cached) {
+      handleDateChange(parseISOToDate(cached));
+      buscarColaboradores(cached);
+      clearLocalStorage();
+      clearLocalStorage();
+    } else {
+      const todayISO = dateOficial();
+      buscarColaboradores(todayISO);
+    }
   }, []);
+
+
+
 
   const buscarColaboradores = async (day) => {
     if (user.idEmpresa != null) {
@@ -129,6 +141,25 @@ const MyDragAndDropCalendar = () => {
     setOpenModalAdd(false);
   };
 
+  const getCachedDateISO = () => {
+    try {
+      const raw = localStorage.getItem('ultimaNotificacaoClicada');
+      if (!raw) return null;
+      const { dataAgendamento } = JSON.parse(raw);
+      return dataAgendamento || null;
+    } catch {
+      return null;
+    }
+  };
+
+  const parseISOToDate = (isoDate) => {
+    const [year, month, day] = isoDate.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  const clearLocalStorage = () => {
+    localStorage.removeItem('ultimaNotificacaoClicada');
+  };
 
   const eventPropGetter = (event) => {
     const borderColor = event.corReferenciaHex || "#00929B";
@@ -190,41 +221,6 @@ const MyDragAndDropCalendar = () => {
     setSelectedDate(day);
     setSelectDateFormatted(formatDateToBRWithMonthName(day));
   };
-
-  const refrashSse = async (day) => {
-    const response = await findColaborador(user.idEmpresa, day);
-
-    const formattedResources = response.data.map(colaborador => ({
-      id: colaborador.idAgenda,
-      title: colaborador.nomeFuncionario,
-    }));
-
-    setColaboradorInfo(response);
-    setResources(formattedResources);
-
-    const colaboradores = response.data;
-    const eventsFeature = colaboradores.flatMap(colaborador =>
-      colaborador.agendamentoDTOS.map(evento => ({
-        id: evento.idAgendamento,
-        title: evento.servico.nomeServico,
-        start: new Date(evento.horaAgendamento),
-        end: new Date(new Date(evento.horaAgendamento).getTime() + evento.servico.duracao),
-        nomeFuncionario: colaborador.nomeFuncionario,
-        nomeCliente: evento.cliente.nomePessoa,
-        funcionario: colaborador,
-        cliente: evento.cliente,
-        telefoneCliente: evento.cliente.telefone,
-        descricaoServico: evento.servico.descricao,
-        resourceId: colaborador.idFuncionario,
-        corReferenciaHex: evento.servico.corReferenciaHex,
-        precisaConfirmar: evento.statusAgendamento == 'PENDENTE',
-        realizado: evento.statusAgendamento == 'REALIZADO',
-        status: filterStatus(evento.statusAgendamento)
-      }))
-    );
-    setEvents(eventsFeature);
-    infoToast('Houve Uma Atualição na Agenda');
-  }
 
   const isSelected = (day) => {
     return selectedDate.toDateString() === new Date(day).toDateString();
