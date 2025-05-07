@@ -23,6 +23,7 @@ services:
     environment:
       - VITE_NODE_ENV=production
       - VITE_API_URL=/api/v1/
+      - VITE_API_URL_WS=/ws-notifications
     networks:
       - public_network  # Só precisa da rede pública
 
