@@ -94,7 +94,7 @@ const MyDragAndDropCalendar = () => {
             cliente: evento.cliente,
             telefoneCliente: evento.cliente.telefone,
             descricaoServico: evento.servico.descricao,
-            resourceId: colaborador.idFuncionario,
+            resourceId: colaborador.idAgenda,
             corReferenciaHex: evento.servico.corReferenciaHex,
             precisaConfirmar: evento.statusAgendamento == 'PENDENTE',
             realizado: evento.statusAgendamento == 'REALIZADO',
