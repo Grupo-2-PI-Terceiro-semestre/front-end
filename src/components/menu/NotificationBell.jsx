@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaBell } from 'react-icons/fa';
 import { connectWebSocket, disconnectWebSocket } from '../../router/router';
+import { marcarComoLida } from '../../services/empresaServices';
 import './Menu.css';
 import { useNavigate } from 'react-router-dom'; // Para redirecionamento
 
@@ -83,6 +84,12 @@ const NotificationBell = ({ onClick, idEmpresa }) => {
   const clearNotifications = () => {
     setNotifications([]);
     localStorage.clear();
+    marcarComoLida(idEmpresa)
+      .then(() => {
+        console.log('Notificações marcadas como lidas');
+      }).catch((error) => {
+        console.error('Erro ao marcar notificações como lidas:', error);
+      });
     setIsOpen(false);
   };
 

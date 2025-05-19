@@ -55,7 +55,6 @@ const MyDragAndDropCalendar = () => {
       handleDateChange(parseISOToDate(cached));
       buscarColaboradores(cached);
       clearLocalStorage();
-      clearLocalStorage();
     } else {
       const todayISO = dateOficial();
       buscarColaboradores(todayISO);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaCalendarAlt, FaUser, FaChartBar, FaUsers, FaBriefcase, FaSignOutAlt, FaServicestack } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { findByEmpresa, uploadImage } from '../../services/empresaServices';
+import { findByEmpresa, uploadImage, buscarNotificacao } from '../../services/empresaServices';
 import Cookies from 'js-cookie';
 import './Menu.css';
 import Tooltip from '@mui/material/Tooltip';
@@ -34,6 +34,7 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
         setEmpresa(JSON.parse(empresaData));
       } else {
         buscarEmpresa(parsedUser.idEmpresa);
+        buscarNotificacao(parsedUser.idEmpresa);
       }
     }
   }, [refreshKey]);

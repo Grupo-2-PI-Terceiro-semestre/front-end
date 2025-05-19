@@ -1,4 +1,4 @@
-import { deleteData, getData, postImage } from '../router/router';
+import { deleteData, getData, postImage, putData } from '../router/router';
 
 export const findByEmpresa = async (idEmpresa) => {
     try {
@@ -9,6 +9,26 @@ export const findByEmpresa = async (idEmpresa) => {
         throw error;
     }
 };
+
+export const buscarNotificacao = async (idEmpresa) => {
+    try {
+        const response = await putData(`agendamentos/notificacao/${idEmpresa}`, {}, {});
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao buscar a empresa", error);
+        throw error;
+    }
+}
+
+export const marcarComoLida = async (idEmpresa) => {
+    try {
+        const response = await putData(`agendamentos/notificacao/lida/${idEmpresa}`, {}, {});
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao buscar a empresa", error);
+        throw error;
+    }
+}
 
 
 export const uploadImage = async (idEmpresa, image) => {
