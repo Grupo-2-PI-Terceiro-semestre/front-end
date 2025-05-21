@@ -23,44 +23,46 @@ const NotificationBell = ({ onClick, idEmpresa }) => {
   }, []);
 
   useEffect(() => {
-    let isMounted = true;
-    let subscription = null;
+  if (!idEmpresa) return;
 
-    const handleIncomingMessage = (msg) => {
+  let isMounted = true;
+  let subscription = null;
+
+  const handleIncomingMessage = (msg) => {
+    if (isMounted) {
+      console.log('Nova notificação:', msg);
+      setNotifications(prev => {
+        const updated = [...prev, msg];
+        localStorage.setItem('notificacoes', JSON.stringify(updated));
+        return updated;
+      });
+    }
+  };
+
+  const setupWebSocket = async () => {
+    try {
+      const client = await connectWebSocket(handleIncomingMessage, idEmpresa);
       if (isMounted) {
-        console.log('Nova notificação:', msg);
-        setNotifications(prev => {
-          const updated = [...prev, msg];
-          localStorage.setItem('notificacoes', JSON.stringify(updated)); // salva no cache
-          return updated;
-        });
+        setConnectionStatus('connected');
+        setStompClient(client);
       }
-    };
-
-    const setupWebSocket = async () => {
-      try {
-        const client = await connectWebSocket(handleIncomingMessage, idEmpresa);
-        if (isMounted) {
-          setConnectionStatus('connected');
-          setStompClient(client);
-        }
-        subscription = client.subscription;
-      } catch (error) {
-        if (isMounted) {
-          setConnectionStatus('error');
-          setTimeout(() => setupWebSocket(), 5000);
-        }
+      subscription = client.subscription;
+    } catch (error) {
+      if (isMounted) {
+        setConnectionStatus('error');
+        setTimeout(() => setupWebSocket(), 5000);
       }
-    };
+    }
+  };
 
-    setupWebSocket();
+  setupWebSocket();
 
-    return () => {
-      isMounted = false;
-      if (subscription) subscription.unsubscribe();
-      disconnectWebSocket(idEmpresa);
-    };
-  }, [idEmpresa]);
+  return () => {
+    isMounted = false;
+    if (subscription) subscription.unsubscribe();
+    disconnectWebSocket(idEmpresa);
+  };
+}, [idEmpresa]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
