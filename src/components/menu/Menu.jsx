@@ -9,6 +9,7 @@ import { infoToast } from '../../utils/Toats'
 import CircularProgress from '@mui/material/CircularProgress';
 import { errorToast, successToast } from '../../utils/Toats'
 import NotificationBell from './NotificationBell';
+import { disconnectWebSocket } from '../../router/router';
 
 
 
@@ -64,6 +65,7 @@ const Menu = ({ activeMenuItem, refreshKey }) => {
         Cookies.remove(cookieName);
       });
       localStorage.clear();
+      disconnectWebSocket(idEmpresa);
     }, 2500);
     navigate('/login');
   };
