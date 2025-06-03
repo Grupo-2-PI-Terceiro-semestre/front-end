@@ -6,20 +6,44 @@ services:
     container_name: nginx_proxy
     restart: always
     ports:
-      - "80:80"   # Mantido para renovação do Certbot (HTTP-01) e redirecionamento HTTP->HTTPS
-      - "443:443" # Porta HTTPS
+      - "80:80"
+      - "443:443"
     volumes:
-      # Mapeia a nova configuração Nginx com SSL
-      - ./nginx_ssl.conf:/etc/nginx/nginx.conf:ro
-      # Mapeia o diretório de certificados Let's Encrypt para persistência e renovação
-      - ./letsencrypt:/etc/letsencrypt
-      # Mapeia os arquivos estáticos do frontend
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./dist:/usr/share/nginx/html:ro
-      # Mapeia arquivos de log do Nginx (opcional, mas útil para debug)
-      - ./nginx_logs:/var/log/nginx
+      - /opt/ssl_certbot/www:/var/www/certbot  # Remova :ro para permitir escrita
+      - /opt/ssl_certbot/conf:/etc/letsencrypt:ro
+      - /etc/nginx/dhparam.pem:/etc/nginx/dhparam.pem:ro
     networks:
       - public_network
-      - host_network # Rede para acessar a API privada
+      - host_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/.well-known/acme-challenge/test"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - /opt/ssl_certbot/www:/var/www/certbot
+      - /opt/ssl_certbot/conf:/etc/letsencrypt
+    command: >
+      sh -c 'while ! curl -s http://nginx/.well-known/acme-challenge/test >/dev/null; do
+        echo "Waiting for nginx...";
+        sleep 5;
+      done;
+      certbot certonly --webroot -w /var/www/certbot
+      --keep-until-expiring --agree-tos --no-eff-email
+      --email jonatha.carvalho0503@gmail.com
+      -d orderhub.zapto.org;
+      echo "Certificate obtained!"'
+    depends_on:
+      nginx:
+        condition: service_healthy
+    networks:
+      - public_network
 
   frontend:
     build:
@@ -32,20 +56,10 @@ services:
       - VITE_API_URL=/api/v1/
       - VITE_API_URL_WS=/ws-notifications
     networks:
-      - public_network # Só precisa da rede pública
+      - public_network
 
 networks:
   public_network:
     driver: bridge
   host_network:
     driver: bridge
-
-volumes:
-  # Define os volumes nomeados para garantir a persistência dos dados do Let's Encrypt
-  # Embora o mapeamento direto de diretórios funcione, volumes nomeados são geralmente preferidos
-  # Se você preferir mapeamento direto como acima, esta seção pode ser removida.
-  # letsencrypt_certs:
-  # nginx_logs:
-  # Nota: O mapeamento direto (bind mount) usado acima em 'volumes:' para nginx já cria os diretórios se não existirem no host.
-  # Se você usar volumes nomeados, precisaria ajustar os mapeamentos acima para usar os nomes (ex: 'letsencrypt_certs:/etc/letsencrypt').
-  # Por simplicidade e clareza com o Certbot, mantive os bind mounts diretos.
