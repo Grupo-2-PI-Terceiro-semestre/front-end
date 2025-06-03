@@ -77,7 +77,6 @@ export const findChartServiceData = async (idEmpresa, endPoint) => {
 
 export const findChartReceitaServiceData = async (idEmpresa, endPoint) => {
     try {
-        debugger;
         const response = await getData(`agendamentos/${endPoint}/${idEmpresa}`, {}, {});
         const data = response.data;
         const seriesData = data.map(item => item.receita);

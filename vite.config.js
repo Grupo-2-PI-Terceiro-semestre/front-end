@@ -14,6 +14,7 @@ export default defineConfig(() => {
       react({ include: /\.(mdx|js|jsx|ts|tsx)$/ }),
     ],
     define: {
+      global: {},
       __APP_VERSION__: JSON.stringify(appVersion),
     },
     build: {
