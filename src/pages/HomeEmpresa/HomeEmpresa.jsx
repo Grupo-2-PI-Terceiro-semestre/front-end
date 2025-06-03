@@ -10,6 +10,10 @@ import PerguntasFrequentes from "./components/perguntasFrequentes/PerguntasFrequ
 import FooterEmpresa from "../../components/footerEmpresa/FooterEmpresa";
 
 function HomeEmpresa() {
+
+  let next = 'empresa';
+  localStorage.setItem('lastHomeType', next);
+
   return (
     <div className="main-home">
       <HeaderEmpresa
@@ -19,7 +23,7 @@ function HomeEmpresa() {
           { name: 'Sobre', url: '#sobre' },
           { name: 'Preview', url: '#preview' },
           { name: 'Contato', url: '#contato' },
-          { name: 'Cadastro', url: '/cadastro' },  // Esses são links externos, mantém o comportamento normal de navegação
+          { name: 'Cadastro', url: '/cadastro' },
           { name: 'Login', url: '/login' }
         ]}
         buttonText="Para Clientes"

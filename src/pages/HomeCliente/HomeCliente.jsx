@@ -13,6 +13,9 @@ import CadastroForm from "./components/modal-cadastro/CadastroForm";
 import ModalAgendaCliente from "./components/modal-agenda-cliente/ModalAgendaCliente";
 
 function HomeCliente() {
+    let next = 'cliente';
+    localStorage.setItem('lastHomeType', next);
+
     const [searchResults, setSearchResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
