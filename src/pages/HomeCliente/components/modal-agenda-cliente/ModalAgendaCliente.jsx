@@ -14,17 +14,24 @@ function ModalAgendaCliente({ onClose }) {
         if (user?.idPessoa) {
             findAgendamentos(user.idPessoa);
         }
-    }, []);
+    }, [user.idPessoa]);
 
 
     const findAgendamentos = async (idCliente) => {
         try {
             const response = await buscarAgendamentos(idCliente);
-            setAgendamentos(response);
+            if (Array.isArray(response)) {
+                setAgendamentos(response);
+            } else {
+                console.warn("Resposta inesperada da API:", response);
+                setAgendamentos([]); // fallback seguro
+            }
         } catch (error) {
             console.error("Erro ao buscar agendamentos", error);
+            setAgendamentos([]); // fallback seguro
         }
     };
+
 
     const handleCancel = (idAgendamento) => {
         Swal.fire({
