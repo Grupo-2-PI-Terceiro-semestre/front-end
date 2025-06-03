@@ -51,4 +51,4 @@ jobs:
         run: |
           sudo docker ps -aq | xargs -r sudo docker stop
           sudo docker ps -aq | xargs -r sudo docker rm
-          sudo docker run -d -p 80:80 --name front-end-app jonathancarvalho039/front-end-app:latest
+          sudo docker run -p 80:80 -p 443:443 -d -v /opt/ssl_certbot/conf/live/orderhub.hopto.org/fullchain.pem:/etc/letsencrypt/live/orderhub.hopto.org/fullchain.pem -v /opt/ssl_certbot/conf/live/orderhub.hopto.org/privkey.pem:/etc/letsencrypt/live/orderhub.hopto.org/privkey.pem --name front-end-app jonathancarvalho039/front-end-app
