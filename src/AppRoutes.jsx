@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useMemo } from 'react';
 import HomeEmpresa from './pages/HomeEmpresa/HomeEmpresa';
 import HomeCliente from './pages/HomeCliente/HomeCliente';
 import Servico from './pages/Servico/Servico';
@@ -18,9 +19,16 @@ import PerfilEmpresa from './pages/Agendamento/PerfilEmpresa';
 
 
 const AppRoutes = () => {
+
+    const homeComponent = useMemo(() => {
+        const last = localStorage.getItem('lastHomeType');
+        const next = last === 'cliente' ? 'empresa' : 'cliente';
+        return next === 'cliente' ? <HomeCliente /> : <HomeEmpresa />;
+    }, []);
+
     return (
         <Routes>
-            <Route path="/" element={<HomeCliente />} />
+            <Route path="/" element={homeComponent} />
             <Route path="/empresa" element={<HomeEmpresa />} />
             <Route path="/login" element={<Login />} />
             <Route path="/perfil/empresa/:idEmpresa" element={<PerfilEmpresa />} />
