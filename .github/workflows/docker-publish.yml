@@ -53,4 +53,7 @@ jobs:
           sudo docker rm front-end-app || true
           sudo docker rmi jonathancarvalho039/front-end-app || true
           sudo docker pull jonathancarvalho039/front-end-app
-          sudo docker run -p 80:80 -p 443:443 -d -v /opt/ssl_certbot/conf/live/orderhub.hopto.org/fullchain.pem:/etc/letsencrypt/live/orderhub.hopto.org/fullchain.pem -v /opt/ssl_certbot/conf/live/orderhub.hopto.org/privkey.pem:/etc/letsencrypt/live/orderhub.hopto.org/privkey.pem --name front-end-app jonathancarvalho039/front-end-app
+          sudo docker run -p 80:80 -p 443:443 -d \
+          -v /mnt/data/ssl_certbot/conf/live/orderhub.hopto.org/fullchain.pem:/etc/letsencrypt/live/orderhub.hopto.org/fullchain.pem \
+          -v /mnt/data/ssl_certbot/conf/live/orderhub.hopto.org/privkey.pem:/etc/letsencrypt/live/orderhub.hopto.org/privkey.pem \
+          --name front-end-app jonathancarvalho039/front-end-app
